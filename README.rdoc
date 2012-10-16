@@ -4,3 +4,6 @@
 
 Username: admin
 Password: waterloo12
+
+----
+Just testing .git here - jeremy!
