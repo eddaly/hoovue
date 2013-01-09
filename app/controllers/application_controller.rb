@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 protected
 
 #Temp Security Attr
-  if RAILS_ENV == "production"
+  if RAILS_ENV= "production"
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
       username == "foo" && password == "bar"
