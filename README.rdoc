@@ -1,3 +1,6 @@
 == Welcome to Hoovue
 
-STBY1
+== Basic HTTP Auth ==	
+
+Username: admin
+Password: waterloo12
