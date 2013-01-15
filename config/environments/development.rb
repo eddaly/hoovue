@@ -1,5 +1,13 @@
 Hoo::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  
+   
+ #Facbook
+  
+  ENV['FACEBOOK_APP_ID'] = "275432675916981"
+  
+  ENV['FACEBOOK_SECRET'] = "b5b6fbfe69adffee1d18b3526373aa13"
+  
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

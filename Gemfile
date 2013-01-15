@@ -25,15 +25,25 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'bootstrap-sass'
 gem 'pg'
 gem 'jquery-rails'
 gem 'carrierwave'
 gem "rmagick"
 gem "fog", "~> 1.3.1"
+gem 'omniauth-facebook'
+
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
+
+#Testing Gems
+gem "rspec-rails", :group => [:test, :development]
+group :development do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
