@@ -25,6 +25,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
+
 gem 'bootstrap-sass'
 gem 'pg'
 gem 'jquery-rails'
@@ -32,6 +33,7 @@ gem 'carrierwave'
 gem "rmagick"
 gem "fog", "~> 1.3.1"
 gem 'omniauth-facebook'
+gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise
 
 
 # To use ActiveModel has_secure_password

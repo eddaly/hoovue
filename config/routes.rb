@@ -1,6 +1,10 @@
 Hoo::Application.routes.draw do
  
-#
+  
+#Rails Admin
+mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+#Temp
 root :to => 'holding#index'
  
  

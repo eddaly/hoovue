@@ -1,3 +1,22 @@
+GIT
+  remote: git://github.com/sferik/rails_admin.git
+  revision: 0183a83d9fc5026f78c50365491ad9970726bb24
+  specs:
+    rails_admin (0.4.1)
+      bootstrap-sass (~> 2.1)
+      builder (~> 3.0)
+      coffee-rails (~> 3.1)
+      font-awesome-sass-rails (~> 3.0, >= 3.0.0.1)
+      haml (~> 3.1)
+      jquery-rails (~> 2.1)
+      jquery-ui-rails (~> 3.0)
+      kaminari (~> 0.14)
+      nested_form (~> 0.2)
+      rack-pjax (~> 0.6)
+      rails (~> 3.1)
+      remotipart (~> 1.0)
+      sass-rails (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,7 +51,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.2)
     arel (3.0.2)
-    bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
@@ -69,7 +87,6 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    ffi (1.3.1)
     ffi (1.3.1-x86-mingw32)
     fog (1.3.1)
       builder
@@ -81,6 +98,9 @@ GEM
       net-ssh (>= 2.1.3)
       nokogiri (~> 1.5.0)
       ruby-hmac
+    font-awesome-sass-rails (3.0.0.1)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formatador (0.2.4)
     guard (1.6.1)
       listen (>= 0.6.0)
@@ -90,6 +110,7 @@ GEM
     guard-rspec (2.3.3)
       guard (>= 1.1)
       rspec (~> 2.11)
+    haml (3.1.7)
     hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.2.0)
@@ -98,9 +119,15 @@ GEM
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (3.0.1)
+      jquery-rails
+      railties (>= 3.1.0)
     json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -114,10 +141,10 @@ GEM
     mime-types (1.19)
     multi_json (1.5.0)
     multipart-post (1.1.5)
+    nested_form (0.3.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
-    net-ssh (2.6.2)
-    nokogiri (1.5.6)
+    net-ssh (2.6.3)
     nokogiri (1.5.6-x86-mingw32)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -133,21 +160,19 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     polyglot (0.3.3)
-    pry (0.9.10)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.3.1)
     pry (0.9.10-x86-mingw32)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
       win32console (~> 1.3)
-    rack (1.4.3)
+    rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-pjax (0.7.0)
+      nokogiri (~> 1.5)
+      rack (~> 1.3)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.2)
@@ -170,6 +195,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    remotipart (1.0.2)
     rmagick (2.13.1)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
@@ -189,7 +215,7 @@ GEM
     ruby-hmac (0.4.0)
     rubyzip (0.9.9)
     sass (3.2.5)
-    sass-rails (3.2.5)
+    sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
@@ -204,8 +230,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.6)
-    sqlite3 (1.3.6-x86-mingw32)
+    sqlite3 (1.3.7-x86-mingw32)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.12)
@@ -237,6 +262,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   rails (= 3.2.11)
+  rails_admin!
   rmagick
   rspec-rails
   sass-rails (~> 3.2.3)
