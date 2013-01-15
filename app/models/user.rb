@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
- #Activemodel Password 
-  has_secure_password
-  
-      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :name, :password, :password_confirmation
+
+      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :name
   
   #User Validation      
   validates_uniqueness_of :email
