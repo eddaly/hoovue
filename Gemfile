@@ -34,7 +34,7 @@ gem "rmagick"
 gem "fog", "~> 1.3.1"
 gem 'omniauth-facebook'
 gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise
-
+gem 'client_side_validations'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'

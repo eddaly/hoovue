@@ -7,9 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+		<div class="container_12 wrapper">
 	<div id="user_nav">
   <% if current_user %>
-    Signed in as <strong><%= current_user.name %></strong>!
+    Signed in as <strong><a href="/users/<%= current_user.id%>"><%= current_user.name %></a><img src="http://graph.facebook.com/<%= current_user.uid%>/picture?type=square"></strong>
     <%= link_to "Sign out", signout_path, id: "sign_out" %>
   <% else %>
     <%= link_to "", "/auth/facebook", id: "login_with_facebook" %>

@@ -1,0 +1,9 @@
+<h2>Profile</h2>
+<img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+<%= @user.name %> <br />
+<%= @user.email%>
+	<h2>Titles Added by User</h2>
+	<% @user.products.each do |p| %>
+	<%= link_to p.title, p %>
+	<%= image_tag p.image.thumb%>	
+	<%end%>

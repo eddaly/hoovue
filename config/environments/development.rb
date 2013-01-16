@@ -8,6 +8,8 @@ Hoo::Application.configure do
   
   ENV['FACEBOOK_SECRET'] = "b5b6fbfe69adffee1d18b3526373aa13"
   
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

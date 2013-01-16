@@ -1,1 +1,9 @@
 <h1>Hoovue Index</h1>
+
+<%= link_to "New Product", new_product_path %> <br />
+
+<h2>Featured Products:</h2>
+<% @products.each do |p| %>
+<%= link_to p.title, p %>
+<%= image_tag p.image.small%>
+<%end%>

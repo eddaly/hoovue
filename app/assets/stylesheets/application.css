@@ -12,6 +12,10 @@
  *= require_tree .
  */
 
+html {
+    
+}
+
 a#login_with_facebook {
 float:left;
 width:261px;
