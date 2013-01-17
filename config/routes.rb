@@ -1,6 +1,9 @@
 Hoo::Application.routes.draw do
  
   
+  resources :credit_validations
+
+
   resources :credits
 
 

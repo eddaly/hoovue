@@ -16,6 +16,7 @@ end
 
 def show
   @user = User.find(params[:id])
+   @credits = @user.credits.all
 end
 
 end

@@ -7,3 +7,8 @@
 	<%= link_to p.title, p %>
 	<%= image_tag p.image.thumb%>	
 	<%end%>
+
+<h2>Credits</h2>
+<% @credits.each do |c|%>
+<%= c.product.title%><br />
+<%end%>

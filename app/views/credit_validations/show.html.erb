@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Credit:</b>
+  <%= @credit_validation.credit_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @credit_validation.user_id %>
+</p>
+
+<p>
+  <b>User validation:</b>
+  <%= @credit_validation.user_validation %>
+</p>
+
+
+<%= link_to 'Edit', edit_credit_validation_path(@credit_validation) %> |
+<%= link_to 'Back', credit_validations_path %>

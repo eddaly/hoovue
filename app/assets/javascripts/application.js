@@ -13,4 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
+//= require jquery.nested-fields
 //= require_tree .
+
+
+$(document).ready(function(e) {
+  $('FORM').nestedFields();
+});
