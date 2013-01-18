@@ -1,6 +1,8 @@
 Hoo::Application.routes.draw do
  
   
+  match '/rate' => 'rater#create', :as => 'rate'
+
   resources :credit_validations
 
 

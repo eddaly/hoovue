@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
       attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids
         has_many :products
           has_many :credits
+            #Rating system
+              letsrate_rater
+          
   #User Validation      
  # validates_uniqueness_of :email
   

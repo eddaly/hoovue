@@ -4,9 +4,8 @@ class Product < ActiveRecord::Base
   belongs_to :user
     has_many :credits
       accepts_nested_attributes_for :credits, :allow_destroy => true
-  
-    mount_uploader :image, ImageUploader
-    
+         mount_uploader :image, ImageUploader
+          letsrate_rateable "quality"
        validates :title, :uniqueness => true
   
 end

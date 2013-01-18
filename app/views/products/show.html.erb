@@ -25,6 +25,8 @@
   <%= @product.description %>
 </p>
 
+Quality : <%= rating_for @product, "quality" %>
+
 <h2>Credits</h2> <br />
 <% @credit_views.each do |c|%>
 	<%= c.user.name %> <strong> <%= c.role%> </strong>

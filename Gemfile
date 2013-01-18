@@ -36,6 +36,7 @@ gem 'omniauth-facebook'
 gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise
 gem 'client_side_validations'
 gem 'awesome_nested_fields'
+gem 'letsrate'
 
 
 # To use ActiveModel has_secure_password
