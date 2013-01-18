@@ -29,5 +29,7 @@ match '/rate' => 'rater#create', :as => 'rate'
 #Temp 
 get "holding/index"
 
+root :to => "holding#index"
+
  
 end
