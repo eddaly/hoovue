@@ -4,9 +4,9 @@ Hoo::Application.configure do
    
  #Facebook
   
-  ENV['FACEBOOK_APP_ID'] = "275432675916981"
+  ENV['FACEBOOK_APP_ID'] = "409064285834455"
   
-  ENV['FACEBOOK_SECRET'] = "b5b6fbfe69adffee1d18b3526373aa13"
+  ENV['FACEBOOK_SECRET'] = "f63033cdbe18abf335942654c953d45e"
   
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
