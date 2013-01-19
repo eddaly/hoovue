@@ -30,7 +30,7 @@ end
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'carrierwave'
-gem "rmagick"
+gem "mini_magick"
 gem "fog", "~> 1.3.1"
 gem 'omniauth-facebook'
 gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise

@@ -2,7 +2,7 @@ Hoo::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
    
- #Facbook
+ #Facebook
   
   ENV['FACEBOOK_APP_ID'] = "275432675916981"
   
