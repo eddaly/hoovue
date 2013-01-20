@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
-  before_filter :authenticate
+ protect_from_forgery
+  #Temp before filter for HTTP
+   before_filter :authenticate
 
 protected
 
@@ -14,16 +15,23 @@ protected
     end
  end
  
- private
+ #Cancan
+ 
+   #Send to log in page if no auth   
+      rescue_from CanCan::AccessDenied do |exception|
+      redirect_to root_url, :alert => "Please Log In"
+    end
+
+private
 
 def current_user
   @current_user ||= User.find(session[:user_id]) if session[:user_id]
 end
-helper_method :current_user
 
-def authorize
-  redirect_to login_url, alert: "Not authorized" if current_user.nil?
-end
+  helper_method :current_user
 
+    def authorize
+      redirect_to login_url, alert: "Not authorized" if current_user.nil?
+    end
 
 end

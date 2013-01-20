@@ -1,13 +1,17 @@
 class User < ActiveRecord::Base
 
-      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids
+      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role
         has_many :products
           has_many :credits
+           
             #Rating system
               letsrate_rater
-          
+              
+              #Roles
+                ROLES = %w[admin moderator user banned]
+              
   #User Validation      
- # validates_uniqueness_of :email
+   # validates_uniqueness_of :email
   
   def self.from_omniauth(auth)
   where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

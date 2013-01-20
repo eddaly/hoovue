@@ -58,6 +58,7 @@ GEM
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
     builder (3.0.4)
+    cancan (1.6.8)
     capybara (2.0.2)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -263,6 +264,7 @@ DEPENDENCIES
   awesome_nested_fields
   bcrypt-ruby (~> 3.0.0)
   bootstrap-sass
+  cancan
   capybara
   carrierwave
   client_side_validations

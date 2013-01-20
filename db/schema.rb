@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.datetime "oauth_expires_at"
     t.string   "image"
     t.string   "profile_picture"
+    t.string   "role"
   end
 
 end
