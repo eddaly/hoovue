@@ -16,9 +16,3 @@ html {
     
 }
 
-a#login_with_facebook {
-float:left;
-width:261px;
-height:44px;
-background-image: url('/assets/application/login_with_facebook.png');
-}

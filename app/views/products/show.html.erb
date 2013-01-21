@@ -1,31 +1,28 @@
+<div class="container_12 pages">
 <p id="notice"><%= notice %></p>
+<div class="grid_8 alpha">
+ 
+<h1><%= @product.title %></h1>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @product.title %>
+<div class="grid_4 omega">
+<%= image_tag @product.image.small %>
+</div>
+
+<div class="grid_8 alpha product-desc">
+<p class="product-desc">
+ <%= @product.description %>
 </p>
 
-<p>
-  <b>Genre:</b>
-  <%= @product.genre %>
-</p>
+</div>
+	
+<div class="grid_4 omega">
+<h3>Added by:</h3><a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a></p>
+<h3>Genre:</h3> <%= @product.genre %></p>
+<h3>Rating:</h3> <%= rating_for @product, "quality" %></p>
 
-<p>
-  <b>Added by:</b>
-  <a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a>
-</p>
+</div>
 
-<p>
-  <b>Image:</b>
-  <%= image_tag @product.image.small %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @product.description %>
-</p>
-
-Quality : <%= rating_for @product, "quality" %>
 
 <h2>Credits</h2> <br />
 <% @credit_views.each do |c|%>
@@ -38,7 +35,7 @@ Quality : <%= rating_for @product, "quality" %>
   <div class="items">
     <%= f.nested_fields_for :credits do |f| %>
       <fieldset class="item">
-        <%= f.label :role %>
+        <%= f.label :what_was_your_role_? %>
         <%= f.text_field :role %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <a href="#" class="remove">remove</a>
@@ -48,9 +45,10 @@ Quality : <%= rating_for @product, "quality" %>
       </fieldset>
     <% end %>
   </div>
-  <a href="#" class="add">add credit</a>
+  <a href="#" class="add">Add credit</a>
 
   <% # more person fields... %>
 <%end%>  
 
 <%end%>
+</div>

@@ -1,0 +1,133 @@
+/* Imports */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,400italic);
+@import "bootstrap";
+
+/* Mixins */
+
+$main: #de5a49;
+
+body {
+  background: url('body-bg.png') ;
+  font-family: "Lato", sans-serif;
+  
+  
+  h1 {
+     margin: 5px 0 0 10px;
+     padding:5px;
+     font-size:35px;
+     border-bottom: 2px solid $main;
+     color: $main
+  }
+  
+ h2 {
+   font-size: 25px;
+   color:grey;
+   margin:5px;
+ }
+ 
+ h3 {
+   font-size: 20px;
+   color: grey;
+   font-weight:bold;
+ }
+  
+ 
+.wrapper {
+background: #fff;
+
+  .yield-wrapper {
+    padding:10px;
+  }  
+
+  .header, .footer {
+     float:left;
+     width:950px;
+     padding:5px;
+     color: white;
+     background: $main;
+     border-bottom: 2px solid grey;
+     
+     .logo {
+       float:left;
+       width:184px;
+       height:47px;
+       margin-top:7px;
+       padding-left:10px;
+     }
+     
+      .user-navi {
+      float:right; 
+      height:50px;
+      
+        .signed-in {
+         
+         .signed-in-text {
+         float:right;   
+         margin-top: 15px;
+         padding:5px;
+              
+                }
+                
+                img {
+                  float:right;
+                  margin: 2px;
+                }
+          
+          }
+      .sign-out {
+           float:right;
+           background-color: $main;
+           margin:-10px -5px 0 0;
+           padding:10px;
+                  a {
+                  text-decoration:none;     
+                  }
+                  a:hover {
+                    text-decoration:underline;
+                    
+                  }
+                }   
+      
+        .login {
+            a#login_with_facebook {
+            float:left;
+            width:163px;
+            height:29px;
+            background-image: url('/assets/application/login_with_facebook.png');
+            margin-top: 15px;
+                                  }
+             
+        }    
+      
+                 } 
+    
+      a {
+        color :white;
+        }  
+
+         }
+  
+  .footer {
+    text-align:center;
+  }  
+  
+  .main-navi{
+    ul {
+      list-style-type:none;
+      margin-left: 10px;
+     
+      li {
+        float:left;
+        padding:10px;
+       
+        
+        margin-right:4px;
+        
+        a {
+          color:grey;
+        }
+      }
+    }
+  }
+        }  
+      }
