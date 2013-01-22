@@ -12,6 +12,11 @@ load_and_authorize_resource
       format.json { render json: @products }
     end
   end
+  
+  def import
+  Product.import(params[:file])
+  redirect_to root_url, notice: "Products imported."
+end
 
   # GET /products/1
   # GET /products/1.json

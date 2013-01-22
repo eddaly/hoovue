@@ -4,5 +4,5 @@
 <h2>Featured Products:</h2>
 <% @products.each do |p| %>
 <%= link_to p.title, p %>
-<%= image_tag p.image.small%>
+<%= image_tag p.image.small%><br />
 <%end%>

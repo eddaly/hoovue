@@ -5,7 +5,9 @@ Hoo::Application.routes.draw do
   resources :credits
 
 
-  resources :products
+  resources :products do
+  collection { post :import }
+end
 
 
 #Rails Admin

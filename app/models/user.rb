@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role
+      attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name
         has_many :products
           has_many :credits
            
@@ -26,5 +26,6 @@ class User < ActiveRecord::Base
     user.save!
   end
 end
+
   
 end
