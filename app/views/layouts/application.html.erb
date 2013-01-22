@@ -29,7 +29,9 @@
 	<div class="container_12 main-navi">
 		<ul>
 		<li><a href="/">Home</a></li>
+		 <% if current_user %>
 		<li><a href="/users/<%= current_user.id%>">My Profile</a></li>
+		<%end%>
 		<li><a href="/products">Products</a></li>
 		<li><a href="/admin">Admin</a></li>
 		</ul>	
