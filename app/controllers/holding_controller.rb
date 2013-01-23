@@ -1,5 +1,5 @@
 class HoldingController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.limit(10)
   end
 end

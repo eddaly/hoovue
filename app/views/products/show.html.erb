@@ -4,9 +4,13 @@
  
 <h1><%= @product.title %></h1>
 </div>
-
+ <div id="flash_notice"></div>
 <div class="grid_4 omega">
-<%= image_tag @product.image.small %>
+	<% if @product.image.small%>
+		<%= image_tag 'default-small.png'%>
+	<%else%>
+		<%= image_tag @product.image.small %>
+	<%end%>
 </div>
 
 <div class="grid_8 alpha product-desc">
@@ -23,11 +27,9 @@
 
 </div>
 
-
-<h2>Credits</h2> <br />
-<% @credit_views.each do |c|%>
-	<%= c.user.name %> <strong> <%= c.role%> </strong>
-<%end%>
+<div id="credits-form">
+<%= render '/products/credits'%>
+</div>
 
 <% if current_user %>
 <%= form_for @product do |f|%>

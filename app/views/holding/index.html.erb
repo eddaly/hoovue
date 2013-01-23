@@ -1,8 +1,16 @@
+<div class="container_12">
 <h1>Welcome to Hoovue</h1>
 
 
 <h2>Featured Products:</h2>
 <% @products.each do |p| %>
 <%= link_to p.title, p %>
-<%= image_tag p.image.small%><br />
+<% if p.image %>
+		<%= image_tag 'default-thumb.png'%>
+	<%else%>
+		<%= image_tag p.image %>
+	<%end%>
+	<br />
 <%end%>
+
+</div>

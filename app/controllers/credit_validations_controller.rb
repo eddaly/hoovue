@@ -40,12 +40,13 @@ class CreditValidationsController < ApplicationController
   # POST /credit_validations
   # POST /credit_validations.json
   def create
-    @credit_validation = CreditValidation.new(params[:credit_validation])
-
+    @credit = Credit.find(params[:credit_id])
+      @credit_validation = @credit.credit_validations.build(:credit_id => @credit.id, :user_id => current_user.id)
+        @credit_views = Credit.all
     respond_to do |format|
       if @credit_validation.save
-        format.html { redirect_to @credit_validation, notice: 'Credit validation was successfully created.' }
-        format.json { render json: @credit_validation, status: :created, location: @credit_validation }
+        format.js
+        flash[:notic] = "Credit Validated."
       else
         format.html { render action: "new" }
         format.json { render json: @credit_validation.errors, status: :unprocessable_entity }

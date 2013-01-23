@@ -1,0 +1,26 @@
+<% if @credit_validation.errors.any? -%>
+  /*Hide the flash notice div*/
+  $("#flash_notice").hide(300);
+
+  /*Update the html of the div credit_validation_errors with the new one*/
+  $("#credit_validation_errors").html("<%= escape_javascript(error_messages_for(@credit_validation))%>");
+
+  /*Show the div credit_validation_errors*/
+  $("#credit_validation_errors").show(300);
+<% else -%>
+  /*Hide the div credit_validation_errors*/
+  $("#credit_validation_errors").hide(300);
+
+  /*Update the html of the div flash_notice with the new one*/
+  $("#flash_notice").html("<%= escape_javascript(flash[:notice])%>");
+
+  /*Show the flash_notice div*/
+  $("#flash_notice").show(300);
+
+  /*Clear the entire form*/
+  $(":input:not(input[type=submit])").val("");
+
+  /*Replace the html of the div credit_validation_lists with the updated new one*/
+	$("#credits_form").html("<%= escape_javascript(render(:partial => "/products/credits"))%>");
+<% end -%>
+
