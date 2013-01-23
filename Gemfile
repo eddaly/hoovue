@@ -38,7 +38,7 @@ gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without D
 gem 'client_side_validations'
 gem 'awesome_nested_fields'
 gem 'letsrate'
-
+gem 'counter_culture', '~> 0.1.7'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
