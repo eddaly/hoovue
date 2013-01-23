@@ -17,6 +17,3 @@
 //= require_tree .
 
 
-$(document).ready(function(e) {
-  $('FORM').nestedFields();
-});
