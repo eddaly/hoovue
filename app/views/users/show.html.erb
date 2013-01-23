@@ -8,7 +8,17 @@
 	<%= image_tag p.image.thumb%>	
 	<%end%>
 
+
+
+
 <h2>Credits</h2>
+<% if @credits.empty? %>
+
+<%else%>
 <% @credits.each do |c|%>
-<%= c.product.title%><br />
+<%= link_to c.product.title, product_path(c.product.id) %><br />
 <%end%>
+<%end%>
+
+
+

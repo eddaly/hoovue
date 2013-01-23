@@ -1,5 +1,5 @@
 <h2>Credits</h2> <br />
 
 <% @credit_views.each do |c|%>
-	<%= c.user.name %> <strong> <%= c.role%> </strong> <%= button_to 'Validate', credit_validations_path(:credit_id => c.id), :remote => true, :disable_with => 'Validated.' %>
+	<%= link_to c.user.name, user_path(c.user.id) %> <strong> <%= c.role%> </strong> <%= button_to 'Validate', credit_validations_path(:credit_id => c.id), :remote => true, :disable_with => 'Validated.' %>
 <%end%>

@@ -8,10 +8,21 @@ class Product < ActiveRecord::Base
           letsrate_rateable "quality"
           # validates :title, :uniqueness => true
   
-  def self.import(file)
+def self.import(file)
   CSV.foreach(file.path, headers: true) do |row|
     Product.create! row.to_hash
   end
 end
+
+ #Seach
+   
+def self.search(search)
+  if search
+     where('title LIKE ? OR genre LIKE ?', "%#{search}%","%#{search}%")                        
+  else
+    scoped
+  end
+end  
+       
   
 end

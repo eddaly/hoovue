@@ -16,4 +16,9 @@
 //= require jquery.nested-fields
 //= require_tree .
 
+ $("#products_list_search input").keyup(function() {
+    $.get($("#products_list_search").attr("action"), $("#products_list_search").serialize(), null, "script");
+    return false;
+  });
+
 

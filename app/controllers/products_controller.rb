@@ -5,9 +5,11 @@ load_and_authorize_resource
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+   
+    @products = Product.search(params[:search])
 
     respond_to do |format|
+      format .js
       format.html # index.html.erb
       format.json { render json: @products }
     end
