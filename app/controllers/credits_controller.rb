@@ -9,6 +9,11 @@ class CreditsController < ApplicationController
       format.json { render json: @credits }
     end
   end
+  
+  def import
+  Credit.import(params[:file])
+  redirect_to root_url, notice: "credits imported."
+end
 
   # GET /credits/1
   # GET /credits/1.json

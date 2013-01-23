@@ -1,9 +1,37 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.product-desc {
-  p{
-  
-}
 
+ul.product-list {
+  
+  list-style-type:none;
+  margin-left: 40px;
+  
+  li {
+    
+    float:left;
+    width: 250px;
+    height: 250px;
+    padding: 5px;
+    border: 1px solid grey;
+    margin: 10px;
+    -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+-webkit-box-shadow: 0px 4px 12px rgba(50, 50, 50, 0.39);
+-moz-box-shadow:    0px 4px 12px rgba(50, 50, 50, 0.39);
+box-shadow:         0px 4px 12px rgba(50, 50, 50, 0.39);
+    
+    h3 {
+      
+      font-size: 15px;
+      line-height: 20px;
+      text-align: center;
+      
+    }
+    
+    img {
+      
+    }
+  }
 }

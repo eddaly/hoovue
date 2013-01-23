@@ -4,4 +4,11 @@ class Credit < ActiveRecord::Base
   belongs_to :user
     belongs_to :product
       has_many :credit_validations
+      
+      def self.import(file)
+  CSV.foreach(file.path, headers: true) do |row|
+    Credit.create! row.to_hash
+  end
+end
+  
 end

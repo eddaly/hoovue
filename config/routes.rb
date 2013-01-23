@@ -2,7 +2,9 @@ Hoo::Application.routes.draw do
   resources :credit_validations
 
 
-  resources :credits
+  resources :credits do
+     collection { post :import }
+end
 
 
   resources :products do

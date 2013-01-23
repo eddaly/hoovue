@@ -3,14 +3,19 @@
 
 
 <h2>Featured Products:</h2>
+<ul class="product-list">
 <% @products.each do |p| %>
-<%= link_to p.title, p %>
-<% if p.image %>
-		<%= image_tag 'default-thumb.png'%>
+<%= link_to p do %>
+<li class="product-list">
+	<% if p.image.blank? %>
+		<%= image_tag 'default-small.png'%>
 	<%else%>
-		<%= image_tag p.image %>
+		<%= image_tag p.image.small %>
 	<%end%>
-	<br />
-<%end%>
+<h3> <%= p.title %></h3>
 
+</li>
+<%end%>
+<%end%>
+</ul>
 </div>
