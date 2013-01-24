@@ -25,7 +25,9 @@ end
   def show
     @product = Product.find(params[:id])
        @credit_views = @product.credits.all
-   
+          @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)
+            @credit = Credit.new
+        
   end
 
   # GET /products/new

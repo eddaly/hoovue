@@ -49,7 +49,7 @@ end
 
     respond_to do |format|
       if @credit.save
-        format.html { redirect_to @credit, notice: 'Credit was successfully created.' }
+        format.html { redirect_to :back, notice: 'Credit was successfully created.' }
         format.json { render json: @credit, status: :created, location: @credit }
       else
         format.html { render action: "new" }
@@ -81,7 +81,7 @@ end
     @credit.destroy
 
     respond_to do |format|
-      format.html { redirect_to credits_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
