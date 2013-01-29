@@ -24,6 +24,11 @@
 <h3>Added by:</h3><a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a></p>
 <h3>Genre:</h3> <%= @product.genre %></p>
 <h3>Rating:</h3> <%= rating_for @product, "quality" %></p>
+<% @product.properties.each do |name, value| %>
+<p>
+<h3><%= name.humanize %></h3> <%= value %>
+</p>
+<%end%>
 
 </div>
 
