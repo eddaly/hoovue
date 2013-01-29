@@ -11,14 +11,17 @@
     </div>
   <% end %>
 
+<%= f.hidden_field :product_genre_id %>
+
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :genre %><br />
-    <%= f.text_field :genre %>
-  </div>
+	<%= f.fields_for :properties, OpenStruct.new(@product.properties) do |builder| %>
+	  <% @product.product_genre.fields.each do |field| %>
+	    <%= render "products/fields/#{field.field_type}", field: field, f: builder %>
+	  <% end %>
+	<% end %>
    <div class="field">
     <%= f.label :image %><br />
     <%= f.file_field :image %>

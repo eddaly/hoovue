@@ -47,14 +47,33 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "role"
   end
 
+  create_table "product_fields", :force => true do |t|
+    t.string   "name"
+    t.string   "field_type"
+    t.boolean  "required"
+    t.integer  "product_genre_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "product_fields", ["product_genre_id"], :name => "index_product_fields_on_product_genre_id"
+
+  create_table "product_genres", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "products", :force => true do |t|
     t.string    "title"
     t.string    "genre"
     t.integer   "user_id"
     t.string    "image"
     t.text      "description"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.timestamp "created_at",       :null => false
+    t.timestamp "updated_at",       :null => false
+    t.text      "properties"
+    t.integer   "product_genre_id"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

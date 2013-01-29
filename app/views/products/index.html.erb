@@ -1,6 +1,10 @@
 <div class="container_12">
 <h1>Welcome to Hoovue</h1>
-
+<h2>Add a new Product</h2>
+<%= form_tag new_product_path, method: :get do %>
+  <%= select_tag :product_genre_id, options_from_collection_for_select(ProductGenre.all, :id, :name) %>
+  <%= submit_tag "New Product", name: nil %>
+<% end %>
 
 <h2>Featured Products:</h2>
 

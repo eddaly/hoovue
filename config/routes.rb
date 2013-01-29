@@ -1,4 +1,7 @@
 Hoo::Application.routes.draw do
+  resources :product_genres
+
+
   resources :credit_validations
 
 
