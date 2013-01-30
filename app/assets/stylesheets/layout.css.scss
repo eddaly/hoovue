@@ -129,5 +129,71 @@ background: #fff;
       }
     }
   }
+  
+  
+a.blue-link, input.blue-link, a.grey-link, a.add_fields, a.remove_fields {
+    
+  float:left;  
+    background-color:#3A3A3A;
+  margin:15px 5px 0 0px;
+  background: #00a4ff url("/assets/arrow_white_long.png") no-repeat right center;
+  color: white;
+  padding: 7px 20px 7px 7px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 100;
+  border: 1px solid #0093E5;
+
+}
+
+a.blue-link:hover, a.add_fields {
+
+  background-color: #009DF5;
+}
+
+a.grey-link, a.remove_fields {
+    background-color: #d2d2d2;
+    color: black;
+    border:none;
+  margin:none;
+}
+
+a {
+    color: #00A4FF;
+}
+
+
+.field_with_errors {
+  display: inline;
+}
+
+form .field, form .actions {
+  margin: 12px 0;
+}
+
+fieldset {
+  border: none;
+  border: solid 1px #CCC;
+  padding: 10px 15px;
+  margin: 15px 0;
+  width:95%;
+  position: relative;
+  .remove_fields {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    font-size: 12px;
+  }
+}
+
+.actions {
+float:left;
+width:900px;
+}
         }  
       }

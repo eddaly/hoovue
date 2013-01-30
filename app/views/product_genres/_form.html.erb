@@ -12,14 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :genre_name %>
     <%= f.text_field :name %>
   </div>
   <%= f.fields_for :fields do |builder| %>
   	<%= render 'field_fields', f: builder%>
   <%end%>
-  <%= link_to_add_fields "Add Field", f, :fields%>	
+
+  <%= link_to_add_fields "Add Field", f, :fields %>	<br />
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  %>
   </div>
 <% end %>
