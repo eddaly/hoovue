@@ -1,6 +1,8 @@
 ---
 application/login_with_facebook.png: application/login_with_facebook-99ede98ca8ab082ebfba8c5a1da7e563.png
 application/login_with_facebook/index.png: application/login_with_facebook-99ede98ca8ab082ebfba8c5a1da7e563.png
+arrow_white_long.png: arrow_white_long-1b9c6469d71f304bc0dcf341d9d48532.png
+arrow_white_long/index.png: arrow_white_long-1b9c6469d71f304bc0dcf341d9d48532.png
 body-bg.png: body-bg-a70b618eb56a567b5d0326738363ee41.png
 body-bg/index.png: body-bg-a70b618eb56a567b5d0326738363ee41.png
 default-small.png: default-small-a6f7be8f3dbe0f79b4ae031ac7693baa.png
@@ -17,8 +19,8 @@ star-on.png: star-on-ff5fcbf74ebaeaf4cabf64f051c5c971.png
 star-on/index.png: star-on-ff5fcbf74ebaeaf4cabf64f051c5c971.png
 application.js: application-3c7aeaf32188880a63e835d23a09ece9.js
 application/index.js: application-3c7aeaf32188880a63e835d23a09ece9.js
-application.css: application-6518d565dd43366c46804d630a5e6fa9.css
-application/index.css: application-6518d565dd43366c46804d630a5e6fa9.css
+application.css: application-fd4e3035a6b112e78027f2323e64157c.css
+application/index.css: application-fd4e3035a6b112e78027f2323e64157c.css
 rails_admin/aristo/images/bg_fallback.png: rails_admin/aristo/images/bg_fallback-384ae1acb300072b346c90e2e2ebb0d4.png
 rails_admin/aristo/images/bg_fallback/index.png: rails_admin/aristo/images/bg_fallback-384ae1acb300072b346c90e2e2ebb0d4.png
 rails_admin/aristo/images/icon_sprite.png: rails_admin/aristo/images/icon_sprite-f3acca0c4657ff0833e6d514e25e683a.png
