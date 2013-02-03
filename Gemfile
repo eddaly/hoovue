@@ -28,6 +28,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#Custom Gems
 gem 'cancan'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
@@ -41,6 +42,7 @@ gem 'awesome_nested_fields'
 gem 'letsrate'
 gem 'counter_culture', '~> 0.1.7'
 gem 'honeybadger'
+gem "select2-rails", "~> 3.2.1"
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'

@@ -11,14 +11,18 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require rails.validations
 //= require jquery.nested-fields
 //= require_tree .
 
+    $(document).ready(function() { $("select").select2({ width: 'resolve' }); });
+
  $("#products_list_search input").keyup(function() {
     $.get($("#products_list_search").attr("action"), $("#products_list_search").serialize(), null, "script");
     return false;
   });
+  
 
 

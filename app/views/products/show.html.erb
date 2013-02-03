@@ -32,6 +32,10 @@
 
 </div>
 
+<div id="facts-form">
+	<%= render '/products/facts' %>
+</div>	
+
 <div id="credits-form">
 <%= render '/products/credits'%>
 </div>
@@ -41,7 +45,13 @@
 	<% if @user_credits.empty? %>
 <h3>Were you involved with <%= @product.title %>?</h3>
 		<%= form_for @credit do |f|%>
- What was your role? <%= f.text_field :role %>
+ What was your role? <%= f.text_field :role %> <br />
+ Interesting Fact <%= f.text_field :fact %>
+ 		<%= f.fields_for :credit_validations do |builder| %>
+  <%= render '/credit_validations/credit_validations_fields', f: builder %>
+<% end %>
+
+<%= link_to_add_fields "Add Validator", f, :credit_validations %>	
  		<%= f.hidden_field :user_id, :value => current_user.id %>
 		<%= f.hidden_field :product_id, :value => @product.id %>
 		<%= f.submit 'Create Your Credit' %>

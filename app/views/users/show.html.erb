@@ -8,7 +8,14 @@
 	<%= link_to p.title, p %>
 	<%= image_tag p.image.thumb%>	
 	<%end%>
+<h2>Pending Friend Validations</h2>
+<% if @credit_validations.empty? %>
 
+<%else%>
+<% @credit_validations.each do |cv| %>
+	<%= cv.credit.user.name%> | <%= cv.credit.product.title %> <br />
+<%end%>
+<%end%>
 
 
 

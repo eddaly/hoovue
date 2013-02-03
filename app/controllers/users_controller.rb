@@ -18,6 +18,7 @@ end
 def show
   @user = User.find(params[:id])
    @credits = @user.credits.all
+    @credit_validations = CreditValidation.where(:user_id => @user.id)
 end
 
 end

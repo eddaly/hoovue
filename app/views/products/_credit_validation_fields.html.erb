@@ -1,0 +1,3 @@
+<fieldset>
+<%= f.collection_select :user_id, User.order(:name), :id, :name, {}, {:id=>'my-custom-class'} %>
+</fieldset>

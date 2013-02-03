@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.boolean   "user_validation"
     t.timestamp "created_at",      :null => false
     t.timestamp "updated_at",      :null => false
+    t.string    "token"
+    t.boolean   "verified"
+    t.datetime  "token_sent_at"
   end
 
   create_table "credits", :force => true do |t|
@@ -45,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "created_at", :null => false
     t.timestamp "updated_at", :null => false
     t.string    "role"
+    t.text      "fact"
   end
 
   create_table "product_fields", :force => true do |t|
