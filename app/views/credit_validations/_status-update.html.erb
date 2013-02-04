@@ -1,0 +1,8 @@
+<%= form_for cv.credit, :method => :put do |f| %>
+ <%= f.hidden_field :status, :value => 'approved' %>
+ <%= f.submit "Approve" %>
+<% end %>
+<%= form_for cv.credit, :method => :put do |f| %>
+ <%= f.hidden_field :status, :value => 'declined' %>
+<%= f.submit "Decline" %>
+<% end %>

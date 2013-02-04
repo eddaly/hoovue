@@ -25,7 +25,14 @@
 
 <%else%>
 <% @credit_validations.each do |cv| %>
-	<%= cv.credit.user.name%> | <% cv.credit.role%> | <%= cv.credit.product.title %> <br />
+	<%= cv.credit.user.name%> | <% cv.credit.role%> | <%= cv.credit.product.title %> <%= form_for cv.credit, :method => :put do |f| %>
+																					  <%= f.hidden_field :status, :value => 'approved' %>
+																					  <%= f.submit "Approve" %>
+																						<% end %>
+																						<%= form_for cv.credit, :method => :put do |f| %>
+																					  <%= f.hidden_field :status, :value => 'declined' %>
+																					  <%= f.submit "Decline" %>
+																						<% end %>  <br /> 
 <%end%>
 <%end%>
 

@@ -41,11 +41,13 @@ end
   def edit
     @credit = Credit.find(params[:id])
   end
+  
 
   # POST /credits
   # POST /credits.json
-  def create
+  def create 
     @credit = Credit.new(params[:credit])
+      @credit.status = 'pending'
 
     respond_to do |format|
       if @credit.save
@@ -65,7 +67,7 @@ end
 
     respond_to do |format|
       if @credit.update_attributes(params[:credit])
-        format.html { redirect_to @credit, notice: 'Credit was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Credit was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

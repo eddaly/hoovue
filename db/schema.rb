@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "updated_at", :null => false
     t.string    "role"
     t.text      "fact"
+    t.string    "status"
   end
 
   create_table "posts", :force => true do |t|
