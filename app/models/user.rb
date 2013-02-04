@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
         has_many :products
           has_many :credits
             has_many :posts
+              has_many :friendships
+                has_many :friends, :through => :friendships
            
             #Rating system
               letsrate_rater

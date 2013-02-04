@@ -4,6 +4,12 @@
 <%= @user.email%>
 <%= @user.credits_count %>
 
+<h2>Following</h2>
+<% for friendship in @user.friendships%>
+	<%= friendship.friend.name %>  (<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
+<%end%>
+
+
 <h2>Updates</h2>
 <% @posts.each do |po| %>
 <%= po.body %>

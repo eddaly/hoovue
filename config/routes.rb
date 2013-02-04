@@ -1,4 +1,7 @@
 Hoo::Application.routes.draw do
+  resources :friendships
+
+
   resources :posts
 
 
