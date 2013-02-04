@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
   create_table "credit_validations", :force => true do |t|
-    t.string    "credit_id"
-    t.string    "user_id"
-    t.boolean   "user_validation"
-    t.timestamp "created_at",      :null => false
-    t.timestamp "updated_at",      :null => false
-    t.string    "token"
-    t.boolean   "verified"
-    t.datetime  "token_sent_at"
+    t.integer  "credit_id",       :limit => 255
+    t.integer  "user_id",         :limit => 255
+    t.boolean  "user_validation"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "token"
+    t.boolean  "verified"
+    t.datetime "token_sent_at"
   end
 
   create_table "credits", :force => true do |t|
