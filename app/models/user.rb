@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
       attr_accessible :email, :provider, :uid, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count
         has_many :products
           has_many :credits
+            has_many :posts
            
             #Rating system
               letsrate_rater

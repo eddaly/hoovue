@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+def index 
+  @users = User.all
+end
+
 def new
   @user = User.new
 end
@@ -18,6 +22,7 @@ end
 def show
   @user = User.find(params[:id])
    @credits = @user.credits.all
+    @posts = @user.posts.all
     @credit_validations = CreditValidation.where(:user_id => @user.id)
 end
 

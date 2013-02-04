@@ -3,6 +3,18 @@
 <%= @user.name %> <br />
 <%= @user.email%>
 <%= @user.credits_count %>
+
+<h2>Updates</h2>
+<% @posts.each do |po| %>
+<%= po.body %>
+	<% if po.user.id == current_user.id %>
+		<%= link_to 'Edit', edit_post_path(po) %><br />
+	<%end%>
+<%end%>
+ <% if @user.id == current_user.id%>
+ <%= link_to 'Add new post', new_post_path %>
+ <%end%>
+
 	<h2>Titles Added by User</h2>
 	<% @user.products.each do |p| %>
 	<%= link_to p.title, p %>
@@ -13,7 +25,7 @@
 
 <%else%>
 <% @credit_validations.each do |cv| %>
-	<%= cv.credit.user.name%> | <%= cv.credit.product.title %> <br />
+	<%= cv.credit.user.name%> | <% cv.credit.role%> | <%= cv.credit.product.title %> <br />
 <%end%>
 <%end%>
 

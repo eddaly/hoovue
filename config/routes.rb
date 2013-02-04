@@ -1,4 +1,7 @@
 Hoo::Application.routes.draw do
+  resources :posts
+
+
   resources :product_genres
 
 
@@ -28,6 +31,8 @@ resources :users
 match 'auth/:provider/callback', to: 'sessions#create'
 match 'auth/failure', to: redirect('/')
 match 'signout', to: 'sessions#destroy', as: 'signout'
+match 'users', to: 'users#index', as: 'users'
+
 
 #Products
 match '/rate' => 'rater#create', :as => 'rate'

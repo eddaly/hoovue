@@ -31,6 +31,9 @@ body {
    font-weight:bold;
  }
   
+a:hover {
+  background-color: none;
+}
  
 .wrapper {
 background: #fff;
@@ -84,6 +87,7 @@ background: #fff;
                   }
                   a:hover {
                     text-decoration:underline;
+                    background-color: none;
                     
                   }
                 }   

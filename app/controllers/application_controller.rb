@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
  protect_from_forgery
   #Temp before filter for HTTP
    before_filter :authenticate
+    before_filter :validation_count 
 
 protected
 
@@ -21,6 +22,10 @@ protected
       rescue_from CanCan::AccessDenied do |exception|
       redirect_to root_url, :alert => "Please Log In"
     end
+
+def validation_count 
+  @credit_validations = CreditValidation.where(:user_id => current_user.id)
+end
 
 private
 
