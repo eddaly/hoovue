@@ -24,7 +24,9 @@ protected
     end
 
 def validation_count 
+  if current_user
   @credit_validations = CreditValidation.where(:user_id => current_user.id)
+  end
 end
 
 private
