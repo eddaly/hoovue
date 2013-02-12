@@ -12,16 +12,16 @@ body {
   
   
   h1 {
-     margin: 5px 0 0 10px;
+     margin: 5px 0 0 0px;
      padding:5px;
-     font-size:35px;
+     font-size:30px;
      border-bottom: 2px solid $main;
      color: $main
   }
   
  h2 {
    font-size: 25px;
-   color:grey;
+    color: $main;
    margin:5px;
  }
  
@@ -32,22 +32,22 @@ body {
  }
   
 a:hover {
-  background-color: none;
+  background:0;
 }
  
 .wrapper {
-background: #fff;
+background:white;
 
   .yield-wrapper {
-    padding:10px;
+    padding:0 5px;
   }  
 
   .header, .footer {
      float:left;
-     width:950px;
+     width:100%;
      padding:5px;
      color: white;
-     background: $main;
+     background-image: url('/assets/header-bg.png');
      border-bottom: 2px solid grey;
      
      .logo {
@@ -61,6 +61,7 @@ background: #fff;
       .user-navi {
       float:right; 
       height:50px;
+      margin: 0 10px;
       
         .signed-in {
          
@@ -116,6 +117,10 @@ background: #fff;
   }  
   
   .main-navi{
+    position:relative;
+    top: -55px;
+    z-index:1000;
+    
     ul {
       list-style-type:none;
       margin-left: 10px;
@@ -123,13 +128,17 @@ background: #fff;
       li {
         float:left;
         padding:10px;
-       
-        
         margin-right:4px;
-        
+        height:40px;
         a {
-          color:grey;
+          color:white;
+         
         }
+        
+          li:hover {
+             background: url('/assets/header-bg-hover.png');
+          }
+        
       }
     }
   }
@@ -201,3 +210,36 @@ width:900px;
 }
         }  
       }
+      
+      
+.search {
+  position:relative;
+  z-index:1000;
+  top:10px;
+  
+  input {
+    width:240px;
+      padding:6px 15px 6px 35px;
+       margin:3px;
+  background: url('/assets/search.png') no-repeat 8px 6px;
+  -webkit-border-radius: 1px;
+-moz-border-radius: 1px;
+border-radius: 1px;
+  }
+  
+  .search-button {
+    margin-left:-15px;
+    padding: 7px 0;
+    background: red;
+    color:white;
+    border:none;
+    width:80px;
+    
+  }
+      
+span.ui-helper-hidden-accessible {
+  display:none;
+}   
+
+
+}

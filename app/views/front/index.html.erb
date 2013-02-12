@@ -1,0 +1,80 @@
+<div class="container_12 index-header">
+
+	
+	<div class="grid_7 alpha">
+<% if current_user %>
+ <h2><%= current_user.name %> <img src="http://graph.facebook.com/<%= current_user.uid%>/picture?type=square"></h2>
+<%end%>
+	</div>
+		<div class="grid_5 omega search">
+		<%= form_tag products_path, :method => 'get', :remote => true, :id => "products_list_search" do %>
+  <p>
+  	
+    <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
+		 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+
+  </p>
+<% end %>
+
+
+</div>
+
+
+		</div>	
+</div>
+<% if current_user %>
+<div class="container_12 index-middle">
+	<div class="grid_8 alpha user-folder">
+		<ul id="tabs">
+		    <li><a href="#" name="tab1">Credits</a></li>
+    		<li><a href="#" name="tab2">Pending Credits</a></li>
+    		<li><a href="#" name="tab3">Profile</a></li>   
+		</ul>	
+
+				<div id="content"> 
+				    <div id="tab1">
+				    	<ul>
+			<% current_user.credits.each do |c| %>
+			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><%= image_tag c.product.image.thumb.to_s %> <%= c.product.title %> <%= c.role%></li><%end%>
+			<%end%>	
+		</ul>
+				    </div>
+				    <div id="tab2"></div>
+				    <div id="tab3"></div>
+				  
+				</div>
+	</div>
+	
+		<div class="grid_4 omega user-stats">
+			<h2>Stats</h2>
+				<div class="stats-container">
+					<h3>Credits</h3>
+					<p><%= current_user.credits.count %></p>
+					<h3>Followers</h3>
+					<p><%= current_user.friends.count %></p>	
+					<h3>Products</h3>
+					<p><%= current_user.products.count %></p>					
+				</div>
+			</div>	
+</div>
+
+<%else%>
+	<div class="container_12 index-welcome">
+<h1>Welcome to Hoovue.com</h1>
+<p>Hoovue is a crowdsourced database and social network that allows Consumers and Creators to connect directly.</p>
+
+<p>To best make use of Hoovue please <%= link_to "join us via Facebook.", "/auth/facebook", id: "login_with_facebook" %>
+ 	
+	</div>
+<%end%>
+
+<div class="container_12 activity-feed">
+	<h1>Activity Feed</h1>
+		<ul>
+			<% @credits.each do |c| %>
+			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><span class="timesince"><%= time_ago_in_words(c.created_at) %></span> <%= c.user.name %> <img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><span class="plus">+</span><%= c.product.image.thumb.to_s %>  <%= c.product.title%>  <span class="right">Credit Added</span></li><%end%>
+			<%end%>	
+		</ul>
+</div>
+
+

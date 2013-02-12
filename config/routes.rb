@@ -1,4 +1,6 @@
 Hoo::Application.routes.draw do
+  get "front/index"
+
   resources :friendships
 
 
@@ -44,7 +46,7 @@ match '/rate' => 'rater#create', :as => 'rate'
 #Temp 
 get "holding/index"
 
-root :to => "products#index"
+root :to => "front#index"
 
  
 end

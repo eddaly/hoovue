@@ -1,0 +1,181 @@
+// Place all the styles related to the front controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$main: #669801;
+
+#tabs{
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+
+li{
+  float: left;
+  margin: 0 .5em 0 0;
+}
+
+a{
+  position: relative;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);  
+  padding: .7em 3.5em;
+  float: left;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  border-radius: 5px 0 0 0;
+  box-shadow: 0 2px 2px rgba(0,0,0,.4);
+}
+
+a:hover,
+a:hover::after,
+a:focus,
+a:focus::after{
+  background: #fff;
+}
+
+a:focus{
+  outline: 0;
+}
+
+a::after{
+  content:'';
+  position:absolute;
+  z-index: 1;
+  top: 0;
+  right: -.5em;  
+  bottom: 0;
+  width: 1em;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);  
+  box-shadow: 2px 2px 2px rgba(0,0,0,.4);
+  transform: skew(10deg);
+  border-radius: 0 5px 0 0;  
+}
+
+#current a,
+#current a::after{
+  background: #fff;
+  z-index: 3;
+}
+
+}
+
+#content
+{
+    background: #f1f1f1;
+    padding: 2em;
+    height: 220px;
+    position: relative;
+    z-index: 2; 
+    border-radius: 0 5px 5px 5px;
+    box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+}
+
+
+.user-folder {
+  
+  ul {
+  list-style:none;
+    
+    li.odd, li.even {
+    font-size:14px;
+    padding: 5px 10px;  
+    width:95%;
+    color: $main;
+    background: #fff;
+    margin: 5px 0;
+     
+     .right {
+       float:right;
+     }
+    }
+    
+    li.even {
+      background: #F0F0F0;
+    }
+  
+    
+    li:hover {
+      background: #f1f1f1;
+     
+    }
+  }
+}
+
+
+.activity-feed {
+ 
+ 
+  ul {
+  list-style:none;
+    
+    li.odd, li.even {
+    font-size:16px;
+    padding: 5px 10px;  
+    width:95%;
+    color: $main;
+    background: #e1e1e1;
+    margin: 5px 0;
+     
+     .timesince {
+       background: #fff;
+       padding:15px 5px;
+     }
+     
+     .right {
+       float:right;
+       padding-top:15px;
+     }
+     
+     .plus {
+       font-size:30px;
+       margin:10px 10px 0 10px;
+    
+     }
+    }
+    
+    li.even {
+      background: #F0F0F0;
+    }
+  }
+  
+   a:hover {
+        text-decoration:none;
+   
+   li {
+   background-color:white;
+
+    }
+ }
+  
+}
+
+      
+.index-header {
+ margin:-50px 0 10px 0; 
+}
+
+.user-stats {
+  
+    .stats-container {
+      height:260px;
+      width:100%;
+      background: #f1f1f1;
+      
+              h3 {
+        font-size: 20px;
+        width:100%;
+        text-align: center;
+      }
+  
+      p {
+        font-size: 20px;
+        width:100%;
+        text-align: center;
+      }
+    }
+}
