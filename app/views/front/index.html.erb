@@ -35,7 +35,7 @@
 				    <div id="tab1">
 				    	<ul>
 			<% current_user.credits.each do |c| %>
-			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><%= image_tag c.product.image.thumb.to_s %> <%= c.product.title %> <%= c.role%></li><%end%>
+			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%end%><%= c.product.title %> <%= c.role%></li><%end%>
 			<%end%>	
 		</ul>
 				    </div>
