@@ -120,6 +120,7 @@ background:white;
     position:relative;
     top: -55px;
     z-index:1000;
+    left:200px;
     
     ul {
       list-style-type:none;
@@ -147,7 +148,7 @@ background:white;
 a.blue-link, input.blue-link, a.grey-link, a.add_fields, a.remove_fields {
     
   float:left;  
-    background-color:#3A3A3A;
+  background-color:#3A3A3A;
   margin:15px 5px 0 0px;
   background: #00a4ff url("/assets/arrow_white_long.png") no-repeat right center;
   color: white;

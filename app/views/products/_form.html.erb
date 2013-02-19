@@ -17,6 +17,7 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
+
 	<%= f.fields_for :properties, OpenStruct.new(@product.properties) do |builder| %>
 	  <% @product.product_genre.fields.each do |field| %>
 	    <%= render "products/fields/#{field.field_type}", field: field, f: builder %>
