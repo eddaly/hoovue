@@ -39,6 +39,13 @@
 <div id="credits-form">
 <%= render '/products/credits'%>
 </div>
+<h2>Friends Credit</h2>
+<%= form_for @credit do |f|%>
+	<%= f.text_field :pending_user_email %>
+	 	<%= f.text_field :role %>
+	 		<%= f.hidden_field :product_id, :value => @product.id %>
+	 			<%= f.submit 'Create Your Credit' %>
+<%end%>
 
 <h2>Your Credits</h2>
 <% if current_user %>

@@ -18,7 +18,7 @@
 
 
 </div>
-
+   	<%= session.inspect %>
 
 		</div>	
 </div>
@@ -39,7 +39,9 @@
 			<%end%>	
 		</ul>
 				    </div>
-				    <div id="tab2"></div>
+				    <div id="tab2">
+				 
+				    </div>
 				    <div id="tab3"></div>
 				  
 				</div>
@@ -72,7 +74,7 @@
 	<h1>Activity Feed</h1>
 		<ul>
 			<% @credits.each do |c| %>
-			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><span class="timesince"><%= time_ago_in_words(c.created_at) %></span> <%= c.user.name %> <img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><span class="plus">+</span><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %><%end%>  <%= c.product.title%>  <span class="right">Credit Added</span></li><%end%>
+			<%= link_to product_path(c.product.id) do %><li class="<%= cycle('even', 'odd') -%>"><span class="timesince"><%= time_ago_in_words(c.created_at) %></span><% if c.user %> <%= c.user.name %> <img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><span class="plus">+</span> <%else%> Pending User  <% end %> <% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %><%end%>  <%= c.product.title%>  <span class="right">Credit Added</span></li><%end%>
 			<%end%>	
 		</ul>
 </div>

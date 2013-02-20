@@ -5,10 +5,10 @@
 $main: #669801;
 
 #tabs{
-  overflow: hidden;
-  width: 100%;
-  margin: 0;
+    overflow: hidden;
+  margin-left:10px;
   padding: 0;
+
   list-style: none;
 
 
@@ -34,7 +34,7 @@ a:hover,
 a:hover::after,
 a:focus,
 a:focus::after{
-  background: #fff;
+  background: #f1f1f1;
 }
 
 a:focus{
@@ -58,11 +58,15 @@ a::after{
 
 #current a,
 #current a::after{
-  background: #fff;
+  background: #00A4FF;
   z-index: 3;
+  color:white;
+  text-shadow: none;
+  
 }
 
 }
+
 
 #content
 {
@@ -74,6 +78,7 @@ a::after{
     border-radius: 0 5px 5px 5px;
     box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
     overflow: scroll;
+    margin-top:-10px;
 }
 
 

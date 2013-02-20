@@ -11,8 +11,12 @@
 
 <% @credits.each do |credit| %>
   <tr>
+  	    <td><%= credit.id %></td>
+
     <td><%= credit.user_id %></td>
     <td><%= credit.product_id %></td>
+        <td><%= credit.pending_user_email %></td>
+
     <td><%= link_to 'Show', credit %></td>
     <td><%= link_to 'Edit', edit_credit_path(credit) %></td>
     <td><%= link_to 'Destroy', credit, method: :delete, data: { confirm: 'Are you sure?' } %></td>

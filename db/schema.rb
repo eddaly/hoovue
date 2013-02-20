@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   create_table "credits", :force => true do |t|
     t.integer   "user_id"
     t.integer   "product_id"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.timestamp "created_at",         :null => false
+    t.timestamp "updated_at",         :null => false
     t.string    "role"
     t.text      "fact"
     t.string    "status"
+    t.string    "pending_user_email"
   end
 
   create_table "friendships", :force => true do |t|
