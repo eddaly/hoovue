@@ -9,7 +9,7 @@ gem 'jquery-rails'
 group :development do
 gem 'sqlite3'
 gem 'better_errors'
-gem 'thin'
+
 end
 
 group :production do
@@ -44,7 +44,7 @@ gem 'letsrate'
 gem 'counter_culture', '~> 0.1.7'
 gem 'honeybadger'
 gem "select2-rails", "~> 3.2.1"
-
+gem 'thin'
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'
 
