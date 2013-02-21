@@ -24,7 +24,7 @@
 	
 <div class="grid_4 omega">
 <h3>Added by:</h3><a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a></p>
-<h3>Genre:</h3> <%= @product.genre %></p>
+<h3>Genre:</h3><% if @product.product_genre %> Genre: <%= @product.product_genre.name %> <%end%></p>
 <h3>Rating:</h3> <%= rating_for @product, "quality" %></p>
 <% @product.properties.each do |name, value| %>
 <p>

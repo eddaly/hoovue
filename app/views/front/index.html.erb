@@ -27,7 +27,8 @@
 		<ul id="tabs">
 		    <li><a href="#" name="tab1">Your Credits</a></li>
     		<li><a href="#" name="tab2">Your Pending Credits</a></li>
-    		<li><a href="#" name="tab3">Your Profile</a></li>   
+    		<li><a href="#" name="tab3">Your Profile</a></li>  
+    		<li><a href="#" name="tab4">Your Work</a></li>  
 		</ul>	
 
 				<div id="content"> 
@@ -55,6 +56,15 @@
 				     <li>Current Number Of Credits: <strong><%= current_user.credits.count %></strong></li>
 				    
 				    </ul>	
+				    </div>
+				    
+				    <div id="tab4">
+				    	    	<ul>
+			<% current_user.products.each do |p| %>
+			<li class="<%= cycle('even', 'odd') -%>"><%= link_to p.title, product_path(p)%><span class="right"> <% if p.product_genre %> Genre: <%= p.product_genre.name %> <%end%> </span> </li>
+			<%end%>	
+		</ul> 	
+		<%= link_to 'New Work', new_product_path, :class => 'blue-link' %>
 				    </div>
 				
 				</div>
