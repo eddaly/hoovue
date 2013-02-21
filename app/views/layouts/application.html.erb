@@ -35,9 +35,9 @@
 			</div>
 	<div class="container_12 main-navi">
 		<ul>
-		<li><a href="/">Home</a></li>
+		<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
 		 <% if current_user %>
-		<li><a href="/users/<%= current_user.id%>">My Profile</a></li>
+		<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
 	
 		
 		<%end%>
