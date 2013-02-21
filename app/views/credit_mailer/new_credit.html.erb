@@ -4,4 +4,4 @@ Your friend said that you were a <%= @credit.role %> on <%= @credit.product.titl
 
 To confirm this please join us:
 
-<%= link_to "Click here", root_url(:credit_id => @credit.id) %>
+<%= link_to "Click here", front_validate_email_credit_url(:credit_id => @credit.id) %>
