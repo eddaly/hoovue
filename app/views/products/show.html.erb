@@ -6,7 +6,7 @@
 </div>
  <div id="flash_notice"></div>
 <div class="grid_4 omega">
-	<% if @product.image.small%>
+	<% if @product.image.blank? %>
 		<%= image_tag 'default-small.png'%>
 	<%else%>
 		<%= image_tag @product.image.small %>
@@ -18,6 +18,8 @@
  <%= @product.description %>
 </p>
 
+<h3>Interesting Facts</h3>
+	<%= render '/products/facts' %>
 </div>
 	
 <div class="grid_4 omega">
@@ -32,42 +34,70 @@
 
 </div>
 
-<div id="facts-form">
-	<%= render '/products/facts' %>
+<div class="container_12 facts-form">
+
 </div>	
 
-<div id="credits-form">
+<div class="container_12 credits-form">
 <%= render '/products/credits'%>
 </div>
-<h2>Friends Credit</h2>
-<%= form_for @credit do |f|%>
-	<%= f.text_field :pending_user_email %>
-	 	<%= f.text_field :role %>
-	 		<%= f.hidden_field :product_id, :value => @product.id %>
-	 			<%= f.submit 'Create Your Credit' %>
-<%end%>
 
-<h2>Your Credits</h2>
 <% if current_user %>
+<h2>Your Credits</h2>
+
 	<% if @user_credits.empty? %>
 <h3>Were you involved with <%= @product.title %>?</h3>
+
+	<a href="#openModalhoovue" class="blue-link">Add a credit with Hoovue</a>
+
+<div id="openModalhoovue" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+			<h2>Your credit</h2>
 		<%= form_for @credit do |f|%>
- What was your role? <%= f.text_field :role %> <br />
- Interesting Fact <%= f.text_field :fact %>
+		<%= f.label "What was your role?"%>
+			  <%= f.text_field :role %> <br />
+ 					<%= f.label "Do you have an Interesting Fact?"%>
+						 <%= f.text_area :fact, :rows => '3' %>
  		<%= f.fields_for :credit_validations do |builder| %>
   <%= render '/credit_validations/credit_validations_fields', f: builder %>
 <% end %>
 
-<%= link_to_add_fields "Add Validator", f, :credit_validations %>	
+<%= link_to_add_fields "Add a friend to validate", f, :credit_validations %>	
  		<%= f.hidden_field :user_id, :value => current_user.id %>
 		<%= f.hidden_field :product_id, :value => @product.id %>
-		<%= f.submit 'Create Your Credit' %>
+		<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
 		<%end%>
 	<%else%>
+	</div>
+
 <h3>You currently have a credit for this title:</h3>
 		<% @user_credits.each do |uc|%>
-		Role:<%= uc.role %> <%= link_to 'Delete Credit', uc, method: :delete %> <br />
+	<div class="user-credit"><div class="role">Your Role: <strong><%= uc.role %></strong></div> <div class="status">Status: <strong><%= uc.status %></strong></div> <%= link_to 'Delete Credit', uc, method: :delete, class: "remove"  %>  </div>
 		<%end%>
 	<%end%>
-<%end%>
 </div>
+</div>	
+
+<div class="container_12">
+<a href="#openModalemail" class="blue-link">Add a friends credit by e-mail</a>
+</div>
+<div id="openModalemail" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+	<h2>E-mail Credit</h2>
+<%= form_for @credit do |f|%>
+	<%= f.label "Their E-mail"%>
+	<%= f.text_field :pending_user_email %>
+		<%= f.label "What was their role?"%>
+	 	<%= f.text_field :role %>
+	 		<%= f.hidden_field :product_id, :value => @product.id %>
+	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+<%end%>
+	</div>
+</div>		
+		</div>
+	
+<%end%>
+
+

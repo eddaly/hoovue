@@ -61,3 +61,54 @@ ul.ui-autocomplete {
     }
   }
 } 
+
+.user-credit {
+  float:left;
+   border: none;
+  border: solid 1px #e1e1e1;
+  padding: 15px 15px 5px;
+  margin: 15px 0;
+  width:80%;
+  font-size:16px;
+  
+  .role {
+    float:left;
+  }
+  
+  .status {
+    float:left;
+    margin-left:25px;
+      strong {
+        color:green;
+      }
+  }
+}
+
+.credits-form {
+   ul {
+  list-style:none;
+    
+    li.odd, li.even {
+    font-size:14px;
+    padding: 5px 10px;  
+    width:60%;
+    color: black;
+    background: #fff;
+    margin: 5px 0;
+     
+     .right {
+       float:right;
+     }
+    }
+    
+    li.even {
+      background: #F0F0F0;
+    }
+  
+    
+    li:hover {
+      background: #f1f1f1;
+     
+    }
+  }
+}

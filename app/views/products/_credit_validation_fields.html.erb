@@ -1,3 +1,4 @@
 <fieldset>
 <%= f.collection_select :user_id, User.order(:name), :id, :name, {}, {:id=>'my-custom-class'} %>
+  <%= link_to "remove", '#', class: "remove_fields" %>
 </fieldset>
