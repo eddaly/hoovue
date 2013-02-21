@@ -3,7 +3,7 @@
 	<h2>Credits</h2>
 		<ul>
 			<% @credit_views.each do |c| %>
-		<% if c.user %>	<li class="<%= cycle('even', 'odd') -%>"><%= link_to c.user.name, user_path(c.user) %> <img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><span class="right"><%= c.role %></span></li><%end%>
+		<% if c.user %>	<li class="<%= cycle('even', 'odd') -%>"><img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><%= link_to c.user.name, user_path(c.user) %>  <span class="right"><%= c.role %></span></li><%end%>
 			<%end%>	
 		</ul>
 </div>

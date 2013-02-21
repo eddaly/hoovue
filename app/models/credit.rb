@@ -7,7 +7,7 @@ class Credit < ActiveRecord::Base
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
         
     scope :confirmed, where(:status => "confirmed")
-        
+    scope :pending, where(:status => "pending")    
         
       def self.import(file)
   CSV.foreach(file.path, headers: true) do |row|

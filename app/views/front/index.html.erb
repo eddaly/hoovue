@@ -3,11 +3,9 @@
 
 	
 	<div class="grid_7 alpha">
-<% if current_user %>
- <h2><%= current_user.name %> <img src="http://graph.facebook.com/<%= current_user.uid%>/picture?type=square"></h2>
-<%end%>
+
 	</div>
-		<div class="grid_5 omega search">
+		<div class="grid_5 push_2 omega search">
 		<%= form_tag products_path, :method => 'get', :remote => true, :id => "products_list_search" do %>
   <p>
   	
