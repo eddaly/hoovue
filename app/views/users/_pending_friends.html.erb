@@ -1,0 +1,20 @@
+<h2>Updates</h2>
+<% @posts.each do |po| %>
+<%= po.body %>
+<% if current_user %>
+	<% if po.user.id == current_user.id %>
+		<%= link_to 'Edit', edit_post_path(po) %><br />
+	<%end%>
+<%end%>
+<%end%>
+<% if current_user %>
+ <% if @user.id == current_user.id%>
+ <%= link_to 'Add new post', new_post_path %>
+ <%end%>
+<%end%>
+
+	<% @user.products.each do |p| %>
+	<% link_to p.title, p %>
+	<% image_tag p.image.thumb%>	
+	<%end%>
+

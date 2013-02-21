@@ -1,7 +1,9 @@
-<h2>Credits</h2> <br />
 
-<ul>
-<% @credit_views.each do |c|%>
-<li class="<%= cycle('even', 'odd') -%>"><%= link_to c.user.name, user_path(c.user.id) %><div class="right"><strong> <%= c.role%> </strong></div> <% button_to 'Validate', credit_validations_path(:credit_id => c.id), :remote => true, :disable_with => 'Validated.' %></li>
-<%end%>
-</ul>
+	<div class="container_12 activity-feed">
+	<h2>Credits</h2>
+		<ul>
+			<% @credit_views.each do |c| %>
+		<% if c.user %>	<li class="<%= cycle('even', 'odd') -%>"><%= link_to c.user.name, user_path(c.user) %> <img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><span class="right"><%= c.role %></span></li><%end%>
+			<%end%>	
+		</ul>
+</div>

@@ -126,6 +126,10 @@ a::after{
     color: $main;
     background: #e1e1e1;
     margin: 5px 0;
+    
+      .a {
+        color: $main;
+      }
      
      .timesince {
        background: #fff;
