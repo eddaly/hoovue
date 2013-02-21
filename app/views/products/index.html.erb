@@ -12,7 +12,7 @@
 <%= form_tag products_path, :method => 'get', :remote => true, :id => "products_list_search" do %>
   <p>
   	<%= label_tag 'Search:'%>
-    <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
+    <%= text_field_tag :search, params[:search], data: {autocomplete_source: products_path(id: 'product.id') } %>
      <%= submit_tag "Search", :name => nil, :class => "search-button" %>
 
   </p>

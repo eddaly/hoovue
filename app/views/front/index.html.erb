@@ -59,11 +59,15 @@
 				    </div>
 				    
 				    <div id="tab4">
+				  <% if current_user.products %>
 				    	    	<ul>
 			<% current_user.products.each do |p| %>
 			<li class="<%= cycle('even', 'odd') -%>"><%= link_to p.title, product_path(p)%><span class="right"> <% if p.product_genre %> Genre: <%= p.product_genre.name %> <%end%> </span> </li>
 			<%end%>	
 		</ul> 	
+			<%else%>
+			<h3>No Work Added</h3>
+			<%end%>
 		<%= link_to 'New Work', new_product_path, :class => 'blue-link' %>
 				    </div>
 				
