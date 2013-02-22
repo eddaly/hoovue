@@ -39,6 +39,7 @@ end
 
   # GET /credits/1/edit
   def edit
+      session[:return_to] = request.referer
     @credit = Credit.find(params[:id])
   end
   
@@ -71,7 +72,7 @@ end
 
     respond_to do |format|
       if @credit.update_attributes(params[:credit])
-        format.html { redirect_to :back, notice: 'Credit was successfully updated.' }
+       format.html { redirect_to session[:return_to], notice: 'Content was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

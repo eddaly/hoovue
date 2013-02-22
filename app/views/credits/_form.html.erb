@@ -10,19 +10,15 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+   <div class="field">
+    <%= f.label :your_role %><br />
+    <%= f.text_field :role %>
   </div>
-  <div class="field">
-    <%= f.label :product_id %><br />
-    <%= f.number_field :product_id %>
+   <div class="field">
+  <%= f.label :interesting_fact %><br />
+    <%= f.text_area :fact, :rows => '5'	 %>
   </div>
-    <div class="field">
-    <%= f.label :pending_user_email %><br />
-    <%= f.text_field :pending_user_email %>
-  </div>
+   <%= f.hidden_field :status, :value => 'pending' %>
   <div class="actions">
     <%= f.submit %>
   </div>

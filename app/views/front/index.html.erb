@@ -32,8 +32,8 @@
 				    <div id="tab1">
 			
 				    	<ul>
-			<% current_user.credits.each do |c| %>
-			<li class="<%= cycle('even', 'odd') -%>"><% if c.user %> <% end %> <% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %><%end%>  <%= link_to c.product.title, product_path(c.product)%><span class="right"><%= c.role%> </li>
+			<% current_user.credits.confirmed.each do |c| %>
+			<li class="<%= cycle('even', 'odd') -%>"><% if c.user %> <% end %> <% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%> on   <%= link_to c.product.title, product_path(c.product)%><%= link_to 'Edit Credit', edit_credit_path(c), class: "remove-credit" %>    <%= link_to 'Delete Credit', c, method: :delete, class: "remove-credit"  %> </li>
 			<%end%>	
 		</ul>
 		
@@ -41,7 +41,7 @@
 				    <div id="tab2">
 						    	<ul>
 			<% current_user.credits.pending.each do |c| %>
-			<li class="<%= cycle('even', 'odd') -%>"><% if c.user %> <% end %> <% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %><%end%>  <%= link_to c.product.title, product_path(c.product)%><span class="right"> <%= c.role%> </li>
+				<li class="<%= cycle('even', 'odd') -%>"><% if c.user %> <% end %> <% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%> on   <%= link_to c.product.title, product_path(c.product)%><%= link_to 'Edit Credit', edit_credit_path(c), class: "remove-credit" %>    <%= link_to 'Delete Credit', c, method: :delete, class: "remove-credit"  %> </li>
 			<%end%>	
 		</ul> 
 				    </div>

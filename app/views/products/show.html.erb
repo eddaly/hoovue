@@ -76,7 +76,7 @@
 
 <h3>You currently have a credit for this title:</h3>
 		<% @user_credits.each do |uc|%>
-	<div class="user-credit"><div class="role">Your Role: <strong><%= uc.role %></strong></div> <div class="status">Status: <strong><%= uc.status %></strong></div> <%= link_to 'Delete Credit', uc, method: :delete, class: "remove"  %>  </div>
+	<div class="user-credit"><div class="role">Your Role: <strong><%= uc.role %></strong></div> <div class="status">Status: <strong><%= uc.status %></strong></div> <%= link_to 'Edit Credit', edit_credit_path(uc), class: "remove" %>    <%= link_to 'Delete Credit', uc, method: :delete, class: "remove"  %>  </div>
 		<%end%>
 		</div>
 	<%end%>

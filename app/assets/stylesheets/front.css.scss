@@ -85,11 +85,12 @@ a::after{
     
     li.odd, li.even {
     font-size:16px;
-    padding: 5px 10px;  
+    padding: 10px 10px 0px 10px;  
     width:95%;
     color: $main;
     background: #fff;
     margin: 5px 0;
+    min-height:60px;
     
       .a {
         color: $main;
