@@ -20,7 +20,7 @@ Hoo::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
   
-          config.action_mailer.default_url_options = { :host => "alpha.hoovue.com" }
+            config.action_mailer.default_url_options = { :host => ENV['DEFAULT_URL'] }
   
           ActionMailer::Base.smtp_settings = {
         :address        => 'smtp.sendgrid.net',
