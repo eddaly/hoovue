@@ -14,7 +14,7 @@ load_and_authorize_resource
     end
   end
   
-  def import
+def import
   Product.import(params[:file])
   redirect_to root_url, notice: "Products imported."
 end
