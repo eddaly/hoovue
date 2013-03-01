@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$main: #669801;
+$main: #273F4E;
 
 #tabs{
     overflow: hidden;
@@ -19,7 +19,7 @@ li{
 
 a{
   position: relative;
-  background:#70A801;
+  background:#315165;
   background-image: linear-gradient(to bottom, #fff, #ddd);  
   padding: .7em 3.5em;
   float: left;
@@ -34,7 +34,7 @@ a:hover,
 a:hover::after,
 a:focus,
 a:focus::after{
-  background: #70A801;
+  background: #315165;
 }
 
 a:focus{
@@ -49,7 +49,7 @@ a::after{
   right: -.5em;  
   bottom: 0;
   width: 1em;
-  background: #70A801;
+  background: #315165;
   background-image: linear-gradient(to bottom, #fff, #ddd);  
   box-shadow: 2px 2px 2px rgba(0,0,0,.4);
   transform: skew(10deg);
@@ -58,7 +58,7 @@ a::after{
 
 #current a,
 #current a::after{
-  background: #568001;
+  background: #273F4E;
   z-index: 3;
   color:white;
   text-shadow: none;
