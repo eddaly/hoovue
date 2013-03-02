@@ -6,7 +6,8 @@ load_and_authorize_resource
   # GET /products.json
   def index
      
-      @products = Product.where("title like ?", "%#{params[:title]}%")
+      @products = Product.search(params[:search])
+        @users = User.search(params[:search])
   respond_to do |format|
       format .js
       format.html # index.html.erb

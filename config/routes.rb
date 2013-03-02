@@ -1,4 +1,6 @@
 Hoo::Application.routes.draw do
+  
+
   get "front/index"
   get "front/validate_email_credit"
   resources :friendships
@@ -42,6 +44,9 @@ match 'users', to: 'users#index', as: 'users'
 #Products
 match '/rate' => 'rater#create', :as => 'rate'
 
+#Search
+
+match "search", to: 'search#index', :as => 'search'
 
 #Temp 
 get "holding/index"

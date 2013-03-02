@@ -1,0 +1,36 @@
+<div class="activity-feed">
+	<% if @products %>
+	<h2>Works:</h2>
+<ul>
+<% @products.each do |p| %>
+<%= link_to p do %>
+<li class="<%= cycle('even', 'odd') -%>">
+	 <% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%end%>  <%= link_to p.title, product_path(p)%> 
+
+</li>
+<%end%>
+	<%end%>	
+	<%else%>
+	
+	<%end%>
+</ul>
+</div>
+
+<div class="activity-feed">
+	<% if @users %>
+	<h2>Users:</h2>
+<ul>
+<% @users.each do |u| %>
+<%= link_to p do %>
+<li class="<%= cycle('even', 'odd') -%>">
+<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	<%= link_to u.name, user_path(u) %> 
+
+</li>
+<%end%>
+	<%end%>
+</ul>
+		<%else%>
+		
+		<%end%>
+</div>
+

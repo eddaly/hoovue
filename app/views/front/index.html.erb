@@ -3,7 +3,7 @@
 
 
 		<div class="grid_5 omega search">
-		<%= form_tag products_path, :method => 'get', :remote => true, :id => "products_list_search" do %>
+		<%= form_tag search_path, :method => 'get' do %>
   <p>
   	
     <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
