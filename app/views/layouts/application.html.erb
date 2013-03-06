@@ -23,12 +23,13 @@
 					<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
 	
 		
-					<%end%>
-					
 					<% if current_user.role == "admin" %>
-					<li><%= link_to 'Admin', rails_admin_path %> </li>
-					<%end%>
+			<li><%= link_to 'Admin', rails_admin_path %> </li>
+			<%end%>
 						
+					<%end%>
+				
+							
 					</ul>	
 					</div>		
 				<div class="user-navi">
