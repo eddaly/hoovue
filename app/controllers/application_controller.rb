@@ -62,4 +62,8 @@ end
       redirect_to login_url, alert: "Not authorized" if current_user.nil?
     end
 
+    def admin_user
+      @current_user.role == "admin"
+    end  
+
 end
