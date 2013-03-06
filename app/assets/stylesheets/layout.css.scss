@@ -7,11 +7,12 @@
 $main: #273F4E;
 
 body {
+  
   background: #f1f1f1;
   font-family: "Lato", sans-serif;
   
   h1, h2, h3 {
-    
+	
     width:100%;
   }
   
@@ -54,44 +55,46 @@ textarea {
 
 
   .yield-wrapper {
+	
     padding:0 5px;
     background:white;
-    margin-top:-60px;
+   
   }  
 
   .header, .footer {
-     float:left;
-     width:99%;
+    
+     width:100%;
      padding:5px;
      color: white;
      background-image: url('/assets/header-bg.png');
      border-bottom: 2px solid grey;
+	 height:50px;
      
      .logo {
        float:left;
        width:184px;
        height:47px;
        margin-top:7px;
-       padding-left:10px;
+       padding-left:40px;
      }
      
       .user-navi {
       float:right; 
       height:50px;
-      margin: 0 10px;
+      margin: 0px 40px;
       
         .signed-in {
          
          .signed-in-text {
          float:right;   
-         margin-top: 15px;
+         margin-top: 10px;
          padding:5px;
               
                 }
                 
                 img {
                  
-                  margin: 2px;
+                  margin:0 2px;
                 }
           
           }
@@ -136,11 +139,10 @@ textarea {
   }  
   
   .main-navi{
-    position:relative;
-    top: -55px;
-    z-index:1000;
-    left:100px;
-    width:250px;
+	  float:left;
+  	  width:250px;
+	  height:60px;
+	  margin: 10px 10px 0 10px;
     
     ul {
       list-style-type:none;

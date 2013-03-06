@@ -10,12 +10,23 @@
 <%= render '/layouts/google_analytics'%>
 <body>
 		<div class="wrapper">
-			<div class="header">	
+			<div class="container_12 header">	
 				<div class="logo">
 					<a href="/">
 					<%= image_tag 'hv-logo.png'%>
 					</a>
 				</div>
+				<div class="container_12 main-navi">
+					<ul>
+					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
+					 <% if current_user %>
+					<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
+	
+		
+					<%end%>
+		
+					</ul>	
+					</div>		
 				<div class="user-navi">
   <% if current_user %>
   
@@ -33,17 +44,8 @@
   
 				</div>
 			</div>
-	<div class="container_12 main-navi">
-		<ul>
-		<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
-		 <% if current_user %>
-		<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
 	
-		
-		<%end%>
-		
-		</ul>	
-		</div>		
+
 
 <div class="container_12 yield-wrapper">
 <%= yield %>
