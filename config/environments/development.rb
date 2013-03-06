@@ -8,6 +8,8 @@ Hoo::Application.configure do
   
   ENV['FACEBOOK_SECRET'] = "f63033cdbe18abf335942654c953d45e"
   
+  ENV['rel'] = "12345"
+  
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
       config.action_mailer.default_url_options = { :host => "localhost:3000" }

@@ -149,6 +149,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "profile_picture"
     t.string    "role"
     t.integer   "credits_count",    :default => 0, :null => false
+    t.string    "bio"
+    t.string    "twitter"
+    t.string    "facebook"
+    t.string    "linkedin"
+    t.string    "googleplus"
+    t.string    "link"
   end
 
 end

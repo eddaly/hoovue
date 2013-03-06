@@ -3,11 +3,59 @@
 	</div>
 
 	<div class="container_12 profile-header">
-		<h1><%= @user.name %> </h1>
-		<div class="grid_4">
+		<h1><%= @user.name %> <% if current_user %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %></span></h1> 
+		<div class="grid_3 alpha">
 <img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
 			</div>
-
+			<div class=grid_5>
+				<h3>Bio</h3>
+				<p><%= @user.bio %></p>
+		<h3><a href="<%= @user.link %>"><%= @user.link %></a></h3>
+			</div>
+			
+			<div class="grid_4 omega"  style="margin-top:10px;">
+			<% if @user.twitter.empty? %>
+			
+			<% else %>
+			
+			<script src="https://widgets.twimg.com/j/2/widget.js"></script>
+				<script>
+				new TWTR.Widget({
+				  version: 2,
+				  type: 'profile',
+				  rpp: 10,
+				  interval: 6000,
+				  width: 290,
+				  height: 200,
+				  theme: {
+				    shell: {
+				      background: '#274050',
+				      color: '#fff',
+					  border: '#000'
+				    },
+				    tweets: {
+				      background: '#fff',
+				      color: '#000',
+				      links: '#000000'
+				    }
+				  },
+				  features: {
+				    scrollbar: true,
+				    loop: false,
+				    live: true,
+				    hashtags: true,
+				    timestamp: true,
+				    avatars: false,
+				    behavior: 'all'
+				  }
+				}).render().setUser('<%= @user.twitter %>').start();
+				</script>
+			
+			
+			
+			
+				<% end %>
+			</div>
 
 	</div>
 
