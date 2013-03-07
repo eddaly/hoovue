@@ -1,42 +1,48 @@
 /* Imports */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,400italic);
 @import "bootstrap";
+@import "mixins.css.scss";
+
 
 /* Mixins */
 
-$main: #273F4E;
+$main: #808080;
 
 body {
   
-  background: #f1f1f1;
+  background: url(body-bg.png);
   font-family: "Lato", sans-serif;
+  font-size:16px;
+
   
   h1, h2, h3 {
-	
-    width:100%;
+   font-weight:200;
+   color:#777;
+   text-shadow:0 1px 0 #fff;
+   ;
   }
   
 
   h1 {
+	 
+	 font-size:30px; 
      margin: 5px 0 0 0px;
      padding:5px;
-     font-size:30px;
-     border-bottom: 2px solid $main;
-     width:98%;
+	 width:98%;
      color: $main
      
   }
   
  h2 {
-   font-size: 25px;
-    color: $main;
-    margin:15px 5px;
-       border-bottom: 1px solid $main;
-   
+     font-size: 25px;
+	 margin:15px 0px;
+	 
  }
  
+ 
+ 
  h3 {
-   font-size: 20px;
+   font-size: 16px;
    color: grey;
    font-weight:bold;
 
@@ -46,10 +52,27 @@ a:hover {
   background:0;
 }
 
+p.shadow {
+	  text-shadow:0 1px 0 #f1f1f1;
+	padding:5px;
+}
+
 textarea {
  
  width:50%;
   
+}
+
+.white-box {
+	@include white-box;
+	padding:5px;
+	margin:5px;
+}
+
+.grey-box {
+	@include grey-box;
+	padding:5px;
+	margin:5px;
 }
  
 .wrapper {
@@ -58,40 +81,42 @@ textarea {
   .yield-wrapper {
 	
     padding:0 5px;
-    background:white;
+   
 	
     p.notice, p.error {
 		font-size:25px;
 		text-align:center;
 		margin: 5px;
-		border: 2px solid $main;
+		@include white-box;
 		padding:10px 0;
     }
   
    
   }  
 
-  .header, .footer {
-    
-     width:100%;
-     padding:5px;
-     color: white;
-     background-image: url('/assets/header-bg.png');
-     border-bottom: 2px solid grey;
-	 height:50px;
+  .header {
+  min-height:40px;
+  padding-right:20px;
+  padding-left:20px;
+  @include grey-box;
+ 
+  
      
      .logo {
-       float:left;
-       width:184px;
-       height:47px;
-       margin-top:7px;
-       padding-left:40px;
+       display:block;
+	   float:left;
+	   padding:15px 20px 10px;
+	   margin-left:-20px;
+	   font-size:20px;
+	   font-weight:200;
+	   color:#777;
+	   text-shadow:0 1px 0 #fff;
      }
      
       .user-navi {
       float:right; 
       height:50px;
-      margin: 0px 40px;
+      margin: 0px 10px;
       
         .signed-in {
          
@@ -130,7 +155,7 @@ textarea {
             width:163px;
             height:29px;
             background-image: url('/assets/application/login_with_facebook.png');
-            margin-top: 15px;
+            margin-top: 10px;
                                   }
              
         }    
@@ -138,25 +163,26 @@ textarea {
                  } 
     
       a {
-        color :white;
+       color:#777;
         }  
 
          }
   
   .footer {
     text-align:center;
-    margin-top:20px;
+    margin:20px 0;
 	width:100%;
 	height:40px;
 	padding:5px 0 0 0;
-	margin:0;
+	max-height:25px !important;
+	@include grey-box;
   }  
   
   .main-navi{
 	  float:left;
   	  width:280px;
 	  height:20px;
-	  margin: 10px 10px 0 10px;
+	  margin: 5px 10px 0 10px;
     
     ul {
       list-style-type:none;
@@ -168,7 +194,7 @@ textarea {
         margin-right:4px;
         height:40px;
         a {
-          color:white;
+         
          
         }
         
@@ -188,20 +214,13 @@ textarea {
 a.blue-link, input.blue-link, a.grey-link, a.add_fields, a.remove_fields, input#blue-link, a.remove, a.remove-credit {
     
   float:left;  
-  background-color:#3A3A3A;
+  @include white-box;
   margin:15px 5px 15px 0px;
-  background: #00a4ff url("/assets/arrow_white_long.png") no-repeat right center;
-  color: white;
-  padding: 7px 20px 7px 7px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  text-transform: uppercase;
-  font-size: 12px;
+  background: url("/assets/arrow_white_long.png") no-repeat right center;
+  font-size: 14px;
   font-weight: 100;
-  border: 1px solid #0093E5;
+  padding:10px 20px 10px 10px;
+ 
 
 }
 
@@ -229,7 +248,6 @@ input#blue-link {
 
 a.blue-link:hover, a.add_fields, input#blue-link:hover {
 
- background-color: #009DF5;
 
 }
 
@@ -284,19 +302,16 @@ width:900px;
   
   input {
     width:240px;
-      padding:6px 15px 6px 35px;
-       margin:3px;
-  background: url('/assets/search.png') no-repeat 8px 6px;
-  -webkit-border-radius: 1px;
--moz-border-radius: 1px;
-border-radius: 1px;
+    padding:6px 15px 6px 35px;
+    margin:3px;
+ 	@include white-box;
   }
   
   .search-button {
     margin-left:-15px;
     padding: 7px 0;
-    background: #568001;
-    color:white;
+    background: $main;
+	color:white;
     border:none;
     width:80px;
     
@@ -314,7 +329,6 @@ span.ui-helper-hidden-accessible {
 
   .modalDialog {
     position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
     top: 0;
     right: 0;
     bottom: 0;
@@ -339,15 +353,12 @@ span.ui-helper-hidden-accessible {
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
+	@include grey-box;
   }
 
   .close {
-    background: #fff;
-    color: #FFFFFF;
+    background: #00d9ff;
+    color: #FFF;
     line-height: 25px;
     position: absolute;
     right: -12px;
@@ -364,4 +375,4 @@ span.ui-helper-hidden-accessible {
     box-shadow: 1px 1px 3px #000;
   }
 
-  .close:hover { background: #00d9ff; }
+  .close:hover { background: #000; }

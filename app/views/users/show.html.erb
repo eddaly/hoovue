@@ -72,16 +72,29 @@
 	<h1>Credits</h1>
 		    	<ul>
 	<% @credits.each do |c| %>
-	<li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%> <span style="margin-left:20px">Score: <%= c.count %> </span>
-			<p><strong>Role description: <% if current_user %>
+	<li class="<%= cycle('even', 'odd') -%>">
+	<h2><% if c.product.image? %>
+			<%= image_tag c.product.image.thumb.to_s %>
+				 <%else%> 
+			<%= image_tag '/assets/default-credit-small.jpg'%>
+	 <%end%>  
+	   
+	 
+	  <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%></h2>
+	   <span class="score">
+					<%= c.count %>0% 
+				</span> <br /><br /><br />
+				
+		<div class="more-detail">		
+		<h3>Role description: <% if current_user %>
 <% if c.user.id == current_user.id  %>
 <%= link_to "(edit)", edit_credit_path(c) %>
-<% end %> <% end %></strong><br /> <%= c.role_desc %></p>	
-			<p><strong>Interesting Fact: <% if current_user %>
+<% end %> <% end %></h3><p> <%= c.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>
 <% if c.user.id == current_user.id  %>
 <%= link_to "(edit)", edit_credit_path(c) %>
-<% end %> <% end %></strong> <br /> <%= c.fact %></p>
-
+</h3><p> <%= c.fact %></p>
+		</div>
 	
 
 	
@@ -100,6 +113,8 @@
 	 	<%= f.text_field :role %>
 	 		<%= f.hidden_field :product_id, :value => c.product.id %>
 	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+				
+	<% end %> <% end %>
 <%end%>
 </div>
 
@@ -117,7 +132,7 @@
 	 
 		    	    	<ul>
 	<% current_user.products.each do |p| %>
-	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%><span class="right"> <% if p.product_genre %> Genre: <%= p.product_genre.name %> <%end%>  <%= link_to "Edit Work", edit_product_path(p), :class => 'grey-link' %> </span> </li>
+	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%><span class="right">   <%= link_to "Edit Work", edit_product_path(p), :class => 'blue-link' %> </span> </li>
 	<%end%>	
 </ul> 	
 

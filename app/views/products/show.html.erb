@@ -4,8 +4,8 @@
  
 <h1><%= @product.title %> <% if current_user %> <% if current_user.id == @product.user_id %><span style="font-size:15px"><%= link_to "(edit)", edit_product_path(@product) %> <% end %> <% end %></span> </h1>
 </div>
- <div id="flash_notice"></div>
-<div class="grid_4 omega">
+
+<div class="grid_4 push_1 omega">
 	<% if @product.image.blank? %>
 		<%= image_tag 'default-small.png'%>
 	<%else%>
@@ -13,16 +13,10 @@
 	<%end%>
 </div>
 
-<div class="grid_8 alpha product-desc">
-<p class="product-desc">
- <%= @product.description %>
-</p>
-
-</div>
 	
-<div class="grid_4 omega">
+<div class="grid_4 omega details">
 <h3>Added by:</h3><a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a></p>
-<h3>Category</h3><% if @product.product_genre %> <%= @product.product_genre.name %> <%end%></p>
+<h3>Category</h3><p><% if @product.product_genre %> <%= @product.product_genre.name %> <%end%></p>
 
 <% @product.properties.each do |name, value| %>
 <p>
@@ -46,9 +40,11 @@
 	<% if @user_credits.empty? %>
 	
 	<% else %>
+	<div class="white-box">
+
 		<%= render 'credited_add' %>
 	<%end%>
-		
+	</div>	
 	
 <%end%>
 

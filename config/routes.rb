@@ -58,6 +58,12 @@ match "search", to: 'search#index', :as => 'search'
 #Temp 
 get "holding/index"
 
+#Front
+
+match "legal", to: 'front#legal', :as => 'legal'
+match "terms", to: 'front#terms', :as => 'terms'
+match "privacy", to: 'front#legal', :as => 'privacy'
+
 root :to => "front#index"
 
  

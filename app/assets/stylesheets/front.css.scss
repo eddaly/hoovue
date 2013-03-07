@@ -1,7 +1,4 @@
-// Place all the styles related to the front controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
+@import "mixins.css.scss";
 $main: #273F4E;
 
 #tabs{
@@ -99,6 +96,7 @@ a::after{
      .timesince {
        background: #fff;
        padding:15px 5px;
+
      }
      
      .right {
@@ -172,20 +170,13 @@ a::after{
     font-size:16px;
     padding: 5px 10px;  
     width:95%;
-    color: $main;
-    background: #e1e1e1;
-    background-color:white;
-    border: 3px solid #f0f0f0;
+    @include white-box;
     margin: 5px 0;
     
       .a {
         color: $main;
       }
      
-     .timesince {
-       background: #fff;
-       padding:15px 5px;
-     }
      
      .right {
        float:right;
@@ -217,8 +208,11 @@ a::after{
 
       
 .index-header {
- margin: 0px 0 10px 0; 
- max-height:10px;
+ 
+}
+
+.index-welcome {
+	@include white-box;
 }
 
 .user-stats {

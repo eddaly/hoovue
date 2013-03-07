@@ -1,6 +1,4 @@
-// Place all the styles related to the products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins.css.scss";
 
 ul.product-list {
   
@@ -11,27 +9,21 @@ ul.product-list {
     
     float:left;
     width: 250px;
-    height: 250px;
+    height: 200px;
     padding: 5px;
-    border: 1px solid grey;
-    margin: 10px;
-    -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
--webkit-box-shadow: 0px 4px 12px rgba(50, 50, 50, 0.39);
--moz-box-shadow:    0px 4px 12px rgba(50, 50, 50, 0.39);
-box-shadow:         0px 4px 12px rgba(50, 50, 50, 0.39);
+    margin: 10px 15px;
+   @include white-box;
     
     h3 {
       
-      font-size: 15px;
-      line-height: 20px;
+      font-size: 13px;
+      line-height: 10px;
       text-align: center;
       
     }
     
     img {
-      
+		margin-top:10px;
     }
   }
   
@@ -87,21 +79,48 @@ ul.ui-autocomplete {
 .credits-form {
 
    ul {
-  margin-top:50px;
+  margin-top:10px;
   list-style:none;
+ 
     
     li.odd, li.even {
 	float:left;	
     font-size:14px;
     padding: 5px 10px;  
     width:90%;
-    color: black;
-    background: #fff;
-    margin: 5px 0 0 5px;
-    background: #f1f1f1; 
+	@include white-box;
+    margin: 5px 0 0 20px;
+ 
+    h2 {
+   	 border-bottom: 1px solid #f1f1f1;
+    }
      .right {
        float:right;
      }
+	 
+	 .score {
+		 float:right;
+		 @include grey-box;
+		 padding:15px 5px;
+		 height:20px;
+	 }
+	 
+	 .flag, .validate {
+		 float:right;
+		 @include grey-box;
+		 padding:3px 7px;
+		 font-size:12px;
+	 }
+	 
+	.or {
+		float:right;
+		padding:5px;
+	} 
+	 .more-detail {
+		 width:600px;
+		 margin-top:-80px;
+	 }
+	 
     }
     
     li.even {
@@ -133,5 +152,9 @@ ul.ui-autocomplete {
 		}
 		
 	}
+}
+
+.details {
+	margin-top:-80px;
 }
 

@@ -2,19 +2,29 @@
 
 <h1>Your Credit in <%= @credit.product.title %></h1>
 <h3>Please verify the below information is correct, if it isn't you can edit it.</h3>
+
+<div class="white-box">
 <h3>Your Role:</h3>
 <p>Was your role <strong><%= @credit.role %></strong> ?
 If not you can edit it here: <%= link_to "Edit role >", role_credits_path(:id => @credit.id) %>
 </p>
+</div>
 
-<h3>Description of your Role:</h3>
+<div class="white-box">
+<h3>Description of your Role</h3>
 Tell us more about what you did: <%= link_to "Edit role description >", edit_credit_path(@credit) %>
 </p>
+</div>
 
-<h3>One interesting thing:</h3>
+<div class="white-box">
+<h3>One interesting thing</h3>
 <p>Do you have an interesting fact about this work? Let us know! <%= link_to "Add one interesting thing >", edit_credit_path(@credit) %></p>
+</div>
 
-
+<div class="white-box">
 <h3>If your happy, <%= link_to "confirm this credit >", product_path(@credit.product) %></h3>
+</div>
 
+<div class="white-box">
 <h3>If your not you can, <%= link_to "flag this credit to a moderator >", flag_credit_path(:id => @credit) %></h3>
+</div>

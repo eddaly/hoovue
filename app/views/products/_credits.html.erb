@@ -20,38 +20,51 @@
 			</script>
 		<% if c.user %>
 			<li class="<%= cycle('even', 'odd') -%>">
+			<h2 class="border">
 				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
 					<%= link_to c.user.name, user_path(c.user) %> 
-			<span style="margin-left:10px"><strong>Role: <% if current_user %>
-					<% if c.user.id == current_user.id  %>
-					<%= link_to "(edit)", role_credits_path(:id => c) %>
-					<% end %> <% end %></strong>  <%= c.role %> </span>
-				<span style="margin-left:10px">
-				<strong>Score:</strong> <%= c.count %> 
+					<span class="right"> <%= c.role %> <% if current_user %>
+							<% if c.user.id == current_user.id  %>
+							<%= link_to "(edit)", role_credits_path(:id => c) %>
+							<% end %> <% end %></span>
+			
+			</h2>		
+
+				<span class="score">
+					<%= c.count %>0% 
+				</span> <br /><br /><br />
 						<% if current_user %>
 							<% if c.user.id != current_user.id  %>
-							
-						<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>
-							<% if @user_credits.empty? %>
+								<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>
+									<% if @user_credits.empty? %>
 							<% else %>
-						<% if @credit_validations.empty? %>
-						<%= link_to "Validate", increase_credit_path(c), :method=>:put  %> 
-						<% else %>
+					<% if @credit_validations.empty? %>
+					<span class="validate">	
+					<%= link_to "Validate", increase_credit_path(c), :method=>:put  %>
+				</span> 	 <span class="or">
+						 or
+					</span>	
+									<% else %>
 							<% end %>
-						<% end %>| 
-							<%= link_to "Flag", flag_credit_path(c), :method=>:put  %>
+						<% end %> 
+					<span class="flag">		
+							<%= link_to "Flag", flag_credit_path(c), :method=>:put  %> 
+					 </span> 	
+				 
 						<%end%>  
 							<% end %>
-						</span> <br /><br />
-								<p><strong>Role description: <% if current_user %>
+							<div class="more-detail">
+						
+								<h3>Role description <% if current_user %>
 					<% if c.user.id == current_user.id  %>
 					<%= link_to "(edit)", edit_credit_path(c) %>
-					<% end %> <% end %></strong><br /> <%= c.role_desc %></p>	
-								<p><strong>Interesting Fact: <% if current_user %>
+					<% end %> <% end %></h3><p><%= c.role_desc %></p>
+						
+								<h3>Interesting Fact<% if current_user %>
 					<% if c.user.id == current_user.id  %>
 					<%= link_to "(edit)", edit_credit_path(c) %>
-					<% end %> <% end %></strong> <br /> <%= c.fact %></p>
-					
+					<% end %> <% end %></h3> <p><%= c.fact %></p>
+				</div>
 					<% if current_user %>
 										<% if c.user.id == current_user.id  %>
 					
