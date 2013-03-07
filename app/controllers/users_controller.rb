@@ -23,9 +23,9 @@ end
 
 def show
   @user = User.find(params[:id])
-   @credits = @user.credits.all
-    @posts = @user.posts.all
-    @credit_validations = CreditValidation.where(:user_id => @user.id)
+    @credits = @user.credits.where(:product.nil?)
+      @posts = @user.posts.all
+        @credit_validations = CreditValidation.where(:user_id => @user.id)
 end
 
 def edit

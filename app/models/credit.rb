@@ -1,5 +1,5 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :product_id, :user_id, :role, :fact, :credit_validations_attributes, :status, :pending_user_email
+  attr_accessible :product_id, :user_id, :role, :fact, :credit_validations_attributes, :status, :pending_user_email, :count
   
   belongs_to :user
     belongs_to :product

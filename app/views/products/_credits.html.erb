@@ -3,7 +3,29 @@
 	<h2>Credits</h2>
 		<ul>
 			<% @credit_views.each do |c| %>
-		<% if c.user %>	<li class="<%= cycle('even', 'odd') -%>"><img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square"><%= link_to c.user.name, user_path(c.user) %>  <span class="right"><%= c.role %></span></li><%end%>
-			<%end%>	
+		<% if c.user %>
+			<li class="<%= cycle('even', 'odd') -%>">
+				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
+					<%= link_to c.user.name, user_path(c.user) %>
+					
+						<span class="right"><%= c.role %></span><span style="margin-left:20px">Score: <%= c.count %> </span>	
+						<% if current_user %>
+							<% if c.user.id != current_user.id  %>
+							
+						<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>
+							<% if @user_credits.empty? %>
+							<% else %>
+						<% if @credit_validations.empty? %>
+						<%= link_to "Validate", increase_credit_path(c), :method=>:put  %> 
+						<% else %>
+							<% end %>
+						<% end %>| 
+							<%= link_to "Flag", flag_credit_path(c), :method=>:put  %>
+						<%end%>  
+							<% end %>
+			</li>
+			
+		<%end%>
+							<%end%>	
 		</ul>
 </div>

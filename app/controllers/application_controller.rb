@@ -16,11 +16,13 @@ class ApplicationController < ActionController::Base
         def update_credit_params
           if session[:credit_id] && if current_user 
           @credit = Credit.find(session[:credit_id])  
+          redirect_to @credit
             if current_user.email = @credit.pending_user_email
              @credit.user_id = current_user.id
               @credit.status = "confirmed"
-                @credit.save
-                  session.delete(:credit_id)
+              @credit.increment! :count
+                  @credit.save
+                    session.delete(:credit_id)
             end
                                    end
            end 

@@ -13,33 +13,15 @@
 
 ActiveRecord::Schema.define(:version => 20130118001758655) do
 
-  create_table "admin_users", :force => true do |t|
-    t.string    "email",                  :default => "", :null => false
-    t.string    "encrypted_password",     :default => "", :null => false
-    t.string    "reset_password_token"
-    t.timestamp "reset_password_sent_at"
-    t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",          :default => 0
-    t.timestamp "current_sign_in_at"
-    t.timestamp "last_sign_in_at"
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.timestamp "created_at",                             :null => false
-    t.timestamp "updated_at",                             :null => false
-  end
-
-  add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
-  add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
-
   create_table "credit_validations", :force => true do |t|
-    t.integer  "credit_id",       :limit => 255
-    t.integer  "user_id",         :limit => 255
-    t.boolean  "user_validation"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.string   "token"
-    t.boolean  "verified"
-    t.datetime "token_sent_at"
+    t.integer   "credit_id"
+    t.integer   "user_id"
+    t.boolean   "user_validation"
+    t.timestamp "created_at",      :null => false
+    t.timestamp "updated_at",      :null => false
+    t.string    "token"
+    t.boolean   "verified"
+    t.timestamp "token_sent_at"
   end
 
   create_table "credits", :force => true do |t|
@@ -51,38 +33,39 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.text      "fact"
     t.string    "status"
     t.string    "pending_user_email"
+    t.integer   "count"
   end
 
   create_table "friendships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer   "user_id"
+    t.integer   "friend_id"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "title"
+    t.text      "body"
+    t.integer   "user_id"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "product_fields", :force => true do |t|
-    t.string   "name"
-    t.string   "field_type"
-    t.boolean  "required"
-    t.integer  "product_genre_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.string    "name"
+    t.string    "field_type"
+    t.boolean   "required"
+    t.integer   "product_genre_id"
+    t.timestamp "created_at",       :null => false
+    t.timestamp "updated_at",       :null => false
   end
 
   add_index "product_fields", ["product_genre_id"], :name => "index_product_fields_on_product_genre_id"
 
   create_table "product_genres", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "name"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "products", :force => true do |t|
@@ -111,26 +94,26 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "rates", :force => true do |t|
-    t.integer  "rater_id"
-    t.integer  "rateable_id"
-    t.string   "rateable_type"
-    t.float    "stars",         :null => false
-    t.string   "dimension"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer   "rater_id"
+    t.integer   "rateable_id"
+    t.string    "rateable_type"
+    t.float     "stars",         :null => false
+    t.string    "dimension"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
   end
 
   add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
   add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
 
   create_table "rating_caches", :force => true do |t|
-    t.integer  "cacheable_id"
-    t.string   "cacheable_type"
-    t.float    "avg",            :null => false
-    t.integer  "qty",            :null => false
-    t.string   "dimension"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer   "cacheable_id"
+    t.string    "cacheable_type"
+    t.float     "avg",            :null => false
+    t.integer   "qty",            :null => false
+    t.string    "dimension"
+    t.timestamp "created_at",     :null => false
+    t.timestamp "updated_at",     :null => false
   end
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"

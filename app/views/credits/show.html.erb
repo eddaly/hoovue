@@ -1,16 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @credit.user_id %>
-</p>
+<h1>Your Credit in <%= @credit.product.title %></h1>
 
 <p>
-  <b>Product:</b>
-  <%= @credit.product_id %>
+  <b>Work:</b>
+  <%= @credit.product.title %>
 </p>
 
-<%= @credit.status %>
+<b>Role</b>
+<p>
+<%= @credit.role %>
+<%= link_to "Edit role >", role_credits_path(:id => @credit.id) %>
+</p>
+
+<b>Fact</b>
+<p>
+<%= @credit.fact %>
+<%= link_to "Add another interesting thing +", edit_credit_path(@credit) %>
+</p>
 
 
 

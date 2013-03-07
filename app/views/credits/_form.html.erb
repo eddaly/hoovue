@@ -10,15 +10,25 @@
       </ul>
     </div>
   <% end %>
+
+<% if controller.action_name == 'role' %>
    <div class="field">
     <%= f.label :your_role %><br />
     <%= f.text_field :role %>
   </div>
+ <% end %> 
+  <% if controller.action_name == 'edit' %>
    <div class="field">
   <%= f.label :interesting_fact %><br />
     <%= f.text_area :fact, :rows => '5'	 %>
   </div>
+	<% end %>
+<% if controller.action_name == 'role' %>
    <%= f.hidden_field :status, :value => 'pending' %>
+   <%= f.hidden_field :count, :value => '0' %>
+ <% end  %>
+ 
+ 
   <div class="actions">
     <%= f.submit %>
   </div>

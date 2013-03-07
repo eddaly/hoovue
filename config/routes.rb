@@ -16,7 +16,14 @@ Hoo::Application.routes.draw do
 
 
   resources :credits do
-     collection { post :import }
+     collection do
+     post :import 
+     match 'role'
+   end
+   member do
+     put :increase
+     put :flag
+   end
 end
 
 

@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :genre, :image, :title, :user_id, :credits_attributes, :properties, :product_genre_id
-  
+  attr_accessible :description, :genre, :image, :title, :user_id, :credits_attributes, :properties, :product_genre_id, :role
+    attr_accessor :role   
+ 
   belongs_to :user
     has_many :credits
       belongs_to :product_genre

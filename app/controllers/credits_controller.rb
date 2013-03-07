@@ -41,16 +41,40 @@ end
   def edit
       session[:return_to] = request.referer
     @credit = Credit.find(params[:id])
+     
   end
   
+  def role
+      session[:return_to] = request.referer
+    @credit = Credit.find(params[:id])
+     
+  end
+  
+  def increase
+    @credit = Credit.find(params[:id])
+      @credit.increment! :count
+        @credit_validation = CreditValidation.new(params[:credit_validation])
+           @credit_validation.credit_id = @credit.id
+             @credit_validation.user_id = current_user.id
+         if @credit.update_attributes(params[:credit])
+                @credit_validation.save!
+      flash[:notice] = "Thank you for validating"
+      redirect_to :back
+    end
+  end  
+
+  def flag
+    @credit = Credit.find(params[:id])
+      @credit.status == "flagged"
+      flash[:notice] = "Thank you we will look into it."
+      redirect_to :back
+  end
 
   # POST /credits
   # POST /credits.json
   def create 
     @credit = Credit.new(params[:credit])
       @credit.status = 'pending'
-     
-  
       respond_to do |format|
       if @credit.save
         if @credit.pending_user_email
@@ -69,10 +93,11 @@ end
   # PUT /credits/1.json
   def update
     @credit = Credit.find(params[:id])
-
+     
     respond_to do |format|
+    
       if @credit.update_attributes(params[:credit])
-       format.html { redirect_to session[:return_to], notice: 'Content was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Content was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
