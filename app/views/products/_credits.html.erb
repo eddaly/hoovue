@@ -1,13 +1,29 @@
 
+
 	<div class="container_12 activity-feed">
 	<h2>Credits</h2>
 		<ul>
 			<% @credit_views.each do |c| %>
+			<script type="text/javascript">
+ 
+			$(document).ready(function(){
+ 
+			        $(".slidingDiv_<%= c.id %>").hide();
+			        $(".show_hide<%= c.id %>").show();
+ 
+			    $('.show_hide_<%= c.id %>').click(function(){
+			    $(".slidingDiv_<%= c.id %>").slideToggle();
+			    });
+ 
+			});
+ 
+			</script>
 		<% if c.user %>
 			<li class="<%= cycle('even', 'odd') -%>">
+				<a href="#" class="show_hide_<%= c.id %>">Show detail</a>
+				
 				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
 					<%= link_to c.user.name, user_path(c.user) %>
-					
 						<span class="right"><%= c.role %></span><span style="margin-left:20px">Score: <%= c.count %> </span>	
 						<% if current_user %>
 							<% if c.user.id != current_user.id  %>
@@ -23,6 +39,12 @@
 							<%= link_to "Flag", flag_credit_path(c), :method=>:put  %>
 						<%end%>  
 							<% end %>
+							<div class="slidingDiv_<%= c.id %>">
+								<h4>More Detail:</h4>
+								<p><strong>Role description:</strong><%= c.role_desc %></p>	
+								<p><strong>Interesting Fact:</strong><%= c.fact %></p>
+							 <a href="#" class="show_hide_<%= c.id %>">hide detail</a>
+						 	</div>
 			</li>
 			
 		<%end%>
