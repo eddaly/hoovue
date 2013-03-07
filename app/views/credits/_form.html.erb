@@ -18,6 +18,10 @@
   </div>
  <% end %> 
   <% if controller.action_name == 'edit' %>
+  <div class="field">
+ <%= f.label :role_description %><br />
+   <%= f.text_area :role_desc, :rows => '5'	 %>
+ </div>
    <div class="field">
   <%= f.label :interesting_fact %><br />
     <%= f.text_area :fact, :rows => '5'	 %>

@@ -24,18 +24,18 @@
 	
 
    <div class="field">
-    <%= f.label :image %><br />
+    <%= f.label :work_image %><br />
     <%= f.file_field :image %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :rows => '5' %>
   </div>
   <div class="field">
     <%= f.label :role %><br />
-    <%= f.text_area :role %>
+    <%= f.text_field :role %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>
