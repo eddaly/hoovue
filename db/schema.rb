@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "status"
     t.string    "pending_user_email"
     t.integer   "count"
+    t.text      "role_desc"
   end
 
   create_table "friendships", :force => true do |t|
