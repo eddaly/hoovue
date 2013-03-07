@@ -81,17 +81,40 @@
 <% if c.user.id == current_user.id  %>
 <%= link_to "(edit)", edit_credit_path(c) %>
 <% end %> <% end %></strong> <br /> <%= c.fact %></p>
+
 	
+
+	
+
+<div class="container_12">
+<a href="#openModalemail" class="blue-link">Add Validator</a>
+</div>
+<div id="openModalemail" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+	<h2>E-mail Credit</h2>
+<%= form_for @credit do |f|%>
+	<%= f.label "Their E-mail"%>
+	<%= f.text_field :pending_user_email %>
+		<%= f.label "What was their role?"%>
+	 	<%= f.text_field :role %>
+	 		<%= f.hidden_field :product_id, :value => c.product.id %>
+	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+<%end%>
+</div>
+
+<%end%>
 	</li>
-	<%end%>	
+			
 </ul>
 </div>
 
-<% if current_user %>	
+<% if @user.id == current_user.id %>	
+	 <% if current_user.products %>
 <div class="container_12 credits-form">
 	<h1>Works Added By You</h1>
 	<div class= "activity-feed">
-	  <% if current_user.products %>
+	 
 		    	    	<ul>
 	<% current_user.products.each do |p| %>
 	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%><span class="right"> <% if p.product_genre %> Genre: <%= p.product_genre.name %> <%end%>  <%= link_to "Edit Work", edit_product_path(p), :class => 'grey-link' %> </span> </li>

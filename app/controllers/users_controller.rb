@@ -29,6 +29,7 @@ def show
     @credits = @user.credits.where(:product.nil?)
       @posts = @user.posts.all
         @credit_validations = CreditValidation.where(:user_id => @user.id)
+          @credit = Credit.new
 end
 
 def edit
