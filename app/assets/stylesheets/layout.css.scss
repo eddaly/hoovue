@@ -16,6 +16,7 @@ body {
     width:100%;
   }
   
+
   h1 {
      margin: 5px 0 0 0px;
      padding:5px;
@@ -58,6 +59,15 @@ textarea {
 	
     padding:0 5px;
     background:white;
+	
+    p.notice, p.error {
+		font-size:25px;
+		text-align:center;
+		margin: 5px;
+		border: 2px solid $main;
+		padding:10px 0;
+    }
+  
    
   }  
 

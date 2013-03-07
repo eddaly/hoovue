@@ -53,6 +53,12 @@
 
 
 <div class="container_12 yield-wrapper">
+	<% if flash[:notice] %>
+	      <p class="notice"><%= flash[:notice] %></p>
+	    <% end %>
+	    <% if flash[:error] %>
+	      <p class="error"><%= flash[:error] %></p>
+	    <% end %>
 <%= yield %>
 
 	<div class="footer">

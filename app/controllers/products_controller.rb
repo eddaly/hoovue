@@ -63,7 +63,7 @@ end
       if @product.save
            @credit.product_id = @product.id
              @credit.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to @product, notice: 'Work was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -79,7 +79,7 @@ end
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Work was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

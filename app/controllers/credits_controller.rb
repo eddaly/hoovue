@@ -1,4 +1,7 @@
 class CreditsController < ApplicationController
+  
+  load_and_authorize_resource
+  
   # GET /credits
   # GET /credits.json
   def index
@@ -97,7 +100,7 @@ end
     respond_to do |format|
     
       if @credit.update_attributes(params[:credit])
-        format.html { redirect_to session[:return_to], notice: 'Content was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Your Credit has been updated' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -113,7 +116,7 @@ end
     @credit.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to :back, notice: 'Credit deleted' }
       format.json { head :no_content }
     end
   end

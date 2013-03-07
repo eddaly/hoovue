@@ -43,7 +43,7 @@ protected
  
    #Send to log in page if no auth   
       rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => "Please Log In"
+      redirect_to root_url, :notice => "Not Authorized. Please Log In."
     end
 
 def validation_count 
@@ -61,7 +61,7 @@ end
   helper_method :current_user
 
     def authorize
-      redirect_to login_url, alert: "Not authorized" if current_user.nil?
+      redirect_to root_url, notice: "You not authorized for this action" if current_user.nil?
     end
 
     def admin_user

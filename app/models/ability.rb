@@ -7,11 +7,20 @@ class Ability
           can :manage, :all              
         end
         if user.role =="user"
-           can :manage, :all  
+            can :read, :all  
+              can :manage, User, :id => user.id
+                cannot :destroy, User
+                  can [:create, :flag, :increase], Credit
+                    can :manage, Credit, :user_id => user.id
+                      can :create, Product
+                        can :manage, Product, :user_id => user.id
+                          can :manage, CreditValidation
+                            cannot :destroy, CreditValidation
+                
         end
         if user.role.nil?
-          can :read, :all         
-                          
+          cannot :manage, :all
+            can :read, :all  
        end
     #
     # The first argument to `can` is the action you are giving the user permission to do.

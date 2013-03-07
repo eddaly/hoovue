@@ -3,7 +3,7 @@
 	</div>
 
 	<div class="container_12 profile-header">
-		<h1><%= @user.name %> <% if current_user %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %></span></h1> 
+		<h1><%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %> </span></h1> 
 		<div class="grid_3 alpha">
 <img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
 			</div>
@@ -72,7 +72,7 @@
 	<h1>Credits</h1>
 		    	<ul>
 	<% @credits.each do |c| %>
-	<li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%> <%= link_to "(edit)", role_credits_path(:id => c) %>  on   <%= link_to c.product.title, product_path(c.product)%> <span style="margin-left:20px">Score: <%= c.count %> </span> <%= link_to 'Edit Fact', edit_credit_path(c), class: "remove-credit" %>    <%= link_to 'Delete Credit', c, method: :delete, data: { confirm: 'Are you sure?'},  class: "remove-credit"  %> </li>
+	<li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%> <span style="margin-left:20px">Score: <%= c.count %> </span><% if current_user %> <% if current_user.id == @user.id %> <%= link_to 'Edit Fact', edit_credit_path(c), class: "remove-credit" %>    <%= link_to 'Delete Credit', c, method: :delete, data: { confirm: 'Are you sure?'},  class: "remove-credit"  %> <% end %> <% end %> </li>
 	<%end%>	
 </ul>
 		
