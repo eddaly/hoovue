@@ -68,11 +68,21 @@
 
 
 
-<div class="container_12 activity-feed">
+<div class="container_12 credits-form">
 	<h1>Credits</h1>
 		    	<ul>
 	<% @credits.each do |c| %>
-	<li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%> <span style="margin-left:20px">Score: <%= c.count %> </span><% if current_user %> <% if current_user.id == @user.id %> <%= link_to 'Edit Fact', edit_credit_path(c), class: "remove-credit" %>    <%= link_to 'Delete Credit', c, method: :delete, data: { confirm: 'Are you sure?'},  class: "remove-credit"  %> <% end %> <% end %> </li>
+	<li class="<%= cycle('even', 'odd') -%>"><% if c.product.image? %><%= image_tag c.product.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>   <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%> <span style="margin-left:20px">Score: <%= c.count %> </span>
+			<p><strong>Role description: <% if current_user %>
+<% if c.user.id == current_user.id  %>
+<%= link_to "(edit)", edit_credit_path(c) %>
+<% end %> <% end %></strong><br /> <%= c.role_desc %></p>	
+			<p><strong>Interesting Fact: <% if current_user %>
+<% if c.user.id == current_user.id  %>
+<%= link_to "(edit)", edit_credit_path(c) %>
+<% end %> <% end %></strong> <br /> <%= c.fact %></p>
+	
+	</li>
 	<%end%>	
 </ul>
 		

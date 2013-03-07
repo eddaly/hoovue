@@ -1,13 +1,3 @@
-
-<h2>Your Credits</h2>	
-
-<h3>You currently have a credit for this work:</h3>
-		<% @user_credits.each do |uc|%>
-	<div class="user-credit"><div class="role">Your Role: <strong><%= uc.role %></strong> <%= link_to "(edit)", role_credits_path(:id => uc) %> </div> <div class="status">Status: <strong><%= uc.status %></strong></div> <%= link_to 'Edit Fact', edit_credit_path(uc), class: "remove" %>    <%= link_to 'Delete Credit', uc, method: :delete, class: "remove"  %>  </div>
-		<%end%>
-		</div>
-
-
 	<h3>Do you know other people involved in <%= @product.title %>?</h3>
 
 		<a href="#openModalhoovue" class="blue-link">Add a credit with Hoovue</a>

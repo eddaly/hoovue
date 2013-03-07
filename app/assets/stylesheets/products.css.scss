@@ -87,29 +87,30 @@ ul.ui-autocomplete {
 .credits-form {
 
    ul {
-margin-top:50px;
+  margin-top:50px;
   list-style:none;
     
     li.odd, li.even {
+	float:left;	
     font-size:14px;
     padding: 5px 10px;  
-    width:60%;
+    width:90%;
     color: black;
     background: #fff;
-    margin: 5px 0;
-     
+    margin: 5px 0 0 5px;
+    background: #f1f1f1; 
      .right {
        float:right;
      }
     }
     
     li.even {
-      background: #F0F0F0;
+     
     }
   
     
     li:hover {
-      background: #f1f1f1;
+      
      
     }
   }
