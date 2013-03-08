@@ -26,10 +26,16 @@
 			<h2 class="border">
 				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
 					<%= link_to c.user.name, user_path(c.user) %> 
-					<span class="right"> <%= c.role %> <% if current_user %>
+					<span class="right"> <%= c.role %> 
+						<% if current_user %>
 							<% if c.user.id == current_user.id  %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
-							<% end %> <% end %></span>
+							<% end %> <% end %>
+							<% if c.issue %>
+								Issue: <%= c.issue %>
+								<% end %>
+						
+						</span>
 			
 			</h2>		
 

@@ -21,8 +21,10 @@
 		<%= f.label :genre %>
 		<%= collection_select(:product, :product_genre_id, ProductGenre.all, :id, :name)%>
 	</div>	
-	
-
+	<div class="field">
+		<%= f.label :status %>
+	 <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
+	 </div>
    <div class="field">
     <%= f.label :work_image %><br />
     <%= f.file_field :image %>

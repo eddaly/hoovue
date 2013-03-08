@@ -24,7 +24,10 @@
 	<%= f.label :genre %>
 	<%= collection_select(:product, :product_genre_id, ProductGenre.all, :id, :name)%>
 </div>	
-	
+<div class="field">
+	<%= f.label :status %>
+ <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
+ </div>
 
    <div class="field">
     <%= f.label :image %><br />
@@ -40,5 +43,4 @@
 <% end %>
 
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<%= link_to 'Show', @product %>
