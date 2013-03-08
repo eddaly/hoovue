@@ -21,7 +21,7 @@ end
    
 def self.search(search)
   if search
-     where('title ILIKE ? OR genre ILIKE ?', "%#{search}%","%#{search}%")                        
+     where('lower(title) LIKE lower(?) OR lower(genre) LIKE lower(?)', "%#{search}%","%#{search}%")                        
   else
     scoped
   end
