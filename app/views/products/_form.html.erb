@@ -18,7 +18,7 @@
     <%= f.text_field :title %>
   </div>
 	<div class="field">
-		<%= f.label :genre %>
+		<%= f.label :category %>
 		<%= collection_select(:product, :product_genre_id, ProductGenre.all, :id, :name)%>
 	</div>	
 	<div class="field">
