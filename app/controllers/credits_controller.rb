@@ -44,7 +44,6 @@ end
   def edit
       session[:return_to] = request.referer
         @credit = Credit.find(params[:id])
-        @credit_validation = CreditValidations.where(:id => '19')
          
   end
   
@@ -100,8 +99,6 @@ end
     @credit = Credit.find(params[:id])
      
     respond_to do |format|
-      @credit_validations = CreditValidation.all
-     
       if @credit.update_attributes(params[:credit])
         format.html { redirect_to session[:return_to], notice: 'Your Credit has been updated' }
         format.json { head :no_content }
