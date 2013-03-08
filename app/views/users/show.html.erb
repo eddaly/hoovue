@@ -82,6 +82,7 @@
 	 
 	  <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%></h2>
 	   <span class="score">
+		   Rating <br />
 					<%= c.count %>0% 
 				</span> <br /><br /><br />
 				
@@ -123,7 +124,7 @@
 			
 </ul>
 </div>
-
+<% if current_user %>
 <% if @user.id == current_user.id %>	
 	 <% if current_user.products %>
 <div class="container_12 credits-form">
@@ -145,4 +146,5 @@
 </div>
 
 	<% end %>	
+	<% end %>
 	

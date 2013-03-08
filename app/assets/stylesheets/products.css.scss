@@ -101,8 +101,9 @@ ul.ui-autocomplete {
 	 .score {
 		 float:right;
 		 @include grey-box;
-		 padding:15px 5px;
-		 height:20px;
+		 padding:10px 15px;
+		 height:40px;
+		 text-align: center;
 	 }
 	 
 	 .flag, .validate {
