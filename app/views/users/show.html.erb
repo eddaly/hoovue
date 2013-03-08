@@ -9,6 +9,9 @@
 			</div>
 			<div class=grid_5>
 				<h3>Bio</h3>
+				<% if @credits.empty? %>
+				<p>Not filled out yet.</p>
+				<% end %>
 				<p><%= @user.bio %></p>
 		<h3><a href="<%= @user.link %>"><%= @user.link %></a></h3>
 			</div>
@@ -70,6 +73,9 @@
 
 <div class="container_12 credits-form">
 	<h1>Credits</h1>
+	<% if @credits.empty? %>
+	<h3>No Credits Yet.</h3>
+	<% end %>
 		    	<ul>
 	<% @credits.each do |c| %>
 	<li class="<%= cycle('even', 'odd') -%>">

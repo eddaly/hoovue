@@ -2,6 +2,9 @@
 
 	<div class="container_12 credit-feed">
 	<h2>Credits</h2>
+	<% if @credit_views.empty? %>
+	<h3>No Credits Yet.</h3>
+	<% end %>
 		<ul>
 			<% @credit_views.each do |c| %>
 			<script type="text/javascript">
