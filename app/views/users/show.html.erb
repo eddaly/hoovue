@@ -130,27 +130,33 @@
 			
 </ul>
 </div>
-<% if current_user %>
-<% if @user.id == current_user.id %>	
-	 <% if current_user.products %>
+
 <div class="container_12 credits-form">
-	<h1>Works Added By You</h1>
+	<% if @user.products.empty? %>
+	<% else %>
+	<h1>Works Added By <%= @user.name %></h1>
+	<% end %>
 	<div class= "activity-feed">
 	 
 		    	    	<ul>
-	<% current_user.products.each do |p| %>
-	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%><span class="right">   <%= link_to "Edit Work", edit_product_path(p), :class => 'blue-link' %> </span> </li>
+						
+	<% @user.products.each do |p| %>
+	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%> <% if current_user %> <% if @user.id == current_user.id %> <span class="right"><%= link_to "Edit Work", edit_product_path(p), :class => 'blue-link' %> </span> </li><% end %><%end%>
 	<%end%>	
 </ul> 	
 
-	<%else%>
-	<h3>No Work Added</h3>
-	<%end%>
-	
+<% else %>
+
+
+<% if current_user %>	
+<% if @user.id == current_user.id %>	
 <%= link_to 'New Work', new_product_path, :class => 'blue-link' %>
+<% end %>
+<% end %>
 	</div>
 </div>
 
-	<% end %>	
-	<% end %>
+
+		
 	
+
