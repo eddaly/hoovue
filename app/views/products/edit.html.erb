@@ -25,7 +25,7 @@
 	<%= collection_select(:product, :product_genre_id, ProductGenre.all, :id, :name)%>
 </div>	
 <div class="field">
-	<%= f.label :status %>
+	<%= f.label :work_status %>
  <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
  </div>
 
