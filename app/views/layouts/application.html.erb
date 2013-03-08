@@ -21,7 +21,7 @@
 					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
 					 <% if current_user %>
 					<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
-	
+					<li><%= image_tag "/assets/plus-icon.png"%><a href="/products/new">Add a Work</a></li>
 		
 					<% if current_user.role == "admin" %>
 			<li><%= link_to 'Admin', rails_admin_path %> </li>
