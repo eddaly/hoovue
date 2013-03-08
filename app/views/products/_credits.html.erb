@@ -36,7 +36,7 @@
 				<span class="score">
 					Rating<br />
 					<%= c.count %>0% 
-				</span> <br /><br /><br />
+				</span> <br /><br /><br /><br />
 						<% if current_user %>
 							<% if c.user.id != current_user.id  %>
 								<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>

@@ -30,7 +30,12 @@
 <% if controller.action_name == 'role' %>
    <%= f.hidden_field :status, :value => 'pending' %>
    <%= f.hidden_field :count, :value => '0' %>
- <% end  %>
+  
+   <%= f.fields_for :credit_validations do |builder| %>
+     <%= render 'cv_fields', f: builder %>
+   <% end %>
+   
+   <% end  %>
  
  
   <div class="actions">
