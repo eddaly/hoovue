@@ -37,7 +37,7 @@ end
 
 def self.search(search)
   if search
-     where('name LIKE ?', "%#{search}%")                        
+     where('lower(name) LIKE lower(?)', "%#{search}%")                        
   else
     scoped
   end
