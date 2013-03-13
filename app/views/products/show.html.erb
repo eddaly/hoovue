@@ -15,8 +15,8 @@
 
 	
 <div class="grid_4 omega details">
-<h3>Added by:</h3><a href="/users/<%= @product.user.id%>"><%= @product.user.name%></a></p>
-<% if @product.product_genre %><h3>Category</h3><p><%= @product.product_genre.name %> <%end%></p>
+
+<% if @product.product_genre %><p><%= @product.product_genre.name %> <%end%></p>
 
 <% @product.properties.each do |name, value| %>
 <p>
@@ -34,18 +34,7 @@
 <%= render '/products/credits'%>
 </div>
 
-<% if current_user %>
 
 
-	<% if @user_credits.empty? %>
-	
-	<% else %>
-	<div class="white-box">
-
-		<%= render 'credited_add' %>
-	<%end%>
-	</div>	
-	
-<%end%>
 
 </div>

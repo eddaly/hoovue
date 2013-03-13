@@ -22,13 +22,15 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "token"
     t.boolean   "verified"
     t.timestamp "token_sent_at"
+    t.string    "status"
+    t.integer   "validator_id"
   end
 
   create_table "credits", :force => true do |t|
     t.integer   "user_id"
     t.integer   "product_id"
-    t.timestamp "created_at",         :null => false
-    t.timestamp "updated_at",         :null => false
+    t.timestamp "created_at",           :null => false
+    t.timestamp "updated_at",           :null => false
     t.string    "role"
     t.text      "fact"
     t.string    "status"
@@ -36,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "count"
     t.text      "role_desc"
     t.string    "issue"
+    t.integer   "validator_id"
+    t.integer   "credit_validation_id"
   end
 
   create_table "friendships", :force => true do |t|

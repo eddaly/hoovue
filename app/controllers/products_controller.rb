@@ -25,11 +25,12 @@ end
   def show
     @product = Product.find(params[:id])
      @credit_views = @product.credits.all
+     
         if current_user
         @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)
-          end
-            @credit = Credit.new
+          @credit = Credit.new
         
+      end  
   end
 
   # GET /products/new
@@ -56,8 +57,6 @@ end
         @credit = Credit.new(params[:credit])
           @credit.user_id = current_user.id
             @credit.role = @product.role
-              @credit.increment! :count
-
     respond_to do |format|
       if @product.save
            @credit.product_id = @product.id

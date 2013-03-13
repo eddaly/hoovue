@@ -50,6 +50,9 @@ end
   def role
       session[:return_to] = request.referer
     @credit = Credit.find(params[:id])
+    1.times do
+        credit_validation = @credit.credit_validations.where(:user_id => current_user.id)
+   end   
   end
   
   def search
@@ -80,9 +83,15 @@ end
   # POST /credits.json
   def create 
     @credit = Credit.new(params[:credit])
-      @credit.status = 'pending'
+       @credit.validator_id = current_user.id
+        @credit_validation = CreditValidation.new(params[:credit_validation])
+          @credit_validation.user_id = current_user.id
+            @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
       if @credit.save
+          @credit_validation.save!
+             @credit.credit_validation_id = @credit_validation.id
+           @credit.update_attributes(params[:credit])
         if @credit.pending_user_email
        CreditMailer.new_credit(@credit).deliver
         end

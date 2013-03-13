@@ -7,20 +7,7 @@
 	<% end %>
 		<ul>
 			<% @credit_views.each do |c| %>
-			<script type="text/javascript">
- 
-			$(document).ready(function(){
- 
-			        $(".slidingDiv_<%= c.id %>").hide();
-			        $(".show_hide<%= c.id %>").show();
- 
-			    $('.show_hide_<%= c.id %>').click(function(){
-			    $(".slidingDiv_<%= c.id %>").slideToggle();
-			    });
- 
-			});
- 
-			</script>
+		
 		<% if c.user %>
 			<li class="<%= cycle('even', 'odd') -%>">
 			<h2 class="border">
@@ -33,16 +20,49 @@
 							<% end %> <% end %>
 							<% if c.issue %>
 								Issue: <%= c.issue %>
+									
 								<% end %>
-						
+
+								<div id="openModalemail" class="modalDialog">
+									<div>
+	
+										<a href="#close" title="Close" class="close">X</a>
+									<h2>E-mail Credit</h2>
+								<%= form_for @credit do |f|%>
+									<%= f.label "Their E-mail"%>
+									<%= f.text_field :pending_user_email %>
+										<%= f.label "What was their role?"%>
+									 	<%= f.text_field :role %>
+											<%= f.hidden_field :product_id, :value => @product.id %>
+											<%= f.hidden_field :current_credit_id, :value => c.id %>
+			
+												<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+								<%end%>
+
+								</div>
+
+								</div>
+							
 						</span>
 			
 			</h2>		
 
-				<span class="score">
-					Rating<br />
-					<%= c.count %>0% 
-				</span> <br /><br /><br /><br />
+				
+					<% c.credit_validations.each do |cv| %>
+				
+					<% if cv.status == "confirmed" %>
+					<span class="score">
+					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+					</span>
+					<% end %>
+					<% if cv.status == "pending" %>
+					<span class="score">
+					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
+					</span>
+					<% end %>
+					
+					<% end %>
+			<br /><br /><br /><br />
 						<% if current_user %>
 							<% if c.user.id != current_user.id  %>
 								<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>
@@ -79,7 +99,8 @@
 										<% if c.user.id == current_user.id  %>
 					
 					<a href="#openModalemail" class="blue-link">Invite someone to validate</a>
-
+					
+						
 						<% end %>
 							<% end %>
 						 	

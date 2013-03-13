@@ -14,7 +14,7 @@ class CreditValidationsController < ApplicationController
   # GET /credit_validations/1.json
   def show
     @credit_validation = CreditValidation.find(params[:id])
-
+    @validator = User.find_by_id(@credit_validation.validator_id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @credit_validation }

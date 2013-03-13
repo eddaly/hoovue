@@ -1,5 +1,5 @@
 class CreditValidation < ActiveRecord::Base
-  attr_accessible :credit_id, :user_id, :user_validation, :token, :token_created_at
+  attr_accessible :credit_id, :user_id, :user_validation, :token, :token_created_at, :validator_id, :status
     belongs_to :credit
   
   

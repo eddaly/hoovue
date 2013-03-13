@@ -2,9 +2,10 @@
 
 <table>
   <tr>
-    <th>Credit</th>
-    <th>User</th>
-    <th>User validation</th>
+    <th>Credit ID</th>
+    <th>User ID</th>
+    <th>Status</th>
+	<th>Validator ID</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +15,8 @@
   <tr>
     <td><%= credit_validation.credit_id %></td>
     <td><%= credit_validation.user_id %></td>
-    <td><%= credit_validation.user_validation %></td>
+    <td><%= credit_validation.status %></td>
+	 <td><%= credit_validation.validator_id %></td>
     <td><%= link_to 'Show', credit_validation %></td>
     <td><%= link_to 'Edit', edit_credit_validation_path(credit_validation) %></td>
     <td><%= link_to 'Destroy', credit_validation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

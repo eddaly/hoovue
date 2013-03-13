@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     def save_credit_params
       if params[:credit_id]
      session[:credit_id] = params[:credit_id]  
+    
       end 
     end 
     
@@ -19,12 +20,21 @@ class ApplicationController < ActionController::Base
           redirect_to @credit
             if current_user.email = @credit.pending_user_email
              @credit.user_id = current_user.id
-              @credit.status = "confirmed"
-              @credit.increment! :count
-                  @credit.save
+             @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
+             @credit_validation.status = "confirmed"
+             @credit_validation.validator_id = current_user.id
+             @credit_validation.update_attributes(params[:credit_validationn])
+             @credit_validation = CreditValidation.new(params[:credit_validation])
+               @credit_validation.user_id = current_user.id
+               @credit_validation.validator_id = @credit.validator_id
+               @credit_validation.status = "confirmed"
+               if  @credit.save
+                 @credit_validation.credit_id = @credit.id
+                   @credit_validation.save
                     session.delete(:credit_id)
+                  end
             end
-                                   end
+          end
            end 
          end
 
