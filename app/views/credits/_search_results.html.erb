@@ -1,6 +1,6 @@
 <div class="activity-feed">
 	<% if @products %>
-	<h2>Works:</h2>
+	<h2>Is this the correct work?</h2>
 <ul>
 <% @products.each do |p| %>
 <%= link_to p do %>
@@ -11,11 +11,11 @@
 <%end%>
 	<%end%>	
 	<%else%>
-	
+
 	<%end%>
 </ul>
 </div>
-
+	<p><%= link_to "Work not listed? Add one >", new_product_path %> </p>
 
 </div>
 
