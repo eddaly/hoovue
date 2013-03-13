@@ -1,0 +1,21 @@
+<div class="activity-feed">
+	<% if @products %>
+	<h2>Works:</h2>
+<ul>
+<% @products.each do |p| %>
+<%= link_to p do %>
+<li class="<%= cycle('even', 'odd') -%>">
+	 <% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%end%>  <%= link_to p.title, product_path(p)%> 
+	 <span style="float:right;"><%= link_to 'Add Credit >', new_credit_path(:product_id => p.id) %> </span>
+ </li>
+<%end%>
+	<%end%>	
+	<%else%>
+	
+	<%end%>
+</ul>
+</div>
+
+
+</div>
+

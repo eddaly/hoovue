@@ -19,6 +19,7 @@ Hoo::Application.routes.draw do
      collection do
      post :import 
      match 'role'
+     match 'search'
    end
    member do
      put :increase

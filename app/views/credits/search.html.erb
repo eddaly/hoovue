@@ -1,0 +1,16 @@
+<div class="container_12">
+	
+	<h1>Add a Credit</h1>
+	<div class="search">
+		
+<%= form_tag search_credits_path, :method => 'get' do %>
+
+  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
+     <%= submit_tag "Search", :name => nil, :class => "search-button" %>
+  <%end%>
+  </p>
+</div>
+<p><%= link_to "Work not listed? Add one >", new_product_path %> </p>
+  <p>
+  <div id="products-list"> <%= render 'search_results'%></div>
+   

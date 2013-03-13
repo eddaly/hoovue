@@ -50,8 +50,10 @@ end
   def role
       session[:return_to] = request.referer
     @credit = Credit.find(params[:id])
-    
-     
+  end
+  
+  def search
+    @products = Product.search(params[:search])
   end
   
   def increase
@@ -84,7 +86,7 @@ end
         if @credit.pending_user_email
        CreditMailer.new_credit(@credit).deliver
         end
-        format.html { redirect_to :back, notice: 'Credit was successfully created.' }
+        format.html { redirect_to product_path(@credit.product), notice: 'Credit was successfully created.' }
         format.json { render json: @credit, status: :created, location: @credit }
       else
         format.html { render action: "new" }
