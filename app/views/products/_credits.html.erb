@@ -33,6 +33,7 @@
 				<div>
 	
 					<a href="#close" title="Close" class="close">X</a>
+		<% if current_user %>
 				<h2>E-mail Credit</h2>
 			<%= form_for @credit do |f|%>
 				<%= f.label "Their E-mail"%>
@@ -44,7 +45,7 @@
 			
 							<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
 			<%end%>
-
+		<% end %>		
 			</div>
 
 			</div>			
