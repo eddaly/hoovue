@@ -67,13 +67,20 @@ end
       flash[:notice] = "Thank you we will look into it."
       redirect_to root_url
   end
+  
+  def add
+    
+  end
+  
 
   # POST /credits
   # POST /credits.json
   def create 
+   
     @credit = Credit.new(params[:credit])
        @credit.validator_id = current_user.id
         @credit_validation = CreditValidation.new(params[:credit_validation])
+        @credit_validation.status = "pending"
           @credit_validation.user_id = current_user.id
             @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
@@ -91,6 +98,7 @@ end
         format.json { render json: @credit.errors, status: :unprocessable_entity }
       end
     end
+  
   end
 
   # PUT /credits/1

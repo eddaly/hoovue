@@ -69,10 +69,8 @@
 
 
 
-
-
 <div class="container_12 credits-form">
-	<h1>Credits</h1>
+	<h1>Your Credits</h1>
 	<% if @credits.empty? %>
 	<h3>No Credits Yet.</h3>
 	<% end %>
@@ -86,46 +84,110 @@
 	 <%end%>  
 	   
 	 
-	  <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%></h2>
-		<% c.credit_validations.each do |cv| %>
-				
-		<% if cv.status == "confirmed" %>
-		<span class="score">
-		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+	  <%= c.role%> <%= link_to "(edit)", role_credits_path(:id => c) %>   on   <%= link_to c.product.title, product_path(c.product)%></h2>
+		
+		
+		
+	<% if c.credit_validations.empty? %>
+		<% 3.times do %>
+	<span class="score">
+	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	</span>
+		<% end %>
+		<% else %>
+	<% end %>
+	
+		
+	<%=  %>	
+	
+	
+				<% if c.credit_validations.count.eql?(1) %>
+	<% c.credit_validations.each do |cv| %>
+	<% if cv.status == "confirmed" %>
+	<span class="score">
+	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+	</span>
+	<% end %>
+		<% if cv.status == "pending" %>
+	<span class="score">
+<%= image_tag '/assets/pending.png' %>
+	
 		</span>
 		<% end %>
-			<% if cv.status == "pending" %>
-		<span class="score">
-		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
-					
-				<% if current_user %>
-					<% if current_user.id == cv.validator_id %>
-							
-					<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
-				<% end %>
-			<% end %>
+		<% 2.times do %>
+	<span class="score">
+	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	</span>
 		<% end %>
+		
+		<% end %>
+		<% else %>
+	
+<% end %>
+
+<% if c.credit_validations.count.eql?(2)  %>
+<% c.credit_validations.each do |cv| %>
+<% if cv.status == "confirmed" %>
+<span class="score">
+<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+</span>
+<% end %>
+	<% if cv.status == "pending" %>
+<span class="score">
+<%= image_tag '/assets/pending.png' %>
+	
+	</span>
+	<% end %>
+
+		
+	<% end %>
+	<% 1.times do %>
+<span class="score">
+<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+</span>
+	<% end %>
+	
+	<% end %>
+	
+	<% if c.credit_validations.count.eql?(3)  %>
+	<% c.credit_validations.each do |cv| %>
+	<% if cv.status == "confirmed" %>
+	<span class="score">
+	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+	</span>
+	<% end %>
+		<% if cv.status == "pending" %>
+	<span class="score">
+	<%= image_tag '/assets/pending.png' %>
+	
 		</span>
 		<% end %>
+
+		
+		<% end %>
+	
+	
+		<% end %>
+
 <br /><br /><br /><br />
 	   
 				
 		<div class="more-detail">		
 		<h3>Role description: <% if current_user %>
-<% if c.user.id == current_user.id  %>
+
 <%= link_to "(edit)", edit_credit_path(c) %>
-<% end %> <% end %></h3><p> <%= c.role_desc %></p>	
+ <% end %></h3><p> <%= c.role_desc %></p>	
 			<h3>Interesting Fact: <% if current_user %>
-<% if c.user.id == current_user.id  %>
+
 <%= link_to "(edit)", edit_credit_path(c) %>
 </h3><p> <%= c.fact %></p>
 		</div>
-	
+	<% end %>
 
 	
 
 <div class="container_12">
-<a href="#openModalemail" class="blue-link">Add Validator</a>
+
 <%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 </div>
 <div id="openModalemail" class="modalDialog">
@@ -141,8 +203,9 @@
 			<%= f.hidden_field :current_credit_id, :value => c.id %>
 	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
 				
-	<% end %> <% end %>
-<%end%>
+	<% end %> 
+	
+
 </div>
 
 <%end%>
@@ -150,6 +213,10 @@
 			
 </ul>
 </div>
+
+
+
+
 
 <div class="container_12 credits-form">
 	<% if @user.products.empty? %>

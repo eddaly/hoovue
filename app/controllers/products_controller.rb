@@ -59,6 +59,7 @@ end
             @credit.role = @product.role
               @credit.role_desc = @product.role_description
                 @credit.fact = @product.fact
+                 @credit.count = "0"
     respond_to do |format|
       if @product.save
            @credit.product_id = @product.id
