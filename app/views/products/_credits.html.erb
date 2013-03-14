@@ -51,35 +51,119 @@
 			</div>			
 
 				
-					<% c.credit_validations.each do |cv| %>
-				
-					<% if cv.status == "confirmed" %>
-					<span class="score">
-					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
-					</span>
+			<% if c.credit_validations.empty? %>
+				<% 3.times do %>
+				<span class="score">
 					<% if current_user %>
-						<% if current_user.id == cv.validator_id %>
-					<span style="float:right; margin-top:70px; margin-right:-60px;">
-						<%= link_to "Flag", flag_credit_validation_path(cv), :method=>:put  %> 
-					</span>
+						<% if current_user.id == cv.credit.user_id  %>
+							<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+						<% else %>
+							<%= image_tag '/assets/empty.png' %>
+						<% end%>
+					<% else %>
+						
+							<%= image_tag '/assets/empty.png' %>
 					<% end %>
+				</span>
+					
+				<% end %>
+				<% else %>
+			<% end %>
+	
+		
+			<%=  %>	
+	
+	
+						<% if c.credit_validations.count.eql?(1) %>
+			<% c.credit_validations.each do |cv| %>
+			<% if cv.status == "confirmed" %>
+			<span class="score">
+			<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+			</span>
+			<% end %>
+				<% if cv.status == "pending" %>
+			<span class="score">
+		<%= image_tag '/assets/pending.png' %>
+	
+				</span>
+				<% end %>
+				<% 2.times do %>
+				<span class="score">
+					<% if current_user %>
+						<% if current_user.id == cv.credit.user_id  %>
+							<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+						<% else %>
+							<%= image_tag '/assets/empty.png' %>
+						<% end%>
+					<% else %>
+						
+							<%= image_tag '/assets/empty.png' %>
+					<% end %>
+				</span>
+			
 				<% end %>
 		
-					<% end %>
-						<% if cv.status == "pending" %>
-					<span class="score">
-					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
-					
-							<% if current_user %>
-								<% if current_user.id == cv.validator_id %>
-								<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
-								
-							<% end %>
-						<% end %>
-					<% end %>
-					</span>
-					<% end %>
-			<br /><br /><br /><br />
+				<% end %>
+				<% else %>
+	
+		<% end %>
+
+		<% if c.credit_validations.count.eql?(2)  %>
+		<% c.credit_validations.each do |cv| %>
+		<% if cv.status == "confirmed" %>
+		<span class="score">
+		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+		</span>
+		<% end %>
+			<% if cv.status == "pending" %>
+		<span class="score">
+		<%= image_tag '/assets/pending.png' %>
+	
+			</span>
+			<% end %>
+
+		
+			<% end %>
+			<% 1.times do %>
+			<span class="score">
+				<% if current_user %>
+					<% if current_user.id == cv.credit.user_id  %>
+						<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+					<% else %>
+						<%= image_tag '/assets/empty.png' %>
+					<% end%>
+				<% else %>
+						
+						<%= image_tag '/assets/empty.png' %>
+				<% end %>
+			</span>
+		
+			<% end %>
+	
+			<% end %>
+	
+			<% if c.credit_validations.count.eql?(3)  %>
+			<% c.credit_validations.each do |cv| %>
+			<% if cv.status == "confirmed" %>
+			<span class="score">
+			<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+			</span>
+			<% end %>
+				<% if cv.status == "pending" %>
+			<span class="score">
+			<%= image_tag '/assets/pending.png' %>
+	
+				</span>
+				<% end %>
+
+		
+				<% end %>
+	
+	
+				<% end %>
+
+		<br /><br /><br /><br />
+				
 						
 
 							<div class="more-detail">
