@@ -15,6 +15,7 @@ Hoo::Application.routes.draw do
   resources :credit_validations do
     member do
       put :validate
+      put :flag
     end
   end
 

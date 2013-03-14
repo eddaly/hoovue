@@ -29,6 +29,15 @@ class CreditValidationsController < ApplicationController
           redirect_to :back
         end
   end
+  
+  def flag
+     @credit_validation = CreditValidation.find(params[:id])
+     @credit_validation.status = "pending"
+          if @credit_validation.update_attributes(params[:credit_validation])
+          flash[:notice] = "Credit Flagged"
+          redirect_to :back
+        end
+  end
 
   # GET /credit_validations/new
   # GET /credit_validations/new.json

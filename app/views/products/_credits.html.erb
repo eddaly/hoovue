@@ -56,6 +56,14 @@
 					<span class="score">
 					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
 					</span>
+					<% if current_user %>
+						<% if current_user.id == cv.validator_id %>
+					<span style="float:right; margin-top:70px; margin-right:-60px;">
+						<%= link_to "Flag", flag_credit_validation_path(cv), :method=>:put  %> 
+					</span>
+					<% end %>
+				<% end %>
+		
 					<% end %>
 						<% if cv.status == "pending" %>
 					<span class="score">
@@ -63,8 +71,8 @@
 					
 							<% if current_user %>
 								<% if current_user.id == cv.validator_id %>
-							
 								<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
+								<%= link_to "Flag this credit to a moderator >", flag_credit_validation_path(cv), :method=>:put  %> 
 							<% end %>
 						<% end %>
 					<% end %>
