@@ -1,3 +1,68 @@
-// Place all the styles related to the credits controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins.css.scss";
+
+.new_credit {
+	@include white-box;
+	margin:20px;
+	padding:10px;
+	.role, .desc, .issue, .fact {
+		input, textarea {
+			border:none;
+			margin:15px;
+			border-bottom:1px solid grey;	
+			-webkit-border-radius: 0px;
+			-moz-border-radius: 0px;
+			border-radius: 0px;
+			box-shadow: none;
+			 -webkit-box-shadow: none; 
+			 -moz-box-shadow: none; 
+			
+	}
+	
+	input:focus{
+		box-shadow: none;
+		    -webkit-box-shadow: none; 
+		    -moz-box-shadow: none;
+			border-bottom:1px solid grey; 
+		
+	}
+	
+}
+	
+.role {
+	input {
+		font-size:20px;	
+}
+}
+		
+	
+	
+	.desc {
+		input {
+			width:460px;	
+	}
+	}
+		
+		
+	
+	
+	.fact {
+		textarea {
+		border:1px solid grey;
+		margin-left:400px;	
+		margin-top: -25px;
+		}
+		
+		.counter {
+		margin-left:600px;		
+		}
+	}
+	
+	.submit {
+		input[type=submit] {
+		@include white-box;
+		padding:10px;	
+		}
+	}
+	
+	
+}

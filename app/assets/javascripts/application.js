@@ -45,7 +45,7 @@
 });
 
   $(document).ready(function() {
-maxCharacters = 160;
+maxCharacters = 298;
 
 $('#count').text(maxCharacters);
 

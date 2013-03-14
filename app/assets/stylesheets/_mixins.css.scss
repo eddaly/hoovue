@@ -27,3 +27,15 @@
     box-shadow:0 1px 4px rgba(0,0,0,0.065);
     color:#777;
 }
+
+@mixin blank {
+	border:none;
+	margin:15px;
+	border-bottom:1px solid grey;	
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	box-shadow: none;
+	 -webkit-box-shadow: none; 
+	 -moz-box-shadow: none; 
+}
