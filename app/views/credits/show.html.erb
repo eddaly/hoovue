@@ -26,6 +26,7 @@ Tell us more about what you did: <%= link_to "Edit role description >", edit_cre
 </div>
 
 <div class="white-box">
-<h3>If your not you can, <%= link_to "flag this credit to a moderator >", flag_credit_path(:id => @credit) %></h3>
+<h3>If your not you can, 	<%= link_to "Flag this credit to a moderator >", flag_credit_path(@credit), :method=>:put  %> 
+</h3>
 </div>
 

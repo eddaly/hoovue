@@ -58,25 +58,14 @@ end
   def search
     @products = Product.search(params[:search])
   end
-  
-  def increase
-    @credit = Credit.find(params[:id])
-      @credit.increment! :count
-        @credit_validation = CreditValidation.new(params[:credit_validation])
-           @credit_validation.credit_id = @credit.id
-             @credit_validation.user_id = current_user.id
-         if @credit.update_attributes(params[:credit])
-                @credit_validation.save!
-      flash[:notice] = "Thank you for validating"
-      redirect_to :back
-    end
-  end  
 
   def flag
     @credit = Credit.find(params[:id])
-      @credit.status == "flagged"
+    @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
+      @credit_validation.status = "pending"
+        @credit_validation.save
       flash[:notice] = "Thank you we will look into it."
-      redirect_to :back
+      redirect_to root_url
   end
 
   # POST /credits

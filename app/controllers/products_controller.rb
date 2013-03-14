@@ -57,6 +57,8 @@ end
         @credit = Credit.new(params[:credit])
           @credit.user_id = current_user.id
             @credit.role = @product.role
+              @credit.role_desc = @product.role_description
+                @credit.fact = @product.fact
     respond_to do |format|
       if @product.save
            @credit.product_id = @product.id

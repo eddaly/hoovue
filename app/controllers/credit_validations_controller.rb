@@ -20,6 +20,15 @@ class CreditValidationsController < ApplicationController
       format.json { render json: @credit_validation }
     end
   end
+  
+  def validate
+     @credit_validation = CreditValidation.find(params[:id])
+     @credit_validation.status = "confirmed"
+          if @credit_validation.update_attributes(params[:credit_validation])
+          flash[:notice] = "Thank you for validating"
+          redirect_to :back
+        end
+  end
 
   # GET /credit_validations/new
   # GET /credit_validations/new.json

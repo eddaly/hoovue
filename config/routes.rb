@@ -12,7 +12,11 @@ Hoo::Application.routes.draw do
   resources :product_genres
 
 
-  resources :credit_validations
+  resources :credit_validations do
+    member do
+      put :validate
+    end
+  end
 
 
   resources :credits do

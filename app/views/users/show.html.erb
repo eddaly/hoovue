@@ -76,7 +76,7 @@
 	<% if @credits.empty? %>
 	<h3>No Credits Yet.</h3>
 	<% end %>
-		    	<ul>
+<ul>
 	<% @credits.each do |c| %>
 	<li class="<%= cycle('even', 'odd') -%>">
 	<h2><% if c.product.image? %>
@@ -87,10 +87,28 @@
 	   
 	 
 	  <%= c.role%><% if current_user %> <% if current_user.id == @user.id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %>  on   <%= link_to c.product.title, product_path(c.product)%></h2>
-	   <span class="score">
-		   Rating <br />
-					<%= c.count %>0% 
-				</span> <br /><br /><br />
+		<% c.credit_validations.each do |cv| %>
+				
+		<% if cv.status == "confirmed" %>
+		<span class="score">
+		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+		</span>
+		<% end %>
+			<% if cv.status == "pending" %>
+		<span class="score">
+		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
+					
+				<% if current_user %>
+					<% if current_user.id == cv.validator_id %>
+							
+					<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
+				<% end %>
+			<% end %>
+		<% end %>
+		</span>
+		<% end %>
+<br /><br /><br /><br />
+	   
 				
 		<div class="more-detail">		
 		<h3>Role description: <% if current_user %>
@@ -108,6 +126,7 @@
 
 <div class="container_12">
 <a href="#openModalemail" class="blue-link">Add Validator</a>
+<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 </div>
 <div id="openModalemail" class="modalDialog">
 	<div>
@@ -119,6 +138,7 @@
 		<%= f.label "What was their role?"%>
 	 	<%= f.text_field :role %>
 	 		<%= f.hidden_field :product_id, :value => c.product.id %>
+			<%= f.hidden_field :current_credit_id, :value => c.id %>
 	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
 				
 	<% end %> <% end %>

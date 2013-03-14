@@ -23,29 +23,31 @@
 									
 								<% end %>
 
-								<div id="openModalemail" class="modalDialog">
-									<div>
-	
-										<a href="#close" title="Close" class="close">X</a>
-									<h2>E-mail Credit</h2>
-								<%= form_for @credit do |f|%>
-									<%= f.label "Their E-mail"%>
-									<%= f.text_field :pending_user_email %>
-										<%= f.label "What was their role?"%>
-									 	<%= f.text_field :role %>
-											<%= f.hidden_field :product_id, :value => @product.id %>
-											<%= f.hidden_field :current_credit_id, :value => c.id %>
-			
-												<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
-								<%end%>
 
-								</div>
-
-								</div>
 							
 						</span>
 			
-			</h2>		
+			</h2>	
+			
+			<div id="openModalemail" class="modalDialog">
+				<div>
+	
+					<a href="#close" title="Close" class="close">X</a>
+				<h2>E-mail Credit</h2>
+			<%= form_for @credit do |f|%>
+				<%= f.label "Their E-mail"%>
+				<%= f.text_field :pending_user_email %>
+					<%= f.label "What was their role?"%>
+				 	<%= f.text_field :role %>
+						<%= f.hidden_field :product_id, :value => @product.id %>
+						<%= f.hidden_field :current_credit_id, :value => c.id %>
+			
+							<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+			<%end%>
+
+			</div>
+
+			</div>			
 
 				
 					<% c.credit_validations.each do |cv| %>
@@ -55,34 +57,22 @@
 					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
 					</span>
 					<% end %>
-					<% if cv.status == "pending" %>
+						<% if cv.status == "pending" %>
 					<span class="score">
 					<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
+					
+							<% if current_user %>
+								<% if current_user.id == cv.validator_id %>
+							
+								<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
+							<% end %>
+						<% end %>
+					<% end %>
 					</span>
 					<% end %>
-					
-					<% end %>
 			<br /><br /><br /><br />
-						<% if current_user %>
-							<% if c.user.id != current_user.id  %>
-								<%  @credit_validations = CreditValidation.where(:user_id => current_user.id, :credit_id => c.id) %>
-									<% if @user_credits.empty? %>
-							<% else %>
-					<% if @credit_validations.empty? %>
-					<span class="validate">	
-					<%= link_to "Validate", increase_credit_path(c), :method=>:put  %>
-				</span> 	 <span class="or">
-						 or
-					</span>	
-									<% else %>
-							<% end %>
-						<% end %> 
-					<span class="flag">		
-							<%= link_to "Flag", flag_credit_path(c), :method=>:put  %> 
-					 </span> 	
-				 
-						<%end%>  
-							<% end %>
+						
+
 							<div class="more-detail">
 						
 								<h3>Role description <% if current_user %>
@@ -99,9 +89,9 @@
 										<% if c.user.id == current_user.id  %>
 					
 					<a href="#openModalemail" class="blue-link">Invite someone to validate</a>
+					<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 					
-						
-						<% end %>
+					<% end %>
 							<% end %>
 						 	
 			</li>

@@ -8,10 +8,10 @@ ul.product-list {
   li {
     
     float:left;
-    width: 250px;
-    height: 200px;
+    width: 150px;
+    height: 130px;
     padding: 5px;
-    margin: 10px 15px;
+    margin: 10px 30px;
    @include white-box;
     
     h3 {
@@ -24,6 +24,7 @@ ul.product-list {
     
     img {
 		margin-top:10px;
+		margin-left:10px;
     }
   }
   
