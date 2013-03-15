@@ -55,7 +55,7 @@
 				<% 3.times do %>
 				<span class="score">
 					<% if current_user %>
-						<% if current_user.id == cv.credit.user_id  %>
+						<% if current_user.id == c.user_id  %>
 							<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
 						<% else %>
 							<%= image_tag '/assets/empty.png' %>
@@ -90,7 +90,7 @@
 				<% 2.times do %>
 				<span class="score">
 					<% if current_user %>
-						<% if current_user.id == cv.credit.user_id  %>
+						<% if current_user.id == c.user_id  %>
 							<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
 						<% else %>
 							<%= image_tag '/assets/empty.png' %>
@@ -127,7 +127,7 @@
 			<% 1.times do %>
 			<span class="score">
 				<% if current_user %>
-					<% if current_user.id == cv.credit.user_id  %>
+					<% if current_user.id == c.user_id  %>
 						<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
 					<% else %>
 						<%= image_tag '/assets/empty.png' %>
@@ -181,7 +181,7 @@
 					<% if current_user %>
 										<% if c.user.id == current_user.id  %>
 					
-					<a href="#openModalemail" class="blue-link">Invite someone to validate</a>
+					
 					<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 					
 					<% end %>
