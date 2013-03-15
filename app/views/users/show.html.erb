@@ -103,20 +103,24 @@
 					<%= image_tag '/assets/empty.png' %>
 			<% end %>
 		</span>
-		
-	
 		<% end %>
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+		<div class="validator-text" style="margin-right:-180px;">
+			<p>Please select 3 Validators</p>
+				</div>
+				<% end %> <% end %>
 		<% else %>
+
 	<% end %>
 	
 		
-	<%=  %>	
-	
 	
 				<% if c.credit_validations.count.eql?(1) %>
 	<% c.credit_validations.each do |cv| %>
 	<% if cv.status == "confirmed" %>
 	<span class="score">
+		<p>Please select 2 more Validators</p>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
 				<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
@@ -149,15 +153,20 @@
 					<%= image_tag '/assets/empty.png' %>
 			<% end %>
 		</span>
-	
 		<% end %>
-		
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+		<div class="validator-text">
+			<p>Please select 2 more Validators</p>
+				</div>
+				<% end %> <% end %>
 		<% end %>
 		<% else %>
 	
 <% end %>
 
 <% if c.credit_validations.count.eql?(2)  %>
+
 <% c.credit_validations.each do |cv| %>
 <% if cv.status == "confirmed" %>
 <span class="score">
@@ -186,7 +195,12 @@
 				<%= image_tag '/assets/empty.png' %>
 		<% end %>
 	</span>
-
+	<% if current_user %>
+		<% if current_user.id == c.user_id  %>
+	<div class="validator-text">
+		<p>Please select 1 more Validator</p>
+			</div>
+			<% end %> <% end %>
 	<% end %>
 	
 	<% end %>
@@ -203,6 +217,7 @@
 	<%= image_tag '/assets/pending.png' %>
 	
 		</span>
+		
 		<% end %>
 
 		
@@ -216,16 +231,12 @@
 				
 		<div class="more-detail">
 
-		<h3>Role description:</h3>
-<% if current_user %>			
-<% if current_user.id == c.user_id %>
-<p><%= best_in_place c, :role_desc, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
-<% end %>
-<% else %>
+		<h3>Role description:<% if current_user %>			
+<% if current_user.id == c.user_id %>  <%= link_to "(edit)", role_credits_path(:id => c) %><% end %> <% end %> </h3>
 <p> <%= c.role_desc %></p>	
-<% end %>
 
-		<h3>One interesting thing:</h3>
+
+		<h3>One interesting thing: (click below to edit)</h3>
 <% if current_user %>			
 <% if current_user.id == c.user_id %>
 <p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
@@ -244,23 +255,8 @@
 	<% end %>
 	<% end %>
 </div>
-<div id="openModalemail" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-	<h2>E-mail Credit</h2>
-<%= form_for @credit do |f|%>
-	<%= f.label "Their E-mail"%>
-	<%= f.text_field :pending_user_email %>
-		<%= f.label "What was their role?"%>
-	 	<%= f.text_field :role %>
-	 		<%= f.hidden_field :product_id, :value => c.product.id %>
-			<%= f.hidden_field :current_credit_id, :value => c.id %>
-	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
-				
-	<% end %> 
-	
 
-</div>
+<%= render '/credits/validate-credit', :c => c %>
 
 <%end%>
 	</li>

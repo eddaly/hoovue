@@ -1,0 +1,27 @@
+<% if current_user %>			
+<% if current_user.id == c.user_id %>
+
+<div style="float:left;">
+<% if c.credit_validations.count < 3  %>
+	<h2>Validate my Credit</h2>
+<%= form_for @credit do |f|%>
+	<%= f.label "Co-creator E-mail"%>
+	<%= f.text_field :pending_user_email %>
+	
+		<%= f.label "What was the role of your co-creator?"%>
+		<%= f.text_field :role %>
+
+	 	
+	 		<%= f.hidden_field :product_id, :value => c.product.id %>
+			
+			<%= f.hidden_field :current_credit_id, :value => c.id %>
+	 			<%= f.submit 'Validate Your Credit', :id => 'blue-link' %>
+				
+	<% end %> 
+	
+	<% end %>
+	
+	</div>
+	
+	<% end %>
+	<% end %>

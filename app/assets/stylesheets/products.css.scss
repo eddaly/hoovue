@@ -108,6 +108,13 @@ ul.ui-autocomplete {
 		 text-align: center;
 	 }
 	 
+	 .validator-text {
+		 float:right;
+		 margin-top:70px;
+		 margin-right:-200px;
+		 color:red;
+	 }
+	 
 	 .flag, .validate {
 		 float:right;
 		 @include grey-box;

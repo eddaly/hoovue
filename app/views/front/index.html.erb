@@ -20,12 +20,26 @@
 <%else%>
 	<div class="white-box">
 	
-		<p>hoovue.com is a crowdsourced database and social network that allows Consumers and Creators to connect directly.</p>
+		<p>The platform for all Creators to own and manage their Credits and get the public recognition they deserve.</p>
 
 		<p>To best make use of hoovue.com please  <%= link_to "register/login via Facebook.", "/auth/facebook", id: "login_with_facebook"  %> 
  	
 	</div>
 <%end%>
+
+<div class="product-list">
+	<h2>Featured Users</h2>
+		<ul class="product-list">
+			<% @users_featured.each do |u| %>
+		<%= link_to u do %>
+<li class="product-list">
+<span style="margin-left:40px;"><img src="http://graph.facebook.com/<%= u.uid%>/picture?type=small"></span>
+<h3> <%= u.name %></h3>
+
+</li>
+<%end%><%end%>	
+		</ul>
+</div>
 
 <% if current_user %>
 
@@ -56,7 +70,10 @@
 	<% end %>
 <ul>
 	<% @empty_credits.each do |c| %>
+	
 	<li class="<%= cycle('even', 'odd') -%>">
+		
+		
 	<h2><% if c.product.image? %>
 			<%= image_tag c.product.image.thumb.to_s %>
 				 <%else%> 
@@ -68,21 +85,23 @@
 	  <%= c.role%><% if current_user %>			
 <% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> on   <%= link_to c.product.title, product_path(c.product)%></h2>
 	
-		
+		<%= c.id %>
 		
 		
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
 	<span class="score">
-	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
 	</span>
 		<% end %>
+		<div class="validator-text" style="margin-right:-180px;">
+			<p>Please select 3 Validators</p>
+				</div>
 		<% else %>
 	<% end %>
 	
 		
-	<%=  %>	
-	
+
 	
 				<% if c.credit_validations.count.eql?(1) %>
 	<% c.credit_validations.each do |cv| %>
@@ -99,10 +118,12 @@
 		<% end %>
 		<% 2.times do %>
 	<span class="score">
-	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
 	</span>
 		<% end %>
-		
+		<div class="validator-text">
+			<p>Please select 2 more Validators</p>
+				</div>	
 		<% end %>
 		<% else %>
 	
@@ -126,8 +147,11 @@
 	<% end %>
 	<% 1.times do %>
 <span class="score">
-<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
 </span>
+<div class="validator-text">
+	<p>Please select 1 more Validator</p>
+		</div>
 	<% end %>
 	
 	<% end %>
@@ -144,6 +168,7 @@
 	<%= image_tag '/assets/pending.png' %>
 	
 		</span>
+		
 		<% end %>
 
 		
@@ -156,9 +181,10 @@
 	   
 				
 		<div class="more-detail">		
-		<h3>Role description:</h3><p> <%= best_in_place c, :role_desc, :nil => "Click me to add content!", :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %>
-</p>	
-			<h3>Interesting Fact: 
+		<h3>Role description: <% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>			
+<% if current_user.id == c.user_id %>(click below to edit) <% end %> <% end %>
 </h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
 		</div>
 	
@@ -169,25 +195,13 @@
 
 <%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 </div>
-<div id="openModalemail" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-	<h2>E-mail Credit</h2>
-<%= form_for @credit do |f|%>
-	<%= f.label "Their E-mail"%>
-	<%= f.text_field :pending_user_email %>
-		<%= f.label "What was their role?"%>
-	 	<%= f.text_field :role %>
-	 		<%= f.hidden_field :product_id, :value => c.product.id %>
-			<%= f.hidden_field :current_credit_id, :value => c.id %>
-	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
-				
-	<% end %> 
-	
 
-</div>
+
+<%= render '/credits/validate-credit', :c => c %>
+
 
 <%end%>
+
 	</li>
 			
 </ul>
@@ -234,11 +248,13 @@
    	
    <br /><br /><br /><br />
 		<div class="more-detail">		
-		<h3>Role description:</h3><p> <%= c.role_desc %></p>	
-			<h3>Interesting Fact: 
-
-</h3><p> <%= c.fact %></p>
-		</div>  
+		<h3>Role description: <% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>			
+<% if current_user.id == c.user_id %>(click below to edit) <% end %> <% end %>
+</h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+		</div>
+  
 		</li>
 	<% end %>
 	</ul>
@@ -282,11 +298,13 @@
    	
    <br /><br /><br /><br />
 		<div class="more-detail">		
-		<h3>Role description:</h3><p> <%= c.role_desc %></p>	
-			<h3>Interesting Fact: 
-
-</h3><p> <%= c.fact %></p>
-		</div>  
+		<h3>Role description: <% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>			
+<% if current_user.id == c.user_id %>(click below to edit) <% end %> <% end %>
+</h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+		</div>
+		
 		</li>
 	<% end %>
 	</ul>
@@ -296,19 +314,7 @@
 <% end %>
 
 
-<div class="product-list">
-	<h2>Featured Users</h2>
-		<ul class="product-list">
-			<% @users_featured.each do |u| %>
-		<%= link_to u do %>
-<li class="product-list">
-<span style="margin-left:40px;"><img src="http://graph.facebook.com/<%= u.uid%>/picture?type=small"></span>
-<h3> <%= u.name %></h3>
 
-</li>
-<%end%><%end%>	
-		</ul>
-</div>
 
 <div class="container_12 activity-feed">
 	<h2>New Credits</h2>

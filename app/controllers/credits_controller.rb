@@ -94,7 +94,7 @@ end
         if @credit.pending_user_email
        CreditMailer.new_credit(@credit).deliver
         end
-        format.html { redirect_to product_path(@credit.product), notice: 'Credit was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Credit was successfully created.' }
         format.json { render json: @credit, status: :created, location: @credit }
       else
         format.html { render action: "new" }
