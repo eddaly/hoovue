@@ -127,7 +127,7 @@ end
     @credit.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Credit deleted' }
+      format.html { redirect_to root_url, notice: 'Credit deleted' }
       format.json { head :no_content }
     end
   end
