@@ -1,0 +1,44 @@
+<div class="new-credit">
+	<%= form_for(@credit) do |f| %>
+  <% if @credit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+      <ul>
+      <% @credit.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="role">
+ <h2>Your role was: <%= f.text_field :role %> on <%= @product.title %><% if @product.image.blank? %>
+		<%= image_tag 'default-thumb.png'%>
+	<%else%>
+		<%= image_tag @product.image.small %>
+	<%end%></h2>
+  </div>
+ <div class="desc">
+Can you tell use more about what you did in your role:  <%= f.text_field :role_desc %>
+ </div>
+ <% if @product.product_genre.name == "comic" %>
+ <div class="issue">
+  <%= f.text_field :issue %>
+</div>
+<% end %>
+   <div class="fact">
+<p>Can you tell use one interesting thing about this work:</p>  <%= f.text_area :fact, :rows => '2'	 %>
+	<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
+  </div>
+   <%= f.hidden_field :product_id, :value => @product.id %>
+     <%= f.hidden_field :user_id, :value => current_user.id %>
+	
+   <div class="submit">
+    <%= f.submit 'Create Credit >'%>
+	</div>
+  
+<% end %>
+
+	
+</div>
+

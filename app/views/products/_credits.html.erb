@@ -1,7 +1,26 @@
+<script type="text/javascript">
+ 
+$(document).ready(function(){
+ 
+        $(".slidingDiv").hide();
+        $(".show_hide").show();
+ 
+    $('.show_hide').click(function(){
+    $(".slidingDiv").slideToggle();
+    });
+ 
+});
+ 
+</script>
+	<h2>Credits</h2>
+<a href="#" class="show_hide">Add Credit +</a>
+<div class="slidingDiv">
+	<%= render "add_credit" %>
+<a href="#" class="show_hide">hide</a></div>
 
 
 	<div class="container_12 credit-feed">
-	<h2>Credits</h2>
+
 	<% if @credit_views.empty? %>
 	<h3>No Credits Yet.</h3>
 	<% end %>

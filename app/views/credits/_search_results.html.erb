@@ -1,12 +1,78 @@
+
 <div class="activity-feed">
 	<% if @products %>
+	<% @products.each do |p| %>
+	<script type="text/javascript">
+ 
+	$(document).ready(function(){
+ 
+	        $(".slidingDiv<%= p.id %>").hide();
+	        $(".show_hide<%= p.id %>").show();
+ 
+	    $('.show_hide<%= p.id %>').click(function(){
+	    $(".slidingDiv<%= p.id %>").slideToggle();
+	    });
+ 
+	});
+ 
+	</script>
+
+	<% end %>
 	<h2>Is this the correct work?</h2>
 <ul>
 <% @products.each do |p| %>
 <%= link_to p do %>
 <li class="<%= cycle('even', 'odd') -%>">
-	 <% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%end%>  <%= link_to p.title, product_path(p)%> 
-	 <span style="float:right;"><%= link_to 'Add Credit >', new_credit_path(:product_id => p.id) %> </span>
+<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%></h2> 
+	 <span style="float:right; margin-top:-50px;"><a href="#<%= p.id %>" class="show_hide<%= p.id %>">Add Credit +</a></span>
+<div class="slidingDiv<%= p.id %>">
+	<div class="new-credit">
+		<%= form_for(@credit) do |f| %>
+	  <% if @credit.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+	      <ul>
+	      <% @credit.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	 <div class="role">
+	 <h2>Your role was: <%= f.text_field :role %> on <%= p.title %><% if p.image.blank? %>
+			<%= image_tag 'default-thumb.png'%>
+		<%else%>
+			<%= image_tag p.image.small %>
+		<%end%></h2>
+	  </div>
+	 <div class="desc">
+	Can you tell use more about what you did in your role:  <%= f.text_field :role_desc %>
+	 </div>
+	 <% if p.product_genre.name == "comic" %>
+	 <div class="issue">
+	  <%= f.text_field :issue %>
+	</div>
+	<% end %>
+	   <div class="fact">
+	<p>Can you tell use one interesting thing about this work:</p>  <%= f.text_area :fact, :rows => '2'	 %>
+		<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
+	  </div>
+	   <%= f.hidden_field :product_id, :value => p.id %>
+	     <%= f.hidden_field :user_id, :value => current_user.id %>
+	
+	   <div class="submit">
+	    <%= f.submit 'Create Credit >'%>
+		</div>
+  
+	<% end %>
+
+	
+	</div>
+
+	
+<a href="#<%= p.id %>" class="show_hide<%= p.id %>">hide</a></div>
+ </span>
  </li>
 <%end%>
 	<%end%>	
@@ -15,7 +81,7 @@
 	<%end%>
 </ul>
 </div>
-	<p><%= link_to "Work not listed? Add one >", new_product_path %> </p>
+	<p><%= link_to "Work not listed? Add one >", new_product_path, :class => "blue-link", :style => "background:white;" %> </p>
 
 </div>
 

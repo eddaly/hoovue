@@ -1,32 +1,145 @@
-<p id="notice"><%= notice %></p>
+<div class="container_12 credits-form">
 
-<h1>Your Credit in <%= @credit.product.title %></h1>
-<h3>Please verify the below information is correct, if it isn't you can edit it.</h3>
+<ul>
+	
+	<li class="<%= cycle('even', 'odd') -%>">
+	<h2><% if @credit.product.image? %>
+			<%= image_tag @credit.product.image.thumb.to_s %>
+				 <%else%> 
+			<%= image_tag '/assets/default-credit-small.jpg'%>
+	 <%end%>  
+	   
+	 
+	  <%= @credit.role%> <%= link_to "(edit)", role_credits_path(:id => @credit) %>   on   <%= link_to @credit.product.title, product_path(@credit.product)%></h2>
+		
+		
+		
+	<% if @credit.credit_validations.empty? %>
+		<% 3.times do %>
+	<span class="score">
+	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	</span>
+		<% end %>
+		<% else %>
+	<% end %>
+	
+		
+	<%=  %>	
+	
+	
+				<% if @credit.credit_validations.count.eql?(1) %>
+	<% @credit.credit_validations.each do |cv| %>
+	<% if cv.status == "confirmed" %>
+	<span class="score">
+	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+	</span>
+	<% end %>
+		<% if cv.status == "pending" %>
+	<span class="score">
+<%= image_tag '/assets/pending.png' %>
+	
+		</span>
+		<% end %>
+		<% 2.times do %>
+	<span class="score">
+	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+	</span>
+		<% end %>
+		
+		<% end %>
+		<% else %>
+	
+<% end %>
 
-<div class="white-box">
-<h3>Your Role:</h3>
-<p>Was your role <strong><%= @credit.role %></strong> ?
-If not you can edit it here: <%= link_to "Edit role >", role_credits_path(:id => @credit.id) %>
-</p>
+<% if @credit.credit_validations.count.eql?(2)  %>
+<% @credit.credit_validations.each do |cv| %>
+<% if cv.status == "confirmed" %>
+<span class="score">
+<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+</span>
+<% end %>
+	<% if cv.status == "pending" %>
+<span class="score">
+<%= image_tag '/assets/pending.png' %>
+	
+	</span>
+	<% end %>
+
+		
+	<% end %>
+	<% 1.times do %>
+<span class="score">
+<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+</span>
+	<% end %>
+	
+	<% end %>
+	
+	<% if @credit.credit_validations.count.eql?(3)  %>
+	<% @credit.credit_validations.each do |cv| %>
+	<% if cv.status == "confirmed" %>
+	<span class="score">
+	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+	</span>
+	<% end %>
+		<% if cv.status == "pending" %>
+	<span class="score">
+	<%= image_tag '/assets/pending.png' %>
+	
+		</span>
+		<% end %>
+
+		
+		<% end %>
+	
+	
+		<% end %>
+
+<br /><br /><br /><br />
+	   
+				
+		<div class="more-detail">		
+		<h3>Role description: <% if current_user %>
+
+<%= link_to "(edit)", edit_credit_path(@credit) %>
+ <% end %></h3><p> <%= @credit.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>
+
+<%= link_to "(edit)", edit_credit_path(@credit) %>
+</h3><p> <%= @credit.fact %></p>
+		</div>
+	<% end %>
+
+	
+
+<div class="container_12">
+
+<%= link_to 'Not a valid credit? Delete', @credit, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+</div>
+<div id="openModalemail" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+	<h2>E-mail Credit</h2>
+<%= form_for @credit do |f|%>
+	<%= f.label "Their E-mail"%>
+	<%= f.text_field :pending_user_email %>
+		<%= f.label "What was their role?"%>
+	 	<%= f.text_field :role %>
+	 		<%= f.hidden_field :product_id, :value => @credit.product.id %>
+			<%= f.hidden_field :current_credit_id, :value => @credit.id %>
+	 			<%= f.submit 'Create Your Credit', :id => 'blue-link' %>
+				
+	<% end %> 
+	
+
 </div>
 
-<div class="white-box">
-<h3>Description of your Role</h3>
-Tell us more about what you did: <%= link_to "Edit role description >", edit_credit_path(@credit) %>
-</p>
+
+	</li>
+			
+</ul>
 </div>
 
-<div class="white-box">
-<h3>One interesting thing</h3>
-<p>Do you have an interesting fact about this work? Let us know! <%= link_to "Add one interesting thing >", edit_credit_path(@credit) %></p>
-</div>
 
-<div class="white-box">
-<h3>If your happy, <%= link_to "confirm this credit >", product_path(@credit.product) %></h3>
-</div>
 
-<div class="white-box">
-<h3>If your not you can, 	<%= link_to "Flag this credit to a moderator >", flag_credit_path(@credit), :method=>:put  %> 
-</h3>
-</div>
 

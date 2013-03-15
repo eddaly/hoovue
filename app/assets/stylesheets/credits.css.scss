@@ -1,9 +1,14 @@
 @import "mixins.css.scss";
 
-.new_credit {
+.new-credit {
 	@include white-box;
-	margin:20px;
-	padding:10px;
+	margin:20px 0;
+	padding:5px;
+	
+    h2 {
+   	 border-bottom: 1px solid #f1f1f1;
+    }
+	
 	.role, .desc, .issue, .fact {
 		input, textarea {
 			border:none;
