@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require rails.validations
 //= require jquery.nested-fields
+//= require best_in_place
 //= require_tree .
 
     $(document).ready(function() { $("select").select2({ width: 'resolve' }); });
@@ -62,4 +63,10 @@ $('textarea').bind('keyup keydown', function() {
     count.text(maxCharacters - characters);
 });
 
+});
+
+
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
 });

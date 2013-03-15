@@ -13,11 +13,13 @@ $(document).ready(function(){
  
 </script>
 	<h2>Credits</h2>
+	<% if current_user %>			
+	
 <a href="#" class="show_hide">Add Credit +</a>
 <div class="slidingDiv">
 	<%= render "add_credit" %>
 <a href="#" class="show_hide">hide</a></div>
-
+	<% end %>
 
 	<div class="container_12 credit-feed">
 
@@ -186,17 +188,25 @@ $(document).ready(function(){
 						
 
 							<div class="more-detail">
-						
-								<h3>Role description <% if current_user %>
-					<% if c.user.id == current_user.id  %>
-					<%= link_to "(edit)", edit_credit_path(c) %>
-					<% end %> <% end %></h3><p><%= c.role_desc %></p>
-						
-								<h3>Interesting Fact<% if current_user %>
-					<% if c.user.id == current_user.id  %>
-					<%= link_to "(edit)", edit_credit_path(c) %>
-					<% end %> <% end %></h3> <p><%= c.fact %></p>
-				</div>
+
+								<h3>Role description:</h3>
+						<% if current_user %>			
+						<% if current_user.id == c.user_id %>
+						<p><%= best_in_place c, :role_desc, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+						<% end %>
+						<% else %>
+						<p> <%= c.role_desc %></p>	
+						<% end %>
+
+								<h3>One interesting thing:</h3>
+						<% if current_user %>			
+						<% if current_user.id == c.user_id %>
+						<p><%= best_in_place c, :fact, :type => :textarea, :ok_button => 'Save', :nil => "Click me to add content!", :cancel_button => 'Cancel' %></p>
+						<% end %>
+						<% else %>
+						<p> <%= c.role_desc %></p>	
+						<% end %>
+					
 					<% if current_user %>
 										<% if c.user.id == current_user.id  %>
 					

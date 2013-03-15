@@ -99,17 +99,13 @@
 	   
 				
 		<div class="more-detail">		
-		<h3>Role description: <% if current_user %>
-
-<%= link_to "(edit)", edit_credit_path(@credit) %>
- <% end %></h3><p> <%= @credit.role_desc %></p>	
-			<h3>Interesting Fact: <% if current_user %>
-
-<%= link_to "(edit)", edit_credit_path(@credit) %>
-</h3><p> <%= @credit.fact %></p>
-		</div>
-	<% end %>
-
+		<h3>Role description:</h3><p> <%= best_in_place @credit, :role_desc, :nil => "Click me to add content!", :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %>
+</p>	
+			<h3>Interesting Fact: 
+</h3><p><%= best_in_place @credit, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+	
+	
+	
 	
 
 <div class="container_12">

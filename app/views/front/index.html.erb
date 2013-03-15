@@ -64,7 +64,10 @@
 	 <%end%>  
 	   
 	 
-	  <%= c.role%> <%= link_to "(edit)", role_credits_path(:id => c) %>   on   <%= link_to c.product.title, product_path(c.product)%></h2>
+	 
+	  <%= c.role%><% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> on   <%= link_to c.product.title, product_path(c.product)%></h2>
+	
 		
 		
 		
@@ -153,16 +156,12 @@
 	   
 				
 		<div class="more-detail">		
-		<h3>Role description: <% if current_user %>
-
-<%= link_to "(edit)", edit_credit_path(c) %>
- <% end %></h3><p> <%= c.role_desc %></p>	
-			<h3>Interesting Fact: <% if current_user %>
-
-<%= link_to "(edit)", edit_credit_path(c) %>
-</h3><p> <%= c.fact %></p>
+		<h3>Role description:</h3><p> <%= best_in_place c, :role_desc, :nil => "Click me to add content!", :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %>
+</p>	
+			<h3>Interesting Fact: 
+</h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
 		</div>
-	<% end %>
+	
 
 	
 

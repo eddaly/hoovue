@@ -84,15 +84,27 @@
 	 <%end%>  
 	   
 	 
-	  <%= c.role%> <%= link_to "(edit)", role_credits_path(:id => c) %>   on   <%= link_to c.product.title, product_path(c.product)%></h2>
+	  <%= c.role%><% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> on   <%= link_to c.product.title, product_path(c.product)%></h2>
 		
 		
 		
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
-	<span class="score">
-	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
-	</span>
+		<span class="score">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+					<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+				<% else %>
+					<%= image_tag '/assets/empty.png' %>
+				<% end%>
+			<% else %>
+						
+					<%= image_tag '/assets/empty.png' %>
+			<% end %>
+		</span>
+		
+	
 		<% end %>
 		<% else %>
 	<% end %>
@@ -105,8 +117,18 @@
 	<% c.credit_validations.each do |cv| %>
 	<% if cv.status == "confirmed" %>
 	<span class="score">
-	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+				<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+			<% else %>
+				<%= image_tag '/assets/empty.png' %>
+			<% end%>
+		<% else %>
+						
+				<%= image_tag '/assets/empty.png' %>
+		<% end %>
 	</span>
+	
 	<% end %>
 		<% if cv.status == "pending" %>
 	<span class="score">
@@ -115,9 +137,19 @@
 		</span>
 		<% end %>
 		<% 2.times do %>
-	<span class="score">
-	<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
-	</span>
+		<span class="score">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+					<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+				<% else %>
+					<%= image_tag '/assets/empty.png' %>
+				<% end%>
+			<% else %>
+						
+					<%= image_tag '/assets/empty.png' %>
+			<% end %>
+		</span>
+	
 		<% end %>
 		
 		<% end %>
@@ -142,9 +174,19 @@
 		
 	<% end %>
 	<% 1.times do %>
-<span class="score">
-<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
-</span>
+	<span class="score">
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+				<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+			<% else %>
+				<%= image_tag '/assets/empty.png' %>
+			<% end%>
+		<% else %>
+						
+				<%= image_tag '/assets/empty.png' %>
+		<% end %>
+	</span>
+
 	<% end %>
 	
 	<% end %>
@@ -172,23 +214,35 @@
 <br /><br /><br /><br />
 	   
 				
-		<div class="more-detail">		
-		<h3>Role description: <% if current_user %>
+		<div class="more-detail">
 
-<%= link_to "(edit)", edit_credit_path(c) %>
- <% end %></h3><p> <%= c.role_desc %></p>	
-			<h3>Interesting Fact: <% if current_user %>
+		<h3>Role description:</h3>
+<% if current_user %>			
+<% if current_user.id == c.user_id %>
+<p><%= best_in_place c, :role_desc, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+<% end %>
+<% else %>
+<p> <%= c.role_desc %></p>	
+<% end %>
 
-<%= link_to "(edit)", edit_credit_path(c) %>
-</h3><p> <%= c.fact %></p>
-		</div>
-	<% end %>
+		<h3>One interesting thing:</h3>
+<% if current_user %>			
+<% if current_user.id == c.user_id %>
+<p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+<% end %>
+<% else %>
+<p> <%= c.role_desc %></p>	
+<% end %>
+
 
 	
 
 <div class="container_12">
-
-<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+	<% if current_user %>			
+	<% if current_user.id == c.user_id %>
+	<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+	<% end %>
+	<% end %>
 </div>
 <div id="openModalemail" class="modalDialog">
 	<div>
