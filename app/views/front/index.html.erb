@@ -85,109 +85,13 @@
 	  <%= c.role%><% if current_user %>			
 <% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> on   <%= link_to c.product.title, product_path(c.product)%></h2>
 	
-		<%= c.id %>
-		
-		
-	<% if c.credit_validations.empty? %>
-		<% 3.times do %>
-	<span class="score">
-	<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
-	</span>
-		<% end %>
-		<div class="validator-text" style="margin-right:-180px;">
-			<p>Please select 3 Validators</p>
-				</div>
-		<% else %>
-	<% end %>
 	
-		
-
-	
-				<% if c.credit_validations.count.eql?(1) %>
-	<% c.credit_validations.each do |cv| %>
-	<% if cv.status == "confirmed" %>
-	<span class="score">
-	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
-	</span>
-	<% end %>
-		<% if cv.status == "pending" %>
-	<span class="score">
-<%= image_tag '/assets/pending.png' %>
-	
-		</span>
-		<% end %>
-		<% 2.times do %>
-	<span class="score">
-	<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
-	</span>
-		<% end %>
-		<div class="validator-text">
-			<p>Please select 2 more Validators</p>
-				</div>	
-		<% end %>
-		<% else %>
-	
-<% end %>
-
-<% if c.credit_validations.count.eql?(2)  %>
-<% c.credit_validations.each do |cv| %>
-<% if cv.status == "confirmed" %>
-<span class="score">
-<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
-</span>
-<% end %>
-	<% if cv.status == "pending" %>
-<span class="score">
-<%= image_tag '/assets/pending.png' %>
-	
-	</span>
-	<% end %>
-
-		
-	<% end %>
-	<% 1.times do %>
-<span class="score">
-<a href="#openModalemail<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
-</span>
-<div class="validator-text">
-	<p>Please select 1 more Validator</p>
-		</div>
-	<% end %>
-	
-	<% end %>
-	
-	<% if c.credit_validations.count.eql?(3)  %>
-	<% c.credit_validations.each do |cv| %>
-	<% if cv.status == "confirmed" %>
-	<span class="score">
-	<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
-	</span>
-	<% end %>
-		<% if cv.status == "pending" %>
-	<span class="score">
-	<%= image_tag '/assets/pending.png' %>
-	
-		</span>
-		
-		<% end %>
-
-		
-		<% end %>
-	
-	
-		<% end %>
+	<%= render '/credits/ticks', :c => c %>		
 
 <br /><br /><br /><br />
 	   
 				
-		<div class="more-detail">		
-		<h3>Role description: <% if current_user %>			
-<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
-			<h3>Interesting Fact: <% if current_user %>			
-<% if current_user.id == c.user_id %>(click below to edit) <% end %> <% end %>
-</h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
-		</div>
-	
+	<%= render '/credits/more-detail', :c => c %>	
 
 	
 
@@ -230,7 +134,7 @@
 				
    		<% if cv.status == "confirmed" %>
    		<span class="score">
-   		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+   		<a href="/users/<%= cv.validator_id %>"><img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=square" style="margin-top:-5px;"></a>
    		</span>
    		<% end %>
    			<% if cv.status == "pending" %>
@@ -280,7 +184,7 @@
 				
    		<% if cv.status == "confirmed" %>
    		<span class="score">
-   		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/tick.png' %></a>
+   		<a href="/users/<%= cv.validator_id %>"><img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=square" style="margin-top:-5px;"></a>
    		</span>
    		<% end %>
    			<% if cv.status == "pending" %>
