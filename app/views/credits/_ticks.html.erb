@@ -31,7 +31,7 @@
 	<% if cv.status == "confirmed" %>
 	<span class="score">
 		<% @user = User.find_by_id(cv.validator_id) %>
-	<a href="/users/<%= cv.validator_id %>"><img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=square" style="margin-top:-5px;"></a>
+	<a href="/users/<%= cv.validator_id %>"><img src="http://graph.facebook.com/<% if @user %> <%= @user.uid %> <% end %>/picture?type=square" style="margin-top:-5px;"></a>
 	</span>
 	
 	<% end %>
