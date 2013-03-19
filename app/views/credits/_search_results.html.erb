@@ -18,13 +18,13 @@
 	</script>
 
 	<% end %>
-	<h2>Is this the correct work?</h2>
+	<h2>Works we know about:</h2>
 <ul>
 <% @products.each do |p| %>
 <%= link_to p do %>
 <li class="<%= cycle('even', 'odd') -%>">
 <span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre %><%= p.product_genre.name %> <%end%></h2> 
-	 <span style="float:right; margin-top:-50px;"><a href="#<%= p.id %>" class="show_hide<%= p.id %>">Add Credit +</a></span>
+	 <span style="float:right; margin-top:-50px;"><a href="#<%= p.id %>" class="show_hide<%= p.id %>">Add Credit</a></span>
 <div class="slidingDiv<%= p.id %>">
 	<div class="new-credit">
 		<%= form_for(@credit) do |f| %>
@@ -81,7 +81,7 @@
 	<%end%>
 </ul>
 </div>
-	<p><%= link_to "Work not listed? Add one >", new_product_path, :class => "blue-link", :style => "background:white;" %> </p>
+	<p><%= link_to "Work not listed? Add it >", new_product_path, :class => "blue-link", :style => "background:white;" %> </p>
 
 </div>
 

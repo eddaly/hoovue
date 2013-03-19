@@ -18,9 +18,10 @@
 	<div class="white-box">
 	
 		<p>The platform for all Creators to own and manage their Credits and get the public recognition they deserve.</p>
-
+<% if current_user %>
+<% else %>
 		<p>To best make use of hoovue.com please  <%= link_to "register/login via Facebook.", "/auth/facebook", id: "login_with_facebook"  %> 
- 	
+ 	<% end %>
 	</div>
 
 

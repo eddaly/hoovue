@@ -1,7 +1,10 @@
-Hello,
+<% @user = User.find_by_id(@credit.validator_id) %>
 
-Your friend said that you were a <%= @credit.role %> on <%= @credit.product.title %>.
+<p><%= @user.name %> is managing their online creative legacy. As a co-creator, <%= @user.name %> would like you to validate their Credit on <%= @credit.product.title %>. </p>
 
-To confirm this please join us:
+<p>hoovue.com is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. </p>
 
-<%= link_to "Click here", front_validate_email_credit_url(:credit_id => @credit.id) %>
+<p><%= @user.name %> claims the following Credit on <%= @credit.product.title %>:. <%= @user.name %> also recorded that you were <%= @credit.role %>  on <%= @credit.product.title %>.</p>
+
+<p>To validate this Credit and to claim your own Credit <%= link_to "click here", front_validate_email_credit_url(:credit_id => @credit.id) %></p>
+
