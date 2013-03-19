@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  lock
+ 
 
  protect_from_forgery
   #Temp before filter for HTTP
