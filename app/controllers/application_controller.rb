@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-
  protect_from_forgery
 
+lock
   
     before_filter :validation_count 
       before_filter :save_credit_params
