@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  
+  lock
 
  protect_from_forgery
   #Temp before filter for HTTP
@@ -40,14 +42,6 @@ class ApplicationController < ActionController::Base
 
 protected
 
-#Temp Security Attr
-  if RAILS_ENV= "development"
-    def authenticate
-      authenticate_or_request_with_http_basic do |username, password|
-      username == "admin" && password == "waterloo12"
-                                              end
-    end
- end
  
  #Cancan
  

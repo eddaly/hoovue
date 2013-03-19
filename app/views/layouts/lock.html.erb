@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hoovue.com | Credited with Intelligence</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+</head>
+<%= render '/layouts/google_analytics'%>
+<body>
+		<div class="wrapper">
+			
+	
+
+
+<div class="container_12 yield-wrapper">
+	<% if flash[:notice] %>
+	      <p class="notice"><%= flash[:notice] %></p>
+	    <% end %>
+	    <% if flash[:error] %>
+	      <p class="error"><%= flash[:error] %></p>
+	    <% end %>
+		
+		<h2>hoovue.com is currently in development. You must enter a password to gain access:</h2>
+<%= yield %>
+<br>
+<a href="/lock/login">Login page ></a> 
+	
+	</div>
+</body>
+</html>
