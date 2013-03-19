@@ -14,18 +14,18 @@
 ActiveRecord::Schema.define(:version => 20130118001758655) do
 
   create_table "betausers", :force => true do |t|
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.string    "email"
+    t.string    "password_digest"
+    t.timestamp "created_at",      :null => false
+    t.timestamp "updated_at",      :null => false
   end
 
   create_table "credit_validations", :force => true do |t|
     t.integer   "credit_id"
     t.integer   "user_id"
     t.boolean   "user_validation"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.timestamp "created_at",      :null => false
+    t.timestamp "updated_at",      :null => false
     t.string    "token"
     t.boolean   "verified"
     t.timestamp "token_sent_at"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.text      "properties"
     t.integer   "product_genre_id"
     t.string    "status"
+    t.string    "issue"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

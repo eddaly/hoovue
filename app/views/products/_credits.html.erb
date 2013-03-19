@@ -18,10 +18,10 @@ $(document).ready(function(){
 <a href="#" class="show_hide">Add Credit</a>
 <div class="slidingDiv">
 	<%= render "add_credit" %>
-<a href="#" class="show_hide">hide</a></div>
+
 	<% end %>
 
-	<div class="container_12 credit-feed">
+	<div class="container_12 credit-feed" style="margin-top:40px;">
 
 	<% if @credit_views.empty? %>
 	<h3>No Credits Yet.</h3>
@@ -40,7 +40,7 @@ $(document).ready(function(){
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %> <% end %>
 							<% if c.issue %>
-								Issue: <%= c.issue %>
+							<%= @product.issue %>: <%= c.issue %>
 									
 								<% end %>
 

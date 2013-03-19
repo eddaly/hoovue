@@ -18,14 +18,18 @@
 		<%= image_tag @product.image.small %>
 	<%end%></h2>
   </div>
+  <% if @product.issue.present? %>
+  <% if @product.issue != "None" %>
+   <div class="desc">
+ <%= @product.issue %>:
+   <%= f.text_field :issue %>
+ </div>
+ <% end %>
+ <% end %>
  <div class="desc">
 Can you tell use more about what you did in your role:  <%= f.text_field :role_desc %>
  </div>
- <% if @product.product_genre.name == "comic" %>
- <div class="issue">
-  <%= f.text_field :issue %>
-</div>
-<% end %>
+ 
    <div class="fact">
 <p>Can you tell use one interesting thing about this work:</p>  <%= f.text_area :fact, :rows => '2'	 %>
 	<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>

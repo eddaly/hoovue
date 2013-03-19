@@ -21,10 +21,10 @@
 		<%= f.label :category %>
 		<%= collection_select(:product, :product_genre_id, ProductGenre.all, :id, :name)%>
 	</div>	
-	<div class="field">
-		<%= f.label :work_status %>
-	 <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
-	 </div>
+  	<div class="field">
+  		<%= f.label :does_your_work_have %>
+  	 <%= f.select :issue, [ ['None'], [''], ['Issue number'], ['Episode']] %>
+  	 </div>
    <div class="field">
     <%= f.label :work_image %><br />
     <%= f.file_field :image %>

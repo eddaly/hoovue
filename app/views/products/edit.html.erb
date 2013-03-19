@@ -28,6 +28,10 @@
 	<%= f.label :work_status %>
  <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
  </div>
+<div class="field">
+	<%= f.label :does_your_work_have %>
+ <%= f.select :issue, [ ['None'], [''], ['Issue number'], ['Episode']] %>
+ </div>
 
    <div class="field">
     <%= f.label :image %><br />
