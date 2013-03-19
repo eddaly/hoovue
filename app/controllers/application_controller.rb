@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   
- 
+  lock
 
  protect_from_forgery
-  #Temp before filter for HTTP
-   before_filter :authenticate
+
+  
     before_filter :validation_count 
       before_filter :save_credit_params
         before_filter :update_credit_params
