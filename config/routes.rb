@@ -1,8 +1,15 @@
 Hoo::Application.routes.draw do
   
 
+
+
   get "front/index"
   get "front/validate_email_credit"
+  
+  resources :betausers
+  
+  resources :betasessions
+  
   resources :friendships
 
 

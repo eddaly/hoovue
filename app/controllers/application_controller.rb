@@ -1,10 +1,22 @@
 class ApplicationController < ActionController::Base
  protect_from_forgery
-http_basic_authenticate_with :name => "admin", :password => "waterloo12"
+
   
     before_filter :validation_count 
       before_filter :save_credit_params
         before_filter :update_credit_params
+          before_filter :authorize_beta
+    
+        def beta_user
+          @beta_user ||= Betauser.find(session[:beta_user_id]) if session[:beta_user_id]
+        end
+    
+        def authorize_beta
+          redirect_to new_betasession_path, notice: "hoovue.com is under development please log in." if beta_user.nil?
+        end
+       
+    
+    
     
     def save_credit_params
       if params[:credit_id]
