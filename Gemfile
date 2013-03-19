@@ -29,7 +29,6 @@ group :assets do
 end
 
 #Custom Gems
-gem 'lock'
 gem 'cancan'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
