@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
  protect_from_forgery
-
-lock
+http_basic_authenticate_with :name => "admin", :password => "waterloo12"
   
     before_filter :validation_count 
       before_filter :save_credit_params
