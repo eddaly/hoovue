@@ -23,7 +23,7 @@
 <% @products.each do |p| %>
 <%= link_to p do %>
 <li class="<%= cycle('even', 'odd') -%>">
-<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre %><%= p.product_genre.name %> <%end%></h2> 
+<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre_id.present? %><%= p.product_genre.name %> <%end%></h2> 
 	 <span style="float:right; margin-top:-50px;"><a href="#<%= p.id %>" class="show_hide<%= p.id %>">Add Credit</a></span>
 <div class="slidingDiv<%= p.id %>">
 	<div class="new-credit">
@@ -49,10 +49,12 @@
 	 <div class="desc">
 	What did you do in this role to deserve a Credit?  <%= f.text_field :role_desc %>
 	 </div>
+	<% if p.product_genre_id.present? %>
 	 <% if p.product_genre.name == "comic" %>
 	 <div class="issue">
 	  <%= f.text_field :issue %>
 	</div>
+	<% end %>
 	<% end %>
 	   <div class="fact">
 	<p>Can you tell us one interesting thing about this work?</p>  <%= f.text_area :fact, :rows => '2'	 %>
