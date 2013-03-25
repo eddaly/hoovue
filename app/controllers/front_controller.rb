@@ -2,7 +2,7 @@ class FrontController < ApplicationController
   def index
     @credits = Credit.confirmed.where(:user_id.blank? ).limit(10).order("created_at DESC")
     @products = Product.search(params[:search])
-     @users_featured = User.limit(4).order("RANDOM()")
+     @users_featured = User.where("id > ?", 1).limit(4).order("RANDOM()")
      if current_user
       @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
       @unclaimed = Credit.where(:pending_user_email => current_user.email).where(:user_id => nil)
