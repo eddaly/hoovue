@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "issue"
     t.integer   "validator_id"
     t.integer   "credit_validation_id"
+    t.string    "user_name"
   end
 
   create_table "friendships", :force => true do |t|
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "product_genre_id"
     t.string    "status"
     t.string    "issue"
+    t.string    "url"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

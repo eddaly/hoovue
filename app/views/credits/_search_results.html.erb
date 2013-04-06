@@ -62,6 +62,7 @@
 	  </div>
 	   <%= f.hidden_field :product_id, :value => p.id %>
 	     <%= f.hidden_field :user_id, :value => current_user.id %>
+		 	<%= f.hidden_field :pending_user_email, :value => current_user.email %>
 	
 	   <div class="submit">
 	    <%= f.submit 'Create Credit >'%>

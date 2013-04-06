@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
           redirect_to @credit
             if current_user.email = @credit.pending_user_email
              @credit.user_id = current_user.id
+             @credit.user_name = current_user.name
              @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
              @credit_validation.status = "confirmed"
              @credit_validation.validator_id = current_user.id

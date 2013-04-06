@@ -3,6 +3,59 @@
 
 RailsAdmin.config do |config|
   
+  config.model 'Product' do
+    edit do
+      field :title
+      field :user
+      field :product_genre
+      field :product_genre do
+              label "Category"
+            end
+      field :image
+      field :issue
+      field :url, :string
+      field :status
+   end
+   
+   list do
+     sort_by :title
+     field :title
+     field :user
+     field :image
+     field :product_genre
+     field :product_genre do
+             label "Category"
+           end
+     
+   end
+  end
+  
+  
+  config.model 'Credit' do
+    edit do
+      field :id
+      field :user
+      field :product
+      field :role
+      field :fact
+      field :role_desc
+      field :validator_id
+      field :issue
+      field :pending_user_email
+   end
+   
+   list do
+     field :id
+     field :user
+     field :product
+     field :role
+    
+   end
+  end
+  
+  
+  
+  
   require "rails_admin/application_controller"
 
 module RailsAdmin
@@ -19,6 +72,8 @@ module RailsAdmin
     end
   end
 end
+
+
 
 
   ################  Global configuration  ################

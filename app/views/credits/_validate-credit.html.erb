@@ -39,7 +39,7 @@
 <div style="float:right;">	
 	<h2>Validate by Existing Credit</h2>
 	<%= form_for(@credit_validation) do |f| %>
-		<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => p.id), :id, :user_id %>
+		<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => p.id), :id, :user_name, :prompt => "Please Select" %>
 		<%= f.hidden_field :validator_id, :value => current_user.id %>
 		<%= f.hidden_field :status, :value => "confirmed" %>
 		<%= submit_tag "Add Validator", :name => 'existing_credit', :id => 'blue-link' %>
