@@ -93,7 +93,7 @@ class CreditValidationsController < ApplicationController
     respond_to do |format|
       if @credit_validation.save
         format.js
-        format.html { redirect_to :back, notice: "Credit Validated."}
+        format.html { redirect_to :back, notice: "Credit Validation Updated"}
       else
        format.html { redirect_to :back }
         flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
