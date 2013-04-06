@@ -5,7 +5,7 @@ class Credit < ActiveRecord::Base
     belongs_to :product
       has_many :credit_validations
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
-        
+    
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
     scope :nick, where(:count => "0")
@@ -16,5 +16,7 @@ class Credit < ActiveRecord::Base
     Credit.create! row.to_hash
   end
 end
+
+
   
 end

@@ -8,6 +8,7 @@ class FrontController < ApplicationController
       @unclaimed = Credit.where(:pending_user_email => current_user.email).where(:user_id => nil)
        @flagged_credits = CreditValidation.where(:user_id => current_user.id).where(:status => "pending").where(:credit_id => true)  
        @empty_credits = Credit.where(:user_id => current_user.id).limit(3)
+        @credit_validation = CreditValidation.new
        @credit = Credit.new
      end
    end

@@ -54,22 +54,53 @@ class CreditValidationsController < ApplicationController
   def edit
     @credit_validation = CreditValidation.find(params[:id])
   end
+  
+  def validation
+    @credit_validation = CreditValidation.new
+    if @credit_validation.save
+       flash[:notice] = "Credit Validated."
+    end
+  end
 
   # POST /credit_validations
   # POST /credit_validations.json
   def create
+   if params[:existing_credit]
+     @credit_validation = CreditValidation.new(params[:credit_validation])
+     @current_credit = @credit_validation.current_credit_id
+     @credit = Credit.find_by_id(@credit_validation.credit_id)
+     @current_credit_validator = @credit.user_id
+     @credit_validation.credit_id = @credit.id
+     @credit_validation.user_id = @credit.user_id
+     respond_to do |format|
+       if @credit_validation.save
+         CreditValidation.create(:credit_id => @current_credit, :user_id => current_user.id, :status => "pending", :validator_id => @current_credit_validator  )
+          format.html { redirect_to :back, notice: "Credit Validated."}
+       else
+         format.html { redirect_to :back }
+          flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
+       
+       
+        
+         format.json { render json: @credit_validation.errors, status: :unprocessable_entity }
+       end
+     end
+   else
     @credit = Credit.find(params[:credit_id])
       @credit_validation = @credit.credit_validations.build(:credit_id => @credit.id)
         @credit_views = Credit.all
+    
     respond_to do |format|
       if @credit_validation.save
         format.js
-        flash[:notic] = "Credit Validated."
+        format.html { redirect_to :back, notice: "Credit Validated."}
       else
-        format.html { render action: "new" }
-        format.json { render json: @credit_validation.errors, status: :unprocessable_entity }
+       format.html { redirect_to :back }
+        flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
+          format.json { render json: @credit_validation.errors, status: :unprocessable_entity }
       end
     end
+     end   
   end
 
   # PUT /credit_validations/1
@@ -82,7 +113,11 @@ class CreditValidationsController < ApplicationController
         format.html { redirect_to @credit_validation, notice: 'Credit validation was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to :back }
+         flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
+       
+       
+       
         format.json { render json: @credit_validation.errors, status: :unprocessable_entity }
       end
     end

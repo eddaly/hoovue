@@ -23,6 +23,7 @@ Hoo::Application.routes.draw do
     member do
       put :validate
       put :flag
+      put :validation
     end
   end
 

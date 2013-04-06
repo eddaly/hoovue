@@ -1,9 +1,9 @@
 class CreditValidation < ActiveRecord::Base
-  attr_accessible :credit_id, :user_id, :user_validation, :token, :token_created_at, :validator_id, :status
+  attr_accessible :credit_id, :user_id, :user_validation, :token, :token_created_at, :validator_id, :status, :current_credit_id  
+        attr_accessor :current_credit_id  
     belongs_to :credit
-  
-  
-  
+    
+  validates :validator_id, :uniqueness => { :scope => :credit_id, :message =>  "This user has already validated you."  }
   
   def generate_token(column)
   begin

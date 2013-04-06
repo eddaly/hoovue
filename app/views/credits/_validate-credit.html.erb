@@ -3,8 +3,20 @@
 
 <div style="float:left;">
 <% if c.credit_validations.count < 3  %>
-	<h2>Validate my Credit</h2>
-<%= form_for @credit do |f|%>
+	<h2>Validate by E-mail</h2>
+	
+<%= form_for @credit, :validate => true do |f|%>
+<% if @credit.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+    <ul>
+    <% @credit.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 	<%= f.label "Co-creator E-mail"%>
 	<%= f.text_field :pending_user_email %>
 	
@@ -19,9 +31,21 @@
 				
 	<% end %> 
 	
-	<% end %>
+	
 	
 	</div>
 	
+	
+<div style="float:right;">	
+	<h2>Validate by Existing Credit</h2>
+	<%= form_for(@credit_validation) do |f| %>
+		<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => p.id), :id, :user_id %>
+		<%= f.hidden_field :validator_id, :value => current_user.id %>
+		<%= f.hidden_field :status, :value => "confirmed" %>
+		<%= submit_tag "Add Validator", :name => 'existing_credit', :id => 'blue-link' %>
+		<%= f.hidden_field :current_credit_id, :value => c.id %>
 	<% end %>
+</div>	
 	<% end %>
+<% end %>
+<% end %>

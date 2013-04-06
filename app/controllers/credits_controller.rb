@@ -1,5 +1,6 @@
 class CreditsController < ApplicationController
   
+  
   load_and_authorize_resource
   
   # GET /credits
@@ -81,6 +82,7 @@ end
   def create 
    
     @credit = Credit.new(params[:credit])
+    
        @credit.validator_id = current_user.id
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"
@@ -88,16 +90,20 @@ end
             @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
       if @credit.save
-          @credit_validation.save!
+        if  @credit_validation.save
              @credit.credit_validation_id = @credit_validation.id
            @credit.update_attributes(params[:credit])
+         else
+          
+         end
         if @credit.pending_user_email
        CreditMailer.new_credit(@credit).deliver
         end
         format.html { redirect_to root_url, notice: 'Credit was successfully created.' }
         format.json { render json: @credit, status: :created, location: @credit }
       else
-        format.html { render action: "new" }
+        flash[:error] =  @credit.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
+        format.html { redirect_to :back }
         format.json { render json: @credit.errors, status: :unprocessable_entity }
       end
     end
