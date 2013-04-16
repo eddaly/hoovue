@@ -29,8 +29,8 @@ class ApplicationController < ActionController::Base
         def update_credit_params
           if session[:credit_id] && if current_user 
           @credit = Credit.find(session[:credit_id])  
-          redirect_to @credit
-            if current_user.email = @credit.pending_user_email
+            if @credit.pending_user_email == current_user.email
+               redirect_to @credit
              @credit.user_id = current_user.id
              @credit.user_name = current_user.name
              @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
@@ -46,10 +46,16 @@ class ApplicationController < ActionController::Base
                    @credit_validation.save
                     session.delete(:credit_id)
                   end
+                  
+                else
+                  redirect_to root_url, :notice => "You email does not match the credit. Are you signed in with the right account?"
+                    session.delete(:credit_id)     
             end
           end
            end 
          end
+         
+       
 
 protected
 
