@@ -82,7 +82,9 @@ end
   def create 
    
     @credit = Credit.new(params[:credit])
-    
+    if @credit.pending_user_email == current_user.email
+      redirect_to :back, notice: 'You cannot validate yourself.'
+    else
        @credit.validator_id = current_user.id
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"
@@ -107,7 +109,7 @@ end
         format.json { render json: @credit.errors, status: :unprocessable_entity }
       end
     end
-  
+  end
   end
 
   # PUT /credits/1
