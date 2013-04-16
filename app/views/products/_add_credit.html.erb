@@ -18,14 +18,28 @@
 		<%= image_tag @product.image.small %>
 	<%end%></h2>
   </div>
-  <% if @product.issue.present? %>
-  <% if @product.issue != "None" %>
+  
+  <% if @product.genre == "Game" %>
    <div class="desc">
- <%= @product.issue %>:
+Which versions?
    <%= f.text_field :issue %>
  </div>
  <% end %>
+ 
+  <% if @product.genre == "Comic" %>
+   <div class="desc">
+Which Issue/s?
+   <%= f.text_field :issue %>
+ </div>
  <% end %>
+ 
+  <% if @product.genre == "Website" %>
+   <div class="desc">
+When was it live?
+   <%= f.text_field :issue %>
+ </div>
+ <% end %>
+
  <div class="desc">
 Can you tell us more about what you did in your role:  <%= f.text_field :role_desc %>
  </div>
