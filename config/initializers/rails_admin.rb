@@ -36,6 +36,7 @@ RailsAdmin.config do |config|
       field :id
       field :user
       field :product
+      field :user_name
       field :role
       field :fact
       field :role_desc
