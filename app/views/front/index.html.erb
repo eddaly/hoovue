@@ -17,9 +17,12 @@
 
 	<div class="white-box">
 	
-		<p>We use facebook as the first level of validation to prove you're identity so that you can begin to claim the creative credits on media products (games, film, comics, web) you feel you deserve and find colleagues to validate those claims.</p>
+		
 <% if current_user %>
+<p>The platform for all Creators to own and manage their Credits and get the public recognition they deserve.</p>
+
 <% else %>
+<p>We use facebook as the first level of validation to prove you're identity so that you can begin to claim the creative credits on media products (games, film, comics, web) you feel you deserve and find colleagues to validate those claims.</p>
 		<p>Please  <%= link_to "register/login via Facebook.", "/auth/facebook", id: "login_with_facebook"  %> 
  	<% end %>
 	</div>
