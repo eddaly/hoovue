@@ -45,7 +45,7 @@ gem 'honeybadger'
 gem "select2-rails", "~> 3.2.1"
 gem 'thin'
 gem 'best_in_place'
-gem 'mail_safe'
+
 
 
 # To use ActiveModel has_secure_password

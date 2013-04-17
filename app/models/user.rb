@@ -26,7 +26,10 @@ class User < ActiveRecord::Base
     user.oauth_token = auth.credentials.token
     user.oauth_expires_at = Time.at(auth.credentials.expires_at)
     user.role = "user"
-   
+   if user.id 
+    else
+      UserMailer.signup_confirmation(user).deliver
+   end
     user.save!
     
   end
