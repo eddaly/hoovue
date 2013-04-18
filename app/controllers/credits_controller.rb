@@ -94,6 +94,7 @@ end
       if @credit.save
         if  @credit_validation.save
              @credit.credit_validation_id = @credit_validation.id
+              @credit.user_name = current_user.name
            @credit.update_attributes(params[:credit])
          else
           
