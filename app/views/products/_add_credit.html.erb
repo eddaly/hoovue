@@ -50,6 +50,7 @@ Can you tell us more about what you did in your role:  <%= f.text_field :role_de
   </div>
    <%= f.hidden_field :product_id, :value => @product.id %>
      <%= f.hidden_field :user_id, :value => current_user.id %>
+	     <%= f.hidden_field :user_name, :value => current_user.name %>
 	
    <div class="submit">
     <%= f.submit 'Create Credit >'%>
