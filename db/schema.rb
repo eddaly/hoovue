@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "contents", :force => true do |t|
-    t.string   "slug"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "slug"
+    t.text      "content"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "credit_validations", :force => true do |t|
@@ -95,14 +95,15 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "user_id"
     t.string    "image"
     t.text      "description"
-    t.timestamp "created_at",       :null => false
-    t.timestamp "updated_at",       :null => false
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
     t.text      "properties"
     t.integer   "product_genre_id"
     t.string    "status"
     t.string    "issue"
     t.string    "url"
-    t.string    "date"
+    t.timestamp "date"
+    t.datetime  "year"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
