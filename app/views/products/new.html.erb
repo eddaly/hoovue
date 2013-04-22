@@ -46,7 +46,7 @@ If your work relates to a specific range of issues please include this informati
      <div class="field">
        <%= f.label :year_the_game_was_first_released %>
 	  
-       <%= f.date_select :date, :discard_month => true %>
+       <%= f.date_select :date, :discard_month => true, :start_year => 1980 %>
      </div>
 	 <% end %>
 	 
@@ -54,7 +54,7 @@ If your work relates to a specific range of issues please include this informati
      <div class="field">
        <%= f.label :year_the_website_was_launched %>
 	
-        <%= f.date_select :date, :discard_month => true %>
+        <%= f.date_select :date, :discard_month => true, :start_year => 1980 %>
      </div>
 	 <% end %>
 	 
@@ -62,7 +62,7 @@ If your work relates to a specific range of issues please include this informati
      <div class="field">
        <%= f.label :year_the_movie_was_released %>
 	
-       <%= f.date_select :date, :discard_month => true %>
+       <%= f.date_select :date, :discard_month => true, :start_year => 1980 %>
      </div>
 	 <% end %>
 	 
@@ -81,7 +81,8 @@ If your work relates to a specific range of issues please include this informati
   </div>
   <h1>Your Credit</h1>
   <div class="new-credit">
-
+	
+ 
    <div class="role">
    <h2>Your role was: <%= f.text_field :role %></h2>
     </div>
@@ -98,7 +99,19 @@ If your work relates to a specific range of issues please include this informati
   	<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
     </div>
   
-
+  <% if params[:name] == "1" %>
+   <div class="desc">
+<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+   <%= f.text_field :issue %>
+ </div>
+ <% end %>
+ 
+	  <% if params[:name] == "3" %>
+	   <div class="desc">
+<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
+	   <%= f.text_field :issue %>
+	 </div>
+	 <% end %>
   
 <div class="submit">
  <%= f.submit 'Create Work >'%>
