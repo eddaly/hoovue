@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "status"
     t.string    "issue"
     t.string    "url"
+    t.string    "date"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -145,8 +146,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   create_table "users", :force => true do |t|
     t.string    "email"
     t.string    "password_digest"
-    t.timestamp "created_at",                      :null => false
-    t.timestamp "updated_at",                      :null => false
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
     t.string    "provider"
     t.string    "uid"
     t.string    "name"
@@ -155,8 +156,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "image"
     t.string    "profile_picture"
     t.string    "role"
-    t.integer   "credits_count",    :default => 0, :null => false
-    t.string    "bio"
+    t.integer   "credits_count"
+    t.text      "bio"
     t.string    "twitter"
     t.string    "facebook"
     t.string    "linkedin"

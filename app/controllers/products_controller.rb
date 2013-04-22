@@ -38,7 +38,7 @@ end
   # GET /products/new.json
   def new
     @product = Product.new(product_genre_id: params[:product_genre_id])
-
+    @category = ProductGenre.find_by_id(params[:name])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }

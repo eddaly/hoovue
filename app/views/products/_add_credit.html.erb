@@ -21,24 +21,20 @@
   
   <% if @product.genre == "Game" %>
    <div class="desc">
-Which versions?
+<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
    <%= f.text_field :issue %>
  </div>
  <% end %>
  
-  <% if @product.genre == "Comic" %>
-   <div class="desc">
-Which Issue/s?
-   <%= f.text_field :issue %>
- </div>
- <% end %>
+	  <% if @product.genre == "Comic" %>
+	   <div class="desc">
+<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
+	   <%= f.text_field :issue %>
+	 </div>
+	 <% end %>
  
-  <% if @product.genre == "Website" %>
-   <div class="desc">
-When was it live?
-   <%= f.text_field :issue %>
- </div>
- <% end %>
+ 
+ 
 
  <div class="desc">
 Can you tell us more about what you did in your role:  <%= f.text_field :role_desc %>

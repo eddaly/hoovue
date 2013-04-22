@@ -46,23 +46,39 @@
 			<%= image_tag p.image.small %>
 		<%end%></h2>
 	  </div>
-	 <div class="desc">
-	What did you do in this role to deserve a Credit?  <%= f.text_field :role_desc %>
+  
+	  <% if p.genre == "Game" %>
+	   <div class="desc">
+	<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+	   <%= f.text_field :issue %>
 	 </div>
-	<% if p.product_genre_id.present? %>
-	 <% if p.product_genre.name == "comic" %>
-	 <div class="issue">
-	  <%= f.text_field :issue %>
-	</div>
-	<% end %>
-	<% end %>
+	 <% end %>
+ 
+	  <% if p.genre == "Comic" %>
+	   <div class="desc">
+<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
+	   <%= f.text_field :issue %>
+	 </div>
+	 <% end %>
+ 
+	  <% if p.genre == "Website" %>
+	   <div class="desc">
+	When was it live?
+	   <%= f.text_field :issue %>
+	 </div>
+	 <% end %>
+
+	 <div class="desc">
+	Can you tell us more about what you did in your role:  <%= f.text_field :role_desc %>
+	 </div>
+ 
 	   <div class="fact">
-	<p>Can you tell us one interesting thing about this work?</p>  <%= f.text_area :fact, :rows => '2'	 %>
+	<p>Can you tell us one interesting thing about this work:</p>  <%= f.text_area :fact, :rows => '2'	 %>
 		<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
 	  </div>
 	   <%= f.hidden_field :product_id, :value => p.id %>
 	     <%= f.hidden_field :user_id, :value => current_user.id %>
-		 <%= f.hidden_field :user_name, :value => current_user.name %>
+		     <%= f.hidden_field :user_name, :value => current_user.name %>
 	
 	   <div class="submit">
 	    <%= f.submit 'Create Credit >'%>
@@ -72,6 +88,8 @@
 
 	
 	</div>
+
+	
 
 	
 <a href="#<%= p.id %>" class="show_hide<%= p.id %>">hide</a></div>
@@ -84,7 +102,14 @@
 	<%end%>
 </ul>
 </div>
-	<p><%= link_to "Work not listed? Add it >", new_product_path, :class => "blue-link", :style => "background:white;" %> </p>
+	 <h2>Add a new work</h2>
+		<%= form_tag new_product_path, :method => 'get' do%>
+		  <p>
+ <%= select_tag :name, options_from_collection_for_select(ProductGenre.all, :id, :name, params[:product_category]), :class => "select_list" %>
+ <%= submit_tag "Add new work", :class => "blue-link-right" %>
+</p>
+		<% end %>
+	
 
 </div>
 
