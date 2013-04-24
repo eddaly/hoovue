@@ -41,8 +41,11 @@ $(document).ready(function(){
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %> <% end %>
 							<% if c.issue %>
-							<%= @product.issue %>: <%= c.issue %>
-									
+							<%= @product.issue %>: <%= c.issue %> 
+							
+							 <% if @product.product_genre.name == "Comic" %>
+							<%= c.startdate.strftime("%Y") %> - <%= c.enddate.strftime("%Y") %>
+							<% end %>		
 								<% end %>
 
 

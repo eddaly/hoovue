@@ -58,7 +58,11 @@
 	   <div class="desc">
 <p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
 	   <%= f.text_field :issue %>
+<p class="small"><p class="small">Please also include a date range where you worked on this Comic.</p></p>	   
+    <%= f.date_select :startdate, :discard_month => true, :start_year => 1980 %> - 
+	 <%= f.date_select :enddate, :discard_month => true, :start_year => 1980 %>  
 	 </div>
+	  
 	 <% end %>
  
 	  <% if p.genre == "Website" %>

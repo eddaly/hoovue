@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "validator_id"
     t.integer   "credit_validation_id"
     t.string    "user_name"
+    t.datetime  "startdate"
+    t.datetime  "enddate"
   end
 
   create_table "friendships", :force => true do |t|
