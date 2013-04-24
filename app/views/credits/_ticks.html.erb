@@ -4,20 +4,23 @@
 		<span class="score">
 			<% if current_user %>
 				<% if current_user.id == c.user_id  %>
-					<a href="#openModalemail"><%= image_tag '/assets/empty.png' %></a>
+					<a href="#<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
 				<% else %>
+				<a href="#<%= c.id %>">
 					<%= image_tag '/assets/empty.png' %>
+					</a>
 				<% end%>
 			<% else %>
-						
+				<a href="#<%= c.id %>">		
 					<%= image_tag '/assets/empty.png' %>
+					</a>
 			<% end %>
 		</span>
 		<% end %>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
-		<div class="validator-text" style="margin-right:-180px;">
-			<p>Please add 3 Validators</p>
+		<div class="validator-text" style="margin-right:-210px;">
+			<p>Please add 3 Validators below</p>
 				</div>
 				<% end %> <% end %>
 		<% else %>
@@ -43,13 +46,16 @@
 		<% end %>
 		<% 2.times do %>
 		<span class="score">
-					<%= image_tag '/assets/empty.png' %>
+			<a href="#<%= c.id %>">
+				<%= image_tag '/assets/empty.png' %>
+				</a>
+				
 		</span>
 		<% end %>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
-		<div class="validator-text">
-			<p>Please add 2 more Validators</p>
+		<div class="validator-text" style="margin-right:-210px;">
+			<p>Please add 2 more Validators below</p>
 				</div>
 				<% end %> <% end %>
 		<% end %>
@@ -78,12 +84,15 @@
 	<% end %>
 	<% 1.times do %>
 	<span class="score">
-				<%= image_tag '/assets/empty.png' %>
+		<a href="#<%= c.id %>">
+			<%= image_tag '/assets/empty.png' %>
+			</a>
+				
 	</span>
 	<% if current_user %>
 		<% if current_user.id == c.user_id  %>
-	<div class="validator-text">
-		<p>Please add 1 more Validator</p>
+	<div class="validator-text" style="margin-right:-240px;">
+		<p>Please add 1 more Validator below</p>
 			</div>
 			<% end %> <% end %>
 	<% end %>
