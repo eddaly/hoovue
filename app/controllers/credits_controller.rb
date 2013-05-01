@@ -102,7 +102,7 @@ end
         if @credit.pending_user_email
       
         end
-        format.html { redirect_to root_url, notice: 'Credit was successfully created.' }
+        format.html { redirect_to product_path(@credit.product_id), notice: 'Credit was successfully created.' }
         format.json { render json: @credit, status: :created, location: @credit }
       else
         flash[:error] =  @credit.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 

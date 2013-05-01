@@ -2,20 +2,12 @@
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
 		<span class="score">
-			<% if current_user %>
-				<% if current_user.id == c.user_id  %>
-					<a href="#<%= c.id %>"><%= image_tag '/assets/empty.png' %></a>
-				<% else %>
-				<a href="#<%= c.id %>">
-					<%= image_tag '/assets/empty.png' %>
-					</a>
-				<% end%>
-			<% else %>
-				<a href="#<%= c.id %>">		
-					<%= image_tag '/assets/empty.png' %>
-					</a>
-			<% end %>
+			<a href="#<%= c.id %>">
+				<%= image_tag '/assets/empty.png' %>
+				</a>
+				
 		</span>
+		
 		<% end %>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
@@ -39,10 +31,25 @@
 	
 	<% end %>
 		<% if cv.status == "pending" %>
-	<span class="score">
-<%= image_tag '/assets/pending.png' %>
+		<span class="score">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+			<%= link_to credit_validation_path(cv) do %>
+		<%= image_tag '/assets/pending.png' %>
 	
-		</span>
+			<% end %>
+			<% else %>
+				<%= image_tag '/assets/pending.png' %>
+					<% end %>
+					<% else %>
+						<%= image_tag '/assets/pending.png' %>
+						<% end %>
+		<p style="margin:-10px;">Pending</p>
+			</span>
+		
+		
+		
+	
 		<% end %>
 		<% 2.times do %>
 		<span class="score">
@@ -74,10 +81,27 @@
 </span>
 <% end %>
 	<% if cv.status == "pending" %>
-<span class="score">
-<%= image_tag '/assets/pending.png' %>
 	
-	</span>
+	<span class="score">
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+		<%= link_to credit_validation_path(cv) do %>
+	<%= image_tag '/assets/pending.png' %>
+	
+		<% end %>
+		<% else %>
+			<%= image_tag '/assets/pending.png' %>
+				<% end %>
+				<% else %>
+					<%= image_tag '/assets/pending.png' %>
+					<% end %>
+	<p style="margin:-10px;">Pending</p>
+		</span>
+		
+
+	
+
+
 	<% end %>
 
 		
@@ -101,6 +125,7 @@
 	
 	<% if c.credit_validations.count.eql?(3)  %>
 	<% c.credit_validations.each do |cv| %>
+	
 	<% if cv.status == "confirmed" %>
 	<span class="score">
 		<% @user = User.find_by_id(cv.validator_id) %>
@@ -109,8 +134,19 @@
 	<% end %>
 		<% if cv.status == "pending" %>
 	<span class="score">
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+		<%= link_to credit_validation_path(cv) do %>
 	<%= image_tag '/assets/pending.png' %>
 	
+		<% end %>
+		<% else %>
+			<%= image_tag '/assets/pending.png' %>
+				<% end %>
+				<% else %>
+					<%= image_tag '/assets/pending.png' %>
+					<% end %>
+	<p style="margin:-10px;">Pending</p>
 		</span>
 		
 		<% end %>

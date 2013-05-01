@@ -25,18 +25,16 @@
  
   <% if controller.action_name == 'edit' %>
  
-
- <div class="field">
-<%= f.label :issue_number_? %><br />
-  <%= f.text_field :issue %>
-</div>
-
+  <div class="white-box">
+  	
+  
+ 
    <div class="field">
   <%= f.label :interesting_fact %><br />
     <%= f.text_area :fact, :rows => '5'	 %><br/>
-	  <strong>You have <em id="count"></em> characters remaining</strong>
+	 
   </div>
-
+</div>
 	<% end %>
 	
 <% if controller.action_name == 'role' %>
