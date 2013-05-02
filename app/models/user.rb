@@ -31,9 +31,23 @@ class User < ActiveRecord::Base
       UserMailer.signup_confirmation(user).deliver
    end
     user.save!
-    
   end
 end
+
+def facebook
+  @facebook ||= Koala::Facebook::API.new(oauth_token)
+  block_given? ? yield(@facebook) : @facebook
+rescue Koala::Facebook::APIError => e
+  logger.info e.to_s
+  nil # or consider a custom null object
+end
+
+
+def friends_count
+  facebook { |fb| fb.get_connection("me", "friendslists").size }
+end
+
+
 
 def self.search(search)
   if search

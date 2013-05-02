@@ -383,3 +383,33 @@ span.ui-helper-hidden-accessible {
   }
 
   .close:hover { background: #000; }
+  
+  .help-box {
+  width:400px;
+  float:right;
+  padding:15px;
+  border: 1px solid grey;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  line-height:150%;
+  font-size:14px;
+  margin:20px;
+
+  }
+
+  .help-box h4, label {
+  background:grey;
+  color:white;
+  padding:5px;
+  margin-top:-10px;
+  text-align:center;
+  }
+  
+  
+  label {
+	  width:250px;
+	  padding:3px;
+	  font-size:14px;
+	  text-align:left;
+  }

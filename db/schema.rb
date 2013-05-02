@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "validator_id"
     t.integer   "credit_validation_id"
     t.string    "user_name"
-    t.datetime  "startdate"
-    t.datetime  "enddate"
+    t.timestamp "startdate"
+    t.timestamp "enddate"
   end
 
   create_table "friendships", :force => true do |t|
@@ -97,15 +97,16 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "user_id"
     t.string    "image"
     t.text      "description"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.timestamp "created_at",       :null => false
+    t.timestamp "updated_at",       :null => false
     t.text      "properties"
     t.integer   "product_genre_id"
     t.string    "status"
     t.string    "issue"
     t.string    "url"
-    t.timestamp "date"
-    t.datetime  "year"
+    t.string    "date"
+    t.timestamp "year"
+    t.string    "studio"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -143,8 +144,6 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "created_at",     :null => false
     t.timestamp "updated_at",     :null => false
   end
-
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "users", :force => true do |t|
     t.string    "email"

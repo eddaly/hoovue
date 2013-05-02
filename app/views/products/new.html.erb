@@ -18,20 +18,24 @@
   <% end %>
 
 	 <% if params[:name] == "3" %>
-  <p>The name of the comic is the title of a series.
+  <div class="help-box">The name of the comic is the title of a series.
 	  The image used may be of a specific issue, not that which all credits relate too (a range of images and other issue information will be included in due course).
 
-If your work relates to a specific range of issues please include this information within the credit.</p>
+If your work relates to a specific range of issues please include this information within the credit.</div>
     
 	 <% end %>
 	 
 	  <% if params[:name] == "1" %>
-	  <p>The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)</p>
+	 <div class="help-box">
+		 <h4>Help</h4>
+		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)</div>
 	  
-	  <p>The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course).</p>
+		 <div class="help-box">
+			 <h4>Help</h4>
+	  The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course).</div>
  <% end %>
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :name %><br />
     <%= f.text_field :title %>
   </div>
 
@@ -39,7 +43,7 @@ If your work relates to a specific range of issues please include this informati
  
  
 	<div class="field">
-		<%= f.label :work_status %><br />
+		<%= f.label :status %><br />
 		
 	 <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
 	 </div>
@@ -47,8 +51,11 @@ If your work relates to a specific range of issues please include this informati
 	 <% if params[:name] == "1" %>
      <div class="field">
        <%= f.label :year_the_game_was_first_released %>
-	  
-       <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
+	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
+     </div>
+     <div class="field">
+       <%= f.label :studio %>
+	   <%= f.text_field :studio %>
      </div>
 	 <% end %>
 	 
