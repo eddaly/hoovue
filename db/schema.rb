@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "user_name"
     t.timestamp "startdate"
     t.timestamp "enddate"
+    t.string    "pending_token"
   end
 
   create_table "friendships", :force => true do |t|

@@ -36,6 +36,44 @@
 	</div>
 	
 	
+	
+	
+	<div style="float:left;">
+	
+		<h2>Validate Credit by Facebook</h2>
+	
+	<%= form_for @credit, :validate => true do |f|%>
+	<% if @credit.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+	    <ul>
+	    <% @credit.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+			<%= f.label "What was the role of your co-creator?"%>
+			<%= f.text_field :role %>
+
+			
+		 		<%= f.hidden_field :product_id, :value => c.product.id %>
+			
+				<%= f.hidden_field :current_credit_id, :value => c.id %>
+		 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook' %>
+				
+		<% end %> 
+	
+	
+	
+		</div>
+	
+	
+	
+	
+	
+	
 <div style="float:right;">	
 	<h2>Validate Credit from co-creator</h2>
 	<%= form_for(@credit_validation) do |f| %>
