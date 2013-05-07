@@ -72,16 +72,22 @@ end
       redirect_to root_url
   end
   
-  def add
-    
+  def batch
+    @credit = Credit.new
+   
+   
   end
   
 
   # POST /credits
   # POST /credits.json
   def create 
-   
     @credit = Credit.new(params[:credit])
+     if params[:batch]
+     @credit.role = params[:role]
+     @credit.product_id = params[:product_id]
+     @credit.user_id = current_user.id
+   end
     if @credit.pending_user_email == current_user.email
       redirect_to :back, notice: 'You cannot validate yourself.'
     else
@@ -102,7 +108,11 @@ end
         if @credit.pending_user_email
       
         end
+        if params[:batch]
+          format.html { redirect_to :back, notice: 'Credit was successfully created.' }
+        else  
         format.html { redirect_to product_path(@credit.product_id), notice: 'Credit was successfully created.' }
+      end
         format.json { render json: @credit, status: :created, location: @credit }
       else
         flash[:error] =  @credit.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
