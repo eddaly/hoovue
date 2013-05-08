@@ -92,7 +92,11 @@ end
     if @credit.pending_user_email == current_user.email
       redirect_to :back, notice: 'You cannot validate yourself.'
     else
+      if params[:facebook]
+         @credit.validator_id = SecureRandom.random_number(100000)
+      else
        @credit.validator_id = current_user.id
+     end
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"
           @credit_validation.user_id = current_user.id
