@@ -173,6 +173,7 @@ GEM
     net-scp (1.0.6)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.6)
+    newrelic_rpm (3.6.1.88)
     nokogiri (1.5.7)
     nokogiri (1.5.7-x86-mingw32)
     oauth2 (0.8.1)
@@ -313,6 +314,7 @@ DEPENDENCIES
   koala
   letsrate
   mini_magick
+  newrelic_rpm
   omniauth-facebook
   pg
   rails (= 3.2.13)

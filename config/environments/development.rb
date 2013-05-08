@@ -10,6 +10,8 @@ Hoo::Application.configure do
   
   ENV['rel'] = "12345"
   
+
+  
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
       config.action_mailer.default_url_options = { :host => "localhost:3000" }
