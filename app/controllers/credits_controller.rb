@@ -95,10 +95,11 @@ end
       if params[:facebook]
          @credit.validator_id = SecureRandom.random_number(100000)
       else
-       @credit.validator_id = current_user.id
+     
      end
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"
+          @credit.validator_id = current_user.id
           @credit_validation.user_id = current_user.id
             @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
