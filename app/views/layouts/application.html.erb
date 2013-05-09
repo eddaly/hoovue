@@ -20,7 +20,7 @@
 					<ul>
 					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
 					 <% if current_user %>
-					<li><%= image_tag "/assets/user-icon.png"%><a href="/users/<%= current_user.id%>">My Profile</a></li>
+					<li><a href="/users/<%= current_user.id%>">My Profile</a></li>
 					<li><%= image_tag "/assets/plus-icon.png"%><a href="/credits/search">Add a Credit</a></li>
 		
 					<% if current_user.role == "admin" %>
