@@ -34,20 +34,16 @@ class ApplicationController < ActionController::Base
         @credit = Credit.find_by_pending_token(session[:pending_token])
         @credit.user_id = current_user.id
         @credit.user_name = current_user.name
-        @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
-        @credit_validation.status = "confirmed"
-        @credit_validation.validator_id = current_user.id
-        @credit_validation.update_attributes(params[:credit_validationn])
-        @credit_validation = CreditValidation.new(params[:credit_validation])
-          @credit_validation.user_id = current_user.id
-               
-          @credit_validation.validator_id = @credit.validator_id
-          @credit_validation.status = "confirmed"
         if @credit.save
+         @credit_validation = CreditValidation.new(params[:credit_validation])
+          @credit_validation.validator_id = @credit.validator_id
           @credit_validation.credit_id = @credit.id
-            @credit_validation.save
+          @credit_validation.status = "confirmed"
+          @credit_validation.user_id = current_user.id
+          if @credit_validation.save
           redirect_to root_url, :notice => "Your Facebook refered credit has been added."
           session.delete(:pending_token)
+        end
           end
         end
       end  

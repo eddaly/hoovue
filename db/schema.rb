@@ -108,6 +108,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "date"
     t.timestamp "year"
     t.string    "studio"
+    t.datetime  "startdate"
+    t.datetime  "enddate"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
