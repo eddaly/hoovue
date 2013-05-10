@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "pending_token"
   end
 
+  create_table "emails", :force => true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "friendships", :force => true do |t|
     t.integer   "user_id"
     t.integer   "friend_id"
@@ -108,8 +115,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "date"
     t.timestamp "year"
     t.string    "studio"
-    t.datetime  "startdate"
-    t.datetime  "enddate"
+    t.timestamp "startdate"
+    t.timestamp "enddate"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -147,6 +154,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "created_at",     :null => false
     t.timestamp "updated_at",     :null => false
   end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "users", :force => true do |t|
     t.string    "email"

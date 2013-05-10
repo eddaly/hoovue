@@ -3,9 +3,12 @@ Hoo::Application.routes.draw do
 
 
 
+  resources :emails
+
+
   get "front/index"
   get "front/validate_email_credit"
-  
+  get "front/validate_new_email_credit"
   resources :betausers
   
   resources :betasessions
