@@ -57,6 +57,9 @@
 	<h1>Unclaimed Credits</h1>
 	<% end %>
 	
+	<% if @unclamied_email_credits.exists?%>
+	
+	<h1>Unclaimed Credits matching other email addresses</h1>
 	
 	<div class= "activity-feed">
 	 
@@ -70,7 +73,8 @@
 	<% end %>
 	
 </ul> 	
-
+<% else %>
+<% end %>
 
 	</div>
 </div>
