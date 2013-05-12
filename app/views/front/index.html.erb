@@ -55,26 +55,27 @@
 	<% if @unclaimed.empty?%>
 	<% else %>
 	<h1>Unclaimed Credits</h1>
-	<% end %>
-	
-	<% if @unclamied_email_credits.exists?%>
-	
-	<h1>Unclaimed Credits matching other email addresses</h1>
-	
-	<div class= "activity-feed">
-	 
-		    	    	<ul>
+		<div class= "activity-feed">
+			<ul>
 	<% @unclaimed.each do |u| %>
-	<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit", front_validate_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
+		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit", front_validate_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
 	<%end%>	
-
-		<% @unclamied_email_credits.each do |u| %>
+	<% end %>
+	</ul>
+	</div>
+	
+	
+	<% if @unclamied_email_credits  %>
+	
+	<% else %>
+	<h1>Unclaimed Credits matching other email addresses</h1>
+	<div class= "activity-feed">
+		<ul>
+	<% @unclamied_email_credits.each do |u| %>
 		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit", front_validate_new_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
 	<% end %>
-	
+	<% end %>
 </ul> 	
-<% else %>
-<% end %>
 
 	</div>
 </div>
