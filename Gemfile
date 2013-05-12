@@ -45,6 +45,7 @@ gem "select2-rails", "~> 3.2.1"
 gem 'thin'
 gem 'best_in_place'
 gem 'koala'
+gem 'newrelic_rpm'
 
 
 # To use ActiveModel has_secure_password

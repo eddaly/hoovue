@@ -9,14 +9,15 @@
 	</div>
 
 		<div class="grid_6 push_1 search omega">
-		<%= form_tag search_path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
-		 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+			<%= form_tag search_credits_path, :method => 'get' do %>
 
-
-<% end %>
+			  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
+			     <%= submit_tag "Search", :name => nil, :class => "search-button" %>
+			  <%end%>
+		
 		</div>
 </div>
+
 
 	<div class="white-box">
 	
@@ -51,18 +52,29 @@
 <% if current_user %>
 
 <div class="container_12 credits-form">
-	<% if @unclaimed.empty? %>
+	<% if @unclaimed.empty?%>
 	<% else %>
 	<h1>Unclaimed Credits</h1>
 	<% end %>
+	
+	<% if @unclamied_email_credits.exists?%>
+	
+	<h1>Unclaimed Credits matching other email addresses</h1>
+	
 	<div class= "activity-feed">
 	 
 		    	    	<ul>
 	<% @unclaimed.each do |u| %>
-	<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "View Credit", front_validate_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
+	<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit", front_validate_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
 	<%end%>	
-</ul> 	
 
+		<% @unclamied_email_credits.each do |u| %>
+		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit", front_validate_new_email_credit_url(:credit_id => u.id), :class => "blue-link" %> </span> </li>
+	<% end %>
+	
+</ul> 	
+<% else %>
+<% end %>
 
 	</div>
 </div>

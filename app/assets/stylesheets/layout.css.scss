@@ -331,6 +331,10 @@ span.ui-helper-hidden-accessible {
 
 }
 
+.ui-helper-hidden-accessible {
+  display:none;
+} 
+
 /* Modal */
 
 
@@ -408,8 +412,10 @@ span.ui-helper-hidden-accessible {
   
   
   label {
-	  width:250px;
+	  width:100%;
 	  padding:3px;
 	  font-size:14px;
 	  text-align:left;
+	  background:none;
+	  color:black;
   }

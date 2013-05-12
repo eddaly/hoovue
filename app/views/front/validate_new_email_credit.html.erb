@@ -1,0 +1,12 @@
+<br /><br /><br />
+<div class="container_12 pages">
+<%  if current_user%>
+<h1>Welcome Back</h1>
+<p>You credit has been added. <%= link_to 'Home >', root_url %></p>
+
+<%else%>
+<h1>Welcome to Hoovue</h1>
+<p>To get your credit approved you will need to <%= link_to "log in or join us via Facebook.", "/auth/facebook", id: "login_with_facebook" %></p> 
+
+<%end%>
+</div>

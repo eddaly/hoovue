@@ -14,11 +14,12 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require rails.validations
+//= require select2
 //= require jquery.nested-fields
 //= require best_in_place
 //= require_tree .
 
-    $(document).ready(function() { $("select").select2({ width: 'resolve' }); });
+    $(document).ready(function() { $("select").select2({ width: 'element' }); });
 
  $("#products_list_search input").keyup(function() {
     $.get($("#products_list_search").attr("action"), $("#products_list_search").serialize(), null, "script");

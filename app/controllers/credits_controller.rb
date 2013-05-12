@@ -72,22 +72,34 @@ end
       redirect_to root_url
   end
   
-  def add
-    
+  def batch
+    @credit = Credit.new
+   
+   
   end
   
 
   # POST /credits
   # POST /credits.json
   def create 
-   
     @credit = Credit.new(params[:credit])
+     if params[:batch]
+     @credit.role = params[:role]
+     @credit.product_id = params[:product_id]
+     @credit.user_id = current_user.id
+   end
+     @credit.pending_token = SecureRandom.urlsafe_base64(20)
     if @credit.pending_user_email == current_user.email
       redirect_to :back, notice: 'You cannot validate yourself.'
     else
-       @credit.validator_id = current_user.id
+      if params[:facebook]
+         @credit.validator_id = SecureRandom.random_number(100000)
+      else
+     
+     end
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"
+          @credit.validator_id = current_user.id
           @credit_validation.user_id = current_user.id
             @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
@@ -102,7 +114,19 @@ end
         if @credit.pending_user_email
       
         end
+        if params[:batch]
+          format.html { redirect_to :back, notice: 'Credit was successfully created.' }
+        end 
+        
+        if params[:facebook]
+          format.html { redirect_to ("https://www.facebook.com/dialog/send?app_id=561827047168768&
+name=hoovue.com%20Credit%20&
+link=http://staging.hoovue.com/?pending_token=#{@credit.pending_token}&
+redirect_uri=http://staging.hoovue.com")}
+        end 
+         
         format.html { redirect_to product_path(@credit.product_id), notice: 'Credit was successfully created.' }
+   
         format.json { render json: @credit, status: :created, location: @credit }
       else
         flash[:error] =  @credit.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 

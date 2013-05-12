@@ -2,9 +2,9 @@
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
 		<span class="score">
-			<a href="#<%= c.id %>">
+			
 				<%= image_tag '/assets/empty.png' %>
-				</a>
+				
 				
 		</span>
 		
@@ -53,9 +53,9 @@
 		<% end %>
 		<% 2.times do %>
 		<span class="score">
-			<a href="#<%= c.id %>">
+			
 				<%= image_tag '/assets/empty.png' %>
-				</a>
+			
 				
 		</span>
 		<% end %>
@@ -108,9 +108,9 @@
 	<% end %>
 	<% 1.times do %>
 	<span class="score">
-		<a href="#<%= c.id %>">
+		
 			<%= image_tag '/assets/empty.png' %>
-			</a>
+		
 				
 	</span>
 	<% if current_user %>

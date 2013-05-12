@@ -167,12 +167,22 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.7.3)
     multipart-post (1.2.0)
+<<<<<<< HEAD
     nested_form (0.3.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.6.7)
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
+=======
+    nested_form (0.3.1)
+    net-scp (1.0.6)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.6)
+    newrelic_rpm (3.6.1.88)
+    nokogiri (1.5.7)
+    nokogiri (1.5.7-x86-mingw32)
+>>>>>>> f0ffcb57d4b85ebf5e7f4d010df05938c12972d6
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -305,6 +315,7 @@ DEPENDENCIES
   koala
   letsrate
   mini_magick
+  newrelic_rpm
   omniauth-facebook
   rails (= 3.2.13)
   rails_admin!
