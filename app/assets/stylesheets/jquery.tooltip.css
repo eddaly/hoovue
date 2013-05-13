@@ -1,6 +1,7 @@
 .ui-tooltip-content {
 	position: absolute;
 	z-index: 3000;
+	font-size:12px;
 	border: 1px solid #111;
 	background-color: #eee;
 	padding: 5px;

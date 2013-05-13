@@ -112,7 +112,7 @@ end
           
          end
         if @credit.pending_user_email
-      
+        CreditMailer.new_credit(@credit).deliver
         end
         if params[:batch]
           format.html { redirect_to :back, notice: 'Credit was successfully created.' }

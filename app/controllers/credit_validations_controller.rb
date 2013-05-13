@@ -130,7 +130,7 @@ class CreditValidationsController < ApplicationController
     @credit_validation.destroy
 
     respond_to do |format|
-      format.html { redirect_to credit_validations_url }
+      format.html { redirect_to root_url }
       format.json { head :no_content }
     end
   end
