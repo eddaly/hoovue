@@ -5,7 +5,7 @@ class FrontController < ApplicationController
        @users_featured = User.where("id > ?", 1).limit(4).order("RANDOM()")
      if current_user
         @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
-        @emails = Email.all
+        @emails = Email.where(:user_id => current_user.id)
         @emails.each do |email|
           @unclamied_email_credits = Credit.where(:pending_user_email => email.email)
             end

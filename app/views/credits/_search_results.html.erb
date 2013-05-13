@@ -49,16 +49,16 @@
   
 	  <% if p.genre == "Game" %>
 	   <div class="desc">
-	<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+	<p>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
 	   <%= f.text_field :issue %>
 	 </div>
 	 <% end %>
  
 	  <% if p.genre == "Comic" %>
 	   <div class="desc">
-<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
+<p>Please include details of the range of issues or other information for which your credit relates.</p>
 	   <%= f.text_field :issue %>
-<p class="small"><p class="small">Please also include a date range where you worked on this Comic.</p></p>	   
+<p>Please also include a date range where you worked on this Comic.</p>  
     <%= f.date_select :startdate, :discard_month => true, :start_year => 1980 %> - 
 	 <%= f.date_select :enddate, :discard_month => true, :start_year => 1980 %>  
 	 </div>
@@ -110,7 +110,7 @@
 		<%= form_tag new_product_path, :method => 'get' do%>
 		  <p>
  <%= select_tag :name, options_from_collection_for_select(ProductGenre.all, :id, :name, params[:product_category]), :class => "select_list" %>
- <%= submit_tag "Add new work", :class => "blue-link-right" %>
+ <%= submit_tag "Add new work", :class => "search-button" %>
 </p>
 		<% end %>
 	

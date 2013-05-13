@@ -1,4 +1,12 @@
 <div class="container_12">
+	
+
+	<script type="text/javascript">
+	$(function() {
+	$('input#product_url').tooltip();
+	$('input#product_title').tooltip();
+	});
+	</script>
 
 <h1>New <%= @category.name %></h1>
 <div class="white-box">
@@ -30,7 +38,7 @@ If your work relates to a specific range of issues please include this informati
 	  <% if params[:name] == "1" %>
 	 <div class="help-box">
 		 <h4>Help</h4>
-		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)</div>
+		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course).</div>
 	  
 		 <div class="help-box">
 			 <h4>Help</h4>
@@ -38,23 +46,23 @@ If your work relates to a specific range of issues please include this informati
  <% end %>
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :title => "The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)" %>
   </div>
 
 <%= f.hidden_field :product_genre_id, :value => params[:name] %>	
  
  
 	<div class="field">
-		<%= f.label :status %>
-		
-	 <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
-	 </div>
+	<%= f.label :status %>
+	<%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
+	 </div><br />
 	 
 	 <% if params[:name] == "1" %>
      <div class="field">
        <%= f.label :year_the_game_was_first_released %>
 	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
      </div>
+	 <br />
      <div class="field">
        <%= f.label :studio %>
 	   <%= f.text_field :studio %>
@@ -104,7 +112,7 @@ If your work relates to a specific range of issues please include this informati
   </div>
   <div class="field">
     <%= f.label :url %>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course)." %>
   </div>
 
   
@@ -131,14 +139,14 @@ If your work relates to a specific range of issues please include this informati
   
   <% if params[:name] == "1" %>
    <div class="desc">
-<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+<p>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
    <%= f.text_field :issue %>
  </div>
  <% end %>
  
 	  <% if params[:name] == "3" %>
 	   <div class="desc">
-<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
+<p>Please include details of the range of issues or other information for which your credit relates.</p>
 	   <%= f.text_field :issue %>
 	 </div>
 	 <% end %>

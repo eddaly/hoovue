@@ -9,12 +9,12 @@
 	</div>
 
 		<div class="grid_6 push_1 search omega">
-		<%= form_tag search_path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
-		 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+			<%= form_tag search_credits_path, :method => 'get' do %>
 
-
-<% end %>
+			  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
+			     <%= submit_tag "Search", :name => nil, :class => "search-button" %>
+			  <%end%>
+		
 		</div>
 </div>
 
