@@ -1,5 +1,5 @@
 class CreditMailer < ActionMailer::Base
-   default from: "no-reply@hoovue.com"
+   default from: "no-reply@whoactually.com"
 
 
   def new_credit(credit)

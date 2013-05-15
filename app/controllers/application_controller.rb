@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
         end
     
         def authorize_beta
-          redirect_to new_betasession_path, notice: "hoovue.com is under development please log in." if beta_user.nil?
+          redirect_to new_betasession_path, notice: "whoactually.com is under development please log in." if beta_user.nil?
         end
    
     def save_credit_params

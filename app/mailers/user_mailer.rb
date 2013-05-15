@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "no-reply@hoovue.com"
+  default from: "no-reply@whoactually.com"
 
 
   def signup_confirmation(user)
