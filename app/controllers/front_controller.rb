@@ -3,6 +3,8 @@ class FrontController < ApplicationController
     @credits = Credit.limit(10).order("created_at DESC")
       @products = Product.search(params[:search])
        @users_featured = User.where("id > ?", 1).limit(4).order("RANDOM()")
+         @most_user_credits = User.limit(4).order("credits_count DESC")
+            @most_product_credits = Product.limit(4).order("credits_count DESC")
      if current_user
         @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
         @emails = Email.where(:user_id => current_user.id)

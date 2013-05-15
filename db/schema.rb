@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "user_id"
     t.string    "image"
     t.text      "description"
-    t.timestamp "created_at",       :null => false
-    t.timestamp "updated_at",       :null => false
+    t.timestamp "created_at",                      :null => false
+    t.timestamp "updated_at",                      :null => false
     t.text      "properties"
     t.integer   "product_genre_id"
     t.string    "status"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "studio"
     t.timestamp "startdate"
     t.timestamp "enddate"
+    t.integer   "credits_count",    :default => 0
   end
 
   create_table "rails_admin_histories", :force => true do |t|
