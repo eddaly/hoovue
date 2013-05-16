@@ -3,15 +3,15 @@
 <div class="grid_8 alpha">
  
 <h1><%= @product.title %> <% if @product.date %><%= @product.date.strftime("%Y") %><% end %> <% if current_user %><span style="font-size:15px"><% if current_user.id == @product.user_id %><%= link_to "(edit)", edit_product_path(@product) %> <% end %><% end %></span> </h1>
-
+<% if @product.image.blank? %>
+	<%= image_tag 'default-small.png'%>
+<%else%>
+	<%= image_tag @product.image.small %>
+<%end%>
 </div>
 
 <div class="grid_4 push_1 omega">
-	<% if @product.image.blank? %>
-		<%= image_tag 'default-small.png'%>
-	<%else%>
-		<%= image_tag @product.image.small %>
-	<%end%>
+	
 </div>
 
 	

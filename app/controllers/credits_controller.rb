@@ -119,10 +119,10 @@ end
         end 
         
         if params[:facebook]
-          format.html { redirect_to ("https://www.facebook.com/dialog/send?app_id=561827047168768&
-name=hoovue.com%20Credit%20&
-link=http://staging.hoovue.com/?pending_token=#{@credit.pending_token}&
-redirect_uri=http://staging.hoovue.com")}
+          format.html { redirect_to ("https://www.facebook.com/dialog/send?app_id=125707934296166&
+name=hoovue.com%20Credit%20-%20Get%20the%20recognition%20you%20deserve&description=The%20platform%20for%20all%20Creators%20to%20own%20and%20manage%20their%20Credits%20and%20get%20the%20public%20recognition%20they%20deserve&
+link=http://alpha.whoactually.com/credits/#{@credit.id}?pending_token=#{@credit.pending_token}&
+redirect_uri=http://alpha.whoactually.com")}
         end 
          
         format.html { redirect_to product_path(@credit.product_id), notice: 'Credit was successfully created.' }

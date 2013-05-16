@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
     before_filter :validation_count 
       before_filter :update_credit_params
         before_filter :update_facebook_params
-          before_filter :authorize_beta
             before_filter :save_credit_params
               before_filter :save_facebook_params
        
