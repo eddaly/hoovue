@@ -1,6 +1,6 @@
 <div class="container_12">
 
-<h1>Update Work</h1>
+<h1>New <%= @category.name %></h1>
 <div class="white-box">
 
 
@@ -19,7 +19,7 @@
 
 	 <% if params[:name] == "3" %>
   <div class="help-box">The name of the comic is the title of a series.
-	  The image used may be of a specific issue, not that which all credits relate to (a range of images and other issue information will be included in due course).
+	  The image used may be of a specific issue, not that which all credits relate too (a range of images and other issue information will be included in due course).
 
 If your work relates to a specific range of issues please include this information within the credit.</div>
     
@@ -32,7 +32,7 @@ If your work relates to a specific range of issues please include this informati
 	  
 		 <div class="help-box">
 			 <h4>Help</h4>
-	  The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).</div>
+	  The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course).</div>
  <% end %>
   <div class="field">
     <%= f.label :name %><br />
@@ -119,20 +119,20 @@ If your work relates to a specific range of issues please include this informati
   
   <% if params[:name] == "1" %>
    <div class="desc">
-<p>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+<p class="small">Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
    <%= f.text_field :issue %>
  </div>
  <% end %>
  
 	  <% if params[:name] == "3" %>
 	   <div class="desc">
-<p>Please include details of the range of issues or other information for which your credit relates.</p>
+<p class="small">Please include details of the range of issues or other information for which your credit relates.</p>
 	   <%= f.text_field :issue %>
 	 </div>
 	 <% end %>
   
 <div class="submit">
- <%= f.submit 'Update Work >'%>
+ <%= f.submit 'Create Work >'%>
 </div>
  
   </div>

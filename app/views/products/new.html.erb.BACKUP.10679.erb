@@ -1,6 +1,14 @@
 <div class="container_12">
+	
 
-<h1>Update Work</h1>
+	<script type="text/javascript">
+	$(function() {
+	$('input#product_url').tooltip();
+	$('input#product_title').tooltip();
+	});
+	</script>
+
+<h1>New <%= @category.name %></h1>
 <div class="white-box">
 
 
@@ -19,40 +27,38 @@
 
 	 <% if params[:name] == "3" %>
   <div class="help-box">The name of the comic is the title of a series.
-	  The image used may be of a specific issue, not that which all credits relate to (a range of images and other issue information will be included in due course).
-
-If your work relates to a specific range of issues please include this information within the credit.</div>
+	  The image used may be of a specific issue, not that which all credits relate to (a range of images and other issue information will be included in due course). If your work relates to a specific range of issues please include this information within the credit.</div>
     
 	 <% end %>
 	 
 	  <% if params[:name] == "1" %>
 	 <div class="help-box">
 		 <h4>Help</h4>
-		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)</div>
+		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course).</div>
 	  
 		 <div class="help-box">
 			 <h4>Help</h4>
 	  The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).</div>
  <% end %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :title %>
+    <%= f.label :name %>
+    <%= f.text_field :title, :title => "The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)" %>
   </div>
 
 <%= f.hidden_field :product_genre_id, :value => params[:name] %>	
  
  
 	<div class="field">
-		<%= f.label :status %><br />
-		
-	 <%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
-	 </div>
+	<%= f.label :status %>
+	<%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
+	 </div><br />
 	 
 	 <% if params[:name] == "1" %>
      <div class="field">
        <%= f.label :year_the_game_was_first_released %>
 	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
      </div>
+	 <br />
      <div class="field">
        <%= f.label :studio %>
 	   <%= f.text_field :studio %>
@@ -67,6 +73,16 @@ If your work relates to a specific range of issues please include this informati
      </div>
 	 <% end %>
 
+	 <% if params[:name] == "3" %>
+     <div class="field">
+       <%= f.label :start_year %>
+	   <%= f.date_select :startdate, :discard_month => true, :start_year => 1900 %>
+     </div>
+     <div class="field">
+       <%= f.label :end_year %>
+	   <%= f.date_select :enddate, :discard_month => true, :start_year => 1900 %>
+     </div>
+	 <% end %>
 	 
 	 <% if params[:name] == "4" %>
      <div class="field">
@@ -91,8 +107,8 @@ If your work relates to a specific range of issues please include this informati
     <%= f.file_field :image %>
   </div>
   <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
+    <%= f.label :url %>
+    <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course)." %>
   </div>
 
   
@@ -132,7 +148,7 @@ If your work relates to a specific range of issues please include this informati
 	 <% end %>
   
 <div class="submit">
- <%= f.submit 'Update Work >'%>
+ <%= f.submit 'Create Work >'%>
 </div>
  
   </div>

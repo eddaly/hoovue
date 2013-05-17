@@ -26,12 +26,8 @@
   <% end %>
 
 	 <% if params[:name] == "3" %>
-  <div class="help-box">
-	   <h4>Help</h4>
-	  The name of the comic is the title of a series.
-	  The image used may be of a specific issue, not that which all credits relate too (a range of images and other issue information will be included in due course).
-
-If your work relates to a specific range of issues please include this information within the credit.</div>
+  <div class="help-box">The name of the comic is the title of a series.
+	  The image used may be of a specific issue, not that which all credits relate to (a range of images and other issue information will be included in due course). If your work relates to a specific range of issues please include this information within the credit.</div>
     
 	 <% end %>
 	 
@@ -42,7 +38,7 @@ If your work relates to a specific range of issues please include this informati
 	  
 		 <div class="help-box">
 			 <h4>Help</h4>
-	  The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course).</div>
+	  The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).</div>
  <% end %>
   <div class="field">
     <%= f.label :name %>
@@ -112,7 +108,7 @@ If your work relates to a specific range of issues please include this informati
   </div>
   <div class="field">
     <%= f.label :url %>
-    <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate too (a range of images and other version information will be included in due course)." %>
+    <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course)." %>
   </div>
 
   
