@@ -113,15 +113,4 @@
 	</div>
 
 
-<div class="container_12 activity-feed">
-	<h2>New Credits</h2>
-		<ul>
-			<% @credits.each do |c| %>
-			<% if c.user %>
-			<li class="<%= cycle('even', 'odd') -%>"><img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square" style="margin:5px;"> <%= link_to c.user.name, user_path(c.user) %> -   <%= link_to c.product.title, product_path(c.product)%>  <span class="right">Credit Added</span></li>
-			<%else%>
-			<%end%>
-			<%end%>	
-		</ul>
-		
-</div>
+

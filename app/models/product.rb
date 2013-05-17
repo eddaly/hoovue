@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   attr_accessible :description, :genre, :credits_count, :image, :studio, :title, :year, :status, :user_id, :credits_attributes, :properties, :product_genre_id, :role, :role_description, :fact, :issue, :url, :remove_image, :image_cache
     attr_accessor :role, :role_description, :fact, :issue
   belongs_to :user
-    has_many :credits
+    has_many :credits, :dependent => :destroy
       belongs_to :product_genre
         serialize :properties, Hash
          accepts_nested_attributes_for :credits, :allow_destroy => true
