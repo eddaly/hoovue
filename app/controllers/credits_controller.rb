@@ -120,13 +120,7 @@ end
         
         if params[:facebook]
           format.html { redirect_to ("https://www.facebook.com/dialog/send?app_id=595973353753752&
-name=whoactually.com%20credit%20-%20Get%20the%20recognition%20you%20deserve&description=#{current_user.name} is managing their online creative legacy. As a co-creator, #{ current_user.name } would like you to validate their Credit on #{ @credit.product.title }. 
-whoactually.com is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. 
-#{ current_user.name } claims the following Credit on #{ @credit.product.title }. #{ current_user.name } also recorded that you were #{ @credit.role }  on #{ @credit.product.title }.
-To validate this Credit and to claim your own Credit follow this link.
-
-&
-link=http://alpha.whoactually.com/credits/#{@credit.id}?pending_token=#{@credit.pending_token}&
+name=whoactually.com%20credit%20-%20Get%20the%20recognition%20you%20deserve&description=As%20a%20co-creator%20on%20#{@credit.product.title},%20#{current_user.name}%20would%20like%20you%20to%20validate%20their%20credit.%20#{current_user.name}%20also%20recorded%20that%20you%20were%20#{@credit.role}.%20To%20validate%20this%20credit%20and%20claim%20your%20own%20follow%20this%20link.&link=http://alpha.whoactually.com/credits/#{@credit.id}?pending_token=#{@credit.pending_token}&
 redirect_uri=http://alpha.whoactually.com")}
         end 
          
