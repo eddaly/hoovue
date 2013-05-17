@@ -6,13 +6,7 @@ load_and_authorize_resource
   # GET /products.json
   def index
      
-      @products = Product.search(params[:search])
-        @users = User.search(params[:search])
-  respond_to do |format|
-      format .js
-      format.html # index.html.erb
-      format.json {  render json: @products.map(&:id) }
-    end
+    redirect_to root_url
   end
   
 def import

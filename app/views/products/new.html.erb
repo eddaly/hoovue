@@ -42,7 +42,11 @@
  <% end %>
   <div class="field">
     <%= f.label :name %>
+	 <% if params[:name] == "1" %>
     <%= f.text_field :title, :title => "The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)" %>
+	<% else %>
+<%= f.text_field :title %>	
+	<% end %>
   </div>
 
 <%= f.hidden_field :product_genre_id, :value => params[:name] %>	
