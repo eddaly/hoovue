@@ -3,7 +3,8 @@
 <div class="white-box">
 
 <h2>Validation Status:</h2>
-<p><%= @credit_validation.status %> on <%= @credit_validation.updated_at.strftime "%A, %B %d, %Y" %></p>
+
+<p><%= @credit_validation.credit.pending_user_email %> is <%= @credit_validation.status %> on <%= @credit_validation.updated_at.strftime "%A, %B %d, %Y" %></p>
 <%= link_to 'Delete pending validation', @credit_validation, :confirm => 'Are you sure?', :method => :delete, :class => "blue-link" %>
 <br /><br /><br /><br />
 

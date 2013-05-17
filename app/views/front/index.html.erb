@@ -9,11 +9,12 @@
 	</div>
 
 		<div class="grid_6 push_1 search omega">
-			<%= form_tag search_credits_path, :method => 'get' do %>
-
+			<%= form_tag search_path, :method => 'get' do %>
 			  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
-			     <%= submit_tag "Search", :name => nil, :class => "search-button" %>
-			  <%end%>
+					 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+
+
+			<% end %>
 		
 		</div>
 </div>
@@ -110,16 +111,17 @@
 	
 <% end %>
 	</div>
-</div>
+
 
 <div class="container_12 activity-feed">
 	<h2>New Credits</h2>
 		<ul>
 			<% @credits.each do |c| %>
 			<% if c.user %>
-			<li class="<%= cycle('even', 'odd') -%>"><span class="timesince"><%= time_ago_in_words(c.created_at) %></span><img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square" style="margin:5px;"> <%= link_to c.user.name, user_path(c.user) %> -   <%= link_to c.product.title, product_path(c.product)%>  <span class="right">Credit Added</span></li>
+			<li class="<%= cycle('even', 'odd') -%>"><img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square" style="margin:5px;"> <%= link_to c.user.name, user_path(c.user) %> -   <%= link_to c.product.title, product_path(c.product)%>  <span class="right">Credit Added</span></li>
 			<%else%>
 			<%end%>
 			<%end%>	
 		</ul>
+		
 </div>
