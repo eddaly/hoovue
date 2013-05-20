@@ -1,9 +1,0 @@
-<h1>Users</h1>
-
-
-
-<% @users.each do |u|%>
-<%= link_to u.name, user_path(u)%>  <%= link_to 'Follow', friendships_path(:friend_id => u.id), :method => :post %>
- <br />
-<%end%>
-
