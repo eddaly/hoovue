@@ -14,7 +14,7 @@ end
 
 def create
   @user = User.new(params[:user])
-  @user.credits_count == "0"
+ 
   if @user.save
     session[:user_id] = @user.id
     UserMailer.signup_confirmation(@user).deliver

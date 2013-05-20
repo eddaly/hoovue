@@ -139,8 +139,6 @@
 	<li class="<%= cycle('even', 'odd') -%>"><% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%>  <%= link_to p.title, product_path(p)%>  <span class="right"><%= link_to "Edit Work", edit_product_path(p), :class => 'blue-link' %> </span> </li>
 	<%end%>	
 </ul> 	
-
-<%= link_to 'New Work', new_product_path, :class => 'blue-link' %>
 	</div>
 </div>
 
