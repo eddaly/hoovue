@@ -13,6 +13,7 @@ RailsAdmin.config do |config|
             end
       field :image
       field :issue
+      field :studio
       field :url, :string
       field :status
    end
