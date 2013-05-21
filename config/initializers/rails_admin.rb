@@ -20,6 +20,7 @@ RailsAdmin.config do |config|
    
    list do
      sort_by :title
+     field :id
      field :title
      field :user
      field :image
@@ -27,6 +28,7 @@ RailsAdmin.config do |config|
      field :product_genre do
              label "Category"
            end
+    field :created_at       
      
    end
   end
@@ -81,7 +83,7 @@ end
   ################  Global configuration  ################
 
   # Set the admin name here (optional second array element will appear in red). For example:
-  config.main_app_name = ['Hoovue', 'Admin']
+  config.main_app_name = ['Whatactually', 'Admin']
   # or for a more dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
