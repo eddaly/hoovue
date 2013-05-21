@@ -16,6 +16,8 @@ RailsAdmin.config do |config|
       field :studio
       field :url, :string
       field :status
+      field :startdate
+      field :enddate
    end
    
    list do
@@ -46,6 +48,7 @@ RailsAdmin.config do |config|
       field :validator_id
       field :issue
       field :pending_user_email
+    
    end
    
    list do

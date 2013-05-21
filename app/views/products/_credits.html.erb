@@ -44,7 +44,12 @@ $(document).ready(function(){
 							<%= @product.issue %>: <%= c.issue %> 
 							
 							 <% if @product.product_genre.name == "Comic" %>
-							<%= c.startdate.strftime("%Y") %> - <%= c.enddate.strftime("%Y") %>
+							 <% if c.startdate %>
+							<%= c.startdate.strftime("%Y") %>
+							<% end %>
+							 <% if c.enddate %>
+							 - <%= c.enddate.strftime("%Y") %>
+							<% end %>
 							<% end %>		
 								<% end %>
 
@@ -53,7 +58,7 @@ $(document).ready(function(){
 						</span>
 			
 			</h2>	
-			
+			<br /><br />
 				
 		<%= render '/credits/ticks', :c => c %>
 		<br /><br /><br /><br />
