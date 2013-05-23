@@ -1,5 +1,5 @@
 		<div class="more-detail">		
-		<h3>Role description: <% if current_user %>			
+		<h3>What I actually did: <% if current_user %>			
 <% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
 			<h3>Interesting Fact: <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
