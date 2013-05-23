@@ -61,6 +61,28 @@ RailsAdmin.config do |config|
   end
   
   
+  config.model 'Credit_validations' do
+    edit do
+      field :id
+      field :credit_id
+      field :user_id
+      field :user_validation
+      field :token
+      field :status
+      field :validator_id
+    
+   end
+   
+   list do
+     field :id
+     field :credit_id
+     field :user_id
+     field :status
+     field :validator_id
+   end
+  end
+  
+  
   
   
   require "rails_admin/application_controller"

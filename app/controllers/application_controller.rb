@@ -33,6 +33,9 @@ class ApplicationController < ActionController::Base
         @credit = Credit.find_by_pending_token(session[:pending_token])
         @credit.user_id = current_user.id
         @credit.user_name = current_user.name
+        @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
+        @credit_validation.status = "confirmed"
+        @credit_validation.save
         if @credit.save
          @credit_validation = CreditValidation.new(params[:credit_validation])
           @credit_validation.validator_id = @credit.validator_id
