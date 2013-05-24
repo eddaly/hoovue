@@ -104,6 +104,13 @@
      </div>
 	 <% end %>
 	 
+	 <% if params[:name] == "7" %>
+     <div class="field">
+       <%= f.label :year_of_first_broadcast %>
+	
+        <%= f.date_select :year, :discard_month => true, :start_year => 1950 %>
+     </div>
+	 <% end %>
 
   	
    <div class="field">
