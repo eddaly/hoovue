@@ -1,7 +1,7 @@
 		
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
-		<a class="show_hide_validate_partial_<%= c.id %>">
+		<a class="show_hide_validate_partial_<%= c.id.to_i %>">
 		<span class="score">
 			
 				<%= image_tag '/assets/empty.png' %>
