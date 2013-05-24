@@ -1,5 +1,23 @@
+
+
 <% if current_user %>			
 <% if current_user.id == c.user_id %>
+
+<script type="text/javascript">
+ 
+$(document).ready(function(){
+ 
+        $(".slidingDiv_validate_partial_<%= c.id %>").hide();
+        $(".show_hide_validate_partial_<%= c.id %>").show();
+ 
+    $('.show_hide_validate_partial_<%= c.id %>').click(function(){
+    $(".slidingDiv_validate_partial_<%= c.id %>").slideToggle();
+    });
+ 
+});
+ 
+</script>
+
 
 <script type="text/javascript">
  
@@ -15,11 +33,14 @@ $(document).ready(function(){
 });
  
 </script>
-<% if c.credit_validations.count < 3  %>
 
-<a class="show_hide_email_<%= c.id %>"><%= image_tag 'validate-by-email-button.png' %></a>
-	<a class="show_hide_facebook_<%= c.id %>"><%= image_tag 'validate-by-facebook-button.png' %></a>
-		<a class="show_hide_co_<%= c.id %>"><%= image_tag 'validate-by-co-button.png' %></a>
+<div class="slidingDiv_validate_partial_<%= c.id %>">
+<% if c.credit_validations.count < 3  %>
+<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;"><%= image_tag 'validate-by-email-button.png' %></a>
+	<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" ><%= image_tag 'validate-by-facebook-button.png' %></a>
+		<a class="show_hide_co_<%= c.id %>" style="cursor: pointer;" ><%= image_tag 'validate-by-co-button.png' %></a>
+</div>
+
 
 <div class="slidingDiv_email_<%= c.id %>">
 	<div class="credit-validate-container">

@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   create_table "credits", :force => true do |t|
     t.integer   "user_id"
     t.integer   "product_id"
-    t.timestamp "created_at",           :null => false
-    t.timestamp "updated_at",           :null => false
+    t.timestamp "created_at",                              :null => false
+    t.timestamp "updated_at",                              :null => false
     t.string    "role"
     t.text      "fact"
     t.string    "status"
@@ -58,13 +58,14 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "startdate"
     t.timestamp "enddate"
     t.string    "pending_token"
+    t.integer   "credit_validations_count", :default => 0, :null => false
   end
 
   create_table "emails", :force => true do |t|
-    t.string   "email"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "email"
+    t.integer   "user_id"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "friendships", :force => true do |t|
@@ -115,14 +116,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "date"
     t.timestamp "year"
     t.string    "studio"
-<<<<<<< HEAD
     t.timestamp "startdate"
     t.timestamp "enddate"
     t.integer   "credits_count",    :default => 0
-=======
-    t.datetime  "startdate"
-    t.datetime  "enddate"
->>>>>>> e8cdf0d1d01c47728f6b4442603a20a9c52cfedf
   end
 
   create_table "rails_admin_histories", :force => true do |t|

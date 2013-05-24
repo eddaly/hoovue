@@ -80,6 +80,26 @@ ul.ui-autocomplete {
   }
 }
 
+.card-status {
+	.un, .part, .valid {
+	float:right;	
+	font-size:20px;	
+	margin:5px;
+	}
+	
+	.un {
+		color:red;
+	}
+	
+	.part {
+		color:orange;
+	}
+	
+	.valid {
+		color:green;
+	}
+}
+
 .credits-form {
 
    ul {
@@ -97,9 +117,11 @@ ul.ui-autocomplete {
  
     h2 {
    	 border-bottom: 1px solid #f1f1f1;
+	 margin-top:40px;
     }
      .right {
        float:right;
+	  
 	 
      }
 	 
@@ -110,6 +132,7 @@ ul.ui-autocomplete {
 		 height:40px;
 		 margin-left:5px;
 		 text-align: center;
+		 cursor: pointer;
 	 }
 	 
 	 .validator-text {

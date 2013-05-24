@@ -12,6 +12,8 @@ $(document).ready(function(){
 });
  
 </script>
+
+
 	<h2>Credits</h2>
 	<% if current_user %>			
 	
@@ -31,7 +33,43 @@ $(document).ready(function(){
 			<% @credit_views.each do |c| %>
 		
 		<% if c.user %>
-			<li class="<%= cycle('even', 'odd') -%>">
+			<li class="<%= cycle('even', 'odd') -%>"
+			style="
+			<% if c.credit_validations.confirmed.empty? %>
+			border: 1px solid red;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+			border: 1px solid orange;
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				border: 1px solid orange;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+			border: 1px solid green;
+			<% end %>
+			
+			">
+				<div class="card-status">
+					<% if c.credit_validations.confirmed.empty? %>
+						<span class="un">Unsubstantiated</p>
+					<% end %>
+					
+					<% if c.credit_validations.confirmed.count == 1  %>
+						<span class="part">Partly Validated</p>
+					<% end %>	
+					
+					<% if c.credit_validations.confirmed.count == 2  %>
+						<span class="part">Part Validated</p>
+					<% end %>
+					
+					<% if c.credit_validations.confirmed.count == 3  %>
+						<span class="valid">Validated</p>
+					<% end %>
+						
+				</div>
 			<h2 class="border">
 				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
 					<%= link_to c.user.name, user_path(c.user) %> 

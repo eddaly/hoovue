@@ -1,19 +1,20 @@
 		
 	<% if c.credit_validations.empty? %>
 		<% 3.times do %>
+		<a class="show_hide_validate_partial_<%= c.id %>">
 		<span class="score">
 			
 				<%= image_tag '/assets/empty.png' %>
 				
 				
 		</span>
-		
+		</a>
 		<% end %>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
 		<div class="validator-text" style="margin-right:-210px;">
 			<p>
-				Who will actually vouch for me:<br />
+			<span style="color:black;">	Who will actually vouch for me: </span><br />
 				Please add 3 Validators below</p>
 				</div>
 				<% end %> <% end %>
@@ -54,17 +55,19 @@
 	
 		<% end %>
 		<% 2.times do %>
+		<a class="show_hide_validate_partial_<%= c.id %>">
 		<span class="score">
 			
 				<%= image_tag '/assets/empty.png' %>
 			
 				
 		</span>
+		</a>
 		<% end %>
 		<% if current_user %>
 			<% if current_user.id == c.user_id  %>
-		<div class="validator-text" style="margin-right:-210px;">
-			<p>Who will actually vouch for me:<br />
+		<div class="validator-text" style="margin-right:-230px;">
+		<span style="color:black;">	Who will actually vouch for me: </span><br />
 				Please add 2 more Validators below</p>
 				</div>
 				<% end %> <% end %>
@@ -110,16 +113,18 @@
 		
 	<% end %>
 	<% 1.times do %>
+	<a class="show_hide_validate_partial_<%= c.id %>">
 	<span class="score">
 		
 			<%= image_tag '/assets/empty.png' %>
 		
 				
 	</span>
+	</a>
 	<% if current_user %>
 		<% if current_user.id == c.user_id  %>
 	<div class="validator-text" style="margin-right:-210px;">
-		<p>Who will actually vouch for me:<br />
+		<span style="color:black;">	Who will actually vouch for me: </span><br />
 			Please add 1 more Validator below</p>
 			</div>
 			<% end %> <% end %>

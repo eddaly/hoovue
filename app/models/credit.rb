@@ -11,7 +11,8 @@ class Credit < ActiveRecord::Base
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
     scope :nick, where(:count => "0")
-    scope :more, where("count > ?", 0)    
+    scope :cv_confirmed, where(:credit_validations_count => "3")  
+      
         
       def self.import(file)
   CSV.foreach(file.path, headers: true) do |row|

@@ -64,6 +64,8 @@
 			</div>
 
 	</div>
+Number of credits: <%= @user.credits.count %><br />
+Number of confirmed credits: <%= @user.credits.cv_confirmed.count %>
 
 <% for friendship in @user.friendships%>
 	<% friendship.friend.name %>  (<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
@@ -83,7 +85,42 @@
 	<% end %>
 <ul>
 	<% @credits.each do |c| %>
-	<li class="<%= cycle('even', 'odd') -%>">
+	<li class="<%= cycle('even', 'odd') -%>"style="
+			<% if c.credit_validations.confirmed.empty? %>
+			border: 1px solid red;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+			border: 1px solid orange;
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				border: 1px solid orange;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+			border: 1px solid green;
+			<% end %>
+			
+			">
+		<div class="card-status">
+			<% if c.credit_validations.confirmed.empty? %>
+				<span class="un">Unsubstantiated</p>
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+				<span class="part">Partly Validated</p>
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				<span class="part">Part Validated</p>
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+				<span class="valid">Validated</p>
+			<% end %>
+				
+		</div>
 	<h2><% if c.product.image? %>
 			<%= image_tag c.product.image.thumb.to_s %>
 				 <%else%> 
