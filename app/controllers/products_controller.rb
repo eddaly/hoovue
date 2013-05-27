@@ -18,7 +18,7 @@ end
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-     @credit_views = @product.credits.all
+     @credit_views = @product.credits.order("credit_validations_count")
       
         if current_user
         @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)

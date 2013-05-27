@@ -125,12 +125,20 @@ ul.ui-autocomplete {
 	 
      }
 	 
+	 .tick-text {
+	 	float:right;
+		 color:green;
+		 font-size:18px; 
+		 margin-right:5px;
+	 }
+	 
 	 .score {
 		 float:right;
 		 @include grey-box;
 		 padding:10px 15px;
 		 height:40px;
 		 margin-left:5px;
+		 margin-top:20px;
 		 text-align: center;
 		 cursor: pointer;
 	 }
