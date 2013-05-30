@@ -17,8 +17,9 @@
 				
 				<p>
 				
-				<span style="color:green;  font-size:20px;">	Numbers of validated credits: <%= @user.credits.cv_confirmed.count%></span><br /><br />
-				<span style="color:orange; font-size:16px;">	Numbers of credits: <%= @user.credits.count %></span>
+
+				<span style="color:green; font-size:16px;">	Numbers of credits: <%= @user.credits.count %></span><br />
+								<span style="color:red;  font-size:16px;">	Numbers of validated credits: <%= @user.credits.cv_confirmed.count%></span><br />
 				</p>					
 				<p><%= @user.bio %></p>
 		<h3><a href="http://<%= @user.link %>" target=blank ><%= @user.link %></a></h3>
