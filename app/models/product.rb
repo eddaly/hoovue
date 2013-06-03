@@ -20,7 +20,7 @@ end
    
 def self.search(search)
   if search
-     where('lower(title) LIKE lower(?) OR lower(genre) LIKE lower(?)', "%#{search}%","%#{search}%")                        
+     where('lower(title) LIKE lower(?) OR lower(genre) LIKE lower(?) OR lower(studio) LIKE lower(?)', "%#{search}%","%#{search}%","%#{search}%")                        
    end
 end  
 

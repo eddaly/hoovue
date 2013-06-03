@@ -4,7 +4,13 @@
  
 <h1><%= @product.title %> <% if @product.year %><%= @product.year.strftime("%Y") %><% end %> <% if current_user %><span style="font-size:15px"><% if current_user.id == @product.user_id %><%= link_to "(edit)", edit_product_path(@product) %> <% end %><% end %></span> </h1>
 <% if @product.product_genre %><p><%= @product.product_genre.name %> <%end%></p>
-<p><%= @product.studio %> </p>
+<p><%= @product.studio %> <%= form_tag search_path, :method => 'get' do %>
+  
+ 
+     <input name="search" type="hidden" value="<%= @product.studio %>" />
+	 <%= submit_tag "Find other games by this developer >", :name => nil, :class => "search-button" %>
+  <%end%> </p>
+
 <p><%= @product.status %> </p>
 <p><a href="http://<%= @product.url %>" target=blank><%= @product.url %></a></p>
 <div style="margin: 20px 0">

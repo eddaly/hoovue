@@ -34,3 +34,20 @@
 		<%end%>
 </div>
 
+<div class="activity-feed">
+	<% if @studios %>
+	<h2>Works:</h2>
+<ul>
+<% @studios.each do |p| %>
+<%= link_to p do %>
+<li class="<%= cycle('even', 'odd') -%>">
+	 <% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%end%>  <%= link_to p.title, product_path(p)%> 
+
+</li>
+<%end%>
+	<%end%>	
+	<%else%>
+	
+	<%end%>
+</ul>
+</div>

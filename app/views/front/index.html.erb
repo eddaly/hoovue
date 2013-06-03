@@ -96,7 +96,21 @@
 	<% end %>
 	</ul>
 	</div>
-	
+
+	<div class="container_12 credits-form">
+		<% if @related_products.empty?%>
+		<% else %>
+		<h1>Did you work on?</h1>
+			<div class= "activity-feed">
+				<ul>
+	<% @related_products.each do |rc| %>
+			<li class="<%= cycle('even', 'odd') -%>"><h3><%= rc.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "View Work", product_path(rc), :class => "blue-link" %> </span> </li>
+		<%end%>	
+		<% end %>
+		</ul>
+		</div>	
+
+
 	
 	<% if @unclamied_email_credits  %>
 	<h1>Unclaimed Credits matching other email addresses</h1>

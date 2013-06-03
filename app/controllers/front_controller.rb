@@ -11,6 +11,17 @@ class FrontController < ApplicationController
         @emails.each do |email|
           @unclamied_email_credits = Credit.where(:pending_user_email => email.email)
             end
+            
+            @related_credits = Credit.where(:user_id => current_user.id)
+              @related_credits.each do |rc|
+              @studio = rc.product.studio
+                @products = Product.where(:studio => @studio)
+                @products.each do |p|
+                  @related_products = Product.where(:studio => @studio)
+                end
+            end  
+                  
+                
           @unclaimed = Credit.where(:pending_user_email => current_user.email).where(:user_id => nil)
             @flagged_credits = CreditValidation.where(:user_id => current_user.id).where(:status => "pending").where(:credit_id => true)  
               @empty_credits = Credit.where(:user_id => current_user.id).limit(3)
