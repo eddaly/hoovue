@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     user.email = auth.info.email
     user.profile_picture = auth.info.image
     user.oauth_token = auth.credentials.token
-    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+    user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
     user.role = "user"
     user.credits_count = "0"
    if user.id 
