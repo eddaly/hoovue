@@ -93,7 +93,7 @@ end
       redirect_to :back, notice: 'You cannot validate yourself.'
     else
       if params[:facebook]
-         @credit.validator_id = SecureRandom.random_number(100000)
+         @credit.validator_id = current_user.id
       else
      
      end
