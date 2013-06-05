@@ -10,7 +10,7 @@ Hoo::Application.configure do
   
   ENV['rel'] = "12345"
   
-
+  ENV['DEFAULT_URL'] = "localhost:3000"
   
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
