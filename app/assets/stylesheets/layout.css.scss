@@ -164,6 +164,23 @@ textarea {
             background-image: url('/assets/application/login_with_facebook.png');
             margin-top: 10px;
                                   }
+					              a#login_with_linkedin {
+					              float:left;
+					              width:163px;
+					              height:29px;
+					              background-image: url('/assets/application/login_with_linkedin.png');
+					              margin-top: 10px;
+								  margin-left:15px;
+					                                    }
+														
+											            a#login_with_twitter {
+											            float:left;
+											            width:163px;
+											            height:29px;
+											            background-image: url('/assets/application/login_with_twitter.png');
+											            margin-top: 10px;
+														  margin-left:15px;
+											                                  }					  
              
         }    
       
@@ -187,17 +204,17 @@ textarea {
   
   .main-navi{
 	  float:left;
-  	  width:350px;
+  	  width:310px;
 	  height:20px;
-	  margin: 5px 10px 0 10px;
+	  margin: 12px 10px 0 -25px;
     
     ul {
       list-style-type:none;
-      margin-left: 10px;
+      margin-left: 5px;
      
       li {
         float:left;
-        padding:10px;
+        padding:5px;
         margin-right:4px;
         height:40px;
         a {

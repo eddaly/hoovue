@@ -18,8 +18,8 @@
 				</div>
 				<div class="container_12 main-navi">
 					<ul>
-					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
 					 <% if current_user %>
+					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
 					<li><a href="/users/<%= current_user.id%>">My Profile</a></li>
 					<li><%= image_tag "/assets/plus-icon.png"%><a href="/credits/search">Add a Credit</a></li>
 		
@@ -42,7 +42,9 @@
 
   <% else %>
   	<div class="login">
-    <%= link_to "", "/auth/facebook?state='123'", id: "login_with_facebook" %>
+    <%= link_to "", "/auth/facebook", id: "login_with_facebook" %>
+	<%= link_to "", "/auth/linkedin", id: "login_with_linkedin" %>
+	<%= link_to "", "/auth/twitter", id: "login_with_twitter" %>
  		</div>
   <% end %>
   

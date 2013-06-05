@@ -31,11 +31,13 @@ end
 #Custom Gems
 gem 'cancan'
 gem 'bootstrap-sass'
-gem 'jquery-rails'
+gem 'rails-asset-jqueryui'
 gem 'carrierwave'
 gem "mini_magick"
 gem "fog", "~> 1.3.1"
 gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
+gem 'omniauth-twitter'
 gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise
 gem 'client_side_validations'
 gem 'awesome_nested_fields'
@@ -53,12 +55,12 @@ gem 'newrelic_rpm'
  gem 'bcrypt-ruby', '~> 3.0.0'
 
 #Testing Gems
-gem "rspec-rails", :group => [:test, :development]
-group :development do
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "guard-rspec"
-end
+# gem "rspec-rails", :group => [:test, :development]
+# group :development do
+#  gem "factory_girl_rails"
+#  gem "capybara"
+#  gem "guard-rspec"
+# end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
