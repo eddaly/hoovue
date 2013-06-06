@@ -48,7 +48,7 @@ $(document).ready(function(){
 		</div>
 	<%= form_for(@credit_validation) do |f| %>
 	<%= f.label "Select co-creator:"%>
-		<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => p.id), :id, :user_name, :prompt => "Please Select" %>
+		<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => p.id).uniq, :id, :user_name, :prompt => "Please Select" %>
 		<%= f.hidden_field :validator_id, :value => current_user.id %>
 		<%= f.hidden_field :status, :value => "confirmed" %>
 	   
