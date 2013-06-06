@@ -81,10 +81,15 @@
 		</ul>
 </div>
 
-<% if @credit_validations.empty? %>
+<% if @credit_validations.nil? %>
 <% else %>
 <h1>Validation Requestions</h1>
 <% end %>
+
+
+<% if @credit_validations.nil? %>
+<% else %>
+
 
 <div class="container_12 credits-form">
 	<ul>
@@ -132,6 +137,8 @@
 	</ul>
 
 </div>
+
+<% end %>
 
 <% if current_user %>
 

@@ -76,7 +76,7 @@ class CreditValidationsController < ApplicationController
      respond_to do |format|
        if @credit_validation.save
          CreditValidation.create(:credit_id => @current_credit, :user_id => current_user.id, :status => "pending", :validator_id => @current_credit_validator  )
-          format.html { redirect_to :back, notice: "Credit Validated."}
+          format.html { redirect_to :back, notice: "Credit Validation Request Sent."}
        else
          format.html { redirect_to :back }
           flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
