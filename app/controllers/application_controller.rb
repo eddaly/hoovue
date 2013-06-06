@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
                   end
                   
                 else
-                  redirect_to root_url, :notice => "You email does not match the credit. Are you signed in with the right account?"
+                  redirect_to root_url, :notice => "Your email does not match the credit. Please add this e-mail address to your account by clicking <a href=/emails/new>here.</a>".html_safe
                     session.delete(:credit_id)     
             end
           end
