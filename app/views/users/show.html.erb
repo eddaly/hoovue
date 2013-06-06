@@ -4,9 +4,19 @@
 
 	<div class="container_12 profile-header">
 		<h1><%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <%= link_to '(manage additional e-mail addresses)', emails_path %> <% end %> <% end %> </span></h1> 
+		
+		
 		<div class="grid_3 alpha">
-<img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+<img src="<%= @user.profile_picture %>" width="200"><br />
+<% if current_user %>
+	 <% if current_user.id == @user.id %>
+	 		<% else %>
+<%= link_to 'Follow +', friendships_path(:friend_id => @user.id), :method => :post %>
+
+	<% end %>
+			<% end %>
 			</div>
+		  
 			<div class=grid_5>
 				<h3>About <% if current_user && current_user.id == @user.id %> 
 					me:
@@ -72,11 +82,14 @@
 	</div>
 
 
-<% for friendship in @user.friendships%>
-	<% friendship.friend.name %>  (<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
+
+
+<% if current_user && current_user.id == @user.id %> 
+<h2>Following</h2>
+<% for friendship in current_user.friendships%>
+	<%= friendship.friend.name %>  (<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
 <%end%>
-
-
+<% end %>
 
 
 <div class="container_12 credits-form">

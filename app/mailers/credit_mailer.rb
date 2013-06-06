@@ -4,6 +4,6 @@ class CreditMailer < ActionMailer::Base
 
   def new_credit(credit)
     @credit = credit
-    mail to: credit.pending_user_email, subject: "Hoovue Credit Confirmation Needed"
+    mail to: credit.pending_user_email, subject: "Whoactually Credit Confirmation Needed"
   end
 end

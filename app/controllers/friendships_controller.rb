@@ -42,7 +42,9 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
   if @friendship.save
-    flash[:notice] = "Following."
+    @user = User.find_by_id(@friendship.friend_id)
+     FriendshipMailer.new_friendship(@user).deliver
+    flash[:notice] = "Following #{@user.name}."
     redirect_to :back
   else
     flash[:error] = "Unable to follow."
