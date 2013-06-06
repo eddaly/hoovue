@@ -81,7 +81,57 @@
 		</ul>
 </div>
 
+<% if @credit_validations.empty? %>
+<% else %>
+<h1>Validation Requestions</h1>
+<% end %>
 
+<div class="container_12 credits-form">
+	<ul>
+	<% @credit_validations.each do |cv| %>
+		<% c = Credit.find_by_id(cv.credit_id)%>
+		<li class="<%= cycle('even', 'odd') -%>">
+		<h2><% if c.product.image? %>
+				<%= image_tag c.product.image.thumb.to_s %>
+					 <%else%> 
+				<%= image_tag '/assets/default-credit-small.jpg'%>
+		 <%end%>  
+
+  <%= c.user.name %> was a <%= c.role%>  on   <%= link_to c.product.title, product_path(c.product)%></h2>
+   		
+
+   		<% if cv.status == "confirmed" %>
+   		<span class="score">
+   		<a href="/users/<%= cv.validator_id %>"><img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=square" style="margin-top:-5px;"></a>
+   		</span>
+   		<% end %>
+   			<% if cv.status == "pending" %>
+   		<span class="score">
+   		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
+
+   				<% if current_user %>
+   					<% if current_user.id == cv.validator_id %>
+
+   					<%= link_to "Validate", validate_credit_validation_path(cv), :method=>:put  %>
+   				<% end %>
+   			<% end %>
+   		<% end %>
+   		</span>
+   	
+   <br /><br /><br /><br />
+		<div class="more-detail">		
+		<h3>Role description: <% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
+			<h3>Interesting Fact: <% if current_user %>			
+<% if current_user.id == c.user_id %>(click below to edit) <% end %> <% end %>
+</h3><p><%= best_in_place c, :fact, :type => :textarea, :nil => "Click me to add content!", :ok_button => 'Save', :cancel_button => 'Cancel' %></p>
+		</div>
+  
+		</li>
+	<% end %>
+	</ul>
+
+</div>
 
 <% if current_user %>
 
@@ -98,18 +148,7 @@
 	</ul>
 	</div>
 
-	<div class="container_12 credits-form">
-		<% if @related_products.nil? %>
-		<% else %>
-		<h1>Did you work on?</h1>
-			<div class= "activity-feed">
-				<ul>
-	<% @related_products.each do |rc| %>
-			<li class="<%= cycle('even', 'odd') -%>"><h3><%= rc.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "View Work", product_path(rc), :class => "blue-link" %> </span> </li>
-		<%end%>	
-		<% end %>
-		</ul>
-		</div>	
+	
 
 
 	

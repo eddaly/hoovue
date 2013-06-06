@@ -1,5 +1,5 @@
 class FriendshipMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "from@whoactually.com"
   
   def new_friendship(user)
     @user = user
