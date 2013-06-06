@@ -25,6 +25,7 @@ class CreditValidationsController < ApplicationController
      @credit_validation = CreditValidation.find(params[:id])
      @credit_validation.status = "confirmed"
           if @credit_validation.update_attributes(params[:credit_validation])
+           
           flash[:notice] = "Thank you for validating"
           redirect_to :back
         end
