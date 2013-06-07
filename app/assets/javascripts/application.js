@@ -10,15 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require_tree .
+
 //= require jquery
-//= require jquery.ui.all
 //= require jquery_ujs
+//= require select2
 //= require rails.validations
- //= require select2
-//= require rails.validations
- //= require jquery.nested-fields
- //= require best_in_place
- //= require_tree .
+//= require jquery.nested-fields
+//= require best_in_place
 
 
     $(document).ready(function() { $("select").select2({ width: 'element' }); });
