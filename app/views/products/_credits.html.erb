@@ -54,19 +54,19 @@ $(document).ready(function(){
 			">
 				<div class="card-status">
 					<% if c.credit_validations.confirmed.empty? %>
-						<span class="un">Unsubstantiated</p>
+						<span class="un">Unverified</p>
 					<% end %>
 					
 					<% if c.credit_validations.confirmed.count == 1  %>
-						<span class="part">Partly Validated</p>
+						<span class="part">Part Verified</p>
 					<% end %>	
 					
 					<% if c.credit_validations.confirmed.count == 2  %>
-						<span class="part">Part Validated</p>
+						<span class="part">Part Verified</p>
 					<% end %>
 					
 					<% if c.credit_validations.confirmed.count == 3  %>
-						<span class="valid">Validated</p>
+						<span class="valid">Verified</p>
 					<% end %>
 						
 				</div>

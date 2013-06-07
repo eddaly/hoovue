@@ -41,7 +41,7 @@ $(document).ready(function(){
 	
 <div class="credit-validate-container">
 <div style="float:right;"> <a class="show_hide_validate_partial_<%= c.id %>">(close X)</a></div>
-	<h2>Validate with credited co-creator</h2>
+	<h2>Someone who already has a credit to verify yours</h2>
     <div class="help-box" stlye="margin-top:-20px">
 		 <h4>Help</h4>
 		To validate your credit ask someone else who had a role on <%= p.title %> to vouch for you
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		<%= f.hidden_field :current_credit_id, :value => c.id %>
 	<% end %>
 </div>	
-<h2 style="width:100%;"> Invite someone to validate you from:</h2>
+<h2 style="float:left; width:100%;">Or Invite someone to validate you from:</h2>
 <a class="show_hide_email_<%= c.id %>" style="cursor: pointer;"><%= image_tag 'validate-by-email-button.png' %></a>
 	<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" ><%= image_tag 'validate-by-facebook-button.png' %></a>
 		
@@ -94,6 +94,8 @@ $(document).ready(function(){
 			
 			<%= f.hidden_field :current_credit_id, :value => c.id %>
 		    
+			<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
+			
 	 			<%= f.submit 'Validate Your Credit', :id => 'blue-link' %>
 				
 	<% end %> 

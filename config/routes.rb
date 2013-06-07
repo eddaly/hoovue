@@ -76,6 +76,7 @@ match "search", to: 'search#index', :as => 'search'
 #Temp 
 get "holding/index"
 
+match "message_preview", to: 'credits#validate-message', :as => 'message_preview'
 #Front
 
 match "legal", to: 'front#legal', :as => 'legal'

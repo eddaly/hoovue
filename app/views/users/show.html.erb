@@ -25,12 +25,20 @@
 					<% end %>
 				</h3>
 				
-				<p>
+			<p>
+				<span style="color:green; font-size:16px;">	
+					Numbers of credits: <%= @user.credits.count %>
+				</span><br />
+				<span style="color:orange; font-size:16px;">	
+					Numbers of part verified credits: <%= @user.credits.cv_part.count%>
+				</span><br />
+				<span style="color:red;  font-size:16px;">
+					Numbers of verified credits: <%= @user.credits.cv_confirmed.count%>
+				</span><br />
+			</p>					
 				
-
-				<span style="color:green; font-size:16px;">	Numbers of credits: <%= @user.credits.count %></span><br />
-								<span style="color:red;  font-size:16px;">	Numbers of validated credits: <%= @user.credits.cv_confirmed.count%></span><br />
-				</p>					
+				
+				
 				<p><%= @user.bio %></p>
 		<h3><a href="http://<%= @user.link %>" target=blank ><%= @user.link %></a></h3>
 			</div>
@@ -123,19 +131,19 @@
 			">
 		<div class="card-status">
 			<% if c.credit_validations.confirmed.empty? %>
-				<span class="un">Unsubstantiated</p>
+				<span class="un">Unverified</p>
 			<% end %>
 			
 			<% if c.credit_validations.confirmed.count == 1  %>
-				<span class="part">Partly Validated</p>
+				<span class="part">Part Verified</p>
 			<% end %>	
 			
 			<% if c.credit_validations.confirmed.count == 2  %>
-				<span class="part">Part Validated</p>
+				<span class="part">Part Verified</p>
 			<% end %>
 			
 			<% if c.credit_validations.confirmed.count == 3  %>
-				<span class="valid">Validated</p>
+				<span class="valid">Verified</p>
 			<% end %>
 				
 		</div>
