@@ -243,7 +243,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   best_in_place
   better_errors
-  bootstrap-sass
   cancan
   carrierwave
   client_side_validations
