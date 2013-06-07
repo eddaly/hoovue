@@ -11,10 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.all
-//= require jquery_ujs
-//= require rails.validations
 //= require select2
+//= require rails.validations
 //= require jquery.nested-fields
 //= require best_in_place
 //= require_tree .
