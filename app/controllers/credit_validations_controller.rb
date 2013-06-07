@@ -73,19 +73,15 @@ class CreditValidationsController < ApplicationController
      @current_credit_validator = @credit.user_id
      @credit_validation.credit_id = @credit.id
      @credit_validation.user_id = @credit.user_id
-     respond_to do |format|
-       if @credit_validation.save
-         CreditValidation.create(:credit_id => @current_credit, :user_id => current_user.id, :status => "pending", :validator_id => @current_credit_validator  )
-          format.html { redirect_to :back, notice: "Credit Validation Request Sent."}
+     @credit_validationn = CreditValidation.new(params[:credit_validation])
+     @credit_validationn.credit_id = @current_credit
+     @credit_validationn.status = "pending"
+     @credit_validationn.validator_id = @current_credit_validator
+     if @credit_validationn.save
+      redirect_to :back, notice: "Credit Validation Updated"
        else
-         format.html { redirect_to :back }
-          flash[:error] =  @credit_validation.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
-       
-       
-        
-         format.json { render json: @credit_validation.errors, status: :unprocessable_entity }
+       redirect_to :back, notice: "Cannot be added." 
        end
-     end
    else
     @credit = Credit.find(params[:credit_id])
       @credit_validation = @credit.credit_validations.build(:credit_id => @credit.id)

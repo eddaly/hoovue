@@ -4,8 +4,8 @@ class CreditValidation < ActiveRecord::Base
     belongs_to :credit, :counter_cache => true
        scope :confirmed, where(:status => "confirmed")
  
-       validates :validator_id, :uniqueness => { :scope => :credit_id, :message =>  "This user has already validated you."  }
- 
+     validates_uniqueness_of :credit_id, :scope => :validator_id, :message => "This user has already validated you."
+     
   def generate_token(column)
   begin
     self[column] = SecureRandom.urlsafe_base64
