@@ -73,14 +73,14 @@ class CreditValidationsController < ApplicationController
      @current_credit_validator = @credit.user_id
      @credit_validation.credit_id = @credit.id
      @credit_validation.user_id = @credit.user_id
-     @credit_validationn = CreditValidation.new(params[:credit_validation])
-     @credit_validationn.credit_id = @current_credit
-     @credit_validationn.status = "pending"
-     @credit_validationn.validator_id = @current_credit_validator
-     if @credit_validationn.save
+     @credit_validation_current = CreditValidation.new(params[:credit_validation])
+     @credit_validation_current.credit_id = @current_credit
+     @credit_validation_current.status = "pending"
+     @credit_validation_current.validator_id = @current_credit_validator
+     if @credit_validation_current.save
       redirect_to :back, notice: "Credit Validation Updated"
        else
-       redirect_to :back, notice: "Cannot be added." 
+       redirect_to :back, notice: "Cannot be added. Has this person already validated you?" 
        end
    else
     @credit = Credit.find(params[:credit_id])
