@@ -30,7 +30,6 @@ end
 
 #Custom Gems
 gem 'cancan'
-gem 'bootstrap-sass'
 gem 'rails-asset-jqueryui'
 gem 'carrierwave'
 gem "mini_magick"
