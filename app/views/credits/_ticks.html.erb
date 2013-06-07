@@ -115,14 +115,13 @@
 	<% 1.times do %>
 	<a class="show_hide_validate_partial_<%= c.id %>">
 	<span class="score">
-		
+	<% if current_user %>
 		<% if current_user.id == c.user_id  %>
 			<%= image_tag '/assets/empty.png' %>
-		<% else %>	
-		<%= image_tag '/assets/question.png' %>	
 		<% end %>
-			
-				
+	<% else %>
+		<%= image_tag '/assets/question.png' %>	
+	<% end %>
 	</span>
 	</a>
 	<% if current_user %>

@@ -3,7 +3,7 @@ class FriendshipMailer < ActionMailer::Base
   
   def new_friendship(user)
     @user = user
-    mail to: user.email, subject: "Whoactually - New Follower"
+    mail to: user.email, subject: "whoactually - New Follower"
   end
   
 end
