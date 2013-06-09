@@ -238,9 +238,9 @@ textarea {
   
 a.blue-link, input.blue-link, a.grey-link, a.add_fields, a.remove_fields, input#blue-link, a.remove, a.remove-credit {
     
-  float:left;  
+float:left; 
   @include white-box;
-  margin:15px 5px 15px 0px;
+  margin:15px 5px 5px 0px;
   background: url("/assets/arrow_white_long.png") no-repeat right center;
   font-size: 14px;
   font-weight: 100;

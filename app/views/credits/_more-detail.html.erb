@@ -1,7 +1,53 @@
 		<div class="more-detail">		
-		<h3>What I actually did: <% if current_user %>			
+		<% if c.product.status == "In Development" %>	
+		<h3>What you are actually doing:<% else %>	
+		<h3>What I actually did:<% end %> <% if current_user %>			
 <% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
 			<h3>Interesting Fact: <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 </h3><p><%= c.fact %></p>
+
+<% if c.product.status == "In Development" %>	
+
+
+<h3>Updates:</h3>
+	  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(4) %>
+<% if current_user %>			
+	<% if current_user.id == c.user_id %>	
+			<%= form_for(@post) do |f| %>
+			  <% if @post.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+			      <ul>
+			      <% @post.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+			  <div class="field">
+			    <%= f.label :post_an_update %><br />
+			    <%= f.text_area :body, :rows => "5" %>
+				<%= f.hidden_field :credit_id, :value => c.id %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit "Add update", :class => "blue-link" %>
+			 
+			<% end %>
+	<% end %>	
+		<% end %>
+	<div class="update">
+	<ul>	
+	<% @posts.each do |post| %>
+	<li>
+		<%= post.created_at.strftime "%d-%m-%Y" %><br />
+		<%= post.body %>
+	</li>
+	
+	<% end %>
+	</ul>	
+	</div>
+			<% end %>
+	
 		</div>

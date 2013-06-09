@@ -43,8 +43,10 @@
  
  
 
- <div class="desc">
-What did you actually do?  <%= f.text_field :role_desc %>
+ <div class="desc"><% if @product.status == "In Development" %>	
+		What you are actually doing:<% else %>	
+		What I actually did:<% end %>
+  <%= f.text_field :role_desc %>
  </div>
  
    <div class="fact">

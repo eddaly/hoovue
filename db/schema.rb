@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "user_id"
     t.timestamp "created_at", :null => false
     t.timestamp "updated_at", :null => false
+    t.integer   "credit_id"
+    t.datetime  "date"
   end
 
   create_table "product_fields", :force => true do |t|

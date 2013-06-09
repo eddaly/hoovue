@@ -48,6 +48,7 @@ RailsAdmin.config do |config|
       field :validator_id
       field :issue
       field :pending_user_email
+      field :credit_validations_count
     
    end
    

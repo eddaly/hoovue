@@ -32,6 +32,7 @@ def show
         @credit_validations = CreditValidation.where(:user_id => @user.id)
           @credit_validation = CreditValidation.new
             @credit = Credit.new
+            @post = Post.new
             @followers = Friendship.where(:friend_id => @user.id)
 end
 
