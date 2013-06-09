@@ -11,8 +11,8 @@ class Credit < ActiveRecord::Base
    validates_uniqueness_of :user_id, :scope => [:role, :product_id], :message => "A credit with this email and role has already been taken."
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
-    scope :cv_unverified, where(:confirmed_validations_count => "0")
-    scope :cv_part, where(:confirmed_validations_count => "1 | 2")  
+    scope :cv_unverified, where(:credit_validations_count => "0")
+    scope :cv_part, where(:credit_validations_count => "1 | 2")  
     scope :cv_confirmed, where(:confirmed_validations_count => "3")  
   
       
