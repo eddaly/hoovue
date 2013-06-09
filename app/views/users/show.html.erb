@@ -8,12 +8,12 @@
 		
 		<div class="grid_3 alpha">
 <img src=" <% if @user.picture %>
- <%=  @user.picture.small %>
+ <%=  @user.picture %>
 	<% else %>
 	<% if @user.profile_picture %>
 	  	<%= @user.profile_picture %>	 
 	 <% end %>
-	<% end %>"><br />
+	<% end %>" width=200 ><br />
 <% if current_user %>
 	 <% if current_user.id == @user.id %>
 	 		<% else %>
@@ -41,7 +41,7 @@
 					Number of part verified credits: <%= @user.credits.cv_part.count%>
 				</span><br />
 				<span style="color:green;  font-size:16px;">
-					Number of verified credits: <%= @user.credits.cv_confirmed.count%>
+					Number of verified credits: 0
 				</span><br />
 				<span style="color:blue;  font-size:16px;">
 					Number of followers: <%= @followers.count%>
