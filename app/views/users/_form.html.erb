@@ -14,6 +14,18 @@
     <%= f.label :email_address %><br />
     <%= f.text_field :email %>
   </div>
+ 
+ <% if @user.picture %>
+ <%= image_tag @user.picture.small %>
+	<% else %>
+	<% if @user.profile_picture %>
+	  	<%= image_tag @user.profile_picture %>	 
+	 <% end %>
+	<% end %> 
+  <div class="field">
+    <%= f.label :upload_your_own_picture %><br />
+  <%= f.file_field :picture %>
+  </div>
   <div class="field">
     <%= f.label :tell_us_a_little_about_yourself %><br />
   <%= f.text_area :bio, :rows => '5' %>

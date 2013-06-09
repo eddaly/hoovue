@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "linkedin"
     t.string    "googleplus"
     t.string    "link"
+    t.string    "picture"
   end
 
 end

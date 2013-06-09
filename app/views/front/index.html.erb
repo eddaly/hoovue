@@ -43,7 +43,12 @@
 			<% @users_featured.each do |u| %>
 		<%= link_to u do %>
 <li class="product-list">
-<span style="margin-left:40px;"><img src="http://graph.facebook.com/<%= u.uid%>/picture?type=small"></span>
+<span style="margin-left:40px;"> 
+	<% if u.picture.nil? %>
+ <%= image_tag u.picture.small, :width => "50" %>
+	<% else %>
+		<%= image_tag u.profile_picture, :width => "50" %>	 
+	<% end %> </span>
 <h3> <%= u.name %></h3>
 
 </li>
@@ -58,7 +63,11 @@
 			<% @most_user_credits.each do |u| %>
 		<%= link_to u do %>
 <li class="product-list">
-<span style="margin-left:40px;"><img src="http://graph.facebook.com/<%= u.uid%>/picture?type=small"></span>
+<span style="margin-left:40px;">	<% if u.picture.nil? %>
+ <%= image_tag u.picture.small, :width => "50" %>
+	<% else %>
+		<%= image_tag u.profile_picture, :width => "50" %>	 
+	<% end %></span>
 <h3> <%= u.name %></h3>
 
 </li>

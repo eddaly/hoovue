@@ -71,7 +71,11 @@ $(document).ready(function(){
 						
 				</div>
 			<h2 class="border">
-				<img src="http://graph.facebook.com/<%= c.user.uid%>/picture?type=square">
+				<% if c.user.picture %>
+			 <%= image_tag c.user.picture.small, :width => "50" %>
+				<% else %>
+					<%= image_tag c.user.profile_picture, :width => "50" %>	 
+				<% end %>
 					<%= link_to c.user.name, user_path(c.user) %> 
 					<span class="right"> <%= c.role %> 
 						<% if current_user %>
