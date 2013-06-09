@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+  <script type="text/javascript">  $(document).ready(function() { $("select").select2({ width: 'element' }); }); </script>
 </head>
 <%= render '/layouts/google_analytics'%>
 <body>
