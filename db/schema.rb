@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   create_table "credits", :force => true do |t|
     t.integer   "user_id"
     t.integer   "product_id"
-    t.timestamp "created_at",                              :null => false
-    t.timestamp "updated_at",                              :null => false
+    t.timestamp "created_at",                                 :null => false
+    t.timestamp "updated_at",                                 :null => false
     t.string    "role"
     t.text      "fact"
     t.string    "status"
@@ -58,7 +58,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "startdate"
     t.timestamp "enddate"
     t.string    "pending_token"
-    t.integer   "credit_validations_count", :default => 0, :null => false
+    t.integer   "credit_validations_count",    :default => 0, :null => false
+    t.integer   "confirmed_validations_count", :default => 0, :null => false
   end
 
   create_table "emails", :force => true do |t|

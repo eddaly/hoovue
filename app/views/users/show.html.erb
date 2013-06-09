@@ -7,13 +7,9 @@
 		
 		
 		<div class="grid_3 alpha">
-<img src=" <% if @user.picture %>
- <%=  @user.picture %>
-	<% else %>
-	<% if @user.profile_picture %>
+<img src=" 
 	  	<%= @user.profile_picture %>	 
-	 <% end %>
-	<% end %>" width=200 ><br />
+	 " width=200 ><br />
 <% if current_user %>
 	 <% if current_user.id == @user.id %>
 	 		<% else %>

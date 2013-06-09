@@ -1,5 +1,5 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :product_id, :user_id, :role, :role_desc, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
+  attr_accessible :product_id, :user_id, :role, :role_desc, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
     attr_accessor :current_credit_id  
   belongs_to :user, :counter_cache => true
     belongs_to :product, :counter_cache => true
@@ -11,9 +11,9 @@ class Credit < ActiveRecord::Base
    validates_uniqueness_of :user_id, :scope => [:role, :product_id], :message => "A credit with this email and role has already been taken."
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
-    scope :cv_unverified, where(:credit_validations_count => "0")
-    scope :cv_part, where(:credit_validations_count => "1 | 2")  
-    scope :cv_confirmed, where(:credit_validations_count => "3")  
+    scope :cv_unverified, where(:confirmed_validations_count => "0")
+    scope :cv_part, where(:confirmed_validations_count => "1 | 2")  
+    scope :cv_confirmed, where(:confirmed_validations_count => "3")  
   
       
         

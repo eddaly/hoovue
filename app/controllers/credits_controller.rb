@@ -101,6 +101,7 @@ end
         @credit_validation.status = "pending"
           @credit.validator_id = current_user.id
           @credit_validation.user_id = current_user.id
+          @credit_validation.validator_id = SecureRandom.random_number(100)
             @credit_validation.credit_id = @credit.current_credit_id
       respond_to do |format|
       if @credit.save

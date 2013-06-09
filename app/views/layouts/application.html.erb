@@ -39,13 +39,9 @@
   
    <div class="signed-in">
    <div class="signed-in-text">Signed in as <strong><a href="/users/<%= current_user.id%>"><%= current_user.name %></a> | <%= link_to "Sign out", signout_path %> </div>
-	   <% if current_user.picture %>
-	   <%= image_tag current_user.picture.small, :width => "50" %>
-	  	<% else %>
-	  	<% if current_user.profile_picture %>
+	   
 	  	  	<%= image_tag current_user.profile_picture %>	 
-	  	 <% end %>
-	  	<% end %> 
+
 	 </strong>
  	  
  	</div>

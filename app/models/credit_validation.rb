@@ -21,7 +21,7 @@ def after_destroy
 end
 
 def update_counter_cache
-  self.credit.credit_validations_count = Credit_validation.count( :conditions => ["status = confirmed",self.credit.id])
+  self.credit.credit_validations_count = Credit_validation.count
   self.credit.save
 end
 
