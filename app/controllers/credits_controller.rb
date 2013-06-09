@@ -94,6 +94,7 @@ end
     else
       if params[:facebook]
          @credit.validator_id = current_user.id
+         @credit.pending_user_email = SecureRandom.random_number(100)
       else
      
      end
