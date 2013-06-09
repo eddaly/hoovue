@@ -12,7 +12,7 @@ class Credit < ActiveRecord::Base
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
     scope :cv_unverified, where(:credit_validations_count => "0")
-    scope :cv_part, where(:credit_validations_count => "1 | 2")  
+    scope :cv_part, where(:confirmed_validations_count => "1 | 2")  
     scope :cv_confirmed, where(:confirmed_validations_count => "3")  
   
       
