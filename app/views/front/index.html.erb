@@ -121,7 +121,7 @@
    		<% end %>
    			<% if cv.status == "pending" %>
    		<span class="score">
-   		<a href="/credit_validations/<%= cv.id %>"><%= image_tag '/assets/pending.png' %></a>
+   	<%= image_tag '/assets/pending.png' %>
 
    				<% if current_user %>
    					<% if current_user.id == cv.validator_id %>
