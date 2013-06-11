@@ -51,7 +51,7 @@ end
 
 
 #Rails Admin
-mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+mount RailsAdmin::Engine => '/lecrabe', :as => 'rails_admin'
 
  
 #Session Routes
