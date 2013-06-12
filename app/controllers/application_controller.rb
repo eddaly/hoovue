@@ -24,14 +24,20 @@ class ApplicationController < ActionController::Base
     
     def save_facebook_params
       if params[:pending_token]
+        if @credit.nil?
+          redirect_to root_url, :notice => "This credit has been deleted."
+          session.delete(:pending_token)
+        end  
      session[:pending_token] = params[:pending_token]  
      end 
     end
     
     def update_facebook_params
+      begin
       if session[:pending_token] && if current_user
         @credit = Credit.find_by_pending_token(session[:pending_token])
-        @credit.user_id = current_user.id
+      @credit.user_id = current_user.id
+    
         @credit.user_name = current_user.name
         @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
         @credit_validation.validator_id = current_user.id
@@ -50,6 +56,12 @@ class ApplicationController < ActionController::Base
           end
         end
       end  
+    rescue Exception
+      session.delete(:pending_token)
+      session.delete(:credit_id)
+      redirect_to root_url
+    end
+    
     end
     
         def update_credit_params
