@@ -9,6 +9,7 @@ class Ability
      end
         if user.role = "admin"
           can :manage, :all  
+          can :destroy, :all
           can :access, :rails_admin   
           can :dashboard              
         end
@@ -22,7 +23,7 @@ class Ability
                       can :create, Product
                         can :manage, Product, :user_id => user.id
                           can :manage, CreditValidation
-                            cannot :destroy, CreditValidation
+                         
                             can [:create, :destroy], Email, :user_id => user.id
                 
         end
