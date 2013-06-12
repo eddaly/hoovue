@@ -95,7 +95,7 @@ module RailsAdmin
     private
 
     def is_admin?
-      if current_user.nil? || !current_user.admin?
+      if current_user.nil? || !current_user.admin
         head(:forbidden)
         false
       end
@@ -121,6 +121,8 @@ end
 
   # Or with a PaperTrail: (you need to install it first)
   # config.audit_with :paper_trail, 'AdminUser'
+
+   config.authorize_with :cancan
 
   # Display empty fields in show views:
   # config.compact_show_view = false

@@ -2,11 +2,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    if @current_user
+      user = @current_user
+    else
        user ||= User.new # guest user (not logged in)
-        if user.role =="admin"
-          can :manage, :all              
+     end
+        if user.role = "admin"
+          can :manage, :all  
+          can :access, :rails_admin   
+          can :dashboard              
         end
-        if user.role =="user"
+        
+        if user.role = "user"
             can :read, :all  
               can :manage, User, :id => user.id
                 cannot :destroy, User
