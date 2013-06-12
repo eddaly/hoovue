@@ -7,8 +7,9 @@ class Credit < ActiveRecord::Base
       has_many :posts, :dependent => :destroy
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
         validates_presence_of :role
-      #  validates_uniqueness_of :pending_user_email, :scope => [:role, :product_id ], :message => "A credit with this email and role has already been taken."
+     #   validates_uniqueness_of :pending_user_email, :scope => [:credit_validation_id, :product_id ], :message => "A credit with this email and role has already been taken."
    validates_uniqueness_of :user_id, :scope => [:role, :product_id], :message => "A credit with this email and role has already been taken."
+
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
     scope :cv_unverified, where(:credit_validations_count => "0")
@@ -16,6 +17,8 @@ class Credit < ActiveRecord::Base
     scope :cv_confirmed, where(:confirmed_validations_count => "3")  
   
       
+      
+   
         
       def self.import(file)
   CSV.foreach(file.path, headers: true) do |row|

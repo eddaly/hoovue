@@ -7,9 +7,7 @@
 		
 		
 		<div class="grid_3 alpha">
-<img src=" 
-	  	<%= @user.profile_picture %>	 
-	 " width=200 ><br />
+<img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
 <% if current_user %>
 	 <% if current_user.id == @user.id %>
 	 		<% else %>
@@ -17,7 +15,7 @@
 
 	<% end %>
 			<% end %>
-		<%= render '/layouts/addthis' %>
+		
 			</div>
 			
 		  
@@ -98,7 +96,10 @@
 			
 			<a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @<%= @user.twitter %></a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<br />
+		Share this page:<br /> <%= render '/layouts/addthis' %>	
 			</div>
+			
 	</div>
 
 
@@ -194,6 +195,7 @@
 	</li>
 			
 </ul>
+
 </div>
 
 

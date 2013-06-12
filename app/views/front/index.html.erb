@@ -27,11 +27,13 @@
 <p>The platform for all Creators to own and manage their Credits and get the public recognition they deserve.</p>
 
 <% else %>
-<p>We use facebook as the first level of validation to prove your identity so that you can begin to claim the creative credits on media products (games, film, comics, web) you feel you deserve and find colleagues to validate those claims.</p>
+<p>We need to validate your identity so you can begin to claim the creative credits (on games, film, TV, comics, websites) you feel you deserve.</p>
 
-<p>We will NOT POST ANYTHING TO YOUR WALL or contact any of your friends. The facebook login is purely to validate that you are who you say you are. We will only use your profile picture and your registered email address to communicate with you ONLY. We hate spam as much as you do.</p>
+<p>You can use either facebook or LinkedIn.</p>
 
-		<p>Please  <%= link_to "register/login via Facebook.", "/auth/facebook", id: "login_with_facebook"  %> 
+<p>We will NEVER post anything without your consent or contact any of your friends. We hate that just as much as you do. We'll only use your profile picture (which you can change) and the email address registered to that account to communicate with you.</p>
+
+		<p>Please  <%= link_to "register/login via Facebook.", "/auth/facebook", id: "login_with_facebook"  %>  or <%= link_to "linked in.", "/auth/linkedin", id: "login_with_linkedin"  %>
  	<% end %>
 	</div>
 
