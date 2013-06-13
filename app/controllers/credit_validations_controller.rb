@@ -127,7 +127,7 @@ class CreditValidationsController < ApplicationController
     @credit_validation.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url }
+      format.html { redirect_to user_path(current_user.id), notice: 'Pending validator has been deleted.' }
       format.json { head :no_content }
     end
   end

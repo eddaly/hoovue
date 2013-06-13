@@ -40,6 +40,10 @@
 			 <h4>Help</h4>
 	  The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).</div>
  <% end %>
+ <div class="help-box">
+	 <h4>Help</h4>
+	 If you wish to include a YouTube video please only paste in the video ID. E.g. http://www.youtube.com/watch?<strong>abcdefgh</strong></div>
+  
   <div class="field">
     <%= f.label :name %>
 	 <% if params[:name] == "1" %>
@@ -54,12 +58,12 @@
  
 	<div class="field">
 	<%= f.label :status %>
-	<%= f.select :status, [ ['Completed'], ['Ongoing'], ['In Development']] %>
+	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']] %>
 	 </div><br />
 	 
 	 <% if params[:name] == "1" %>
      <div class="field">
-       <%= f.label :year_the_game_was_first_released %>
+       <%= f.label :year_the_game_was_first_released_if_applicable %>
 	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
      </div>
 	 <br />
@@ -71,7 +75,7 @@
 	 
 	 <% if params[:name] == "2" %>
      <div class="field">
-       <%= f.label :year_the_website_was_launched %>
+       <%= f.label :year_the_website_was_launched_if_applicable %>
 	
         <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
      </div>
@@ -90,7 +94,7 @@
 	 
 	 <% if params[:name] == "4" %>
      <div class="field">
-       <%= f.label :year_the_movie_was_released %>
+       <%= f.label :year_the_movie_was_released_if_applicable %>
 	
        <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
      </div>
@@ -98,7 +102,7 @@
 	 
 	 <% if params[:name] == "5" %>
      <div class="field">
-       <%= f.label :year_the_book_was_published %>
+       <%= f.label :year_the_book_was_published_if_applicable %>
 	
        <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
      </div>
@@ -106,7 +110,7 @@
 	 
 	 <% if params[:name] == "7" %>
      <div class="field">
-       <%= f.label :year_of_first_broadcast %>
+       <%= f.label :year_of_first_broadcast_if_applicable %>
 	
         <%= f.date_select :year, :discard_month => true, :start_year => 1950 %>
      </div>
@@ -117,6 +121,23 @@
     <%= f.label :work_page_main_image %><br />
     <%= f.file_field :image %>
   </div>
+  <div class="field">
+   <%= f.label :work_page_main_other_image %><br />
+   <%= f.file_field :image_2 %>
+ </div>
+ <div class="field">
+  <%= f.label :work_page_other_image %><br />
+  <%= f.file_field :image_3 %>
+</div>
+  <div class="field">
+   <%= f.label :youtube_video %><br />
+   <%= f.text_field :video %>
+ </div>
+ <div class="field">
+  <%= f.label :work_desription %><br />
+  <%= f.text_area :description, :rows => "3" %>
+</div>
+ 
   <div class="field">
     <%= f.label :url %>
     <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course)." %>

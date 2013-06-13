@@ -1,8 +1,65 @@
+<script>
+		 $(function() {
+      $('#slides').slidesjs({
+        width: 280,
+        height: 180,
+        navigation: {
+      active: false,
+      effect: "fade"
+        // [string] Can be either "slide" or "fade".
+    },
+    pagination: {
+      active: false,
+        // [boolean] Create pagination items.
+        // You cannot use your own pagination. Sorry.
+      effect: "fade"
+        // [string] Can be either "slide" or "fade".
+    },
+        play: {
+          active: true,
+          auto: true,
+          interval: 5000,
+          swap: true
+        }
+      });
+    });
+	</script>
+
+
+
 <div class="container_12 pages">
 <p id="notice"></p>
 <div class="grid_8 alpha">
  
 <h1><%= @product.title %> <% if @product.year %><%= @product.year.strftime("%Y") %><% end %> <% if current_user %><span style="font-size:15px"><% if current_user.id == @product.user_id %><%= link_to "(edit)", edit_product_path(@product) %> <% end %><% end %></span> </h1>
+<div style="margin: 20px 0">
+	
+<div id="slides">	
+
+<% if @product.image.blank? %>
+<div class="slides">
+	<%= image_tag 'default-small.png'%>
+</div>	
+<%else%>
+<div class="slides">
+	<%= image_tag @product.image.small %>
+</div>	
+<%end%>
+<% if @product.image_2 %>
+<div class="slides">	
+<%= image_tag @product.image_2.small %>
+</div>
+
+<% end %>
+
+<% if @product.image_3 %>
+<div class="slides">
+<%= image_tag @product.image_3.small %>
+</div>
+<% end %>
+</div>
+
+</div>
 <% if @product.product_genre %><p><%= @product.product_genre.name %> <%end%></p>
 <p><%= @product.studio %> <%= form_tag search_path, :method => 'get' do %>
   
@@ -17,15 +74,23 @@
 
 <p><%= @product.status %> </p>
 <p><a href="http://<%= @product.url %>" target=blank><%= @product.url %></a></p>
-<div style="margin: 20px 0">
-	
-	
-<% if @product.image.blank? %>
-	<%= image_tag 'default-small.png'%>
-<%else%>
-	<%= image_tag @product.image.small %>
-<%end%>
+
+
+
+<% if @product.video.blank? %>
+
+<% else %>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/<%= @product.video %>" frameborder="0" allowfullscreen></iframe>
+<% end %>
+
+<% if @product.description.blank? %>
+
+<% else %>
+<div class="description">
+<%= @product.description %>
 </div>
+<% end %>
+
 <%= render '/layouts/addthis' %>
 </div>
 
@@ -43,7 +108,11 @@
 
 </div>	
 
+
+
 <div class="container_12 credits-form">
+
+
 <%= render '/products/credits'%>
 </div>
 

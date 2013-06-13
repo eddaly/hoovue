@@ -18,7 +18,7 @@ $(document).ready(function(){
 	<% if current_user %>			
 	
 <a href="#" class="show_hide">Add Credit</a>
-<div class="slidingDiv" style="margin-bottom:200px;">
+<div class="slidingDiv" style="float:left; margin-bottom:300px;">
 	<%= render "add_credit" %>
 
 </div>
@@ -29,6 +29,13 @@ $(document).ready(function(){
 	<% if @credit_views.empty? %>
 	<h3>No Credits Yet.</h3>
 	<% end %>
+<div class="sort">
+<select onchange="if (this.value) window.location.href=this.value">
+	    <option value="1">Sort by..</option>
+	    <option value="/products/<%= @product.id %>?sort=created_at desc">Most Recent</option>
+	    <option value="/products/<%= @product.id %>?sort=verified">Verified</option>
+	</select>
+</div>	
 		<ul>
 			<% @credit_views.each do |c| %>
 		
@@ -113,7 +120,7 @@ $(document).ready(function(){
 										<div style="float:left; margin:10px;">
 											
 										
-					<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+					<%= link_to 'Delete this credit', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 					</div>
 					<% end %>
 					

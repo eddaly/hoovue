@@ -8,7 +8,13 @@
 <% end %>
 <p><% if @user %>Sent to:<%= @user.name %> <% end %>
 	<% if @credit_validation.token %>
+	<% if @credit_validation.token.match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i) %>
 	<%= @credit_validation.token %>
+	<% else %>
+	Added By Facebook
+	<% end %>
+	<% else %>
+	
 	<% end %>
 	 on <%= @credit_validation.updated_at.strftime "%A, %B %d, %Y" %></p>
 <%= link_to 'Delete pending validation', @credit_validation, :confirm => 'Are you sure?', :method => :delete, :class => "blue-link" %>

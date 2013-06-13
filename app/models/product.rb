@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :genre, :startdate, :enddate, :credits_count, :image, :studio, :title, :year, :status, :user_id, :credits_attributes, :properties, :product_genre_id, :role, :role_description, :fact, :issue, :url, :remove_image, :image_cache
+  attr_accessible :description, :genre, :video, :moderation_status, :startdate, :enddate, :credits_count, :image, :image_2, :image_3, :studio, :title, :year, :status, :user_id, :credits_attributes, :properties, :product_genre_id, :role, :role_description, :fact, :issue, :url, :remove_image, :image_cache
     attr_accessor :role, :role_description, :fact, :issue
   belongs_to :user
     has_many :credits, :dependent => :destroy
@@ -7,6 +7,8 @@ class Product < ActiveRecord::Base
         serialize :properties, Hash
          accepts_nested_attributes_for :credits, :allow_destroy => true
            mount_uploader :image, ImageUploader
+             mount_uploader :image_2, ImageUploader
+               mount_uploader :image_3, ImageUploader
             letsrate_rateable "quality"
             # validates :title, :uniqueness => true
   

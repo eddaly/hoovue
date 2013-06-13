@@ -109,8 +109,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "user_id"
     t.string    "image"
     t.text      "description"
-    t.timestamp "created_at",                      :null => false
-    t.timestamp "updated_at",                      :null => false
+    t.timestamp "created_at",                                      :null => false
+    t.timestamp "updated_at",                                      :null => false
     t.text      "properties"
     t.integer   "product_genre_id"
     t.string    "status"
@@ -121,7 +121,11 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "studio"
     t.timestamp "startdate"
     t.timestamp "enddate"
-    t.integer   "credits_count",    :default => 0
+    t.integer   "credits_count",                    :default => 0
+    t.string    "video"
+    t.string    "moderation_status"
+    t.string    "image_2"
+    t.string    "image_3",           :limit => nil
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -181,6 +185,11 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "googleplus"
     t.string    "link"
     t.string    "picture"
+    t.string    "link_desc"
+    t.string    "link_2"
+    t.string    "link_2_desc"
+    t.string    "link_3"
+    t.string    "link_3_desc"
   end
 
 end

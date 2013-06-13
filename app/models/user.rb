@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
 
-      attr_accessible :email, :provider, :picture, :credits_count, :uid, :bio, :link, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count
+      attr_accessible :email, :provider, :picture, :credits_count, :uid, :bio, :link, :link_desc, :link_2, :link_2_desc, :link_3, :link_3_desc, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count
         has_many :products
           has_many :credits
             has_many :posts
               has_many :friendships
                 has_many :friends, :through => :friendships
+                has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+                has_many :inverse_friends, :through => :inverse_friendships, :source => :user
                   has_many :emails
          mount_uploader :picture, ImageUploader   
             #Rating system

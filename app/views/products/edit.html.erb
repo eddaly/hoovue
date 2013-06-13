@@ -39,9 +39,7 @@ If your work relates to a specific range of issues please include this informati
     <%= f.text_field :title %>
   </div>
 
-<%= f.hidden_field :product_genre_id, :value => params[:name] %>	
- 
- 
+
 	<div class="field">
 		<%= f.label :status %><br />
 		
@@ -91,59 +89,32 @@ If your work relates to a specific range of issues please include this informati
     <%= f.file_field :image %>
   </div>
   <div class="field">
+   <%= f.label :youtube_video %><br />
+   <%= f.text_field :video %>
+ </div>
+ <div class="field">
+  <%= f.label :work_desription %><br />
+  <%= f.text_area :description, :rows => "3" %>
+</div>
+  <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url %>
   </div>
 
   
   </div>
-  <h1>Your Credit</h1>
-  <div class="new-credit">
-	
  
-   <div class="role">
-   <h2>Your role was: <%= f.text_field :role %></h2>
-    </div>
-   <div class="desc">
-  What did you actually do?  <%= f.text_field :role_description %>
-   </div>
-  
-   <div class="issue">
-  
-  </div>
- 
-     <div class="fact">
-  <p>Tell fans of this work one interesting thing about it:</p>  <%= f.text_area :fact, :rows => '2'	 %>
-  	<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
-    </div>
-  
-  <% if params[:name] == "1" %>
-   <div class="desc">
-<p>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
-   <%= f.text_field :issue %>
- </div>
- <% end %>
- 
-	  <% if params[:name] == "3" %>
-	   <div class="desc">
-<p>Please include details of the range of issues or other information for which your credit relates.</p>
-	   <%= f.text_field :issue %>
-	 </div>
-	 <% end %>
+ <%= f.hidden_field :moderation_status, :value => "edited" %>
   
 <div class="submit">
  <%= f.submit 'Update Work >'%>
 </div>
  
-  </div>
-  </div>
+
 <% end %>
   
   
   
   
   
-  
- 
 
-</div>

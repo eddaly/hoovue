@@ -7,7 +7,18 @@
 		
 		
 		<div class="grid_3 alpha">
+	<% if @user.picture %>
+	<%= image_tag @user.picture %>
+	<% else %>
+	
+	<% if @user.provider == "facebook" %>		
 <img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+	<% end %>
+	<% if @user.provider == "linkedin" %>		
+<%= image_tag @user.profile_picture %><br />
+	<% end %>
+	<% end %>
+	
 <% if current_user %>
 	 <% if current_user.id == @user.id %>
 	 		<% else %>
@@ -91,26 +102,40 @@
 			
 				<% end %>
 			</div>
+	
+		
 		<div class="twitter-follow" style="float:right; margin:10px 30px 0 0;">
+			<% if @user.twitter.blank? %>
 			
-			
+			<% else %>
 			<a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @<%= @user.twitter %></a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			<br />
+			<% end %>
+			</div>
 		Share this page:<br /> <%= render '/layouts/addthis' %>	
 			</div>
 			
-	</div>
+	
 
 
 
-
+	<div class="following">
 <% if current_user && current_user.id == @user.id %> 
-<h2>Following</h2>
+<h2>Following:</h2>
 <% for friendship in current_user.friendships%>
-	<%= friendship.friend.name %>  (<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
+<%= link_to user_path(friendship.friend.id) do %><%= friendship.friend.name %><% end %>(<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
 <%end%>
 <% end %>
+
+<h2>Followed by:</h2>
+
+  <% for user in @user.inverse_friends %>
+<%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
+  <% end %>
+
+
+</div>
 
 
 <div class="container_12 credits-form">
@@ -184,7 +209,7 @@
 <div class="container_12">
 	<% if current_user %>			
 	<% if current_user.id == c.user_id %>
-	<%= link_to 'Delete', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+	<%= link_to 'Delete this credit', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
 	<% end %>
 	<% end %>
 </div>

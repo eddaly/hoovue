@@ -14,6 +14,19 @@
     <%= f.label :email_address %><br />
     <%= f.text_field :email %>
   </div>
+  <div class="additional" style="margin-bottom:10px;">
+  	
+  <%= f.label :addtional_email_addresses %>
+ <ul> 
+  <% @emails.each do |email| %>
+  
+     <li><%= email.email %> <%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  	
+  <% end %>
+  </ul>
+ <%= link_to 'Add Additional Email +', new_email_path %>
+ 
+ </div>
  
  <% if @user.picture %>
  <%= image_tag @user.picture.small %>
@@ -31,12 +44,19 @@
   <%= f.text_area :bio, :rows => '5' %>
   </div>
   <div class="field">
-    <%= f.label :link_to_a_personal_website_or_something_you_are_currently_working_on %><br />
+    <%= f.label :links_to_personal_websites_or_something_you_are_currently_working_on %><br />
    http:// <%= f.text_field :link %>
+   Why this link? <%= f.text_field :link_desc %><br />
+   
+   http:// <%= f.text_field :link_2 %>
+   Why this link? <%= f.text_field :link_2_desc %><br />
+   
+   http:// <%= f.text_field :link_3 %>
+   Why this link? <%= f.text_field :link_3_desc %>
   </div>
   <div class="field">
     <%= f.label :we_can_display_your_twitter_feed_in_your_profile_page_if_you_enter_your_twitter_username_here %><br />
-    <%= f.text_field :twitter %>
+    @<%= f.text_field :twitter %>
   </div>
   <div class="actions"><%= f.submit "Submit" %></div>
 <% end %>

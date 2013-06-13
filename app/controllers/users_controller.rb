@@ -36,6 +36,7 @@ end
 
 def edit
   @user = User.find(params[:id])
+    @emails = Email.where(:user_id => current_user.id)
 end
 
 def update

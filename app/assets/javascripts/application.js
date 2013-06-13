@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require jquery.slides
 //= require rails.validations
 //= require select2
 //= require jquery.nested-fields
