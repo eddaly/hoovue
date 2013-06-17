@@ -86,6 +86,7 @@ end
      if params[:batch]
      @credit.role = params[:role]
      @credit.product_id = params[:product_id]
+     @credit.current_credit_role = params[:current_credit_role]
      @credit.user_id = current_user.id
    end
      @credit.pending_token = SecureRandom.urlsafe_base64(20)

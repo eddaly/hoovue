@@ -16,6 +16,7 @@
 //= require jquery.slides
 //= require rails.validations
 //= require select2
+//= require jquery.ui.datepicker
 //= require jquery.nested-fields
 //= require best_in_place
 //= require_tree .

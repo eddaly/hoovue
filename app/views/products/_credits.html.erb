@@ -13,8 +13,22 @@ $(document).ready(function(){
  
 </script>
 
+<div class="team-shot">
+	<h2>Team Shot</h2>
+	<% if @credit_views.size > 2 %>
+		<% @credit_views.each do |c| %>
+		<% if c.user %>
+	<%= link_to user_path(c.user) do %>	<%= image_tag c.user.profile_picture, :width => "50" %>	<% end %> 
+			<% end %>
+		<% end %>
+		<% else %>
+	<% end %>
+</div>
 
 	<h2>Credits</h2>
+	
+
+	
 	<% if current_user %>			
 	
 <a href="#" class="show_hide">Add Credit</a>

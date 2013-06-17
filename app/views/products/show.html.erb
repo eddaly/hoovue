@@ -31,7 +31,8 @@
 <p id="notice"></p>
 <div class="grid_8 alpha">
  
-<h1><%= @product.title %> <% if @product.year %><%= @product.year.strftime("%Y") %><% end %> <% if current_user %><span style="font-size:15px"><% if current_user.id == @product.user_id %><%= link_to "(edit)", edit_product_path(@product) %> <% end %><% end %></span> </h1>
+<h1><%= @product.title %> <% if @product.year %><%= @product.year.strftime("%Y") %><% end %> <% if current_user %><span style="font-size:15px"><% if current_user.id == @product.user_id %><%= link_to "(edit)", edit_product_path(@product) %> <% end %><% end %></span>
+ </h1>
 <div style="margin: 20px 0">
 	
 <div id="slides">	
@@ -75,7 +76,7 @@
 <p><%= @product.status %> </p>
 <p><a href="http://<%= @product.url %>" target=blank><%= @product.url %></a></p>
 
-
+<a type=amzn search="<%= @product.title %>">Buy on Amazon ></a><br />
 
 <% if @product.video.blank? %>
 
@@ -107,6 +108,9 @@
 <div class="container_12 facts-form">
 
 </div>	
+
+
+
 
 
 

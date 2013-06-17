@@ -4,6 +4,6 @@
 
 <p>whoactually is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. </p>
 
-<p><%= @user.name %> claims the following Credit on <%= @credit.product.title %>:. <%= @user.name %> also recorded that you were <%= @credit.role %>  on <%= @credit.product.title %>.</p>
+<p><%= @user.name %> claims the following Credit on <%= @credit.product.title %>: <%= @credit.current_credit_role %>. <%= @user.name %> also recorded that you were <%= @credit.role %>  on <%= @credit.product.title %>.</p>
 
 <p>To validate this Credit and to claim your own Credit <%= link_to "click here", front_validate_email_credit_url(:credit_id => @credit.id) %></p>
