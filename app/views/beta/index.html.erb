@@ -1,0 +1,107 @@
+<div class="index">
+	
+
+<div class="row-1">
+	<div class="container_12 row-1-content">
+		<h1>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam</h1>
+		<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,  sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </p>
+		
+		<a href"#" class="blue-btn">Watch the video tour</a>
+			
+		
+		
+	</div>	
+	
+</div>	
+
+
+<div class="row-2">
+	<div class="container_12 row-2-content">
+		<h1>Sign up to WhoActually</h1>
+		<p>By creating your WhoActually account you agree to our <a>Terms of Use</a> and  <a>Privacy Policy</a></p>
+
+		<div class="signin">
+			<div class="grid_3 push_1">
+			 <%= link_to "Sign Up With Facebook", "/auth/facebook", id: "facebook" %>
+			 <%= link_to "Sign Up with LinkedIn", "/auth/linkedin", id: "linkedin" %>
+			<p>All ready have an account? <a href="#">Login</a></p>
+			 </div>
+		</div>	
+		
+		<div class="grid_2 push_2 or">
+			<%= image_tag '/assets/beta/or-circle.png' %>
+		</div>	
+	</div>
+</div>
+
+
+<div class="row-3">
+	<div class="container_12 slider">
+		<%= image_tag '/assets/beta/arrow-left.png' %>
+	<% @featured_users.each do |fu| %>
+		
+		<img src="http://graph.facebook.com/<%= fu.uid%>/picture?type=large">
+	<% end %>
+	<%= image_tag '/assets/beta/arrow-right.png' %>
+	</div>	
+	
+	<div class="container_12 charts">
+		<div class="grid_4 popular">
+			<div class="selected">
+				Popular Works
+			</div>
+			<div class="tab">
+				Popular Users
+			</div>
+			<ul>
+			<% @popular_works.each do |pw| %>
+				<li>
+			<%= image_tag pw.image %>		
+				<div class="title">
+					<%= link_to pw.title, product_path(pw) %>
+				</div>
+				
+				<div class="sats">
+				<strong>Credits</strong> <%= pw.credits_count %>
+				</div>	
+					
+				</li>
+			<% end %>	
+				</ul>	
+		</div>	
+		
+		<div class="grid_4 push_1 popular">
+					<div class="selected">
+						Recently Validated
+					</div>
+					<div class="tab">
+						Popular Users
+					</div>
+					<ul>
+					<% @recent_credits.each do |c| %>
+						<% if c.user_id %>
+						<% @user = User.find_by_id(c.user_id) %>
+						<li>
+					<%= image_tag @user.profile_picture %>		
+						<div class="title">
+							<%= link_to @user.name, user_path(c.user_id) %>
+						</div>
+				
+						<div class="sats">
+						<strong>Work:</strong> <%= link_to c.product.title, product_path(c.product.id) %>
+						</div>	
+					
+						</li>
+						<% else %>
+						
+						<% end %>
+					<% end %>	
+						</ul>	
+				</div>	
+		
+	</div>	
+</div>
+	
+
+
+</div>

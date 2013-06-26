@@ -3,6 +3,12 @@ Hoo::Application.routes.draw do
 
 
 
+  get "beta/index"
+
+  get "beta/work"
+
+  get "beta/user"
+
   resources :emails
 
 
@@ -53,7 +59,7 @@ end
 #Rails Admin
 mount RailsAdmin::Engine => '/lecrabe', :as => 'rails_admin'
 
- 
+
 #Session Routes
 get "sessions/new"
 
@@ -83,7 +89,7 @@ match "legal", to: 'front#legal', :as => 'legal'
 match "terms", to: 'front#terms', :as => 'terms'
 match "privacy", to: 'front#legal', :as => 'privacy'
 
-root :to => "front#index"
+root :to => "beta#index"
 
  
 end
