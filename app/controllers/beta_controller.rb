@@ -6,6 +6,8 @@ class BetaController < ApplicationController
   end
 
   def work
+    @product = Product.find_by_id(79)
+    @credits = Credit.where(:product_id => @product.id).where(:user_id != nil)
   end
 
   def user

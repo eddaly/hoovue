@@ -6,6 +6,7 @@ $darklink: #00353B;
 $light: #00ADEF;
 $grey: #7F9FA1;
 $light-blue: #00AEEF;
+$bright-green: #09C11F;
 
 body.new {
 	
@@ -294,8 +295,244 @@ float:left;
 }
 	
 	
+.work-page {
+	
+	.work-container {
+		
+		.work-info-panel {
+		height:550px;
+		background-color:#002529;	
+		padding:30px;
+			.title {
+				font-size:22px;
+				color:white;
+					}
+					.genre {
+						margin-top:5px;
+						font-size:14px;
+						color:$grey;
+					}
+					
+					#slides {
+						float:left;
+						width:410px;
+						height:209px;
+						background-color:black;
+						
+					}
+					
+		.stats {
+			float:right;
+			width:209px;
+			height:209px;
+			background-color: $light;
+			color:white;
+				
+
+			
+			p.credit-count {
+			width:290px;
+			margin:30px 0 0 -40px;
+			text-align:center;
+			font-size:40px;	
+			}
+			
+			p.credits {
+				text-align:center;
+				margin:15px 0 0 10px;
+				font-size:20px;
+				width:150px;
+				padding-bottom:20px;
+				background-color:$light;
+				border-bottom:1px solid white;
+			}
+			
+			.verified-count, .images, .videos {
+				float:left;
+				width:45px;
+				padding-right:29px;
+				border-right: 1px solid white;
+				margin-top:10px;
+			
+			p.verified-credits {
+				font-size:25px;
+				margin:20px 0px 5px 15px;
+				
+			}
+			
+			p.verifed {
+				font-size:15px;
+				margin:5px 0 0 5px;
+				
+			}
+				}
+			
+			.images {
+				margin-left:10px;
+				width:35px;
+				padding-right:25px;
+			}
+				
+			.videos {
+				border-right:none;
+				margin-left:12px;
+				padding-right:0px;
+				margin-left:5px;
+			}	
+		
+		}
+		
+		
+		.description-containter {
+			
+			
+			
+			.analytics { 
+			float:left;	
+			width:200px;
+			height:290px;
+			margin-top:10px;
+			background-color:white;	
+						}
+						
+			.description {
+				
+				width:410px;
+				height: 290px;
+				margin-left:10px;
+				padding:5px;
+				background-color:#003F45;
+			
+				.details {
+					float:left;
+					width:400px;
+					font-size:12px;
+					margin:10px;
+					 padding:0;
+					 border-bottom:1px solid $grey;
+					
+					p.description-title {
+					float:left;	
+					color:$grey; 
+					width:70px;
+					margin-right:0px;
+					padding-right:0px;	
+						}	
+					
+					p.data {
+					float:left;	
+					 color:white;	
+					 width:100px;
+					
+					}					
+				}
+				
+				p.description-text {
+					color:white;
+					margin:20px;
+				}
+				
+			}			
+			
+		}
+			
+		
+			
+							}
+		
+							.credits {
+								background-color:#F1F5F5;
+								padding:5px 0 0 15px;	
+								
+								
+								.credit-item {
+								width:625px;
+								height:252px;
+								background-color:white;		
+								margin:10px 0;
+								padding:20px;
+								
+								img {
+								float:left;	
+								margin-right:10px;
+								}
+								
+								.user-name {
+								float:left;
+								color: $light;	
+								font-weight:bold;
+								font-size:20px;
+								margin:5px 0 0 0;
+								}
+								
+								.user-details {
+									
+									margin:30px 0 0 0;
+									font-size:13px;
+									
+									p.title {
+									float:left;
+									width:70px;	
+									 color: $grey;	
+									}
+									
+									p.data {
+									float:left;
+									width:50px;	
+									}
+									
+								}
+								
+								.more-detail {
+									
+									float:left;
+									width:390px;
+									margin:20px 0;
+									
+									p.role {
+									font-size:20px;	
+									color: $grey;
+									width:390px;
+									}
+									
+									p.role-description {
+										width:390px;
+									}
+								
+								}
+								
+								
+								.validation-info {
+									float:right;
+									width:200px;
+									height:292px;
+									margin-top:-80px;
+									margin-right:-20px;
+									padding:3px;
+									background-color:$bright-green;
+								
+									p.cv-count, p.validation-status  {
+									color:white;
+									text-align:center;	
+									font-size:30px;
+									margin:10px 0 0 0;
+									}
+									
+									p.validation-status {
+										font-size:25px;
+										margin-top:15px;
+									}
+									
+								}
+								
+								
+								}
+							}
+		
+		
+					}	
+		
 	
 	
-	
-	
+}
 }

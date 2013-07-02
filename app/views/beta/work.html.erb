@@ -1,2 +1,126 @@
-<h1>Beta#work</h1>
-<p>Find me in app/views/beta/work.html.erb</p>
+<div class="container_12 work-page">
+	<div class="grid_9 work-container">
+
+
+<div class="work-info-panel">
+	<div class="title">
+		<%= @product.title %>
+	</div>
+	<div class="genre">
+	<% if @product.product_genre %><p><%= @product.product_genre.name %><%end%>
+	</div>	
+	
+	<div id="slides">	
+			<% if @product.image.blank? %>
+		<div class="slides">
+			<%= image_tag 'default-small.png'%>
+		</div>	
+		<%else%>
+		<div class="slides">
+			<%= image_tag @product.image.small %>
+		</div>	
+		<%end%>
+		<% if @product.image_2 %>
+		<div class="slides">	
+		<%= image_tag @product.image_2.small %>
+		</div>
+
+		<% end %>
+
+		<% if @product.image_3 %>
+		<div class="slides">
+		<%= image_tag @product.image_3.small %>
+		</div>
+		<% end %>
+	</div>	
+
+	<div class="stats">
+		<p class="credit-count">14</p>
+		<p class="credits">Credits</p>
+			<div class="verified-count">
+				<p class="verified-credits">10</p>
+				<p class="verifed">Validated</p>
+			</div>
+				<div class="images">
+					<p class="verified-credits">10</p>
+					<p class="verifed">Videos</p>
+				</div>
+					<div class="videos">
+						<p class="verified-credits">10</p>
+						<p class="verifed">Images</p>
+					</div>
+	</div>
+
+
+	<div class="description-containter">
+		<div class="analytics">
+			
+		</div>
+		
+		<div class="description">
+			<div class="details">
+				<p class="description-title">Date added</p><p class="data"><%= @product.created_at.strftime("%Y") %></p>
+				<p class="description-title">Added By</p><p class="data"><%= @product.user.name %></p><br /><br />
+				<p class="description-title">Developer</p><p class="data"><%= @product.studio %></p>
+				<p class="description-title">Status</p><p class="data"><%= @product.status %></p>
+		
+			</div>
+			
+			<p class="description-text"><%= @product.description %></p>	
+			
+		</div>
+			
+	</div>	
+			
+		
+	
+	</div>	
+		
+<div class="credits">
+	<% @credits.each do |c| %>
+	<div class="credit-item">
+		<% if c.user %>
+	<%= image_tag c.user.profile_picture, :width => "50" %>	 
+	<div class="user-name">
+	<%= link_to c.user.name, user_path(c.user) %>
+	</div>
+	
+	<div class="user-details">
+		<p class="title">Credits</p><p class="data"><%= c.user.credits_count %></p>
+		<p class="title">Followers</p><p class="data">5</p>
+	</div>
+	
+	<div class="more-detail">
+		<p class="role"><%= c.role %></p>
+		<p class="role-description"><%= c.role_desc %></p>
+	</div>
+	<div class="validation-info">
+	<p class="cv-count">
+	<% if c.confirmed_validations_count > 2 %>
+	<%= image_tag '/assets/beta/tick.png' %>
+	<% else %>	
+		<%= c.confirmed_validations_count %>/3</p><br />
+		
+	<% end %>	
+	<p class="validation-status">
+		<% if c.confirmed_validations_count > 2  %>
+		Verfied</p>
+		<% else %>
+		Partly Verified
+		<% end %>
+		
+	</div>
+		<% end %>
+	</div>
+	<% end %>
+	
+</div>
+
+
+
+	</div>
+	<div class="grid_3 acticvity-feed">
+		
+	</div>
+	
+</div>
