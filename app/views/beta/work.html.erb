@@ -54,7 +54,43 @@
 
 	<div class="description-containter">
 		<div class="analytics">
-			
+			<div class="followers">
+				<div class="data">
+					11
+				</div>
+				<div class="title">
+					Followers
+				</div>	
+				</div>
+				
+				<div class="likes">
+					<div class="data">
+						11
+					</div>
+					<div class="title">
+						Likes
+					</div>	
+					</div>
+					
+					
+					<div class="shared">
+						<div class="data">
+							11
+						</div>
+						<div class="title">
+							Shared
+						</div>	
+					</div>
+						
+						
+						<div class="views">
+							<div class="data">
+								11
+							</div>
+							<div class="title">
+								Views
+							</div>	
+						</div>		
 		</div>
 		
 		<div class="description">
@@ -69,14 +105,24 @@
 			<p class="description-text"><%= @product.description %></p>	
 			
 		</div>
-			
+		<div class="actions">
+		<a href="#" class="blue-btn">Like <%= image_tag '/assets/beta/like.png' %></a>
+		<a href="#" class="blue-btn">Follow Work <%= image_tag '/assets/beta/follow.png' %></a>
+		</div>
 	</div>	
-			
-		
-	
 	</div>	
-		
 <div class="credits">
+
+	<div class="actions">
+		<a href="#" class="blue-btn-border">Add Credit <%= image_tag '/assets/beta/like.png' %></a>
+		<div class="sort">
+		<select onchange="if (this.value) window.location.href=this.value">
+			    <option value="1">Sort by..</option>
+			    <option value="/products/<%= @product.id %>?sort=created_at desc">Most Recent</option>
+			    <option value="/products/<%= @product.id %>?sort=verified">Verified</option>
+			</select>
+		</div>	
+	</div>
 	<% @credits.each do |c| %>
 	<div class="credit-item">
 		<% if c.user %>
@@ -94,6 +140,12 @@
 		<p class="role"><%= c.role %></p>
 		<p class="role-description"><%= c.role_desc %></p>
 	</div>
+	
+	<a href"#" class="blue-btn-border-large">View Interesting Fact</a>
+		
+	
+	
+	
 	<div class="validation-info">
 	<p class="cv-count">
 	<% if c.confirmed_validations_count > 2 %>
@@ -108,7 +160,186 @@
 		<% else %>
 		Partly Verified
 		<% end %>
+	
+	
+<div class="head-shots">
+		<% if c.credit_validations.empty? %>
+			<% 3.times do %>
+			<a class="show_hide_validate_partial_<%= c.id.to_i %>">
+			<span class="picture">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+					<%= image_tag '/assets/empty.png' %>
+				<% else %>	
+				<%= image_tag '/assets/question.png' %>	
+				<% end %>
+				<% else %>
+				<%= image_tag '/assets/question.png' %>
+				<% end %>
+			</span>
+			</a>
+			<% end %>
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
 		
+					<% end %> <% end %>
+			<% else %>
+
+		<% end %>
+	
+		
+	
+					<% if c.credit_validations.count.eql?(1) %>
+					<span class="tick-text" style="">Who will actually vouch for me: </span><br />
+		<% c.credit_validations.each do |cv| %>
+		<% if cv.status == "confirmed" %>
+		<span class="picture">
+			<% @user = User.find_by_id(cv.validator_id) %>
+		<a href="/users/<%= cv.validator_id %>" name="confirmed1"><img src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square" style="margin-top:-5px;"></a>
+		</span>
+	
+		<% end %>
+			<% if cv.status == "pending" %>
+			<span class="picture">
+				<% if current_user %>
+					<% if current_user.id == c.user_id  %>
+				<%= link_to credit_validation_path(cv) do %>
+			<%= image_tag '/assets/pending.png' %>
+	
+				<% end %>
+				<% else %>
+					<%= image_tag '/assets/pending.png' %>
+						<% end %>
+						<% else %>
+							<%= image_tag '/assets/pending.png' %>
+							<% end %>
+			
+				</span>
+		
+		
+		
+	
+			<% end %>
+			<% 2.times do %>
+			<a class="show_hide_validate_partial_<%= c.id %>">
+			<span class="picture">
+			<% if current_user %>	
+				<% if current_user.id == c.user_id  %>
+					<%= image_tag '/assets/empty.png' %>
+				<% else %>	
+				<%= image_tag '/assets/question.png' %>	
+				<% end %>
+				<% end %>
+			
+				
+			</span>
+			</a>
+			<% end %>
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+		
+					<% end %> <% end %>
+			<% end %>
+			<% else %>
+	
+	<% end %>
+
+	<% if c.credit_validations.count.eql?(2)  %>
+	<% c.credit_validations.each do |cv| %>
+	<% if cv.status == "confirmed" %>
+	<span class="picture">
+		<% @user = User.find_by_id(cv.validator_id) %>
+	<a href="/users/<%= cv.validator_id %> "name="confirmed2"><img src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square" style="margin-top:-5px;"></a>
+
+	</span>
+	<% end %>
+		<% if cv.status == "pending" %>
+	
+		<span class="picture">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+			<%= link_to credit_validation_path(cv) do %>
+		<%= image_tag '/assets/pending.png' %>
+	
+			<% end %>
+			<% else %>
+				<%= image_tag '/assets/pending.png' %>
+					<% end %>
+					<% else %>
+						<%= image_tag '/assets/pending.png' %>
+						<% end %>
+	
+			</span>
+	<% end %>
+
+		
+		<% end %>
+		<% 1.times do %>
+		<a class="show_hide_validate_partial_<%= c.id %>">
+			<span class="picture">
+			<% if current_user %>	
+				<% if current_user.id == c.user_id  %>
+					<%= image_tag '/assets/empty.png' %>
+				<% else %>	
+				<%= image_tag '/assets/question.png' %>	
+				<% end %>
+				<% end %>
+			</span>
+	
+		</a>
+		<% if current_user %>
+			<% if current_user.id == c.user_id  %>
+	
+				<% end %> <% end %>
+		<% end %>
+	
+		<% end %>
+	
+		<% if c.credit_validations.count.eql?(3)  %>
+		<% c.credit_validations.each do |cv| %>
+	
+		<% if cv.status == "confirmed" %>
+		<span class="picture">
+			<% @user = User.find_by_id(cv.validator_id) %>
+		<a href="/users/<%= cv.validator_id %>" name="confirmed3"><img src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square" style="margin-top:-5px;"></a>
+		</span>
+		<% end %>
+			<% if cv.status == "pending" %>
+		<span class="picture">
+			<% if current_user %>
+				<% if current_user.id == c.user_id  %>
+			<%= link_to credit_validation_path(cv) do %>
+		<%= image_tag '/assets/pending.png' %>
+	
+			<% end %>
+			<% else %>
+				<%= image_tag '/assets/pending.png' %>
+					<% end %>
+					<% else %>
+						<%= image_tag '/assets/pending.png' %>
+						<% end %>
+		
+			</span>
+		
+			<% end %>
+
+		
+			<% end %>
+	
+	
+			<% end %>
+	
+	
+	
+</div>	
+	
+	
+	
+	
+	
+	
+	
+	
 	</div>
 		<% end %>
 	</div>
@@ -119,7 +350,7 @@
 
 
 	</div>
-	<div class="grid_3 acticvity-feed">
+	<div class="grid_3 activity-feed">
 		
 	</div>
 	

@@ -7,7 +7,7 @@ class BetaController < ApplicationController
 
   def work
     @product = Product.find_by_id(79)
-    @credits = Credit.where(:product_id => @product.id).where(:user_id != nil)
+    @credits = Credit.find_all_by_id([101,20,102])
   end
 
   def user
