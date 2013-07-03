@@ -40,7 +40,7 @@ gem "fog", "~> 1.3.1"
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
-gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git" # Without Devise
+gem "rails_admin", "0.4.9" # Without Devise
 gem 'client_side_validations'
 gem 'awesome_nested_fields'
 gem 'letsrate'
