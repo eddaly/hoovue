@@ -141,8 +141,26 @@
 		<p class="role-description"><%= c.role_desc %></p>
 	</div>
 	
-	<a href"#" class="blue-btn-border-large">View Interesting Fact</a>
-		
+	
+	<script type="text/javascript">
+ 
+	$(document).ready(function(){
+ 
+	        $(".slidingDiv_interesting_fact_<%= c.id %>").hide();
+	        $(".show_hide_interesting_fact_<%= c.id %>").show();
+ 
+	    $('.show_hide_interesting_fact_<%= c.id %>').click(function(){
+	    $(".slidingDiv_interesting_fact_<%= c.id %>").slideToggle();
+	    });
+ 
+	});
+ 
+	</script>
+
+	
+	<div class="interesting_fact">
+		<a href"#" class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact</a>
+	</div>
 	
 	
 	
@@ -341,8 +359,52 @@
 	
 	
 	</div>
+	
 		<% end %>
 	</div>
+		
+		<div class="slidingDiv_interesting_fact_<%= c.id %>" id="interesting_fact">
+			<h3>Interesting Fact:</h3>
+				 <% if current_user %>			
+<% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>">Tweet this fact</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</h3><p><%= c.fact %></p>
+
+
+
+<% if c.product.status == "In Development" or c.product.status == "Live and Ongoing"  %>	
+
+
+<h3>Updates:</h3>
+	  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(4) %>
+<% if current_user %>			
+	<% if current_user.id == c.user_id %>	
+			<%= form_for(@post) do |f| %>
+			  <% if @post.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+			      <ul>
+			      <% @post.errors.full_messages.each do |msg| %>
+			        <li><%= msg %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+			  <div class="field">
+			    <%= f.label :post_an_update %><br />
+			    <%= f.text_area :body, :rows => "5" %>
+				<%= f.hidden_field :credit_id, :value => c.id %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit "Add update", :class => "blue-link" %>
+			 
+			<% end %>
+	<% end %>	
+		<% end %>
+		<% end %>
+		</div>	
 	<% end %>
 	
 </div>
