@@ -36,7 +36,12 @@
 			<%= image_tag '/assets/beta/divider.png' %>
 			</div>
 			
-			
+			<div class="grid_4 search">
+			<%= form_tag search_credits_path, :method => 'get' do %>
+			  <%= text_field_tag :search, params[:search] %>
+					 <%= submit_tag "", :name => nil, :class => "search-button" %>   
+			<% end %>
+			</div>
 			
 			<div class="divider">
 			<%= image_tag '/assets/beta/divider.png' %>
