@@ -108,7 +108,7 @@ $main: #273F4E;
     font-size:16px;
     padding: 5px 10px;  
     width:95%;
-    @include white-box;
+    background-color:white;
     margin: 5px 0;
     
       .a {
@@ -129,7 +129,7 @@ $main: #273F4E;
     }
     
     li.even {
-      background: #F0F0F0;
+      background: white;
     }
   }
   

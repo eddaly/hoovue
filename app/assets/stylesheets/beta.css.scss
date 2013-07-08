@@ -13,6 +13,7 @@ body.new {
 	font-family:lato;
 	font-szie:12px;
 	
+	
 	p.error, p.notice {
 	
 	text-align:center;
@@ -31,6 +32,15 @@ float:left;
 	h3 {
 		font-size:15px;
 	}
+	
+		input  {
+		height:28px;	
+		width:221px;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		}
+	
 	
 .blue-btn, .blue-btn-border, .blue-btn-border-large {
 	width:100%;
@@ -271,7 +281,7 @@ float:left;
 		
 		.slider {
 			padding:20px 20px 20px 40px;
-			margin-left:300px;	
+			margin-left:200px;	
 				
 			img {
 			max-height:200px;	
@@ -989,5 +999,12 @@ float:left;
 	}
 	
 }
+
+
+.search-page {
+	background-color: #E5EAED;
+	padding:5px;
+}
+
 
 }
