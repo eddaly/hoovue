@@ -41,6 +41,10 @@ class ImageUploader < CarrierWave::Uploader::Base
       version :tall do
         process :resize_to_limit => [358,428]
       end
+      
+      version :post do
+        process :resize_to_limit => [600,428]
+      end
     
  
   

@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  attr_accessible :body, :title, :credit_id
+  attr_accessible :body, :title, :credit_id, :image, :video
     belongs_to :credit
-    validates_presence_of :body
+   
+     mount_uploader :image, ImageUploader
 end

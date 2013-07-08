@@ -75,15 +75,16 @@ float:left;
 .interesting_fact {
 	a {
 		float:left;
-		width:300px;
+		width:400px;
 		height:35px;
 		padding:15px 0 0 0;
 		font-size:20px;
 		border:4px;
 		text-align:center;	
 		color:white;
+		cursor:hand;
 		text-transform:uppercase;
-		
+		text-decoration:underline;
 		background-color:$light-blue;
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -677,7 +678,83 @@ float:left;
 									margin-top:-10px;
 									background-color: #003F46;
 									color:white;
+				
+									p.fact {
+				
+										background-color:$grey;
+										padding:10px;
+					
+									}
+				
+									textarea, input {
+									width:650px;
+									background-color:#195259;	
+									border:none;
+									color:white;
+									border-radius:0px;
+									}
+				
+									.file-upload {
+										padding:10px 5px 0 5px;
+										background-color:#195259;
+										width:200px;
+									}
+				
+									input {
+										width:200px;
+					
+									}
+				
+									.submit {
+										width:120px;
+										height:30px;
+										border:none;
+										color:white;
+										text-transform:uppercase;
+										padding:5px 10px;
+										background-color:$light-blue;
+										-webkit-border-radius: 5px;
+										-moz-border-radius: 5px;
+										border-radius: 5px;
+										margin:5px 0 10px 250px;
+				
+									}
+				
+									ul.posts {
+					
+					
+					
+									li {
+										background-color:white;
+										color:$grey;
+										padding-bottom:5px;
+										margin-top:20px;
+					
+										p.time {
+										background-color:#195259;	
+										padding:5px;
+										}
+					
+										p.content {
+											padding:5px;
+											margin-bottom:10px;
+											color:#003F46;
+											font-size:18px;
+										}
+					
+										img {
+											margin:0 0px 40px 25px;
+										}
+					
+										iframe {
+											margin-left:10px;
+										}
+					
+										}	
+					
+									}
 								}
+							
 							}
 		
 		
@@ -936,6 +1013,81 @@ float:left;
 				margin-top:-10px;
 				background-color: #003F46;
 				color:white;
+				
+				p.fact {
+				
+					background-color:$grey;
+					padding:10px;
+					
+				}
+				
+				textarea, input {
+				width:650px;
+				background-color:#195259;	
+				border:none;
+				color:white;
+				border-radius:0px;
+				}
+				
+				.file-upload {
+					padding:10px 5px 0 5px;
+					background-color:#195259;
+					width:200px;
+				}
+				
+				input {
+					width:200px;
+					
+				}
+				
+				.submit {
+					width:120px;
+					height:30px;
+					border:none;
+					color:white;
+					text-transform:uppercase;
+					padding:5px 10px;
+					background-color:$light-blue;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					border-radius: 5px;
+					margin:5px 0 10px 250px;
+				
+				}
+				
+				ul.posts {
+					
+					
+					
+				li {
+					background-color:white;
+					color:$grey;
+					padding-bottom:5px;
+					margin-top:20px;
+					
+					p.time {
+					background-color:#195259;	
+					padding:5px;
+					}
+					
+					p.content {
+						padding:5px;
+						margin-bottom:10px;
+						color:#003F46;
+						font-size:18px;
+					}
+					
+					img {
+						margin:0 0px 40px 25px;
+					}
+					
+					iframe {
+						margin-left:10px;
+					}
+					
+					}	
+					
+				}
 			}
 		}
 
