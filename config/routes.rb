@@ -8,6 +8,8 @@ Hoo::Application.routes.draw do
   get "beta/work"
 
   get "beta/user"
+  
+  get "beta/add_credit"
 
   resources :emails
 
