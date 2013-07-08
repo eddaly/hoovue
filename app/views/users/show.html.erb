@@ -228,7 +228,7 @@
 		
 	
 					<% if c.credit_validations.count.eql?(1) %>
-					<span class="tick-text" style="">Who will actually vouch for me: </span><br />
+				
 		<% c.credit_validations.each do |cv| %>
 		<% if cv.status == "confirmed" %>
 		<span class="picture">

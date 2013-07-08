@@ -7,7 +7,7 @@
 	 </div>
 	
 	<h2>Enter the name of the Work you wish to be credited for:</h2>
-	<div class="search">
+	
 		
 <%= form_tag search_credits_path, :method => 'get' do %>
 
@@ -15,10 +15,7 @@
      <%= submit_tag "Search", :name => nil, :class => "search-button" %>
   <%end%>
   </p>
-</div>
-
-
-<%= link_to "Use the quick add credits page >", batch_credits_path %>
+  <%= link_to "Use the quick add credits page >", batch_credits_path %>
   <p>
   <div id="products-list"> <%= render 'search_results'%></div>
    
