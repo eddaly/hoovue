@@ -122,7 +122,7 @@
 		
 		<div id="openModalhoovue" class="modalDialog">
 			<div>
-				<a href="#close" title="Close" class="close">X</a>
+				<a href="#close" title="Close" class="close" style="width:30px;">X</a>
 				<h2>Add your credit</h2>
 				
 				<%= form_for(@credit) do |f| %>
@@ -399,8 +399,6 @@
 								<%= form_for(@credit_validation) do |f| %>
 								<%= f.label "Select existing co-creator:"%>
 								<div style="z-index:1000;">
-									
-								
 									<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => @product.id).uniq, :id, :user_name, :prompt => "Please Select" %>
 									</div> 
 									<%= f.hidden_field :validator_id, :value => current_user.id %>
@@ -453,7 +451,7 @@
 		    
 										<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 			
-								 			<%= f.submit 'Validate Your Credit', :id => 'blue-link' %>
+								 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :class => 'submit' %>
 				
 								<% end %> 
 							</div>
@@ -494,14 +492,15 @@
 								<% end %>
    
 										<%= f.label "What was the role of your co-creator?"%>
+										<div>
 										<%= f.text_field :role %>
-
+										</div>	
 			
 									 		<%= f.hidden_field :product_id, :value => c.product.id %>
 			
 											<%= f.hidden_field :current_credit_id, :value => c.id %>
 			   
-									 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook' %>
+									 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
 				
 									<% end %> 
 								 

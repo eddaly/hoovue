@@ -1,0 +1,235 @@
+<div class="container_12 pages">
+	
+	</div>
+
+	<div class="container_12 profile-header">
+		<h1><%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <%= link_to '(manage additional e-mail addresses)', emails_path %> <% end %> <% end %> </span></h1> 
+		
+		
+		<div class="grid_3 alpha">
+	<% if @user.picture.blank? %>
+
+	<% if @user.provider == "facebook" %>		
+<img src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+	<% end %>
+	<% if @user.provider == "linkedin" %>		
+<%= image_tag @user.profile_picture %><br />
+	<% end %>
+	<% else %>
+	<%= image_tag @user.picture %>
+	<% end %>
+	
+<% if current_user %>
+	 <% if current_user.id == @user.id %>
+	 		<% else %>
+<%= link_to 'Follow +', friendships_path(:friend_id => @user.id), :method => :post %>
+
+	<% end %>
+			<% end %>
+		
+			</div>
+			
+		  
+			<div class=grid_5>
+				<h3>About <% if current_user && current_user.id == @user.id %> 
+					me:
+					<% else %>
+					<%= @user.name %>:
+					<% end %>
+				</h3>
+				
+			<p>
+				<span style="color:red; font-size:16px;">	
+					Number of credits: <%= @user.credits.count %>
+				</span><br />
+				<span style="color:orange; font-size:16px;">	
+					Number of part verified credits: <%= @user.credits.cv_part.count%>
+				</span><br />
+				<span style="color:green;  font-size:16px;">
+					Number of verified credits: 0
+				</span><br />
+				<span style="color:blue;  font-size:16px;">
+					Number of followers: <%= @followers.count%>
+				</span><br />
+			</p>					
+				
+				
+				
+				<p><%= @user.bio %></p>
+		<h3><a href="http://<%= @user.link %>" target=blank ><%= @user.link %></a></h3>
+			</div>
+			
+			<div class="grid_4 omega"  style="margin-top:10px;">
+			<% if @user.twitter.blank? %>
+			
+			<% else %>
+			
+			<script src="https://widgets.twimg.com/j/2/widget.js"></script>
+				<script>
+				new TWTR.Widget({
+				  version: 2,
+				  type: 'profile',
+				  rpp: 10,
+				  interval: 6000,
+				  width: 290,
+				  height: 200,
+				  theme: {
+				    shell: {
+				      background: '#808080',
+				      color: '#fff',
+					  border: '#000'
+				    },
+				    tweets: {
+				      background: '#fff',
+				      color: '#000',
+				      links: '#000000'
+				    }
+				  },
+				  features: {
+				    scrollbar: true,
+				    loop: false,
+				    live: true,
+				    hashtags: true,
+				    timestamp: true,
+				    avatars: false,
+				    behavior: 'all'
+				  }
+				}).render().setUser('<%= @user.twitter %>').start();
+				</script>
+			
+			
+			
+			
+				<% end %>
+			</div>
+	
+		
+		<div class="twitter-follow" style="float:right; margin:10px 30px 0 0;">
+			<% if @user.twitter.blank? %>
+			
+			<% else %>
+			<a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @<%= @user.twitter %></a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<br />
+			<% end %>
+			</div>
+		Share this page:<br /> <%= render '/layouts/addthis' %>	
+			</div>
+			
+	
+
+
+
+	<div class="following">
+<% if current_user && current_user.id == @user.id %> 
+<h2>Following:</h2>
+<% for friendship in current_user.friendships%>
+<%= link_to user_path(friendship.friend.id) do %><%= friendship.friend.name %><% end %>(<%= link_to "unfollow", friendship, :method => :delete %>)    <br />
+<%end%>
+<% end %>
+
+<h2>Followed by:</h2>
+
+  <% for user in @user.inverse_friends %>
+<%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
+  <% end %>
+
+
+</div>
+
+
+
+<div class="container_12 credits-form">
+	<h1>Credits</h1>
+	<% if @credits.empty? %>
+		<% if current_user && current_user.id == @user.id %> 
+	<h3>You have no credits.</h3>
+		<% else %>
+	<h3><%= @user.name%> has no credits.</h3>	
+		<% end %>
+	<% end %>
+<ul>
+	<% @credits.each do |c| %>
+	<li class="<%= cycle('even', 'odd') -%>"style="
+			<% if c.credit_validations.confirmed.empty? %>
+			border: 1px solid red;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+			border: 1px solid orange;
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				border: 1px solid orange;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+			border: 1px solid green;
+			<% end %>
+			
+			">
+		<div class="card-status">
+			<% if c.credit_validations.confirmed.empty? %>
+				<span class="un">Unverified</p>
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+				<span class="part">Part Verified</p>
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				<span class="part">Part Verified</p>
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+				<span class="valid">Verified</p>
+			<% end %>
+				
+		</div>
+	<h2><% if c.product.image? %>
+			<%= image_tag c.product.image.thumb.to_s %>
+				 <%else%> 
+			<%= image_tag '/assets/default-credit-small.jpg'%>
+	 <%end%>  
+	   
+	 
+	  <%= c.role%> <% if current_user %>			
+<% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> on   <%= link_to c.product.title, product_path(c.product)%></h2>
+		
+		
+	<%= render '/credits/ticks', :c => c %>
+	
+<br /><br /><br /><br />
+	   
+				
+<%= render '/credits/more-detail', :c => c %>	
+
+
+	
+
+<div class="container_12">
+	<% if current_user %>			
+	<% if current_user.id == c.user_id %>
+	<%= link_to 'Delete this credit', c, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+	<% end %>
+	<% end %>
+</div>
+
+	<%= render '/credits/validate-credit', :c => c, :p => c.product %>	
+
+<%end%>
+	</li>
+			
+</ul>
+
+</div>
+
+
+
+
+
+
+
+		
+	
+

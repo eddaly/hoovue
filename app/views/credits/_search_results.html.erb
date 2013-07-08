@@ -110,7 +110,7 @@
 		<%= form_tag new_product_path, :method => 'get' do%>
 		  <p>
 Please select a category for your new work then click 'Add new work':<br />			  
- <%= select_tag :name, options_from_collection_for_select(ProductGenre.all, :id, :name, params[:product_category]), :class => "select_list" %>
+ <%= select_tag :name, options_from_collection_for_select(ProductGenre.all, :id, :name, params[:product_category]), :class => "select-advanced" %>
 
  <%= submit_tag "Add new work", :class => "search-button" %>
 

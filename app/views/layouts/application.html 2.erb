@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>whoactually | Credited with Intelligence</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="/assets/favicon.ico" />
+  <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+ <script type="text/javascript">  $(document).ready(function() { $(".select-advanced").select2({ width: 'element' }); }); </script>
+</head>
+<SCRIPT charset="utf-8" type="text/javascript" src="http://ws.amazon.co.uk/widgets/q?ServiceVersion=20070822&MarketPlace=GB&ID=V20070822/GB/whoactually-21/8005/5a799ec4-96f9-454c-91c9-334719815924"> </SCRIPT>
+
+<%= render '/layouts/google_analytics'%>
+<body class="old">
+		<div class="wrapper">
+			<div class="container_12 header">	
+				<div class="logo">
+					<a href="/">
+				<span style="color:red;">who</span>actually
+					</a>
+				</div>
+				<div class="container_12 main-navi">
+					<ul>
+					 <% if current_user %>
+					<li> <%= image_tag "/assets/home-icon.png"%> <a href="/">Home</a></li>
+					<li><a href="/users/<%= current_user.id%>">My Profile</a></li>
+					<li><%= image_tag "/assets/plus-icon.png"%><a href="/credits/search">Add a Credit</a></li>
+		
+					
+						
+					<%end%>
+				
+							
+					</ul>	
+					</div>		
+				<div class="user-navi">
+  <% if current_user %>
+  
+   <div class="signed-in">
+   <div class="signed-in-text">Signed in as <strong><a href="/users/<%= current_user.id%>"><%= current_user.name %></a> | <%= link_to "Sign out", signout_path %> </div>
+	   
+	  	  	<%= image_tag current_user.profile_picture, :width => "50" %>	 
+
+	 </strong>
+ 	  
+ 	</div>
+
+  <% else %>
+  	<div class="login">
+    <%= link_to "", "/auth/facebook", id: "login_with_facebook" %>
+	<%= link_to "", "/auth/linkedin", id: "login_with_linkedin" %>
+		</div>
+  <% end %>
+  
+				</div>
+			</div>
+	
+
+
+<div class="container_12 yield-wrapper">
+	<% if flash[:notice] %>
+	      <p class="notice"><%= flash[:notice] %></p>
+	    <% end %>
+	    <% if flash[:error] %>
+	      <p class="error"><%= flash[:error] %></p>
+	    <% end %>
+<%= yield %>
+
+	<div class="footer">
+		&copy; 2013 Itsoo Ltd | <a href="/terms">Terms of Use</a> | <a href="mailto:contact@whoactually.com">Contact Us</a> | Release: <%= ENV['rel'] %> | <% if current_user && current_user.role = "admin" %>
+			<%= link_to 'Admin', rails_admin_path %>
+			<%end%>
+	</div>
+	</div>
+	<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+	<script type="text/javascript">
+	  var _sf_async_config = { uid: 47632, domain: 'alpha.whoactually.com', useCanonical: true };
+	  (function() {
+	    function loadChartbeat() {
+	      window._sf_endpt = (new Date()).getTime();
+	      var e = document.createElement('script');
+	      e.setAttribute('language', 'javascript');
+	      e.setAttribute('type', 'text/javascript');
+	      e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
+	      document.body.appendChild(e);
+	    };
+	    var oldonload = window.onload;
+	    window.onload = (typeof window.onload != 'function') ?
+	      loadChartbeat : function() { oldonload(); loadChartbeat(); };
+	  })();
+	</script>
+	<!-- UserVoice JavaScript SDK (only needed once on a page) -->
+	<script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/VUuMusu6f4sJpeHJHaikBA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+
+	<!-- A tab to launch the Classic Widget -->
+	<script>
+	UserVoice = window.UserVoice || [];
+	UserVoice.push(['showTab', 'classic_widget', {
+	  mode: 'feedback',
+	  primary_color: '#cc6d00',
+	  link_color: '#007dbf',
+	  forum_id: 209979,
+	  tab_label: 'Give Feedback ',
+	  tab_color: '#cc6d00',
+	  tab_position: 'middle-right',
+	  tab_inverted: false
+	}]);
+	</script>
+</body>
+</html>

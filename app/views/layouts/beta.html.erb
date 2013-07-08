@@ -6,7 +6,7 @@
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/assets/favicon.ico" />
   <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
-  <script type="text/javascript">  $(document).ready(function() { $("select").select2({ width: 'element' }); }); </script>
+  <script type="text/javascript">  $(document).ready(function() { $(".select-advanced").select2({ width: 'element' }); }); </script>
 </head>
 
 
@@ -86,10 +86,12 @@
 
 
 
-
-
-
-
+	<% if flash[:notice] %>
+	      <p class="notice"><%= flash[:notice].join(", ") %></p>
+	    <% end %>
+	    <% if flash[:error] %>
+	      <p class="error"><%= flash[:error].join(", ") %></p>
+	    <% end %>
 	<div class="body-wrapper">
 		
 		

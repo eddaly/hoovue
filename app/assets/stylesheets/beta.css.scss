@@ -13,6 +13,17 @@ body.new {
 	font-family:lato;
 	font-szie:12px;
 	
+	p.error {
+	
+	text-align:center;
+	height:50px;	
+	background-color:$light-blue;
+	font-size:25px;
+	color:white;
+	padding-top:20px;
+		
+	}
+	
 .divider {
 float:left;	
 	}	
