@@ -89,7 +89,15 @@
 			<%= @user.name %>
 		</div>
 	
-		<a href="#" class="blue-btn">Follow <%= image_tag '/assets/beta/follow.png' %></a>
+		<% if current_user %>
+			 <% if current_user.id == @user.id %>
+			 		<% else %>
+		<%= link_to 'Follow +', friendships_path(:friend_id => @user.id), :method => :post, :class => "blue-btn" %>
+
+			<% end %>
+					<% end %>
+		
+		
 	
 		<div class="info">
 			<p class="url"><%= @user.link %></p>
@@ -414,10 +422,10 @@
 
 
 <div class="grid_3 activity-feed">
-
+<% if current_user %>
 	<h3>Recent Activity</h3>
 	
-<% for friendship in @user.friendships%>
+<% for friendship in current_user.friendships%>
 <% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
 <% @friend_credits.each do |fc| %>
 <div class="following-item">
@@ -447,11 +455,11 @@
 
 
 
-  <% for user in @user.inverse_friends %>
+  <% for user in current_user.inverse_friends %>
 <%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
   <% end %>
 
-
+<% end %>
 
 		
 </div>

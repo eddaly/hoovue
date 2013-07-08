@@ -14,8 +14,8 @@ class BetaController < ApplicationController
   end
 
   def user
-    @user = User.find_by_id(3)
-    @credits = Credit.where(:user_id => 3)
+    @user = User.find_by_id(2)
+    @credits = Credit.where(:user_id => 2)
    
   end
 end
