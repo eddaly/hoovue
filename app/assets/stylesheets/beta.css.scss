@@ -608,6 +608,7 @@ float:left;
 								
 								.user-name {
 								float:left;
+								width:355px;
 								color: $light;	
 								font-weight:bold;
 								font-size:20px;
@@ -658,7 +659,7 @@ float:left;
 									margin-top:-180px;
 									margin-right:-20px;
 									padding:3px;
-									background-color:$bright-green;
+									
 								
 									p.cv-count, p.validation-status  {
 									color:white;
@@ -999,6 +1000,7 @@ float:left;
 			
 			.user-name {
 			float:left;
+			width:355px;
 			color: $light;	
 			font-weight:bold;
 			font-size:20px;

@@ -228,12 +228,41 @@
 	
 	
 	
-	<div class="validation-info">
-	<p class="cv-count">
-	<% if c.confirmed_validations_count > 2 %>
-	<%= image_tag '/assets/beta/tick.png' %>
-	<% else %>	
-		<%= c.confirmed_validations_count %>/3</p><br />
+	<div class="validation-info" style="
+			<% if c.credit_validations.confirmed.empty? %>
+			background-color:red;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 1  %>
+			background-color:orange;
+			<% end %>	
+			
+			<% if c.credit_validations.confirmed.count == 2  %>
+				background-color:orange;
+			<% end %>
+			
+			<% if c.credit_validations.confirmed.count == 3  %>
+			background-color:green;
+			<% end %>
+			
+			">
+			<p class="cv-count">
+			<% if c.confirmed_validations_count > 2 %>
+			<%= image_tag '/assets/beta/tick.png' %>
+			<% else %>	
+			<% if c.credit_validations.count > 2 %>
+			3
+			<% end %>
+			<% if c.credit_validations.count.eql?(2) %>
+			2
+			<% end %>
+			<% if c.credit_validations.count.eql?(1) %>
+			1
+			<% end %>
+			<% if c.credit_validations.count.eql?(0) %>
+			0
+			<% end %>
+				/3</p><br />
 		
 	<% end %>	
 	<p class="validation-status">
