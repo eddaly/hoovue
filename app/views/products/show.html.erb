@@ -201,8 +201,14 @@
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %></p>
-		<p class="role-description"><%= c.role_desc %></p>
+		<p class="role"><%= c.role %><% if current_user %>
+							<% if c.user.id == current_user.id  %>
+							<%= link_to "(edit)", role_credits_path(:id => c) %>
+							<% end %> <% end %></p>
+		<p class="role-description"><%= c.role_desc %><% if current_user %>
+							<% if c.user.id == current_user.id  %>
+							<%= link_to "(edit)", role_credits_path(:id => c) %>
+							<% end %> <% end %></p>
 	</div>
 	
 	
@@ -268,7 +274,7 @@
 	<% end %>	
 	<p class="validation-status">
 		<% if c.confirmed_validations_count > 2  %>
-		Verfied</p>
+		Verified</p>
 		<% else %>
 		Partly Verified
 		<% end %>

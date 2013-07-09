@@ -183,7 +183,11 @@ $(document).ready(function(){
 	<% @credits.each do |c| %>
 	
 	
-	<div class="credit-item">
+	<div class="credit-item"
+	<% if c.product.status == "Ongoing" %>
+	style="border:1px solid green;"
+	<% end %>
+	>
 		<% if c.user %>
 	<%= image_tag c.product.image, :width => "50" %>	 
 	<div class="user-name">
@@ -193,10 +197,14 @@ $(document).ready(function(){
 	<div class="user-details">
 		<p class="title">Credits</p><p class="data"><%= c.product.credits.count %></p>
 		<p class="title">Followers</p><p class="data">0</p>
+		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %></p>
+		<p class="role"><%= c.role %><% if current_user %>
+							<% if c.user.id == current_user.id  %>
+							<%= link_to "(edit)", role_credits_path(:id => c) %>
+							<% end %> <% end %></p>
 		<p class="role-description"><%= c.role_desc %><% if current_user %>
 							<% if c.user.id == current_user.id  %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
@@ -266,16 +274,16 @@ $(document).ready(function(){
 	<% end %>	
 	<p class="validation-status">
 		<% if c.credit_validations.confirmed.count > 2 %>
-		Verfied</p>
+		Verified</p>
 		<% end %>
 		<% if c.credit_validations.confirmed.count == 2 %>
-		Part Verfied</p>
+		Part Verified</p>
 		<% end %>
 		<% if c.credit_validations.confirmed.count == 1 %>
-		Part Verfied</p>
+		Part Verified</p>
 		<% end %>
 		<% if c.credit_validations.confirmed.count == 0 %>
-		Un Verfied</p>
+		Un Verified</p>
 		<% end %>
 	
 	
