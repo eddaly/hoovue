@@ -134,6 +134,13 @@ float:left;
 					
 				}
 			}
+			
+			a {
+			float:left;	
+			margin:15px 0 0 50px;
+			color:$grey;
+			
+		}
 		}
 		
 		
@@ -439,7 +446,7 @@ float:left;
 			
 			p.verified-credits {
 				font-size:25px;
-				margin:20px 0px 5px 5px;
+				margin:20px 0px 5px 20px;
 				
 			}
 			
@@ -1177,7 +1184,7 @@ float:left;
 	border-bottom:1px solid #7F9EA1;
 	padding:5px;
 	margin:5px 0;	
-	height:100px;
+	height:120px;
 	
 	.profile-picture {
 	float:left;	
@@ -1249,6 +1256,26 @@ float:left;
 	input.search-button {
 		background-color:$light;
 	}
+}
+
+.edit-credit {
+	
+	background-color:#f1f1f1;
+	padding:20px;
+	
+	textarea, input {
+		
+			width:350px;
+			background-color:#195259;	
+			border:none;
+			color:white;
+			margin-top:4px;	
+			border-radius:0px;
+		}
+	
+		input {
+			background-color:$light;
+		}
 }
 
 

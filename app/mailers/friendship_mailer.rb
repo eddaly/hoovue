@@ -1,4 +1,4 @@
-class FriendshipMailer < ActionMailer::Base
+  class FriendshipMailer < ActionMailer::Base
   default from: "from@whoactually.com"
   
   def new_friendship(user)

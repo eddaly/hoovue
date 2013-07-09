@@ -19,9 +19,9 @@ end
   def show
     @product = Product.find(params[:id])
     if params[:sort] == "verified"
-     @credits = @product.credits.where(:user_id.blank?).order("confirmed_validations_count DESC, created_at DESC")
+     @credits = @product.credits.where(:user_id != 0).order("confirmed_validations_count DESC, created_at DESC")
    else
-       @credits = @product.credits.where(:user_id.blank?).order(params[:sort])
+       @credits = @product.credits.where(:user_id != 0).order(params[:sort])
    end
         if current_user
         @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)

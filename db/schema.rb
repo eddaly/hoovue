@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "moderation_status"
     t.string    "image_2"
     t.string    "image_3"
+    t.integer   "like_count"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

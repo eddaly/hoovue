@@ -1,29 +1,3 @@
-<script>
-		 $(function() {
-      $('#slides').slidesjs({
-        width: 280,
-        height: 180,
-        navigation: {
-      active: false,
-      effect: "fade"
-        // [string] Can be either "slide" or "fade".
-    },
-    pagination: {
-      active: false,
-        // [boolean] Create pagination items.
-        // You cannot use your own pagination. Sorry.
-      effect: "fade"
-        // [string] Can be either "slide" or "fade".
-    },
-        play: {
-          active: true,
-          auto: true,
-          interval: 5000,
-          swap: true
-        }
-      });
-    });
-	</script>
 
 
 <div class="container_12 work-page">
@@ -212,6 +186,8 @@
 	</div>
 <% end %>
 	<% @credits.each do |c| %>
+		<% if c.user_id.blank? %>
+		<% else %>
 	<div class="credit-item">
 		<% if c.user %>
 	<%= image_tag c.user.profile_picture, :width => "50" %>	 
@@ -221,7 +197,7 @@
 	
 	<div class="user-details">
 		<p class="title">Credits</p><p class="data"><%= c.user.credits_count %></p>
-		<p class="title">Followers</p><p class="data">5</p>
+		<p class="title">Followers</p><p class="data"><%= c.user.friendships.count %></p>
 	</div>
 	
 	<div class="more-detail">
@@ -933,12 +909,12 @@
 	</div>
 		
 		<div class="slidingDiv_interesting_fact_<%= c.id %>" id="interesting_fact">
-			<h3>Interesting Fact: <%= c.id %></h3>
+			<h3>Interesting Fact:</h3>
 				 <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>">Tweet this fact</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</h3><p><%= c.fact %></p>
+</h3><p class="fact"><%= c.fact %></p>
 
 
 
@@ -999,6 +975,7 @@
 		
 		<% end %>
 		</div>	
+		<% end %>
 	<% end %>
 	
 </div>
@@ -1008,7 +985,7 @@
 	</div>
 	<div class="grid_3 activity-feed">
 		<% if current_user %>
-			<h3>Recent Activity</h3>
+			<h3>Recent Following Activity</h3>
 	
 		<% for friendship in current_user.friendships%>
 		<% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
@@ -1024,14 +1001,14 @@
 			</div>
 			<div class="stats">
 			<p>Credits</p> <div class="data">
-			 <%= friendship.friend.credits_count %>
+			 <%= friendship.friend.credits.count %>
 			</div>
 			</div>	
 		<div class="role">
 				<%= fc.role %>
 			</div>
 			<div class="product-title">
-			<%= fc.product.title %>
+		<a href="/products/<%= fc.product.id %>"><%= fc.product.title %></a>
 			</div>
 		</div>
 		<% end %>
@@ -1045,6 +1022,10 @@
 		  <% end %>
 
 		<% end %>
+
+		
+		</div>
+		
 		
 	</div>
 	

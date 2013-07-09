@@ -36,7 +36,7 @@
 		<a href="#openModalvideo" class="blue-btn">Watch the video tour</a>
 			
 		<div id="openModalvideo" class="modalDialog">
-			<div>
+			<div style="margin-top:10%">
 					<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 				
 		<iframe src="http://player.vimeo.com/video/69849153?byline=0&amp;portrait=0&amp;color=ff0179" width="624" height="351" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
@@ -51,7 +51,7 @@
 <% else %>
 <div class="row-2">
 	<div class="container_12 row-2-content">
-		<h1>Sign up or in to WhoActually</h1>
+		<h1>Sign up or into WhoActually</h1>
 		<p>By creating your WhoActually account you agree to our <a>Terms of Use</a> and  <a>Privacy Policy</a></p>
 
 		<div class="signin">
@@ -80,12 +80,11 @@
 <div class="row-3">
 	<div class="container_12 slider">
 		<h2>Featured Creators</h2>
-		<%= image_tag '/assets/beta/arrow-left.png' %>
-	<% @featured_users.each do |fu| %>
 		
-		<img src="http://graph.facebook.com/<%= fu.uid%>/picture?type=large">
+	<% @featured_users.each do |fu| %>
+	<%= link_to user_path(fu.id) do %><img src="http://graph.facebook.com/<%= fu.uid%>/picture?type=large"><% end %>
 	<% end %>
-	<%= image_tag '/assets/beta/arrow-right.png' %>
+	
 	</div>	
 	
 	<div class="container_12 charts">

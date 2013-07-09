@@ -181,6 +181,8 @@ $(document).ready(function(){
 	<h2>Credits</h2>
 	
 	<% @credits.each do |c| %>
+	
+	
 	<div class="credit-item">
 		<% if c.user %>
 	<%= image_tag c.product.image, :width => "50" %>	 
@@ -189,8 +191,8 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= c.user.credits_count %></p>
-		<p class="title">Followers</p><p class="data">5</p>
+		<p class="title">Credits</p><p class="data"><%= c.product.credits.count %></p>
+		<p class="title">Followers</p><p class="data">0</p>
 	</div>
 	
 	<div class="more-detail">
@@ -956,7 +958,7 @@ $(document).ready(function(){
 
 
 <h3>Timeline Posts:</h3>
-	  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(10) %>
+
 <% if current_user %>			
 	<% if current_user.id == c.user_id %>	
 			<%= form_for(@post) do |f| %>
@@ -987,6 +989,7 @@ $(document).ready(function(){
 		<% end %>
 		
 		<ul class="posts">	
+				  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(10) %>
 		<% @posts.each do |post| %>
 		<li>
 		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>" style="margin-top:10px;">Tweet this fact</a></p><br />
@@ -1005,6 +1008,7 @@ $(document).ready(function(){
 		</ul>	
 		
 		</div>	
+	
 	<% end %>
 	
 </div>
@@ -1016,7 +1020,7 @@ $(document).ready(function(){
 
 <div class="grid_3 activity-feed">
 <% if current_user %>
-	<h3>Recent Activity</h3>
+	<h3>Recent Following Activity</h3>
 	
 <% for friendship in current_user.friendships%>
 <% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
@@ -1032,14 +1036,14 @@ $(document).ready(function(){
 	</div>
 	<div class="stats">
 	<p>Credits</p> <div class="data">
-	 <%= friendship.friend.credits_count %>
+	 <%= friendship.friend.credits.count %>
 	</div>
 	</div>	
 <div class="role">
 		<%= fc.role %>
 	</div>
 	<div class="product-title">
-	<%= fc.product.title %>
+<a href="/products/<%= fc.product.id %>"><%= fc.product.title %></a>
 	</div>
 </div>
 <% end %>
