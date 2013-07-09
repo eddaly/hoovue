@@ -25,19 +25,19 @@
 	
 	<div class="grid_3 stats">
 		<div class="stats">
-			<p class="credit-count">14</p>
+			<p class="credit-count"><%= @user.credits.count %></p>
 			<p class="credits">Credits</p>
 				<div class="verified-count">
-					<p class="verified-credits">10</p>
-					<p class="verifed">Validated</p>
+					<p class="verified-credits">0</p>
+					<p class="verifed">Verified</p>
 				</div>
 					<div class="images">
-						<p class="verified-credits">10</p>
-						<p class="verifed">Videos</p>
+						<p class="verified-credits"><%= @user.credits.cv_part.count%></p>
+						<p class="verifed">Part</p>
 					</div>
 						<div class="videos">
-							<p class="verified-credits">10</p>
-							<p class="verifed">Images</p>
+							<p class="verified-credits">1</p>
+							<p class="verifed">Image</p>
 						</div>
 		</div>
 	</div>
@@ -45,7 +45,7 @@
 	<div class="grid_2 analytics">
 		<div class="followers">
 			<div class="data">
-				11
+				<%= @followers.count %>
 			</div>
 			<div class="title">
 				Followers
@@ -54,7 +54,7 @@
 			
 			<div class="likes">
 				<div class="data">
-					11
+					3
 				</div>
 				<div class="title">
 					Likes
@@ -64,8 +64,7 @@
 				
 				<div class="shared">
 					<div class="data">
-						11
-					</div>
+						2					</div>
 					<div class="title">
 						Shared
 					</div>	
@@ -74,7 +73,7 @@
 					
 					<div class="views">
 						<div class="data">
-							11
+							109
 						</div>
 						<div class="title">
 							Views
@@ -118,7 +117,68 @@
 </div>	
 
 
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+        $(".slidingDiv_followers").hide();
+        $(".show_hide_followers").show();
+
+    $('.show_hide_followers').click(function(){
+    $(".slidingDiv_followers").slideToggle();
+    });
+
+});
+
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+        $(".slidingDiv_following").hide();
+        $(".show_hide_following").show();
+
+    $('.show_hide_following').click(function(){
+    $(".slidingDiv_following").slideToggle();
+    });
+
+});
+
+</script>
+
+<ul class="following-navi">
+	<li><a href"#" class="show_hide_followers">Followers</a></li>
+	<li><a href"#" class="show_hide_following">Following</a></li>
+</ul>	
+
+<div class="slidingDiv_followers">
+	<ul>
+<% for friendship in @user.friendships%>
+<% user = User.find_by_id(friendship.friend_id) %>
+<li>
+	<%= link_to user_path(user.id) do %>
+<%= image_tag user.profile_picture %>
+	<%= user.name %><% end %></li>
+<% end %>
+	</ul>
+</div>
+
+<div class="slidingDiv_following">
+	<ul>
+	    <% for user in @user.inverse_friends %>
+	<li><%= link_to user_path(user.id) do %><%=h user.name %><% end %></li>
+	    <% end %>
+
+	</ul>
+</div>
+
+
+
 <div class="credits">
+	
+	<h2>Credits</h2>
 	
 	<% @credits.each do |c| %>
 	<div class="credit-item">

@@ -58,6 +58,7 @@ end
   
   def search
     @products = Product.search(params[:search])
+        @users = User.search(params[:search])
     if current_user
       @credit = Credit.new
     end  

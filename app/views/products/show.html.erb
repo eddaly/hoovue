@@ -1,3 +1,31 @@
+<script>
+		 $(function() {
+      $('#slides').slidesjs({
+        width: 280,
+        height: 180,
+        navigation: {
+      active: false,
+      effect: "fade"
+        // [string] Can be either "slide" or "fade".
+    },
+    pagination: {
+      active: false,
+        // [boolean] Create pagination items.
+        // You cannot use your own pagination. Sorry.
+      effect: "fade"
+        // [string] Can be either "slide" or "fade".
+    },
+        play: {
+          active: true,
+          auto: true,
+          interval: 5000,
+          swap: true
+        }
+      });
+    });
+	</script>
+
+
 <div class="container_12 work-page">
 	<div class="grid_9 work-container">
 
@@ -20,34 +48,23 @@
 			<%= image_tag @product.image.small %>
 		</div>	
 		<%end%>
-		<% if @product.image_2 %>
-		<div class="slides">	
-		<%= image_tag @product.image_2.small %>
-		</div>
-
-		<% end %>
-
-		<% if @product.image_3 %>
-		<div class="slides">
-		<%= image_tag @product.image_3.small %>
-		</div>
-		<% end %>
+		
 	</div>	
 
 	<div class="stats">
-		<p class="credit-count">14</p>
+		<p class="credit-count"><%= @product.credits.count %></p>
 		<p class="credits">Credits</p>
 			<div class="verified-count">
-				<p class="verified-credits">10</p>
+				<p class="verified-credits">0</p>
 				<p class="verifed">Validated</p>
 			</div>
 				<div class="images">
-					<p class="verified-credits">10</p>
+					<p class="verified-credits">0</p>
 					<p class="verifed">Videos</p>
 				</div>
 					<div class="videos">
-						<p class="verified-credits">10</p>
-						<p class="verifed">Images</p>
+						<p class="verified-credits">1</p>
+						<p class="verifed">Image</p>
 					</div>
 	</div>
 
@@ -56,7 +73,7 @@
 		<div class="analytics">
 			<div class="followers">
 				<div class="data">
-					11
+				3
 				</div>
 				<div class="title">
 					Followers
@@ -65,7 +82,7 @@
 				
 				<div class="likes">
 					<div class="data">
-						11
+						0
 					</div>
 					<div class="title">
 						Likes
@@ -75,7 +92,7 @@
 					
 					<div class="shared">
 						<div class="data">
-							11
+							0
 						</div>
 						<div class="title">
 							Shared
@@ -85,7 +102,7 @@
 						
 						<div class="views">
 							<div class="data">
-								11
+								112
 							</div>
 							<div class="title">
 								Views
@@ -107,7 +124,8 @@
 		</div>
 		<div class="actions">
 		<a href="#" class="blue-btn">Like <%= image_tag '/assets/beta/like.png' %></a>
-		<a href="#" class="blue-btn">Follow Work <%= image_tag '/assets/beta/follow.png' %></a>
+		
+		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
 		</div>
 	</div>	
 	</div>	

@@ -203,6 +203,12 @@ float:left;
 				
 			}
 			
+			.user-list {
+				h2 {
+				margin-top:-40px;	
+				}
+			}
+			
 			p {
 				text-align:center;
 				font-size:20px;
@@ -433,7 +439,7 @@ float:left;
 			
 			p.verified-credits {
 				font-size:25px;
-				margin:20px 0px 5px 15px;
+				margin:20px 0px 5px 5px;
 				
 			}
 			
@@ -547,6 +553,19 @@ float:left;
 				width:290px;
 				margin-top:10px;
 				margin-right:-20px;
+				
+				a {
+					width:100%;
+					height:20px;
+					color:white;
+					text-transform:uppercase;
+					padding:5px 10px;
+					background-color:$light-blue;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					border-radius: 5px;
+					margin:5px 0;	
+				}
 			}		
 			
 		}
@@ -785,14 +804,14 @@ float:left;
 			
 			p.credit-count {
 			width:290px;
-			margin:30px 0 0 0px;
+			margin:30px 0 0 5px;
 			text-align:center;
 			font-size:40px;	
 			}
 			
 			p.credits {
 				text-align:center;
-				margin:15px 0 0 10px;
+				margin:15px 0 0 0px;
 				font-size:20px;
 				width:280px;
 				padding-bottom:20px;
@@ -806,16 +825,17 @@ float:left;
 				padding-right:49px;
 				border-right: 1px solid white;
 				margin-top:10px;
+				text-align:center;
 			
 			p.verified-credits {
 				font-size:25px;
-				margin:20px 0px 5px 15px;
+				margin:20px 0px 5px 35px;
 				
 			}
 			
 			p.verifed {
 				font-size:15px;
-				margin:5px 0 0 5px;
+				margin:5px 0 0 15px;
 				
 			}
 				}
@@ -823,7 +843,9 @@ float:left;
 			.images {
 				margin-left:0px;
 				width:35px;
-				padding-left:20px;
+				padding-left:10px;
+				
+				
 				
 			}
 				
@@ -886,6 +908,59 @@ float:left;
 				padding:3px 0;	
 				}
 			}
+		
+		
+		}
+		
+		
+		
+	}
+	
+	ul.following-navi {
+		
+		list-style-type:none;
+		margin-bottom:80px;
+		margin-left:0px;
+		margin-top:10px;
+		
+		li {
+		
+			
+			a {
+				float:left;
+				height:20px;
+				color:white;
+				text-transform:uppercase;
+				padding:15px 20px;
+				background-color:$light-blue;
+				margin:5px 10px 50px 0px;	
+				cursor:hand;
+				
+			}
+			
+		}
+	}
+	
+	.slidingDiv_followers, .slidingDiv_following {
+		margin-top:70px;
+		
+		ul {
+			margin-top:120px;
+			list-style-type:none;
+		
+			li {
+			height:50px;
+			background-color:$grey;	
+			padding:5px;
+			margin-bottom:10px;
+			color:white;
+			
+			a {
+			color:white;	
+			}
+			
+			}
+			
 		}
 		
 	}
@@ -1155,7 +1230,25 @@ float:left;
 
 .search-page {
 	background-color: #E5EAED;
-	padding:5px;
+	padding:15px;
+	
+	h2 {
+	font-size:20px;	
+	}
+	
+	input {
+		
+		width:350px;
+		background-color:#195259;	
+		border:none;
+		color:white;
+		margin-top:4px;	
+		border-radius:0px;
+	}
+	
+	input.search-button {
+		background-color:$light;
+	}
 }
 
 

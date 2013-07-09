@@ -7,6 +7,7 @@
   <link rel="shortcut icon" href="/assets/favicon.ico" />
   <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
   <script type="text/javascript">  $(document).ready(function() { $(".select-advanced").select2({ width: 'element' }); }); </script>
+  <SCRIPT charset="utf-8" type="text/javascript" src="http://ws.amazon.co.uk/widgets/q?ServiceVersion=20070822&MarketPlace=GB&ID=V20070822/GB/whoactually-21/8005/5a799ec4-96f9-454c-91c9-334719815924"> </SCRIPT>
 </head>
 
 
@@ -38,7 +39,7 @@
 			
 			<div class="grid_4 search">
 			<%= form_tag search_credits_path, :method => 'get' do %>
-			  <%= text_field_tag :search, params[:search] %>
+			  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
 					 <%= submit_tag "", :name => nil, :class => "search-button" %>   
 			<% end %>
 			</div>
