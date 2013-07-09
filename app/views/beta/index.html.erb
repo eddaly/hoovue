@@ -7,7 +7,7 @@
 
 
 	<div class="grid_5 push_1 user-list">
-		<h2>Explore Creators</h2>
+		<h2>Discover new people</h2>
 		<% @users.each do |fu| %>
 		<%= link_to user_path(fu.id) do %>
 		<%= image_tag fu.profile_picture %>
@@ -16,7 +16,7 @@
 	</div>
 	
 	<div class="grid_5 push_1 user-list">
-		<h2>Explore Works</h2>
+		<h2>Uncover new info</h2>
 		<% @works.each do |w| %>
 		<% if w.image.blank? %>
 		<% else %>
@@ -52,12 +52,14 @@
 <div class="row-2">
 	<div class="container_12 row-2-content">
 		<h1>Sign up or into WhoActually</h1>
-		<p>By creating your WhoActually account you agree to our <a>Terms of Use</a> and  <a>Privacy Policy</a></p>
+	
+		<p> We need to validate your identity so you can begin to claim the creative credits you feel you deserve and connect with the fans who love them.</p>
 
+	<p>We will NEVER post anything without your consent or contact any of your friends. We hate that just as much as you do. We'll only use your profile picture (which you can change) and the email address registered to that account to communicate with you. </p>
 		<div class="signin">
 			<div class="grid_3 push_1">
-			 <%= link_to "Sign Up With Facebook", "/auth/facebook", id: "facebook" %>
-			 <%= link_to "Sign Up with LinkedIn", "/auth/linkedin", id: "linkedin" %>
+			 <%= link_to "Sign in With Facebook", "/auth/facebook", id: "facebook" %>
+			
 			
 			 </div>
 		</div>	
@@ -67,12 +69,15 @@
 		</div>	
 		<div class="signin">
 			<div class="grid_3 push_2">
-			 <%= link_to "Sign in With Facebook", "/auth/facebook", id: "facebook" %>
+			
 			 <%= link_to "Sign in with LinkedIn", "/auth/linkedin", id: "linkedin" %>
 		
 			 </div>
 		</div>	
 	</div>
+	<div class="container_12">
+		<p>By creating your WhoActually account you agree to our <a>Terms of Use</a> and  <a>Privacy Policy</a></p>
+</div>
 </div>
 <% end %>
 
