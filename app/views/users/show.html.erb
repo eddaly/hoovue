@@ -242,35 +242,35 @@ $(document).ready(function(){
 	
 	
 	<p class="cv-count">
-	<% if c.confirmed_validations_count > 2 %>
+	<% if c.credit_validations.confirmed.count > 2 %>
 	<%= image_tag '/assets/beta/tick.png' %>
 	<% else %>	
-	<% if c.credit_validations.count > 2 %>
+	<% if c.credit_validations.confirmed.count > 2 %>
 	3
 	<% end %>
-	<% if c.credit_validations.count.eql?(2) %>
+	<% if c.credit_validations.confirmed.count == 2 %>
 	2
 	<% end %>
-	<% if c.credit_validations.count.eql?(1) %>
+	<% if c.credit_validations.confirmed.count == 1 %>
 	1
 	<% end %>
-	<% if c.credit_validations.count.eql?(0) %>
+	<% if c.credit_validations.confirmed.count == 0 %>
 	0
 	<% end %>
 		/3</p><br />
 		
 	<% end %>	
 	<p class="validation-status">
-		<% if c.credit_validations.count > 2 %>
+		<% if c.credit_validations.confirmed.count > 2 %>
 		Verfied</p>
 		<% end %>
-		<% if c.credit_validations.count.eql?(2) %>
+		<% if c.credit_validations.confirmed.count == 2 %>
 		Part Verfied</p>
 		<% end %>
-		<% if c.credit_validations.count.eql?(1) %>
+		<% if c.credit_validations.confirmed.count == 1 %>
 		Part Verfied</p>
 		<% end %>
-		<% if c.credit_validations.count.eql?(0) %>
+		<% if c.credit_validations.confirmed.count == 0 %>
 		Un Verfied</p>
 		<% end %>
 	
