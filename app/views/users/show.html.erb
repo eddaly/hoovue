@@ -682,7 +682,15 @@ $(document).ready(function(){
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
 					<% @user = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed1"><img src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square" ></a>
+				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+					<% if @user %>
+					<% if @user.provider == "facebook" %>
+					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
+					<% else %>
+					<%= image_tag @user.profile_picture %>
+					</a>
+					<% end %>
+					<% end %>
 				</span>
 	
 				<% end %>
@@ -736,8 +744,15 @@ $(document).ready(function(){
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
 				<% @user = User.find_by_id(cv.validator_id) %>
-			<a href="/users/<%= cv.validator_id %> "name="confirmed2"><img src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square" ></a>
-
+			<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+				<% if @user %>
+				<% if @user.provider == "facebook" %>
+				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
+				<% else %>
+				<%= image_tag @user.profile_picture %>
+				</a>
+				<% end %>
+				<% end %>
 			</span>
 			<% end %>
 				<% if cv.status == "pending" %>
@@ -948,7 +963,15 @@ $(document).ready(function(){
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
 					<% @user = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed3"><img  src="http://graph.facebook.com/<% if @user %><%= @user.uid %><% end %>/picture?type=square"></a>
+				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+					<% if @user %>
+					<% if @user.provider == "facebook" %>
+					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
+					<% else %>
+					<%= image_tag @user.profile_picture %>
+					</a>
+					<% end %>
+					<% end %>
 				</span>
 				<% end %>
 					<% if cv.status == "pending" %>
