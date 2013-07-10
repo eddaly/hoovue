@@ -1,5 +1,5 @@
 <div class="container_12 credits-form">
-
+	<h2>Your new credit:</h2>
 <ul>
 	
 	<li class="<%= cycle('even', 'odd') -%>">
@@ -14,7 +14,7 @@
 		
 		
 		
-	<%= render '/credits/ticks', :c => @credit %>
+	
 
 <br /><br /><br /><br />
 	   
@@ -22,11 +22,11 @@
 	
 
 <div class="container_12">
+	<p>Would you like to?</p>
+	<%= link_to 'Accept this credit', product_path(@credit.product), :class => "blue-btn" %>
 
-	<%= link_to 'Accept', product_path(@credit.product), :class => "blue-link" %>
 
-
-<%= link_to 'Decline', @credit, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %>
+<%= link_to 'Decline this credit', @credit, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-btn" %>
 
 </div>
 

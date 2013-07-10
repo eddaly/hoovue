@@ -234,7 +234,7 @@
 	
 	
 	
-	<div class="validation-info" style="
+	<div class="validation-info"  style="
 			<% if c.credit_validations.confirmed.empty? %>
 			background-color:red;
 			<% end %>
@@ -252,31 +252,39 @@
 			<% end %>
 			
 			">
-			<p class="cv-count">
-			<% if c.credit_validations.confirmed.count > 2 %>
-			<%= image_tag '/assets/beta/tick.png' %>
-			<% else %>	
-			<% if c.credit_validations.confirmed.count > 2 %>
-			3
-			<% end %>
-			<% if c.credit_validations.confirmed.count == 2 %>
-			2
-			<% end %>
-			<% if c.credit_validations.confirmed.count == 1 %>
-			1
-			<% end %>
-			<% if c.credit_validations.confirmed.count == 0 %>
-			0
-			<% end %>
-				/3</p><br />
-			
+	
+	
+	<p class="cv-count">
+	<% if c.credit_validations.confirmed.count > 2 %>
+	<%= image_tag '/assets/beta/tick.png' %>
+	<% else %>	
+	<% if c.credit_validations.confirmed.count > 2 %>
+	3
+	<% end %>
+	<% if c.credit_validations.confirmed.count == 2 %>
+	2
+	<% end %>
+	<% if c.credit_validations.confirmed.count == 1 %>
+	1
+	<% end %>
+	<% if c.credit_validations.confirmed.count == 0 %>
+	0
+	<% end %>
+		/3</p><br />
 		
 	<% end %>	
 	<p class="validation-status">
-		<% if c.confirmed_validations_count > 2  %>
+		<% if c.credit_validations.confirmed.count > 2 %>
 		Verified</p>
-		<% else %>
-		Partly Verified
+		<% end %>
+		<% if c.credit_validations.confirmed.count == 2 %>
+		Part Verified</p>
+		<% end %>
+		<% if c.credit_validations.confirmed.count == 1 %>
+		Part Verified</p>
+		<% end %>
+		<% if c.credit_validations.confirmed.count == 0 %>
+		Unverified</p>
 		<% end %>
 	
 	
@@ -313,7 +321,7 @@
 						
 								<% if c.credit_validations.count < 3  %>
 
-				<h2>Invite someone to validate your credit.</h2>
+				<h2>Invite someone to verify your credit.</h2>
 						    
 									<%= form_for(@credit_validation) do |f| %>
 									<%= f.label "Select existing co-creator:"%>
@@ -468,53 +476,20 @@
 		
 	
 							<% if c.credit_validations.count.eql?(1) %>
-				
-				<% c.credit_validations.each do |cv| %>
-				<% if cv.status == "confirmed" %>
-				<span class="picture">
-					<% @user = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
-					<% if @user %>
-					<% if @user.provider == "facebook" %>
-					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag @user.profile_picture %>
-					
-					<% end %>
-					<% end %>
-				</a>
-				</span>
-	
-				<% end %>
-					<% if cv.status == "pending" %>
-					<span class="picture">
-						<% if current_user %>
-							<% if current_user.id == c.user_id  %>
-						<%= link_to credit_validation_path(cv) do %>
-					<%= image_tag '/assets/pending.png' %>
-	
-						<% end %>
-						<% else %>
-							<%= image_tag '/assets/pending.png' %>
-								<% end %>
-								<% else %>
-									<%= image_tag '/assets/pending.png' %>
-									<% end %>
-			
-						</span>
-		
-		
-		
-	
-					<% end %>
-					<% 2.times do %>
-					<a class="show_hide_validate_partial_<%= c.id %>">
-					<span class="picture">
-					<% if current_user %>	
-						<% if current_user.id == c.user_id  %>
-							<a href="#openModalvalidate<%= c.id %>" class="">
-							<%= image_tag '/assets/empty.png' %>
-							</a>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<div id="openModalvalidate<%= c.id %>" class="modalDialog">
 								<div>
 								 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
@@ -538,7 +513,7 @@
 							
 									<% if c.credit_validations.count < 3  %>
 
-					<h2>Invite someone to validate your credit.</h2>
+					<h2>Invite someone to verify your credit.</h2>
 							    
 										<%= form_for(@credit_validation) do |f| %>
 										<%= f.label "Select existing co-creator:"%>
@@ -673,6 +648,83 @@
 						
 								</div>
 							</div>			
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+				<% c.credit_validations.each do |cv| %>
+				<% if cv.status == "confirmed" %>
+				<span class="picture">
+					<% @user = User.find_by_id(cv.validator_id) %>
+				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+					<% if @user %>
+					<% if @user.provider == "facebook" %>
+					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
+					<% else %>
+					<%= image_tag @user.profile_picture %>
+					</a>
+					<% end %>
+					<% end %>
+				</span>
+	
+				<% end %>
+					<% if cv.status == "pending" %>
+					<span class="picture">
+						<% if current_user %>
+							<% if current_user.id == c.user_id  %>
+						<%= link_to credit_validation_path(cv) do %>
+					<%= image_tag '/assets/pending.png' %>
+	
+						<% end %>
+						<% else %>
+							<%= image_tag '/assets/pending.png' %>
+								<% end %>
+								<% else %>
+									<%= image_tag '/assets/pending.png' %>
+									<% end %>
+			
+						</span>
+		
+		
+		
+	
+					<% end %>
+					<% 2.times do %>
+					<a class="show_hide_validate_partial_<%= c.id %>">
+					<span class="picture">
+					<% if current_user %>	
+						<% if current_user.id == c.user_id  %>
+							<a href="#openModalvalidate<%= c.id %>" class="">
+							<%= image_tag '/assets/empty.png' %>
+							</a>
+								
 						<% else %>	
 						<%= image_tag '/assets/question.png' %>	
 						<% end %>
@@ -682,10 +734,7 @@
 					</span>
 					</a>
 					<% end %>
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-		
-							<% end %> <% end %>
+					
 					<% end %>
 					<% else %>
 	
@@ -702,10 +751,9 @@
 				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 				<% else %>
 				<%= image_tag @user.profile_picture %>
-				
+				</a>
 				<% end %>
 				<% end %>
-			</a>
 			</span>
 			<% end %>
 				<% if cv.status == "pending" %>
@@ -760,12 +808,12 @@
 						
 								<% if c.credit_validations.count < 3  %>
 
-				<h2>Invite someone to validate your credit.</h2>
+				<h2>Invite someone to verify your credit.</h2>
 						    
 									<%= form_for(@credit_validation) do |f| %>
 									<%= f.label "Select existing co-creator:"%>
 									<div style="z-index:1000;">
-										<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => @product.id).uniq, :id, :user_name, :prompt => "Please Select" %>
+									
 										</div> 
 										<%= f.hidden_field :validator_id, :value => current_user.id %>
 										<%= f.hidden_field :status, :value => "confirmed" %>
@@ -922,10 +970,9 @@
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
 					<%= image_tag @user.profile_picture %>
-					
+					</a>
 					<% end %>
 					<% end %>
-				</a>
 				</span>
 				<% end %>
 					<% if cv.status == "pending" %>
@@ -966,6 +1013,7 @@
 	
 	
 	</div>
+	
 	
 		<% end %>
 	</div>
