@@ -9,7 +9,7 @@
   <script type="text/javascript">  $(document).ready(function() { $(".select-advanced").select2({ width: 'element' }); }); </script>
   <SCRIPT charset="utf-8" type="text/javascript" src="http://ws.amazon.co.uk/widgets/q?ServiceVersion=20070822&MarketPlace=GB&ID=V20070822/GB/whoactually-21/8005/5a799ec4-96f9-454c-91c9-334719815924"> </SCRIPT>
 </head>
-
+<%= render '/layouts/google_analytics'%>
 
 <body class="new">
 	<div class="header-container">
@@ -100,6 +100,31 @@
 <%= yield %>
 
 	</div>
+	
+	<div class="footer">
+			&copy; 2013 Itsoo Ltd | <a href="/terms">Terms of Use</a> | <a href="mailto:contact@whoactually.com">Contact Us</a> | Release: <%= ENV['rel'] %>
+		</div>
+		</div>
+		<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+		<script type="text/javascript">
+		  var _sf_async_config = { uid: 47632, domain: 'alpha.whoactually.com', useCanonical: true };
+		  (function() {
+		    function loadChartbeat() {
+		      window._sf_endpt = (new Date()).getTime();
+		      var e = document.createElement('script');
+		      e.setAttribute('language', 'javascript');
+		      e.setAttribute('type', 'text/javascript');
+		      e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
+		      document.body.appendChild(e);
+		    };
+		    var oldonload = window.onload;
+		    window.onload = (typeof window.onload != 'function') ?
+		      loadChartbeat : function() { oldonload(); loadChartbeat(); };
+		  })();
+		</script>
+		
+	
 </body>	
 
 </html>
