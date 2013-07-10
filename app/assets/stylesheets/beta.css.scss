@@ -1310,8 +1310,16 @@ float:left;
 		width:500px;
 	}
 	
-	input.search-button, input.submit {
+	input.search-button, input.submit, input.batch {
 		background-color:$light;
+	}
+	
+	input.batch {
+		margin-top:-12px;
+	}
+	
+	input.role {
+		margin-top:0px;
 	}
 	
 	

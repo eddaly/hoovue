@@ -3,12 +3,12 @@
 	 <p>Use the form below to quickly add multiple credits. Previous role suggestions appear.</p>
 <%= form_for(@credit) do |f| %>
  
- <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role" %> 
+ <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role", :class => "role" %> 
  
 
 <%= select_tag :product_id, options_from_collection_for_select(Product.all, :id, :title, params[:product_id]), :class => "select-advanced" %>
 
-    <%= f.submit 'Create Credit >', :name => 'batch'%>
+    <%= f.submit 'Create Credit >', :class => 'batch'%>
 
 <% end %>
 
