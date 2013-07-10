@@ -1,6 +1,6 @@
 class BetaController < ApplicationController
   def index
-    @featured_users = User.find_all_by_id([13, 19, 3, 12,13,15])
+    @featured_users = User.find_all_by_id([13, 3, 19,121,15])
     @users = User.where(:profile_picture.blank?).where(:provider => "facebook").order("RANDOM()").limit(45)
     @works = Product.limit(380).where(:image.blank?).order("RANDOM()")
        @popular_works = Product.limit(8).order("credits_count DESC")

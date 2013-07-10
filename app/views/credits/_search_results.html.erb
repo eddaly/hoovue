@@ -25,8 +25,14 @@
 	<% @users.each do |u| %>
 	<%= link_to p do %>
 	<li class="<%= cycle('even', 'odd') -%>">
-	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	<%= link_to u.name, user_path(u) %> 
-
+		<% if u.provider == "facebook" %>
+	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	
+		<% else %>
+		<div style="width:50px; height:50px">
+		<%= image_tag u.profile_picture %>
+		</div>
+		<% end %>
+		<%= link_to u.name, user_path(u) %> 
 	</li>
 	<%end%>
 		<%end%>

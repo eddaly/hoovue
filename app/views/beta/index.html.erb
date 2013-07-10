@@ -39,7 +39,7 @@
 			<div style="margin-top:10%">
 					<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 				
-		<iframe src="http://player.vimeo.com/video/69849153?byline=0&amp;portrait=0&amp;color=ff0179" width="624" height="351" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<iframe src="http://player.vimeo.com/video/70016170?byline=0&amp;portrait=0&amp;color=ff0179" width="624" height="351" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 			</div>
 			<% end %>
@@ -86,7 +86,11 @@
 	<div class="container_12 slider">
 		<h2>Featured Creators</h2>
 	<% @featured_users.each do |fu| %>
+	<% if fu.provider == "facebook" %>
 	<%= link_to user_path(fu.id) do %><img src="http://graph.facebook.com/<%= fu.uid%>/picture?type=large"><% end %>
+	<% else %>
+		<%= link_to user_path(fu.id) do %><%= image_tag fu.picture %><% end  %>
+	<% end %>
 	<% end %>
 	
 	</div>	
