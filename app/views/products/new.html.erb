@@ -34,7 +34,7 @@
 	  <% if params[:name] == "1" %>
 	 <div class="help-box">
 		 <h4>Help</h4>
-		 The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course).</div>
+		 The name of the game is the title of a released version (alternative titles for the same game in other territories will be included in due course)..</div>
 	  
 		 <div class="help-box" style="float:right;">
 			 <h4>Help</h4>
@@ -47,7 +47,7 @@
   <div class="field">
     <%= f.label :name %>
 	 <% if params[:name] == "1" %>
-    <%= f.text_field :title, :title => "The name of the games is the title of a released version (alternative titles for the same game in other territories will be included in due course)" %>
+    <%= f.text_field :title, :title => "The name of the game is the title of a released version (alternative titles for the same game in other territories will be included in due course)." %>
 	<% else %>
 <%= f.text_field :title %>	
 	<% end %>
@@ -139,7 +139,7 @@
 </div>
  
   <div class="field">
-    <%= f.label :url %>
+    <%= f.label :website %>
     <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course)." %>
   </div>
 
@@ -167,7 +167,7 @@
   
   <% if params[:name] == "1" %>
    <div class="desc">
-<p>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank.</p>
+<p>If relevant please include details of platform formats, a period of time for an online game, or other details.</p>
    <%= f.text_field :issue %>
  </div>
  <% end %>
@@ -180,7 +180,7 @@
 	 <% end %>
   
 <div class="submit">
- <%= f.submit 'Create Work >'%>
+ <%= f.submit 'Create Work and your credit >'%>
 </div>
  
   </div>

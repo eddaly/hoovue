@@ -85,7 +85,7 @@ end
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to @product, notice: 'Work was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Work and credit successfully created' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

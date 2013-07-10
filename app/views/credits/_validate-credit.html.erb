@@ -44,7 +44,7 @@ $(document).ready(function(){
 	<h2>Someone who already has a credit to verify yours</h2>
     <div class="help-box" stlye="margin-top:-20px">
 		 <h4>Help</h4>
-		To validate your credit ask someone else who had a role on <%= p.title %> to vouch for you
+		To verify your credit ask someone else who had a role on <%= p.title %> to vouch for you
 		</div>
 	<%= form_for(@credit_validation) do |f| %>
 	<%= f.label "Select co-creator:"%>
@@ -147,7 +147,7 @@ $(document).ready(function(){
 			
 				<%= f.hidden_field :current_credit_id, :value => c.id %>
 			   
-		 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook' %>
+		 			<%= f.submit 'Verify Your Credit', :id => 'blue-link', :name => 'facebook' %>
 				
 		<% end %> 
 		</div>
