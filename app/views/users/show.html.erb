@@ -156,7 +156,9 @@ $(document).ready(function(){
 <div class="slidingDiv_followers">
 	<ul>
 	    <% for user in @user.inverse_friends %>
-	<li><%= link_to user_path(user.id) do %><%=h user.name %><% end %></li>
+	<li><%= link_to user_path(user.id) do %>
+		<%= image_tag user.profile_picture %>
+		<%=h user.name %><% end %></li>
 	    <% end %>
 
 	</ul>
@@ -168,7 +170,9 @@ $(document).ready(function(){
 <% user = User.find_by_id(friendship.friend_id) %>
 <li>
 	<%= link_to user_path(user.id) do %>
+	
 <%= image_tag user.profile_picture %>
+	
 	<%= user.name %><% end %></li>
 <% end %>
 	</ul>
@@ -189,7 +193,14 @@ $(document).ready(function(){
 	<% end %>
 	>
 		<% if c.user %>
-	<%= image_tag c.product.image, :width => "50" %>	 
+		<% if c.product.image.blank? %>
+		
+			<%= image_tag 'default-thumb.png'%>
+		
+		<%else%>	
+	<%= image_tag c.product.image, :width => "50" %>
+	
+		<% end %>
 	<div class="user-name">
 	<%= link_to c.product.title, product_path(c.product) %>
 	</div>
@@ -230,7 +241,7 @@ $(document).ready(function(){
 
 	
 	<div class="interesting_fact">
-		<a href"#" class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact and Posts</a>
+		<a href="#" class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact and Posts</a>
 	</div>
 	
 	<div class="validation-info" style="
@@ -283,7 +294,7 @@ $(document).ready(function(){
 		Part Verified</p>
 		<% end %>
 		<% if c.credit_validations.confirmed.count == 0 %>
-		Un Verified</p>
+		Unverified</p>
 		<% end %>
 	
 	
@@ -330,7 +341,7 @@ $(document).ready(function(){
 										<%= f.hidden_field :validator_id, :value => current_user.id %>
 										<%= f.hidden_field :status, :value => "confirmed" %>
    
-										<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+										<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 										<%= f.hidden_field :current_credit_id, :value => c.id %>
 									<% end %>
 							
@@ -522,7 +533,7 @@ $(document).ready(function(){
 											<%= f.hidden_field :validator_id, :value => current_user.id %>
 											<%= f.hidden_field :status, :value => "confirmed" %>
 	   
-											<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+											<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 											<%= f.hidden_field :current_credit_id, :value => c.id %>
 										<% end %>
 								
@@ -817,7 +828,7 @@ $(document).ready(function(){
 										<%= f.hidden_field :validator_id, :value => current_user.id %>
 										<%= f.hidden_field :status, :value => "confirmed" %>
    
-										<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+										<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 										<%= f.hidden_field :current_credit_id, :value => c.id %>
 									<% end %>
 							

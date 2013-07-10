@@ -97,7 +97,7 @@
 			
 		</div>
 		<div class="actions">
-		<a href="#" class="blue-btn">Like <%= image_tag '/assets/beta/like.png' %></a>
+		<a   class="blue-btn">Like <%= image_tag '/assets/beta/like.png' %></a>
 		
 		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
 		</div>
@@ -229,7 +229,7 @@
 
 	
 	<div class="interesting_fact">
-		<a href"#" class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact</a>
+		<a   class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact</a>
 	</div>
 	
 	
@@ -323,7 +323,7 @@
 										<%= f.hidden_field :validator_id, :value => current_user.id %>
 										<%= f.hidden_field :status, :value => "confirmed" %>
    
-										<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+										<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 										<%= f.hidden_field :current_credit_id, :value => c.id %>
 									<% end %>
 							
@@ -479,10 +479,10 @@
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
 					<%= image_tag @user.profile_picture %>
-					</a>
+					
 					<% end %>
 					<% end %>
-				
+				</a>
 				</span>
 	
 				<% end %>
@@ -548,7 +548,7 @@
 											<%= f.hidden_field :validator_id, :value => current_user.id %>
 											<%= f.hidden_field :status, :value => "confirmed" %>
 	   
-											<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+											<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 											<%= f.hidden_field :current_credit_id, :value => c.id %>
 										<% end %>
 								
@@ -702,10 +702,10 @@
 				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 				<% else %>
 				<%= image_tag @user.profile_picture %>
-				</a>
+				
 				<% end %>
 				<% end %>
-			
+			</a>
 			</span>
 			<% end %>
 				<% if cv.status == "pending" %>
@@ -770,7 +770,7 @@
 										<%= f.hidden_field :validator_id, :value => current_user.id %>
 										<%= f.hidden_field :status, :value => "confirmed" %>
    
-										<%= submit_tag "Add Validator", :name => 'existing_credit', :class => 'submit' %>
+										<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 										<%= f.hidden_field :current_credit_id, :value => c.id %>
 									<% end %>
 							
@@ -922,10 +922,10 @@
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
 					<%= image_tag @user.profile_picture %>
-					</a>
+					
 					<% end %>
 					<% end %>
-				
+				</a>
 				</span>
 				<% end %>
 					<% if cv.status == "pending" %>
