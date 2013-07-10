@@ -9,7 +9,7 @@
 	
 	<div class="grid_3 profile-picture">
 		<% if @user.picture.blank? %>
-
+		
 		<% if @user.provider == "facebook" %>		
 	<img  style="margin-top:3px;" src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
 		<% end %>
@@ -710,6 +710,8 @@ $(document).ready(function(){
 					<%= image_tag @user.profile_picture %>
 					<% end %>
 					</a>
+					<% else %>
+					<%= image_tag '/assets/deleted.png' %>
 					<% end %>
 				</span>
 	
@@ -773,6 +775,8 @@ $(document).ready(function(){
 				
 				<% end %>
 				</a>
+				<% else %>
+				<%= image_tag '/assets/deleted.png' %>
 				<% end %>
 			</span>
 			<% end %>
@@ -993,6 +997,8 @@ $(document).ready(function(){
 					
 					<% end %>
 					</a>
+					<% else %>
+					<%= image_tag '/assets/deleted.png' %>
 					<% end %>
 				</span>
 				<% end %>
