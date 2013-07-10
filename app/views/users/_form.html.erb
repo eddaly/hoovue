@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email_address %><br />
+    <%= f.label :email_address %>
     <%= f.text_field :email %>
   </div>
   <div class="additional" style="margin-bottom:10px;">
@@ -25,7 +25,7 @@
   <% end %>
   </ul>
  <%= link_to 'Add Additional Email +', new_email_path %>
- 
+ <br />
  </div>
  
  <% if @user.picture %>
@@ -36,15 +36,16 @@
 	 <% end %>
 	<% end %> 
   <div class="field">
-    <%= f.label :upload_your_own_picture %><br />
+    <%= f.label :upload_your_own_picture %>
   <%= f.file_field :picture %>
   </div>
+  <br />
   <div class="field">
-    <%= f.label :tell_us_a_little_about_yourself %><br />
+    <%= f.label :tell_us_a_little_about_yourself %>
   <%= f.text_area :bio, :rows => '5' %>
   </div>
   <div class="field">
-    <%= f.label :links_to_personal_websites_or_something_you_are_currently_working_on %><br />
+    <%= f.label :links_to_personal_websites_or_something_you_are_currently_working_on %>
    http:// <%= f.text_field :link %>
    Why this link? <%= f.text_field :link_desc %><br />
    
@@ -55,8 +56,8 @@
    Why this link? <%= f.text_field :link_3_desc %>
   </div>
   <div class="field">
-    <%= f.label :we_can_display_your_twitter_feed_in_your_profile_page_if_you_enter_your_twitter_username_here %><br />
+    <%= f.label :we_can_display_your_twitter_feed_in_your_profile_page_if_you_enter_your_twitter_username_here %>
     @<%= f.text_field :twitter %>
   </div>
-  <div class="actions"><%= f.submit "Submit" %></div>
+  <div class="actions"><%= f.submit "Update", :class => "submit" %></div>
 <% end %>

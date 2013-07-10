@@ -85,7 +85,7 @@
 	 
 	<div class="description">
 		<div class="name">
-			<%= @user.name %>
+			<%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %>
 		</div>
 	
 		<% if current_user %>

@@ -1276,7 +1276,7 @@ float:left;
 }
 
 
-.search-page {
+.pages {
 	background-color: #E5EAED;
 	padding:15px;
 	
@@ -1284,7 +1284,13 @@ float:left;
 	font-size:20px;	
 	}
 	
-	input {
+	label {
+		font-size:18px;
+		color:$dark;
+		margin:5px 0;
+	}
+	
+	input, textarea {
 		
 		width:350px;
 		background-color:#195259;	
@@ -1294,9 +1300,15 @@ float:left;
 		border-radius:0px;
 	}
 	
-	input.search-button {
+	textarea {
+		width:500px;
+	}
+	
+	input.search-button, input.submit {
 		background-color:$light;
 	}
+	
+	
 }
 
 .edit-credit {
