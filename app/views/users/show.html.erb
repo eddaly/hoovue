@@ -253,7 +253,7 @@ $(document).ready(function(){
 		<a class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact and Posts</a>
 	</div>
 	
-	<div class="validation-info" style="
+	<div class="validation-info"   style="
 			<% if c.credit_validations.confirmed.empty? %>
 			background-color:red;
 			<% end %>
@@ -702,14 +702,14 @@ $(document).ready(function(){
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
 					<% @user = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
 					<% if @user %>
 					<% if @user.provider == "facebook" %>
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
 					<%= image_tag @user.profile_picture %>
-					</a>
 					<% end %>
+					</a>
 					<% end %>
 				</span>
 	
@@ -764,14 +764,15 @@ $(document).ready(function(){
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
 				<% @user = User.find_by_id(cv.validator_id) %>
-			<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+			<a href="/users/<%= cv.validator_id %>" name="confirmed2">
 				<% if @user %>
 				<% if @user.provider == "facebook" %>
 				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 				<% else %>
 				<%= image_tag @user.profile_picture %>
-				</a>
+				
 				<% end %>
+				</a>
 				<% end %>
 			</span>
 			<% end %>
@@ -989,8 +990,9 @@ $(document).ready(function(){
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
 					<%= image_tag @user.profile_picture %>
-					</a>
+					
 					<% end %>
+					</a>
 					<% end %>
 				</span>
 				<% end %>
@@ -1032,6 +1034,7 @@ $(document).ready(function(){
 	
 	
 	</div>
+	
 	
 	
 		<% end %>
