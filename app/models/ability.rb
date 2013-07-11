@@ -23,7 +23,8 @@ class Ability
                       can :create, Product
                         can :manage, Product, :user_id => user.id
                           can :manage, CreditValidation
-                         
+                          can :access, :rails_admin   
+                            can :dashboard 
                             can [:create, :destroy], Email, :user_id => user.id
                 
         end
