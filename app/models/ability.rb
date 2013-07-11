@@ -7,14 +7,14 @@ class Ability
     else
        user ||= User.new # guest user (not logged in)
      end
-        if user.role = "admin"
+        if user.googleplus == "lecrabe"
           can :manage, :all  
           can :destroy, :all
           can :access, :rails_admin   
           can :dashboard              
         end
         
-        if user.role = "user"
+        if user.role == "user"
             can :read, :all  
               can :manage, User, :id => user.id
                 cannot :destroy, User
@@ -23,7 +23,8 @@ class Ability
                       can :create, Product
                         can :manage, Product, :user_id => user.id
                           can :manage, CreditValidation
-                          
+                          cannot :access, :rails_admin   
+                            cannot :dashboard 
                             can [:create, :destroy], Email, :user_id => user.id
                 
         end
