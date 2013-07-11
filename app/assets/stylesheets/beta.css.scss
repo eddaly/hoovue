@@ -17,7 +17,7 @@ body.new {
 	p.error, p.notice {
 	
 	text-align:center;
-	height:50px;	
+	height:100px;	
 	background-color:$light-blue;
 	font-size:25px;
 	color:white;
@@ -204,6 +204,20 @@ float:left;
 		width:100%;	
 		padding:10px 0;
 		background-color: $light-blue;
+		
+		
+		.user-messages {
+		
+		h2 {
+			color:white;
+			}	
+		
+		.blue-btn {
+			float:right;
+			margin-top:20px;
+		}	
+			
+		}
 		
 		
 		.row-1-content {

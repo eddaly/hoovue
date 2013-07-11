@@ -36,6 +36,8 @@ end
   # GET /products/new
   # GET /products/new.json
   def new
+    if current_user
+      
     begin
     @product = Product.new(product_genre_id: params[:product_genre_id])
     @category = ProductGenre.find_by_id(params[:name])
@@ -46,6 +48,9 @@ end
   rescue
     redirect_to search_credits_path 
   end
+else
+  redirect_to root_url, :notice => "Please login before making a new product."
+end
   end
 
   # GET /products/1/edit

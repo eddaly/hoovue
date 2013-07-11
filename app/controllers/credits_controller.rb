@@ -45,6 +45,7 @@ end
   def edit
       session[:return_to] = request.referer
         @credit = Credit.find(params[:id])
+        
          
   end
   

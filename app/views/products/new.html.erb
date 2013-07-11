@@ -1,4 +1,4 @@
-<div class="container_12">
+<div class="container_12 pages">
 	
 
 	<script type="text/javascript">
@@ -25,24 +25,7 @@
     </div>
   <% end %>
 
-	 <% if params[:name] == "3" %>
-  <div class="help-box">The name of the comic is the title of a series.
-	  The image used may be of a specific issue, not that which all credits relate to (a range of images and other issue information will be included in due course). If your work relates to a specific range of issues please include this information within the credit.</div>
-    
-	 <% end %>
-	 
-	  <% if params[:name] == "1" %>
-	 <div class="help-box">
-		 <h4>Help</h4>
-		 The name of the game is the title of a released version (alternative titles for the same game in other territories will be included in due course)..</div>
-	  
-		 <div class="help-box" style="float:right;">
-			 <h4>Help</h4>
-	  The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).</div>
- <% end %>
- <div class="help-box">
-	 <h4>Help</h4>
-	 If you wish to include a YouTube video please only paste in the video ID. E.g. http://www.youtube.com/watch?<strong>abcdefgh</strong></div>
+	
   
   <div class="field">
     <%= f.label :name %>
@@ -122,7 +105,7 @@
     <%= f.file_field :image %>
   </div>
   <div class="field">
-   <%= f.label :work_page_main_other_image %><br />
+   <%= f.label :work_page_other_image %><br />
    <%= f.file_field :image_2 %>
  </div>
  <div class="field">
@@ -134,7 +117,7 @@
    <%= f.text_field :video %>
  </div>
  <div class="field">
-  <%= f.label :work_desription %><br />
+  <%= f.label :work_description %><br />
   <%= f.text_area :description, :rows => "3" %>
 </div>
  

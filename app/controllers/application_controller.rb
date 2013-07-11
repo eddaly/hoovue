@@ -72,9 +72,12 @@ class ApplicationController < ActionController::Base
              @credit.user_id = current_user.id
              @credit.user_name = current_user.name
              @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)
+             if @credit_validation
              @credit_validation.status = "confirmed"
              @credit_validation.validator_id = current_user.id
              @credit_validation.update_attributes(params[:credit_validationn])
+           else
+           end
              @credit_validation = CreditValidation.new(params[:credit_validation])
                @credit_validation.user_id = current_user.id
                @credit_validation.validator_id = @credit.validator_id

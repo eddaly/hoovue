@@ -19,6 +19,15 @@
 		</div>
 </div>
 
+<% @ccc = Credit.all %>
+<% @ccc.each do |c| %>
+<% if c.credit_validations_count == c.credit_validations.confirmed.count %>
+<% else %>
+<b><%= link_to edit_credit_path(c.id) do %><%= c.id %><%end  %></b>
+<%= c.confirmed_credits_validations_count %>
+<%= c.credit_validations.confirmed.count %><br />
+<% end %>
+<% end %>
 
 	<div class="white-box">
 	

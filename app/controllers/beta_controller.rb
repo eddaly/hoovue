@@ -5,6 +5,13 @@ class BetaController < ApplicationController
     @works = Product.limit(380).where(:image.blank?).order("RANDOM()")
        @popular_works = Product.limit(8).order("credits_count DESC")
        @recent_credits = Credit.limit(12).order("created_at DESC")
+       if current_user
+          @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
+          @emails = Email.where(:user_id => current_user.id)
+          @emails.each do |email|
+            @unclamied_email_credits = Credit.where(:pending_user_email => email.email)
+              end
+               end
   end
 
   def work

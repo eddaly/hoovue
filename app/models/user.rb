@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     user.credits_count = "0"
    if user.id 
     else
-      UserMailer.signup_confirmation(user).deliver
+      
    end
     user.save!
   end
