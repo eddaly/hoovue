@@ -70,7 +70,7 @@ class CreditValidationsController < ApplicationController
      @credit_validation = CreditValidation.new(params[:credit_validation])
      @current_credit = @credit_validation.current_credit_id
      @credit = Credit.find_by_id(@credit_validation.credit_id)
-     @current_credit.validator = @credit.user_id
+     @current_credit_validator = @credit.user_id
      @credit_validation.credit_id = @credit.id
      @credit_validation.user_id = @credit.user_id
      @credit_validation_current = CreditValidation.new(params[:credit_validation])
