@@ -67,9 +67,13 @@ class CreditValidationsController < ApplicationController
   # POST /credit_validations.json
   def create
    if params[:existing_credit]
+   
      @credit_validation = CreditValidation.new(params[:credit_validation])
      @current_credit = @credit_validation.current_credit_id
      @credit = Credit.find_by_id(@credit_validation.credit_id)
+     if @credit.blank?
+       redirect_to :back, :notice => "Please select a co-creator."
+    else   
      @current_credit_validator = @credit.user_id
      @credit_validation.credit_id = @credit.id
      @credit_validation.user_id = @credit.user_id
@@ -82,6 +86,7 @@ class CreditValidationsController < ApplicationController
        else
        redirect_to :back, notice: "Cannot be added. Has this person already validated you?" 
        end
+     end
    else
     @credit = Credit.find(params[:credit_id])
       @credit_validation = @credit.credit_validations.build(:credit_id => @credit.id)
