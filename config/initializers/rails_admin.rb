@@ -16,6 +16,7 @@ RailsAdmin.config do |config|
       field :studio
       field :url, :string
       field :status
+      field :like_count
       field :startdate
       field :enddate
    end

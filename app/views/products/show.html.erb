@@ -29,7 +29,13 @@
 		<p class="credit-count"><%= @product.credits.count %></p>
 		<p class="credits">Credits</p>
 			<div class="verified-count">
-				<p class="verified-credits">0</p>
+				<p class="verified-credits">
+					<% if @product.like_count %>
+					<%= @product.like_count %>
+					<% else %>
+					0
+					<% end %>
+				</p>
 				<p class="verifed">Verified</p>
 			</div>
 				<div class="images">

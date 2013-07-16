@@ -28,16 +28,28 @@
 			<p class="credit-count"><%= @user.credits.count %></p>
 			<p class="credits">Credits</p>
 				<div class="verified-count">
-					<p class="verified-credits">0</p>
+					<p class="verified-credits">
+						<% if @user.link_3 %>
+						<%= @user.link_3 %>
+						<% else %>
+						0
+						<% end %>
+					</p>
 					<p class="verifed">Verified</p>
 				</div>
 					<div class="images">
-						<p class="verified-credits"><%= @user.credits.cv_part.count%></p>
-						<p class="verifed">Part</p>
+						<p class="verified-credits">
+							<% if @user.link_3_desc %>
+							<%= @user.link_3_desc %>
+							<% else %>
+							0
+							<% end %>
+						</p>
+						<p class="part">Part</p>
 					</div>
 						<div class="videos">
-							<p class="verified-credits">1</p>
-							<p class="verifed">Image</p>
+							<p class="verified-credits">0</p>
+							<p class="pending">Pending</p>
 						</div>
 		</div>
 	</div>
@@ -71,14 +83,7 @@
 				</div>
 					
 					
-					<div class="views">
-						<div class="data">
-							109
-						</div>
-						<div class="title">
-							Views
-						</div>	
-					</div>			
+					
 					
 	
 	 </div>

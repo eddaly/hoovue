@@ -24,8 +24,8 @@ class Ability
                         can :manage, Product, :user_id => user.id
                           can :manage, CreditValidation
                           can :access, :rails_admin   
-                            can :dashboard 
-                            can [:create, :destroy], Email, :user_id => user.id
+                            cannot :dashboard 
+                            cannot [:create, :destroy], Email, :user_id => user.id
                 
         end
         if user.role.nil?
