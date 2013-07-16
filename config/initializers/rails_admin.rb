@@ -12,6 +12,7 @@ RailsAdmin.config do |config|
               label "Category"
             end
       field :image
+      field :description
       field :issue
       field :studio
       field :url, :string
