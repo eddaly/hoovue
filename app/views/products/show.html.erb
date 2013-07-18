@@ -26,11 +26,11 @@
 	</div>	
 
 	<div class="stats">
-		<p class="credit-count"><%= @product.credits.count %></p>
+		<p class="credit-count"><%= @product.credits.confirmed.count %></p>
 		<p class="credits">Credits</p>
 			<div class="verified-count">
 				<p class="verified-credits">
-					<% if @product.like_count %>
+					<% if @product.like_count  %>
 					<%= @product.like_count %>
 					<% else %>
 					0
