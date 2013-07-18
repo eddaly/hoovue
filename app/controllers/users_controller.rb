@@ -31,6 +31,12 @@ def show
             @credit = Credit.new
             @post = Post.new
             @followers = Friendship.where(:friend_id => @user.id)
+             @verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
+             @one_verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
+             @two_verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
+             @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
+             @pending_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
+            
 end
 
 def edit

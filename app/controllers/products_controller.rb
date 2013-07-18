@@ -18,10 +18,16 @@ end
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
+    @verified_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
+    @one_verified_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
+    @two_verified_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
+    @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
+    @pending_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
     if params[:sort] == "verified"
      @credits = @product.credits.where(:user_id.blank?).order("confirmed_validations_count DESC, created_at DESC")
    else
-       @credits = @product.credits.where(:user_id.blank?).order(params[:sort])
+       @credits = @product.credits.where(:user_id.blank?).order("confirmed_validations_count DESC, created_at DESC")
+   
    end
         if current_user
         @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)

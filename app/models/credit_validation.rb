@@ -1,8 +1,8 @@
 class CreditValidation < ActiveRecord::Base
-  attr_accessible :credit_id, :user_id, :user_validation, :token, :token_created_at, :token_sent_at, :verified, :validator_id, :status, :current_credit_id  
+  attr_accessible :credit_id, :user_id, :user_validation, :token, :credit_validation_count, :token_created_at, :token_sent_at, :verified, :validator_id, :status, :current_credit_id  
         attr_accessor :current_credit_id  
-    belongs_to :credit, :counter_cache => true
-       scope :confirmed, where(:status => "confirmed")
+    belongs_to :credit, :counter_cache => :credit_validation_count
+           scope :confirmed, where(:status => "confirmed")
  
      validates_uniqueness_of :credit_id, :scope => :validator_id, :message => "This user has already validated you."
      
@@ -21,7 +21,7 @@ def after_destroy
 end
 
 def update_counter_cache
-  self.credit.credit_validations_count = Credit_validation.count
+  self.credit.credit_validation_count = Credit_validation.count
   self.credit.save
 end
 

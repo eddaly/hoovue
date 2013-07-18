@@ -51,7 +51,7 @@ RailsAdmin.config do |config|
       field :issue
        field :status
       field :pending_user_email
-      field :credit_validations_count
+      field :credit_validation_count
     
    end
    
