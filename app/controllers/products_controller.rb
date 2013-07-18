@@ -24,9 +24,9 @@ end
     @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
     @pending_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
     if params[:sort] == "verified"
-     @credits = @product.credits.where(:user_id.blank?).order("confirmed_validations_count DESC, created_at DESC")
+     @credits = @product.credits.where("user_id > ?", 0).order("credit_validation_count DESC, created_at DESC")
    else
-       @credits = @product.credits.where(:user_id.blank?).order("confirmed_validations_count DESC, created_at DESC")
+       @credits = @product.credits.where("user_id > ?", 0).order("credit_validation_count DESC, created_at DESC")
    
    end
         if current_user

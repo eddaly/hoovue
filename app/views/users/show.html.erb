@@ -211,8 +211,10 @@ $(document).ready(function(){
 	<%= link_to c.product.title, product_path(c.product) %>
 	</div>
 	
+	<% @product_credit_count = c.product.credits.where("user_id > ?", 0) %>
+	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= c.product.credits.count %></p>
+		<p class="title">Credits</p><p class="data"><%= @product_credit_count.size %></p>
 		<p class="title">Followers</p><p class="data">0</p>
 		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
 	</div>

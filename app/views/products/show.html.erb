@@ -26,7 +26,7 @@
 	</div>	
 
 	<div class="stats">
-		<p class="credit-count"><%= @product.credits.count %></p>
+		<p class="credit-count"><%= @credits.size %></p>
 		<p class="credits">Credits</p>
 			<div class="verified-count">
 				<p class="verified-credits">
@@ -198,7 +198,7 @@
 	</div>
 	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= c.user.credits_count %></p>
+		<p class="title">Credits</p><p class="data"><%= c.user.credits.count %></p>
 		<p class="title">Followers</p><p class="data"><%= c.user.friendships.count %></p>
 	</div>
 	
