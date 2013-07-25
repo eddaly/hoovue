@@ -38,5 +38,38 @@ def validate_new_email_credit
     redirect_to root_url
   end
 end   
-   
+
+
+def stats
+  
+  @users_total = User.all.size
+  @users_with_credits = User.where("credits_count > ?", 0).size
+  @users_with_credits_percentage = @users_with_credits * 100 / @users_total
+  @users_logged_in = User.where("updated_at > ?", :created_at).size
+  @users_last_day = User.where("created_at > ?", 24.hours.ago).size
+  @users_last_week = User.where("created_at > ?", 1.week.ago).size
+  @users_last_month = User.where("created_at > ?", 1.month.ago).size
+  
+  @users_with_facebook = User.where(:provider => "facebook").size
+  @users_with_facebook_percentage = @users_with_facebook * 100 / @users_total
+  @users_with_bio = User.where(:bio => nil).size
+  @users_with_bio_percentage = @users_with_bio - @users_total * 100 / @users_total
+
+  
+  @credits_total = Credit.all.size
+  @credits_with_verifiers = Credit.where("credit_validation_count > ?", 0).size
+  @credits_with_verifiers_percentage = @credits_with_verifiers * 100 / @credits_total  
+  @credits_last_day = Credit.where("created_at > ?", 24.hours.ago).size
+  @credits_last_week = Credit.where("created_at > ?", 1.week.ago).size
+  @credits_last_month = Credit.where("created_at > ?", 1.month.ago).size
+
+  
+  @cv_total = CreditValidation.all.size
+  @cv_confirmed = CreditValidation.where(:status => "confirmed").size
+  @cv_percentage = @cv_confirmed * 100 / @cv_total
+  @credits_v_last_day = CreditValidation.where("created_at > ?", 24.hours.ago).size
+  @credits_v_last_week = CreditValidation.where("created_at > ?", 1.week.ago).size
+  @credits_v_last_month = CreditValidation.where("created_at > ?", 1.month.ago).size
+end 
+  
 end

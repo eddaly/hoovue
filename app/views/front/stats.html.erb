@@ -1,0 +1,51 @@
+<div class="container_12 pages">
+	<h1>Stats Users</h1>
+
+<h3>Total Number of Users:</h3>	
+<h2><%= @users_total %></h2>
+
+<h3>Total Number of Users with at least 1 credit:</h3>
+<h2><%= @users_with_credits %></h2>
+
+<h3>Conversion Percentage:</h3>
+<h2><%= @users_with_credits_percentage %>%</h2>
+
+<h3>Percentage Registered with Facebook</h3>
+<h2><%= @users_with_facebook_percentage %>%</h2>
+
+<h3>New users in the:</h3>
+<h2>Last day: <%= @users_last_day %>, Last week: <%= @users_last_week %>, Last month: <%= @users_last_month %></h2>
+
+<h3>Percentage with Bio</h3>
+<h2><%= @users_with_bio_percentage %>%</h2>
+
+<h1>Stats Credits</h1>
+
+<h3>Total Number of Credits:</h3>	
+<h2><%= @credits_total %></h2>
+
+<h3>Total Number of Credits with at least 1 verifier:</h3>
+<h2><%= @credits_with_verifiers %></h2>
+
+<h3>Conversion Percentage:</h3>
+<h2><%= @credits_with_verifiers_percentage %>%</h2>
+
+<h3>New Credits in the:</h3>
+<h2>Last day: <%= @credits_last_day %>, Last week: <%= @credits_last_week %>, Last month: <%= @credits_last_month %></h2>
+
+
+<h1>Stats Credit Verfications</h1>
+<h3>Total number of Credit Verifications sent out</h3>
+<h2><%= @cv_total %></h2>
+
+<h3>Total of confirmed Credit Validations</h3>
+<h2><%= @cv_confirmed %></h2>
+
+<h3>Conversion Percentage:</h3>
+<h2><%= @cv_percentage %>%</h2>
+
+<h3>New Credit Verifications in the:</h3>
+<h2>Last day: <%= @credits_v_last_day %>, Last week: <%= @credits_v_last_week %>, Last month: <%= @credits_v_last_month %></h2>
+
+
+</div>
