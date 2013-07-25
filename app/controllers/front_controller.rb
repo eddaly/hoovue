@@ -41,11 +41,10 @@ end
 
 
 def stats
-  
+  if current_user.googleplus == "lecrabe"
   @users_total = User.all.size
   @users_with_credits = User.where("credits_count > ?", 0).size
   @users_with_credits_percentage = @users_with_credits * 100 / @users_total
-  @users_logged_in = User.where("updated_at > ?", :created_at).size
   @users_last_day = User.where("created_at > ?", 24.hours.ago).size
   @users_last_week = User.where("created_at > ?", 1.week.ago).size
   @users_last_month = User.where("created_at > ?", 1.month.ago).size
@@ -70,6 +69,9 @@ def stats
   @credits_v_last_day = CreditValidation.where("created_at > ?", 24.hours.ago).size
   @credits_v_last_week = CreditValidation.where("created_at > ?", 1.week.ago).size
   @credits_v_last_month = CreditValidation.where("created_at > ?", 1.month.ago).size
+else
+  redirect_to root_url
+end
 end 
   
 end
