@@ -18,7 +18,7 @@ body.new {
 	
 	text-align:center;
 	height:70px;	
-	background-color:$light-blue;
+	background-color:orange;
 	font-size:25px;
 	color:white;
 	padding-top:20px;
@@ -590,7 +590,10 @@ float:left;
 				
 				p.description-text {
 					color:white;
+					float:left;
 					margin:20px;
+					height:90px;
+					overflow:auto;
 				}
 				
 			}	
@@ -965,7 +968,7 @@ float:left;
 			width:500px;
 			padding:5px;
 			height:200px;
-			overflow:scroll;
+			overflow:auto;
 			
 			
 			.name {
@@ -1117,7 +1120,7 @@ float:left;
 				p.role-description {
 					width:390px;
 					height:80px;
-					overflow:scroll;
+					overflow:auto;
 					
 				}
 			

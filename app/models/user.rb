@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
             has_many :posts
               has_many :friendships
                 has_many :friends, :through => :friendships
-                has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-                has_many :inverse_friends, :through => :inverse_friendships, :source => :user
-                  has_many :emails
+                  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+                    has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+                      has_many :emails
+                      
+                      
          mount_uploader :picture, ImageUploader   
             #Rating system
               letsrate_rater

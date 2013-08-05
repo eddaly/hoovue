@@ -55,7 +55,7 @@ end
     redirect_to search_credits_path 
   end
 else
-  redirect_to root_url, :notice => "Please login before making a new product."
+  redirect_to root_url, :notice => "Please login before making a new work."
 end
   end
 

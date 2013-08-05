@@ -47,7 +47,7 @@ class FriendshipsController < ApplicationController
     flash[:notice] = "Following #{@user.name}."
     redirect_to :back
   else
-    flash[:error] = "Unable to follow."
+    flash[:error] = "You are already following this memeber."
     redirect_to :back
   end
   end
