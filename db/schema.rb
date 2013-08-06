@@ -107,29 +107,29 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "products", :force => true do |t|
-    t.string    "title"
-    t.string    "genre"
-    t.integer   "user_id"
-    t.string    "image"
-    t.text      "description"
-    t.timestamp "created_at",                       :null => false
-    t.timestamp "updated_at",                       :null => false
-    t.text      "properties"
-    t.integer   "product_genre_id"
-    t.string    "status"
-    t.string    "issue"
-    t.string    "url"
-    t.string    "date"
-    t.timestamp "year"
-    t.string    "studio"
-    t.timestamp "startdate"
-    t.timestamp "enddate"
-    t.integer   "credits_count",     :default => 0
-    t.string    "video"
-    t.string    "moderation_status"
-    t.string    "image_2"
-    t.string    "image_3"
-    t.integer   "like_count"
+    t.string   "title"
+    t.string   "genre"
+    t.integer  "user_id"
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.text     "properties"
+    t.integer  "product_genre_id"
+    t.string   "status"
+    t.string   "issue"
+    t.text     "url"
+    t.string   "date"
+    t.datetime "year"
+    t.string   "studio"
+    t.datetime "startdate"
+    t.datetime "enddate"
+    t.integer  "credits_count",     :default => 0
+    t.string   "video"
+    t.string   "moderation_status"
+    t.string   "image_2"
+    t.string   "image_3"
+    t.integer  "like_count"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
