@@ -190,6 +190,18 @@ $(document).ready(function(){
 	
 	<h2>Credits</h2>
 	
+	<% if @user.credits.count == 0 %>
+	<% if current_user %>
+		 <% if current_user.id == @user.id %>
+	<h3>You seem to actually have no credits, add your first credit <a href="/credits/search">here.</a>
+		<% else %>
+	<h3>This user actually doesn't actually have any creative credits yet.<h3>
+		<% end %>
+		<% end %>
+	<% else %>
+
+	<% end %>
+	
 	<% @credits.each do |c| %>
 	
 	
