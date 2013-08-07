@@ -23,8 +23,8 @@
 		<h2>Users:</h2>
 	<ul>
 	<% @users.each do |u| %>
-	<%= link_to p do %>
-	<%= link_to u.name, user_path(u) %> 
+	<%= link_to u do %>
+	
 	<li class="<%= cycle('even', 'odd') -%>">
 		<% if u.provider == "facebook" %>
 	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	
@@ -34,7 +34,6 @@
 		</div>
 		<% end %>
 		<%= link_to u.name, user_path(u) %> 
-	<% end %>
 	</li>
 	<%end%>
 		<%end%>
