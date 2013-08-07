@@ -42,7 +42,7 @@ float:left;
 		}
 	
 	
-.blue-btn, .blue-btn-border, .blue-btn-border-large {
+.blue-btn, .blue-btn-border, .blue-btn-border-large, .grn-btn {
 	width:100%;
 	height:20px;
 	color:white;
@@ -59,6 +59,13 @@ float:left;
 	}
 
 }	
+
+
+.grn-btn {
+	background-color:#09C11F;
+	border: 2px solid #10E72A;
+	font-size:18px;
+}
 
 .blue-btn-border, .blue-btn-border-large {
 	border:2px solid #5CCBF5;
@@ -142,9 +149,11 @@ float:left;
 			}
 			
 			a {
-			float:left;	
-			margin:15px 0 0 20px;
-			color:$grey;
+				float:left;
+				color:white;
+				font-size:12px;
+				width:105px;
+				margin-top:7px;
 			
 		}
 		}
