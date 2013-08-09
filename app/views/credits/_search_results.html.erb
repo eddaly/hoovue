@@ -27,13 +27,15 @@
 	
 	<li class="<%= cycle('even', 'odd') -%>">
 		<% if u.provider == "facebook" %>
+		
 	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	
+		
 		<% else %>
-		<div style="width:50px; height:50px">
-		<%= image_tag u.profile_picture %>
-		</div>
+		
+		<%= image_tag u.profile_picture, :width => "50", :height => "50" %>
+		
 		<% end %>
-		<%= link_to u.name, user_path(u) %> 
+<%= link_to u.name, user_path(u) %>
 	</li>
 	<%end%>
 		<%end%>
@@ -48,7 +50,7 @@
 <% @products.each do |p| %>
 <%= link_to p do %>
 <li class="<%= cycle('even', 'odd') -%>">
-<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-credit-small.jpg'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre_id.present? %><%= p.product_genre.name %> <%end%></h2> 
+<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-thumb.png'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre_id.present? %><%= p.product_genre.name %> <%end%></h2> 
 	
 
  </span>
