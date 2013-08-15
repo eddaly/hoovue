@@ -45,12 +45,16 @@ end
     if current_user
       
     begin
+      if params[:name].empty?
+          redirect_to search_credits_path , :notice => "Please select a category."
+      else
     @product = Product.new(product_genre_id: params[:product_genre_id])
     @category = ProductGenre.find_by_id(params[:name])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
     end
+  end
   rescue
     redirect_to search_credits_path 
   end
