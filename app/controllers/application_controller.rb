@@ -24,7 +24,11 @@ class ApplicationController < ActionController::Base
     
     def save_facebook_params
       if params[:pending_token]
-        session[:pending_token] = params[:pending_token]  
+        if @credit.nil?
+          redirect_to root_url, :notice => "Please sign in."
+          session.delete(:pending_token)
+        end  
+     session[:pending_token] = params[:pending_token]  
      end 
     end
     
