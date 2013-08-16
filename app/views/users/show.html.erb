@@ -95,7 +95,7 @@
 		
 		<% else %>
 		<a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @<%= @user.twitter %></a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		
 	
 		<% end %>
 
@@ -124,35 +124,6 @@
 
 
 
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-        $(".slidingDiv_followers").hide();
-        $(".show_hide_followers").show();
-
-    $('.show_hide_followers').click(function(){
-    $(".slidingDiv_followers").slideToggle();
-    });
-
-});
-
-</script>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-        $(".slidingDiv_following").hide();
-        $(".show_hide_following").show();
-
-    $('.show_hide_following').click(function(){
-    $(".slidingDiv_following").slideToggle();
-    });
-
-});
-
-</script>
 
 <ul class="following-navi">
 	<li><a href"#" class="show_hide_followers">Followers</a></li>
@@ -1062,7 +1033,7 @@ $(document).ready(function(){
 				 <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 </h3><p class="fact"><%= c.fact %></p>
 
 
