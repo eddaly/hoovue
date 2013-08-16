@@ -325,10 +325,10 @@ $(document).ready(function(){
 					<span class="picture">
 					<% if current_user %>
 						<% if current_user.id == c.user_id  %>
-						<a href="#openModalvalidate<%= c.id %>" class="">
+						<a href="#openModalvalidate0<%= c.id %>" class="">
 							<%= image_tag '/assets/empty.png' %>
 						</a>	
-						<div id="openModalvalidate<%= c.id %>" class="modalDialog">
+						<div id="openModalvalidate0<%= c.id %>" class="modalDialog">
 							<div>
 							 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 								<% if current_user %>			
@@ -507,7 +507,7 @@ $(document).ready(function(){
 	
 							<% if c.credit_validations.count.eql?(1) %>
 							
-							<div id="openModalvalidate<%= c.id %>" class="modalDialog">
+							<div id="openModalvalidate1<%= c.id %>" class="modalDialog">
 								<div>
 								 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 									<% if current_user %>			
@@ -740,7 +740,7 @@ $(document).ready(function(){
 					<span class="picture">
 					<% if current_user %>	
 						<% if current_user.id == c.user_id  %>
-							<a href="#openModalvalidate<%= c.id %>" class="">
+							<a href="#openModalvalidate1<%= c.id %>" class="">
 							<%= image_tag '/assets/empty.png' %>
 							</a>
 								
@@ -804,10 +804,10 @@ $(document).ready(function(){
 					<span class="picture">
 					<% if current_user %>	
 						<% if current_user.id == c.user_id  %>
-						<a href="#openModalvalidate<%= c.id %>" class="">
+						<a href="#openModalvalidate2<%= c.id %>" class="">
 							<%= image_tag '/assets/empty.png' %>
 						</a>
-						<div id="openModalvalidate<%= c.id %>" class="modalDialog">
+						<div id="openModalvalidate2<%= c.id %>" class="modalDialog">
 							<div>
 							 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 								<% if current_user %>			
