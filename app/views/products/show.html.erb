@@ -146,6 +146,9 @@
 			  </div>
   
 			  <% if @product.product_genre.name == "Game" %>
+			 <!--[if IE]>
+			 <strong>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank</strong><br/>
+			 <![endif]-->
 			   <div class="fact">
 			 <%= f.text_area :issue, :rows => '2', :placeholder => "Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank"	 %>
 
@@ -166,11 +169,15 @@
  
  
  
-
+				 <!--[if IE]>
+				 <strong>What you actually did</strong><br/>
+				 <![endif]--> 
 			 <div class="desc">
 			  <%= f.text_field :role_desc, :placeholder => "What you actually did" %>
 			 </div>
- 
+			 <!--[if IE]>
+			 <strong>Tell fans of this work one interesting thing about it</strong><br/>
+			 <![endif]-->
 			   <div class="fact">
 		<%= f.text_area :fact, :rows => '2', :placeholder => "Tell fans of this work one interesting thing about it"	 %>
 				<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
