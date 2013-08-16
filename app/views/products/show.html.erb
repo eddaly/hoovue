@@ -7,6 +7,9 @@
 <div class="work-info-panel">
 	<div class="title">
 		<%= @product.title %>
+	<% if current_user && @product.user_id == current_user.id %>
+		<%= link_to '(edit work)', edit_product_path(@product, :name => @product.product_genre.id) %>
+	<% end %>	
 	</div>
 	<div class="genre">
 	<% if @product.product_genre %><p><%= @product.product_genre.name %><%end%>

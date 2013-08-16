@@ -24,11 +24,7 @@ class ApplicationController < ActionController::Base
     
     def save_facebook_params
       if params[:pending_token]
-        if @credit.nil?
-          redirect_to root_url, :notice => "This credit has been deleted."
-          session.delete(:pending_token)
-        end  
-     session[:pending_token] = params[:pending_token]  
+        session[:pending_token] = params[:pending_token]  
      end 
     end
     

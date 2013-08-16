@@ -65,9 +65,13 @@ end
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
+     @product = Product.find(params[:id])
+    if current_user.id == @product.user_id
+   
+  else
+    redirect_to root_url, notice: 'You do not own this work.'
   end
-
+end
   # POST /products
   # POST /products.json
   def create

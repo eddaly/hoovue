@@ -1,10 +1,10 @@
 class BetaController < ApplicationController
   def index
     @featured_users = User.find_all_by_id([13, 3, 19,121,15])
-    @users = User.where(:profile_picture.blank?).where(:provider => "facebook").order("RANDOM()").limit(45)
-    @works = Product.limit(380).where(:image.blank?).order("RANDOM()")
+    @users = User.where(:profile_picture.blank?).where("credits_count > ?", 0).where(:provider => "facebook").order("RANDOM()").limit(45)
+    @works = Product.limit(380).where("credits_count > ?", 0).where(:image.blank?).order("RANDOM()")
        @popular_works = Product.limit(8).order("credits_count DESC")
-       @recent_credits = Credit.limit(12).order("created_at DESC")
+       @recent_credits = Credit.limit(10).order("RANDOM()").order("created_at DESC")
        if current_user
           @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
           @emails = Email.where(:user_id => current_user.id)
