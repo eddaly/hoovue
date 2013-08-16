@@ -1,1 +1,254 @@
-<a href="http://www.bbc.co.uk">BBC</a>
+<div class="container_12 user-page">
+	<div class="grid_9 alpha user-container">
+
+
+
+
+
+<div class="user-info-panel">
+	
+	<div class="grid_3 profile-picture">
+		<% if @user.picture.blank? %>
+		
+		<% if @user.provider == "facebook" %>		
+	<img  style="margin-top:3px;" src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+		<% end %>
+		<% if @user.provider == "linkedin" %>		
+	<%= image_tag @user.profile_picture %><br />
+		<% end %>
+		<% else %>
+		<%= image_tag @user.picture %>
+		<% end %>
+		
+	</div>
+	
+	
+	<div class="grid_3 stats">
+		<div class="stats">
+			<p class="credit-count"><%= @user.credits.count %></p>
+			<p class="credits">Credits</p>
+				<div class="verified-count">
+					<p class="verified-credits">
+						<%= @verified_credits.size %>
+					</p>
+					<p class="verifed">Verified</p>
+				</div>
+					<div class="images">
+						<p class="verified-credits">
+							<%= @part_verified_credits %>
+						</p>
+						<p class="part">Part</p>
+					</div>
+						<div class="videos">
+							<p class="verified-credits"><%= @pending_credits.count %></p>
+							<p class="pending">Pending</p>
+						</div>
+		</div>
+	</div>
+	
+	<div class="grid_2 analytics">
+		<div class="followers">
+			<div class="data">
+				<%= @followers.count %>
+			</div>
+			<div class="title">
+				Followers
+			</div>	
+			</div>
+			
+			<div class="likes">
+				<div class="data">
+					3
+				</div>
+				<div class="title">
+					Likes
+				</div>	
+				</div>
+				
+				
+				<div class="shared">
+					<div class="data">
+						2					</div>
+					<div class="title">
+						Shared
+					</div>	
+				</div>
+					
+					
+					
+					
+	
+	 </div>
+	 
+	<div class="description">
+		<div class="name">
+			<%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %>
+		</div>
+	
+		<% if current_user %>
+			 <% if current_user.id == @user.id %>
+			 		<% else %>
+	
+		<%= link_to 'Follow +', friendships_path(:friend_id => @user.id), :method => :post, :class => "blue-btn" %><br /><br />
+
+		<% if @user.twitter.blank? %>
+		
+		<% else %>
+		<a href="https://twitter.com/<%= @user.twitter %>" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @<%= @user.twitter %></a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	
+		<% end %>
+
+			<% end %>
+					<% end %>
+		
+		
+	
+		<div class="info">
+			<p class="url"><a href="http://<%= @user.link %>" target=blank><%= @user.link %></a></p>
+		
+		</div>	
+		
+		<div class="bio">
+			<%= @user.bio %>
+		</div>	
+			
+		
+			
+		
+	
+	</div>
+		
+	
+</div>	
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+        $(".slidingDiv_followers").hide();
+        $(".show_hide_followers").show();
+
+    $('.show_hide_followers').click(function(){
+    $(".slidingDiv_followers").slideToggle();
+    });
+
+});
+
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+        $(".slidingDiv_following").hide();
+        $(".show_hide_following").show();
+
+    $('.show_hide_following').click(function(){
+    $(".slidingDiv_following").slideToggle();
+    });
+
+});
+
+</script>
+
+<ul class="following-navi">
+	<li><a href"#" class="show_hide_followers">Followers</a></li>
+	<li><a href"#" class="show_hide_following">Following</a></li>
+</ul>	
+
+<div class="slidingDiv_followers">
+	<ul>
+	    <% for user in @user.inverse_friends %>
+	<li><%= link_to user_path(user.id) do %>
+		<%= image_tag user.profile_picture %>
+		<%=h user.name %><% end %></li>
+	    <% end %>
+
+	</ul>
+</div>
+
+<div class="slidingDiv_following">
+	<ul>
+<% for friendship in @user.friendships%>
+<% user = User.find_by_id(friendship.friend_id) %>
+<li>
+	<%= link_to user_path(user.id) do %>
+	
+<%= image_tag user.profile_picture %>
+	
+	<%= user.name %><% end %></li>
+<% end %>
+	</ul>
+</div>
+
+
+
+<div class="credits">
+	
+	<h2>Credits</h2>
+	
+	<% if @user.credits.count == 0 %>
+	<% if current_user %>
+		 <% if current_user.id == @user.id %>
+	<h3>You seem to actually have no credits, add your first credit <a href="/credits/search">here.</a>
+		<% else %>
+	<h3>This user doesn't actually have any creative credits yet.<h3>
+		<% end %>
+		<% end %>
+	<% else %>
+
+	<% end %>
+	
+	
+
+
+
+<div class="grid_3 activity-feed">
+<% if current_user %>
+	<h3>Recent Following Activity</h3>
+	
+<% for friendship in current_user.friendships%>
+<% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
+<% @friend_credits.each do |fc| %>
+<div class="following-item">
+
+	<div class="profile-picture">
+		<%= image_tag friendship.friend.profile_picture %>
+	</div>
+	
+	<div class="name">
+	<%= link_to user_path(friendship.friend.id) do %><%= friendship.friend.name %><% end %>
+	</div>
+	<div class="stats">
+	<p>Credits</p> <div class="data">
+	 <%= friendship.friend.credits.count %>
+	</div>
+	</div>	
+<div class="role">
+		<%= fc.role %>
+	</div>
+	<div class="product-title">
+<a href="/products/<%= fc.product.id %>"><%= fc.product.title %></a>
+	</div>
+</div>
+<% end %>
+<% end %>
+
+
+
+
+  <% for user in current_user.inverse_friends %>
+<%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
+  <% end %>
+
+<% end %>
+
+		
+</div>
+
+</div>
+
+
