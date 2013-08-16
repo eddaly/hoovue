@@ -321,6 +321,274 @@ $(document).ready(function(){
 		<div class="head-shots">
 		
 	
+							<% if c.credit_validations.count.eql?(1) %>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							<div id="openModalvalidate<%= c.id %>" class="modalDialog">
+								<div>
+								 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
+									<% if current_user %>			
+									<% if current_user.id == c.user_id %>
+									<script type="text/javascript">
+ 
+									$(document).ready(function(){
+ 
+									        $(".slidingDiv_email_<%= c.id %>").hide();
+									        $(".show_hide_email_<%= c.id %>").show();
+ 
+									    $('.show_hide_email_<%= c.id %>').click(function(){
+									    $(".slidingDiv_email_<%= c.id %>").slideToggle();
+									    });
+ 
+									});
+ 
+									</script>
+
+							
+									<% if c.credit_validations.count < 3  %>
+
+					<h2>Invite someone to verify your credit.</h2>
+							    
+										<%= form_for(@credit_validation) do |f| %>
+										<%= f.label "Select existing co-creator:"%>
+										<div style="z-index:1000;">
+											<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => c.product.id).uniq, :id, :user_name, :prompt => "Please Select" %>
+											</div> 
+											<%= f.hidden_field :validator_id, :value => current_user.id %>
+											<%= f.hidden_field :status, :value => "confirmed" %>
+	   
+											<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
+											<%= f.hidden_field :current_credit_id, :value => c.id %>
+										<% end %>
+								
+										<h2>or invite from:</h2>
+										<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a>
+											<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
+		
+								
+
+
+									<div class="slidingDiv_email_<%= c.id %>">
+							
+
+									<div style="float:right;"> <a class="show_hide_email_<%= c.id %>">(close X)</a></div>
+									<br />
+	
+									<%= form_for @credit, :validate => true do |f|%>
+									<% if @credit.errors.any? %>
+									  <div id="error_explanation">
+									    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+									    <ul>
+									    <% @credit.errors.full_messages.each do |msg| %>
+									      <li><%= msg %></li>
+									    <% end %>
+									    </ul>
+									  </div>
+									<% end %> 
+										<%= f.label "Co-creator E-mail"%>
+   
+										<%= f.text_field :pending_user_email %>
+  
+											<%= f.label "What was the role of your co-creator?"%>
+	   
+											<%= f.text_field :role %>
+	   
+	 	
+										 		<%= f.hidden_field :product_id, :value => c.product.id %>
+			
+												<%= f.hidden_field :current_credit_id, :value => c.id %>
+			
+												<%= f.hidden_field :current_credit_role, :value => c.role %>
+			
+		    
+												<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
+			
+										 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :class => 'submit' %>
+				
+										<% end %> 
+									</div>
+							
+	
+									<script type="text/javascript">
+ 
+									$(document).ready(function(){
+ 
+									        $(".slidingDiv_facebook_<%= c.id %>").hide();
+									        $(".show_hide_facebook_<%= c.id %>").show();
+ 
+									    $('.show_hide_facebook_<%= c.id %>').click(function(){
+									    $(".slidingDiv_facebook_<%= c.id %>").slideToggle();
+									    });
+ 
+									});
+ 
+									</script>	
+
+
+									<div class="slidingDiv_facebook_<%= c.id %>">	
+								
+										<div style="float:right;"> <a class="show_hide_facebook_<%= c.id %>">(close X)</a></div>	
+										<br />
+	
+										<%= form_for @credit, :validate => true do |f|%>
+										<% if @credit.errors.any? %>
+										  <div id="error_explanation">
+										    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
+
+										    <ul>
+										    <% @credit.errors.full_messages.each do |msg| %>
+										      <li><%= msg %></li>
+										    <% end %>
+										    </ul>
+										  </div>
+										<% end %>
+   
+												<%= f.label "What was the role of your co-creator?"%>
+												<div>
+												<%= f.text_field :role %>
+												</div>	
+			
+											 		<%= f.hidden_field :product_id, :value => c.product.id %>
+			
+													<%= f.hidden_field :current_credit_id, :value => c.id %>
+			   
+											 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+				
+											<% end %> 
+								 
+												</div>
+	
+	
+												<script type="text/javascript">
+ 
+												$(document).ready(function(){
+ 
+												        $(".slidingDiv_co_<%= c.id %>").hide();
+												        $(".show_hide_co_<%= c.id %>").show();
+ 
+												    $('.show_hide_co_<%= c.id %>').click(function(){
+												    $(".slidingDiv_co_<%= c.id %>").slideToggle();
+												    });
+ 
+												});
+ 
+												</script>	
+	
+
+										<% end %>
+									<% end %>
+									<% end %>
+						
+								</div>
+							</div>			
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+				<% c.credit_validations.each do |cv| %>
+				<% if cv.status == "confirmed" %>
+				<span class="picture">
+					<% @user = User.find_by_id(cv.validator_id) %>
+				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
+					<% if @user %>
+					<% if @user.provider == "facebook" %>
+					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
+					<% else %>
+					<%= image_tag @user.profile_picture %>
+					<% end %>
+					</a>
+					<% else %>
+					<%= image_tag '/assets/deleted.png' %>
+					<% end %>
+				</span>
+	
+				<% end %>
+					<% if cv.status == "pending" %>
+					<span class="picture">
+						<% if current_user %>
+							<% if current_user.id == c.user_id  %>
+						<%= link_to credit_validation_path(cv) do %>
+					<%= image_tag '/assets/pending.png' %>
+	
+						<% end %>
+						<% else %>
+							<%= image_tag '/assets/pending.png' %>
+								<% end %>
+								<% else %>
+									<%= image_tag '/assets/pending.png' %>
+									<% end %>
+			
+						</span>
+		
+		
+		
+	
+					<% end %>
+					<% 2.times do %>
+					<a class="show_hide_validate_partial_<%= c.id %>">
+					<span class="picture">
+					<% if current_user %>	
+						<% if current_user.id == c.user_id  %>
+							<a href="#openModalvalidate<%= c.id %>" class="">
+							<%= image_tag '/assets/empty.png' %>
+							</a>
+								
+						<% else %>	
+						<%= image_tag '/assets/question.png' %>	
+						<% end %>
+						<% end %>
+			
+				
+					</span>
+					</a>
+					<% end %>
+					
+					<% end %>
+					<% else %>
+	
+			<% end %>
+
+		
 	
 				<% if c.credit_validations.count.eql?(3)  %>
 				<% c.credit_validations.each do |cv| %>
