@@ -12,9 +12,7 @@ class User < ActiveRecord::Base
                       
                       
          mount_uploader :picture, ImageUploader   
-            #Rating system
-              letsrate_rater
-              
+           
               #Roles
                 ROLES = %w[admin moderator user banned]
               
