@@ -376,18 +376,31 @@ span.ui-helper-hidden-accessible {
     pointer-events: auto;
   }
 
-  .add_credit {
+
+#slidingDiv_add_new {
+	float:left;
+	margin-bottom:50px;
+	margin-top:80px !important;
+	margin-bottom:30px !important;
+}
+
+.add_credit {
+	position: relative;
+}
+  .add_credit, #slidingDiv_add_new {
     width: 600px;
-    position: relative;
     margin: 1% auto;
     padding: 5px 20px 13px 20px;
     margin-top:0px;
 	background-color:#E5EAED;
+	
+	
 
 	input, textarea {
 		height:40px;
 		width:300px;
-	    -webkit-border-radius: 0px;
+	    max-width:600px;
+		-webkit-border-radius: 0px;
 	    -moz-border-radius: 0px;
 	    border-radius: 0px;
 		border:none;
@@ -425,7 +438,7 @@ span.ui-helper-hidden-accessible {
 
   }
 
-  #close {
+  #close, .close {
     background: #000;
     color: #FFF;
     line-height: 25px;
