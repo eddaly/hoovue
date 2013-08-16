@@ -17,6 +17,8 @@
 //= require rails.validations
 //= require select2
 //= require jquery.ui.datepicker
+//= require jquery.leanModal.min
+//= require jquery.avgrund
 //= require jquery.nested-fields
 //= require best_in_place
 //= require_tree .
@@ -26,6 +28,7 @@
     $.get($("#products_list_search").attr("action"), $("#products_list_search").serialize(), null, "script");
     return false;
   });
+  
   
   
   $(document).ready(function() {
