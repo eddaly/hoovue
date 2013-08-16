@@ -322,40 +322,12 @@ $(document).ready(function(){
 			
 	
 							<% if c.credit_validations.count.eql?(1) %>
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
 							<div id="openModalvalidate<%= c.id %>" class="modalDialog">
 								<div>
 								 	<a href="#close" title="Close" class="close" style="width:20px;">X</a>
 									<% if current_user %>			
 									<% if current_user.id == c.user_id %>
-									<script type="text/javascript">
- 
-									$(document).ready(function(){
- 
-									        $(".slidingDiv_email_<%= c.id %>").hide();
-									        $(".show_hide_email_<%= c.id %>").show();
- 
-									    $('.show_hide_email_<%= c.id %>').click(function(){
-									    $(".slidingDiv_email_<%= c.id %>").slideToggle();
-									    });
- 
-									});
- 
-									</script>
-
+									
 							
 									<% if c.credit_validations.count < 3  %>
 
@@ -422,20 +394,7 @@ $(document).ready(function(){
 									</div>
 							
 	
-									<script type="text/javascript">
- 
-									$(document).ready(function(){
- 
-									        $(".slidingDiv_facebook_<%= c.id %>").hide();
-									        $(".show_hide_facebook_<%= c.id %>").show();
- 
-									    $('.show_hide_facebook_<%= c.id %>').click(function(){
-									    $(".slidingDiv_facebook_<%= c.id %>").slideToggle();
-									    });
- 
-									});
- 
-									</script>	
+									
 
 
 									<div class="slidingDiv_facebook_<%= c.id %>">	
@@ -472,20 +431,7 @@ $(document).ready(function(){
 												</div>
 	
 	
-												<script type="text/javascript">
- 
-												$(document).ready(function(){
- 
-												        $(".slidingDiv_co_<%= c.id %>").hide();
-												        $(".show_hide_co_<%= c.id %>").show();
- 
-												    $('.show_hide_co_<%= c.id %>').click(function(){
-												    $(".slidingDiv_co_<%= c.id %>").slideToggle();
-												    });
- 
-												});
- 
-												</script>	
+												
 	
 
 										<% end %>
