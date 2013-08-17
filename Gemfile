@@ -43,7 +43,6 @@ gem 'omniauth-twitter'
 gem "rails_admin", "0.4.9" # Without Devise
 gem 'client_side_validations'
 gem 'awesome_nested_fields'
-gem 'letsrate'
 gem 'counter_culture', '~> 0.1.7'
 gem 'honeybadger'
 gem "select2-rails", "~> 3.2.1"
