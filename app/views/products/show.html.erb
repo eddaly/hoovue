@@ -106,7 +106,7 @@
 		
 		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
 		</div>
-		
+		<% if current_user %>
 		<script type="text/javascript">
 
 		$(document).ready(function(){
@@ -195,6 +195,7 @@
 				
 		
 		</div>
+		<% end %>
 	</div>	
 	
 	</div>	
