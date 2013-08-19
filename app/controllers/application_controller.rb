@@ -107,7 +107,7 @@ protected
  
    #Send to log in page if no auth   
       rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :notice => "Not Authorized. Please Log In."
+      redirect_to root_url, :notice => "Please Sign In."
     end
 
 def validation_count 

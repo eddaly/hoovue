@@ -75,107 +75,79 @@ $(document).ready(function(){
 	
   
     <div class="field">
-      <%= f.label :name %>
-  	 <% if params[:name] == "1" %>
-      <%= f.text_field :title, :title => "The name of the game is the title of a released version (alternative titles for the same game in other territories will be included in due course)." %>
-  	<% else %>
-  <%= f.text_field :title %>	
-  	<% end %>
+	 <!--[if IE]>
+	  <%= f.label :name %>
+	 <![endif]-->
+<%= f.text_field :title, :placeholder => "Name" %>	
+  	
     </div>
 	
+    <div class="field">
+   	 <!--[if IE]>
+   	  <%= f.label :studio_or_publisher_if_applicable %>
+   	 <![endif]-->
+     
+   <%= f.text_field :studio, :placeholder => "Studio or publisher if applicable" %>
+    </div>
 	
 	<div class="field">
-		<%= f.label :category %>
-	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}) -%>
+		
+	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}, :prompt => "Category") -%>
 	</div>	
 	
 
  	<div class="field">
-  	<%= f.label :status %>
-  	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']] %>
-  	 </div><br />
+  	
+  	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']], :prompt => "Status" %>
+  	 </div>
 	 
-  	 <% if params[:name] == "1" %>
+  	 
        <div class="field">
-         <%= f.label :year_the_game_was_first_released_if_applicable %>
-  	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
+      
+  	   <%= f.date_select :year, :discard_month => true, :start_year => 1950, :prompt => "Year of release" %>
        </div>
-  	 <br />
-       <div class="field">
-         <%= f.label :studio %>
-  	   <%= f.text_field :studio %>
-       </div>
-  	 <% end %>
-	 
-  	 <% if params[:name] == "2" %>
-       <div class="field">
-         <%= f.label :year_the_website_was_launched_if_applicable %>
-	
-          <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
-       </div>
-  	 <% end %>
+  	
+  	 
 
-  	 <% if params[:name] == "3" %>
        <div class="field">
-         <%= f.label :start_year %>
-  	   <%= f.date_select :startdate, :discard_month => true, :start_year => 1900 %>
+        
+  	   <%= f.date_select :enddate, :discard_month => true, :start_year => 1950, :prompt => "End year (if applies)" %>
        </div>
-       <div class="field">
-         <%= f.label :end_year %>
-  	   <%= f.date_select :enddate, :discard_month => true, :start_year => 1900 %>
-       </div>
-  	 <% end %>
-	 
-  	 <% if params[:name] == "4" %>
-       <div class="field">
-         <%= f.label :year_the_movie_was_released_if_applicable %>
-	
-         <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
-       </div>
-  	 <% end %>
-	 
-  	 <% if params[:name] == "5" %>
-       <div class="field">
-         <%= f.label :year_the_book_was_published_if_applicable %>
-	
-         <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
-       </div>
-  	 <% end %>
-	 
-  	 <% if params[:name] == "7" %>
-       <div class="field">
-         <%= f.label :year_of_first_broadcast_if_applicable %>
-	
-          <%= f.date_select :year, :discard_month => true, :start_year => 1950 %>
-       </div>
-  	 <% end %>
-
   	
      <div class="field">
-      <%= f.label :work_page_main_image %>
-      <%= f.file_field :image  %>
+      <%= f.label :images_for_this_work %>
+      <%= f.file_field :image, :class => "upload"  %>
     </div>
     <div class="field">
-     <%= f.label :work_page_other_image %>
-     <%= f.file_field :image_2 %>
+    
+     <%= f.file_field :image_2, :class => "upload" %>
    </div>
    <div class="field">
-    <%= f.label :work_page_other_image %>
-    <%= f.file_field :image_3 %>
-  </div>
+  
+    <%= f.file_field :image_3, :class => "upload" %>
+  </div><br/>
     <div class="field">
-     <%= f.label :youtube_video %>
-     <%= f.text_field :video %>
+      	 <!--[if IE]>
+      	 <%= f.label :youtube_video_id %>
+      	 <![endif]-->	
+     <%= f.text_field :video, :placeholder => "Youtube video ID" %>
    </div>
    <div class="field">
-    <%= f.label :work_description %>
-    <%= f.text_area :description, :rows => "10", :cols => "5" %>
+    	 <!--[if IE]>
+     <%= f.label :website %>
+		 <![endif]-->
+   
+     <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).", :placeholder => "Website Address" %>
+   </div>
+   <div class="field">
+    	 <!--[if IE]>
+    	 <%= f.label :work_description %>
+    	 <![endif]-->	
+   
+    <%= f.text_area :description, :rows => "10", :cols => "5", :placeholder => "Description of this work." %>
   </div>
  
-    <div class="field">
-      <%= f.label :website %>
-      <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course)." %>
-    </div>
+    
 
   
   
