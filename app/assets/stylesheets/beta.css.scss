@@ -162,13 +162,14 @@ float:left;
 		.search {
 		
 			height:48px;
-			
+			max-height:48px;
 			input {
 			height:28px;	
 			width:221px;
 			-webkit-border-radius: 0px;
 			-moz-border-radius: 0px;
 			border-radius: 0px;
+			padding:0px;
 			}
 			
 			input.search-button, input.submit, a#show_hide_new_work {
