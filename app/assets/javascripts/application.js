@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require jquery-fileupload/basic
-//= require jquery-fileupload/vendor/tmpl
 //= require jquery.slides
 //= require rails.validations
 //= require select2
