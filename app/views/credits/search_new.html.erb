@@ -18,7 +18,7 @@ $(document).ready(function(){
 	<h1>Add a credit</h1> 
 	<div class="container_12">
 <div class="grid_3 alpha add_credit_box">
-	<h2>Search for existing works</h2>
+	<h2>Work already on our site</h2>
 
 <%= form_tag search_credits_path, :method => 'get' do %>
 
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 <div class="grid_3 add_credit_box">
 <h2>Add a new work to our site</h2>	
-<p>Can't find the work your after?</p>
+
 <a id="show_hide_new_work">Add a new work +
 </a>
 
@@ -43,14 +43,12 @@ $(document).ready(function(){
 	 <p>Use the form below to quickly add multiple credits. Previous role suggestions appear.</p>
 <%= form_for(@credit) do |f| %>
  
- 	<%= f.text_field :role, :placeholder => "Type in a role", :class => "role" %> 
+ <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role", :class => "role" %> 
  
 
-	<%= f.select(:product_id, Product.all.collect {|a| [a.title, a.id]}, :class => "select-advanced") -%>
+<%= select_tag :product_id, options_from_collection_for_select(Product.all, :id, :title, params[:product_id]), :class => "select-advanced" %>
 
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-	
-	<%= f.submit 'Create Credit >', :class => 'submit'%>
+    <%= f.submit 'Create Credit >', :class => 'submit'%>
 
 <% end %>
 </div>	
@@ -86,11 +84,14 @@ $(document).ready(function(){
 	
 	<div class="field">
 		<%= f.label :category %>
-	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}) -%>
+	 <%= select_tag :product_genre_id, options_from_collection_for_select(ProductGenre.all, :id, :name, :product_genre_id), :class => "select-advanced" %>
 	</div>	
 	
 
- 	<div class="field">
+  <%= f.hidden_field :product_genre_id, :value => params[:name] %>	
+ 
+ 
+  	<div class="field">
   	<%= f.label :status %>
   	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']] %>
   	 </div><br />

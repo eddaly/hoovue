@@ -46,6 +46,7 @@ Hoo::Application.routes.draw do
      post :import 
      match 'role'
      match 'search'
+     match 'search_new'
      match 'batch'
    end
    member do

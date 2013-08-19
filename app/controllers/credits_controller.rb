@@ -62,7 +62,13 @@ end
         @users = User.search(params[:search])
     if current_user
       @credit = Credit.new
+      @product = Product.new
     end  
+  end
+  
+  def search_new
+    @product = Product.new
+    @credit = Credit.new
   end
 
   def flag
@@ -130,7 +136,7 @@ name=whoactually.com%20credit%20-%20Get%20the%20recognition%20you%20deserve&desc
 redirect_uri=http://#{ENV['DEFAULT_URL']}/users/#{current_user.id}")}
         end 
          
-        format.html { redirect_to product_path(@credit.product_id), notice: 'Credit was successfully created.' }
+       format.html  { redirect_to product_path(@credit.product_id), :notice => "Credit added. Add another <a href=/credits/search>here.</a>".html_safe }
    
         format.json { render json: @credit, status: :created, location: @credit }
       else

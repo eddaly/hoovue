@@ -171,7 +171,7 @@ float:left;
 			border-radius: 0px;
 			}
 			
-			input.search-button {
+			input.search-button, input.submit, a#show_hide_new_work {
 				width:15px;
 				height:19px;
 				margin-left:-30px;
@@ -1008,7 +1008,7 @@ float:left;
 		margin-bottom:40px;
 		margin-left:0px;
 		margin-top:10px;
-		width:300px;
+		width:280px;
 		height:50px;
 		
 		li {
@@ -1356,20 +1356,23 @@ float:left;
 	
 	input, textarea {
 		
-		width:350px;
-		background-color:#195259;	
+		width:280px;
+		height:35px;
+		background-color:#fff;	
 		border:none;
 		color:white;
 		margin-top:4px;	
 		border-radius:0px;
+		color:$dark;
 	}
 	
 	textarea {
 		width:500px;
 	}
 	
-	input.search-button, input.submit, input.batch {
+	input.search-button, input.submit, input.batch, a#show_hide_new_work {
 		background-color:$light;
+		color:white;
 	}
 	
 	input.batch {
@@ -1380,7 +1383,36 @@ float:left;
 		margin-top:0px;
 	}
 	
+.add_credit_box {
+	padding:10px;
+	width:280px;
+	background-color:#F3F4F6;
+	margin-right:10px;
+	min-height:188px;
+}	
+
+
+.new_work {
+	background-color:#F3F4F6;
+	padding:10px;
+	margin-top:20px;
 	
+	textarea#product_description {
+	width:400px;	
+	height:200px;	
+	}
+	
+	
+}
+
+a#show_hide_new_work {
+	padding:8px;
+	float:left;
+	text-align:center;
+	width:260px !important;
+	margin-top:23px;
+}
+
 }
 
 .edit-credit {
@@ -1390,7 +1422,7 @@ float:left;
 	
 	textarea, input {
 		
-			width:350px;
+			width:30	0px;
 			background-color:#195259;	
 			border:none;
 			color:white;
