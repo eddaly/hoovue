@@ -50,6 +50,7 @@ gem 'thin'
 gem 'best_in_place'
 gem 'koala'
 gem 'newrelic_rpm'
+gem 'xmpp4r_facebook'
 
 
 # To use ActiveModel has_secure_password

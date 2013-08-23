@@ -1,4 +1,4 @@
-class ChangeDataTypeForUrl2 < ActiveRecord::Migration
+class ChangeDataTypeForUrl < ActiveRecord::Migration
   def self.up
       change_table :products do |t|
         t.change :url, :text, :limit => nil

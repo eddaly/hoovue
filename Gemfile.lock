@@ -229,6 +229,9 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     uniform_notifier (1.2.0)
+    xmpp4r (0.5)
+    xmpp4r_facebook (0.1.1)
+      xmpp4r
 
 PLATFORMS
   ruby
@@ -265,3 +268,4 @@ DEPENDENCIES
   sqlite3
   thin
   uglifier (>= 1.0.3)
+  xmpp4r_facebook

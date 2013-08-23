@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
                   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
                     has_many :inverse_friends, :through => :inverse_friendships, :source => :user
                       has_many :emails
+
+        has_many :messages, foreign_key: :sender_id
+        has_many :message_recipients, foreign_key: :recipient_id, class_name: "Message"
                       
                       
          mount_uploader :picture, ImageUploader   

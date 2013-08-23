@@ -24,7 +24,7 @@ Hoo::Application.routes.draw do
   resources :betasessions
   
   resources :friendships
-
+  resources :messages
 
   resources :posts
 
