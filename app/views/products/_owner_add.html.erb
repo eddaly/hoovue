@@ -20,7 +20,7 @@
 				<%= form_for @credit do |f|%>
 				<%= f.label "What was your role?"%>
 					  <%= f.text_field :role %> <br />
-		 					<%= f.label "Do you have an Interesting Fact?"%>
+		 					<%= f.label "Do you have an Insider Stories?"%>
 								 <%= f.text_area :fact, :rows => '3' %>
 		 		<%= f.fields_for :credit_validations do |builder| %>
 		  <%= render '/credit_validations/credit_validations_fields', f: builder %>

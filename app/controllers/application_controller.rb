@@ -125,7 +125,7 @@ private
   helper_method :current_user
 
     def authorize
-      redirect_to root_url, notice: "You not authorized for this action" if current_user.nil?
+      redirect_to root_url, notice: "You are not authorized for this action" if current_user.nil?
     end
 
     def admin_user

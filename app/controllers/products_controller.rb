@@ -14,6 +14,19 @@ def import
   redirect_to root_url, notice: "Products imported."
 end
 
+def like
+  @product = Product.find(params[:id])
+  
+  if @current_user.flagged?(@product, :like)
+         @current_user.unflag(@product, :like)
+         msg = "Work Unliked"
+  else
+    @current_user.flag(@product, :like)
+        msg = "Work Liked"
+  end
+    redirect_to @product, :notice => msg
+end
+
   # GET /products/1
   # GET /products/1.json
   def show

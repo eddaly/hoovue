@@ -261,7 +261,7 @@ $(document).ready(function(){
 
 	
 	<div class="interesting_fact">
-		<a class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact and Posts</a>
+		<a class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories and Posts</a>
 	</div>
 	
 	<div class="validation-info"   style="
@@ -718,11 +718,13 @@ $(document).ready(function(){
 		
 		
 		<div class="slidingDiv_interesting_fact_<%= c.id %>" id="interesting_fact">
-			<h3>Interesting Fact:</h3>
+			<h3>Insider Stories:</h3>
 				 <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 100) %>">Tweet this fact</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 </h3><p class="fact"><%= c.fact %></p>
 
 
@@ -765,7 +767,7 @@ $(document).ready(function(){
 				  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(10) %>
 		<% @posts.each do |post| %>
 		<li>
-		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>" style="margin-top:10px;">Tweet this fact</a></p><br />
+		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
 		<p class="content"><%= post.body %></p>
 		<% if post.image.blank? %>
 		<% else %>

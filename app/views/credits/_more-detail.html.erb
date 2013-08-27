@@ -3,7 +3,7 @@
 		<h3>What you are actually doing:<% else %>	
 		<h3>What I actually did:<% end %> <% if current_user %>			
 <% if current_user.id == c.user_id %> <%= link_to "(edit)", role_credits_path(:id => c) %> <% end %> <% end %> </h3><p>  <%= c.role_desc %></p>	
-			<h3>Interesting Fact:
+			<h3>Insider Stories:
 				 <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>">Tweet this fact</a>

@@ -230,7 +230,7 @@
 
 	
 	<div class="interesting_fact">
-		<a href"#" class="show_hide_interesting_fact_<%= c.id %>">View Interesting Fact</a>
+		<a href"#" class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories</a>
 	</div>
 	
 	
@@ -596,7 +596,7 @@
 	</div>
 		
 		<div class="slidingDiv_interesting_fact_<%= c.id %>" id="interesting_fact">
-			<h3>Interesting Fact:</h3>
+			<h3>Insider Stories:</h3>
 				 <% if current_user %>			
 <% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
 <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://alpha.whoactually.com/products/<%=  c.product.id %>" data-text="<%= c.fact %>">Tweet this fact</a>

@@ -57,7 +57,9 @@ end
 
 
   resources :products do
-  collection { post :import }
+    member do
+      get 'like'
+    end
 end
 
 
