@@ -26,7 +26,7 @@
     <%= f.text_area :body, rows: 6 %>
   </div>
 
-  <%= f.hidden_field :recipient_id %>
+  <%= f.hidden_field :recipient_uid %>
 
   <div class="actions">
     <%= f.submit %>
@@ -34,5 +34,5 @@
 <% end %>
 
 <%= javascript_tag do %>
-  window.friends = <%=raw current_user.friends.to_json %>;
+  window.friends = <%=raw current_user.all_friends.to_json %>;
 <% end %>

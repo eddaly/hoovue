@@ -4,7 +4,7 @@ $ ->
     if $("#message_recipient_name").length > 0
 
       friends = for friend in window.friends
-        id: friend.id
+        uid: friend.uid
         value: friend.name
         label: friend.name
 
@@ -14,4 +14,4 @@ $ ->
         minLength: 0
         source: friends
         select: (event, ui) ->
-          $('#message_recipient_id').val ui.item.id
+          $('#message_recipient_uid').val ui.item.uid

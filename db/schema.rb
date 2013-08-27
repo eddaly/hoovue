@@ -93,12 +93,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "messages", :force => true do |t|
-    t.string   "sender_id"
+    t.integer  "sender_id",     :limit => 255
     t.string   "subject"
     t.string   "body"
-    t.string   "recipient_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "recipient_uid"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "users", :force => true do |t|
+<<<<<<< HEAD
     t.string    "email"
     t.string    "password_digest"
     t.timestamp "created_at"
@@ -218,6 +219,34 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "link_2_desc"
     t.string    "link_3"
     t.string    "link_3_desc"
+=======
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.string   "image"
+    t.string   "profile_picture"
+    t.string   "role"
+    t.integer  "credits_count",    :default => 0, :null => false
+    t.string   "bio"
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "linkedin"
+    t.string   "googleplus"
+    t.string   "link"
+    t.string   "picture"
+    t.string   "link_desc"
+    t.string   "link_2"
+    t.string   "link_2_desc"
+    t.string   "link_3"
+    t.string   "link_3_desc"
+    t.text     "facebook_friends"
+>>>>>>> 291fe604bc11803e72cbd55d77a5b69731222817
   end
 
 end

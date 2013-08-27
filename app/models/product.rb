@@ -9,7 +9,8 @@ class Product < ActiveRecord::Base
            mount_uploader :image, ImageUploader
              mount_uploader :image_2, ImageUploader
                mount_uploader :image_3, ImageUploader
-               make_flaggable :like
+               make_flaggable :like, :complete
+                
              validates :title, :presence => true
   
 def self.import(file)

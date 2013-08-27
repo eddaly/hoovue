@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-      attr_accessible :email, :provider, :picture, :credits_count, :uid, :bio, :link, :link_desc, :link_2, :link_2_desc, :link_3, :link_3_desc, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count
+      attr_accessible :email, :provider, :picture, :credits_count, :uid, :bio, :link, :link_desc, :link_2, :link_2_desc, :link_3, :link_3_desc, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count, :facebook_friends
         has_many :products
           has_many :credits
             has_many :posts
@@ -11,8 +11,7 @@ class User < ActiveRecord::Base
                       has_many :emails
                         make_flagger
         has_many :messages, foreign_key: :sender_id
-        has_many :message_recipients, foreign_key: :recipient_id, class_name: "Message"
-                      
+        serialize :facebook_friends
                       
          mount_uploader :picture, ImageUploader   
            
@@ -33,10 +32,8 @@ class User < ActiveRecord::Base
     user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
     user.role = "user"
     user.credits_count = "0"
-   if user.id 
-    else
-      
-   end
+    user.facebook_friends = user.facebook.get_connections("me", "friends").map { |x| {name: x['name'], uid: x['id'] } }
+
     user.save!
   end
 end
@@ -49,12 +46,13 @@ rescue Koala::Facebook::APIError => e
   nil # or consider a custom null object
 end
 
-
 def friends_count
-  facebook { |fb| fb.get_connection("me", "friendslists").size }
+  facebook_friends.size
 end
 
-
+def all_friends
+  friends.map {|x| {name: x.name, uid: x.uid}} + facebook_friends
+end
 
 def self.search(search)
   if search

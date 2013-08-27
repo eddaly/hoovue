@@ -1,17 +1,16 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :recipient_id, :sender_id, :subject
+  attr_accessible :body, :recipient_uid, :sender_id, :subject
   attr_accessor :recipient_name
 
   belongs_to :sender, foreign_key: :sender_id, class_name: "User"
-  belongs_to :recipient, foreign_key: :recipient_id, class_name: "User"
 
-	validates :body, :subject, :sender, :recipient, presence: true
+	validates :body, :subject, :sender, :recipient_uid, presence: true
 
 	after_create :send_message
 
   def send_message()
     sender_chat_id = "-#{sender.uid}@chat.facebook.com"
-    recipient_chat_id = "-#{recipient.uid}@chat.facebook.com"
+    recipient_chat_id = "-#{recipient_uid}@chat.facebook.com"
      
     jabber_message = Jabber::Message.new(recipient_chat_id, body)
     jabber_message.subject = subject

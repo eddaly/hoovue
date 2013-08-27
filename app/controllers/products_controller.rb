@@ -27,6 +27,19 @@ def like
     redirect_to @product, :notice => msg
 end
 
+def complete
+  @product = Product.find(params[:id])
+  
+  if @current_user.flagged?(@product, :complete)
+         @current_user.unflag(@product, :complete)
+         msg = "Vote Deleted"
+  else
+    @current_user.flag(@product, :complete)
+        msg = "You have voted this team is complete"
+  end
+    redirect_to @product, :notice => msg
+end
+
   # GET /products/1
   # GET /products/1.json
   def show
@@ -36,6 +49,9 @@ end
     @two_verified_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
     @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
     @pending_credits = @product.credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
+    @flagging_likes = Flagging.where(:flaggable_type == "Product").where(:flag => "like")
+    @flagging_votes = Flagging.where(:flag => "complete")
+   
     if params[:sort] == "verified"
      @credits = @product.credits.where("user_id > ?", 0).order("credit_validation_count DESC, created_at DESC")
    else

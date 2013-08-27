@@ -61,7 +61,7 @@
 				
 				<div class="likes">
 					<div class="data">
-						<%= @product.flaggings.count %>
+						<%= @flagging_likes.size %>
 					</div>
 					<div class="title">
 						Likes
@@ -81,10 +81,9 @@
 						
 						<div class="views">
 							<div class="data">
-								112
-							</div>
+							<%= @flagging_votes.size %>								</div>
 							<div class="title">
-								Views
+								Complete Votes
 							</div>	
 						</div>		
 		</div>
@@ -102,8 +101,8 @@
 			
 		</div>
 		<div class="actions">
+		<%= toggle_complete_button(@product, current_user) %>
 		<%= toggle_like_button(@product, current_user) %>
-		
 		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
 		</div>
 		<% if current_user %>

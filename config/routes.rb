@@ -59,6 +59,7 @@ end
   resources :products do
     member do
       get 'like'
+      get 'complete'
     end
 end
 
