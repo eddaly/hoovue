@@ -70,12 +70,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "messages", :force => true do |t|
-    t.string   "sender_id"
+    t.integer  "sender_id",     :limit => 255
     t.string   "subject"
     t.string   "body"
-    t.string   "recipient_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "recipient_uid"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "link_2_desc"
     t.string   "link_3"
     t.string   "link_3_desc"
+    t.text     "facebook_friends"
   end
 
 end
