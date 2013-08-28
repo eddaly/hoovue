@@ -20,12 +20,11 @@ class Ability
                 cannot :destroy, User
                   can [:create, :flag, :increase], Credit
                     can :manage, Credit, :user_id => user.id
-                      can :create, Product
-                        can :manage, Product, :user_id => user.id
-                          can :manage, CreditValidation
-                          can :access, :rails_admin   
-                            can :dashboard 
-                            cannot [:create, :destroy], Email, :user_id => user.id
+                      can [:create, :update, :like, :complete], Product
+                        can :manage, CreditValidation
+                            can :access, :rails_admin   
+                              can :dashboard 
+                                cannot [:create, :destroy], Email, :user_id => user.id
                 
         end
         if user.role.nil?

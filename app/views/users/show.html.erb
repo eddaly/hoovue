@@ -3,8 +3,6 @@
 
 
 
-
-
 <div class="user-info-panel">
 	
 	<div class="grid_3 profile-picture">
@@ -243,7 +241,8 @@ $(document).ready(function(){
 							</p>
 	</div>
 	
-	
+
+		
 	<script type="text/javascript">
  
 	$(document).ready(function(){
@@ -525,11 +524,16 @@ $(document).ready(function(){
 	
 	
 		</div>	
-
-	
-	
-	
-	
+		<% if current_user %>
+			 <% if current_user.id == @user_page.id %>
+		<%= form_for @credit, :url => {:controller => "credits", :action => "update", :id => c.id }, :html => { :method => 'put' } do |f| %>
+			<%= f.hidden_field :promoted, :value => "#{DateTime.now}" %>
+			<%= f.submit "Promote this credit", :class => "submit" %>
+		
+			<% end %>
+	 	
+		<% end %>
+	<% end %>
 	
 	
 	
@@ -714,6 +718,7 @@ $(document).ready(function(){
 				<% end %>
 	
 			</div>
+			
 		</div>
 		
 		

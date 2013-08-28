@@ -41,26 +41,27 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "credits", :force => true do |t|
-    t.integer   "user_id"
-    t.integer   "product_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "role"
-    t.text      "fact"
-    t.string    "status"
-    t.string    "pending_user_email"
-    t.integer   "count"
-    t.text      "role_desc"
-    t.string    "issue"
-    t.integer   "validator_id"
-    t.integer   "credit_validation_id"
-    t.string    "user_name"
-    t.timestamp "startdate"
-    t.timestamp "enddate"
-    t.string    "pending_token"
-    t.integer   "credit_validations_count"
-    t.integer   "confirmed_validations_count"
-    t.integer   "credit_validation_count",     :default => 0, :null => false
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "role"
+    t.text     "fact"
+    t.string   "status"
+    t.string   "pending_user_email"
+    t.integer  "count"
+    t.text     "role_desc"
+    t.string   "issue"
+    t.integer  "validator_id"
+    t.integer  "credit_validation_id"
+    t.string   "user_name"
+    t.datetime "startdate"
+    t.datetime "enddate"
+    t.string   "pending_token"
+    t.integer  "credit_validations_count"
+    t.integer  "confirmed_validations_count"
+    t.integer  "credit_validation_count",     :default => 0, :null => false
+    t.string   "promoted"
   end
 
   create_table "emails", :force => true do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "image_2"
     t.string   "image_3"
     t.integer  "like_count"
+    t.boolean  "flag"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -193,7 +195,6 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "users", :force => true do |t|
-<<<<<<< HEAD
     t.string    "email"
     t.string    "password_digest"
     t.timestamp "created_at"
@@ -219,34 +220,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "link_2_desc"
     t.string    "link_3"
     t.string    "link_3_desc"
-=======
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
-    t.string   "image"
-    t.string   "profile_picture"
-    t.string   "role"
-    t.integer  "credits_count",    :default => 0, :null => false
-    t.string   "bio"
-    t.string   "twitter"
-    t.string   "facebook"
-    t.string   "linkedin"
-    t.string   "googleplus"
-    t.string   "link"
-    t.string   "picture"
-    t.string   "link_desc"
-    t.string   "link_2"
-    t.string   "link_2_desc"
-    t.string   "link_3"
-    t.string   "link_3_desc"
-    t.text     "facebook_friends"
->>>>>>> 291fe604bc11803e72cbd55d77a5b69731222817
+    t.text      "facebook_friends"
+    t.integer   "promoted_credit_id"
   end
 
 end

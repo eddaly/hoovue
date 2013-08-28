@@ -6,7 +6,7 @@ module ProductsHelper
       link_to "Unlike", like_product_path(product)
     else
       
-      link_to "Like", like_product_path(product)
+      link_to "Like +", like_product_path(product)
       
     end
     

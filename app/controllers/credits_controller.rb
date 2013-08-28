@@ -152,10 +152,10 @@ redirect_uri=http://#{ENV['DEFAULT_URL']}/users/#{current_user.id}")}
   # PUT /credits/1.json
   def update
     @credit = Credit.find(params[:id])
-     
+   
     respond_to do |format|
       if @credit.update_attributes(params[:credit])
-        format.html { redirect_to session[:return_to], notice: 'Your Credit has been updated' }
+        format.html { redirect_to :back, notice: 'Your Credit has been updated' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

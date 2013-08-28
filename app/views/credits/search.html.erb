@@ -92,7 +92,7 @@ $(document).ready(function(){
 	
 	<div class="field">
 		
-	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}, :prompt => "Category") -%>
+	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}) -%>
 	</div>	
 	
 

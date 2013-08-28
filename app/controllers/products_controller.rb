@@ -94,11 +94,7 @@ end
   # GET /products/1/edit
   def edit
      @product = Product.find(params[:id])
-    if current_user.id == @product.user_id
-   
-  else
-    redirect_to root_url, notice: 'You do not own this work.'
-  end
+     
 end
   # POST /products
   # POST /products.json
@@ -132,7 +128,7 @@ end
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to @product, notice: 'Work and credit successfully created' }
+        format.html { redirect_to @product, notice: 'Work successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

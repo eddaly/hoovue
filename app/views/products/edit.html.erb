@@ -1,147 +1,109 @@
 <div class="container_12 pages">
 	
 
-	<script type="text/javascript">
-	$(function() {
-	$('input#product_url').tooltip();
-	$('input#product_title').tooltip();
-	});
-	</script>
+  <div class="container_10 new_work">
+  <h1>New Work</h1>
+  <div class="white-box">
+ <%= form_for @product, :validate => true do |f| %>
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-<h1>Edit Work</h1>
-<div class="white-box">
-
-
-<%= form_for @product, :validate => true do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
 	
   
-  <div class="field">
-    <%= f.label :name %>
-	 <% if params[:name] == "1" %>
-    <%= f.text_field :title, :title => "The name of the game is the title of a released version (alternative titles for the same game in other territories will be included in due course)." %>
-	<% else %>
-<%= f.text_field :title %>	
-	<% end %>
-  </div>
-
-<%= f.hidden_field :product_genre_id, :value => params[:name] %>	
- 
- 
-	<div class="field">
-	<%= f.label :status %>
-	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']] %>
-	 </div><br />
-	 
-	 <% if params[:name] == "1" %>
-     <div class="field">
-       <%= f.label :year_the_game_was_first_released_if_applicable %>
-	   <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
-     </div>
-	 <br />
-     <div class="field">
-       <%= f.label :studio %>
-	   <%= f.text_field :studio %>
-     </div>
-	 <% end %>
-	 
-	 <% if params[:name] == "2" %>
-     <div class="field">
-       <%= f.label :year_the_website_was_launched_if_applicable %>
-	
-        <%= f.date_select :year, :discard_month => true, :start_year => 1980 %>
-     </div>
-	 <% end %>
-
-	 <% if params[:name] == "3" %>
-     <div class="field">
-       <%= f.label :start_year %>
-	   <%= f.date_select :startdate, :discard_month => true, :start_year => 1900 %>
-     </div>
-     <div class="field">
-       <%= f.label :end_year %>
-	   <%= f.date_select :enddate, :discard_month => true, :start_year => 1900 %>
-     </div>
-	 <% end %>
-	 
-	 <% if params[:name] == "4" %>
-     <div class="field">
-       <%= f.label :year_the_movie_was_released_if_applicable %>
-	
-       <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
-     </div>
-	 <% end %>
-	 
-	 <% if params[:name] == "5" %>
-     <div class="field">
-       <%= f.label :year_the_book_was_published_if_applicable %>
-	
-       <%= f.date_select :year, :discard_month => true, :start_year => 1900 %>
-     </div>
-	 <% end %>
-	 
-	 <% if params[:name] == "7" %>
-     <div class="field">
-       <%= f.label :year_of_first_broadcast_if_applicable %>
-	
-        <%= f.date_select :year, :discard_month => true, :start_year => 1950 %>
-     </div>
-	 <% end %>
-
+    <div class="field">
+	 <!--[if IE]>
+	  <%= f.label :name %>
+	 <![endif]-->
+<%= f.text_field :title, :placeholder => "Name" %>	
   	
+    </div>
+	
+    <div class="field">
+   	 <!--[if IE]>
+   	  <%= f.label :studio_or_publisher_if_applicable %>
+   	 <![endif]-->
+     
+   <%= f.text_field :studio, :placeholder => "Studio or publisher if applicable" %>
+    </div>
+	
+	<div class="field">
+		
+	<%= f.select(:product_genre_id, ProductGenre.all.collect {|a| [a.name, a.id]}) -%>
+	</div>	
+	
+
+ 	<div class="field">
+  	
+  	<%= f.select :status, [ ['Completed'], ['Live and Ongoing'], ['In Development']], :prompt => "Status" %>
+  	 </div>
+	 
+  	 
+       <div class="field">
+      
+  	   <%= f.date_select :year, :discard_month => true, :start_year => 1950, :prompt => "Year of release" %>
+       </div>
+  	
+  	 
+
+       <div class="field">
+        
+  	   <%= f.date_select :enddate, :discard_month => true, :start_year => 1950, :prompt => "End year (if applies)" %>
+       </div>
+  	
+     <div class="field">
+      <%= f.label :images_for_this_work %>
+      <%= f.file_field :image, :class => "upload"  %>
+    </div>
+    <div class="field">
+    
+     <%= f.file_field :image_2, :class => "upload" %>
+   </div>
    <div class="field">
-    <%= f.label :work_page_main_image %><br />
-    <%= f.file_field :image %>
+  
+    <%= f.file_field :image_3, :class => "upload" %>
+  </div><br/>
+    <div class="field">
+      	 <!--[if IE]>
+      	 <%= f.label :youtube_video_id %>
+      	 <![endif]-->	
+     <%= f.text_field :video, :placeholder => "Youtube video ID" %>
+   </div>
+   <div class="field">
+    	 <!--[if IE]>
+     <%= f.label :website %>
+		 <![endif]-->
+   
+     <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course).", :placeholder => "Website Address" %>
+   </div>
+   <div class="field">
+    	 <!--[if IE]>
+    	 <%= f.label :work_description %>
+    	 <![endif]-->	
+   
+    <%= f.text_area :description, :rows => "10", :cols => "5", :placeholder => "Description of this work." %>
   </div>
-  <div class="field">
-   <%= f.label :work_page_other_image %><br />
-   <%= f.file_field :image_2 %>
- </div>
- <div class="field">
-  <%= f.label :work_page_other_image %><br />
-  <%= f.file_field :image_3 %>
-</div>
-  <div class="field">
-   <%= f.label :youtube_video %><br />
-   <%= f.text_field :video %>
- </div>
- <div class="field">
-  <%= f.label :work_description %><br />
-  <%= f.text_area :description, :rows => "3" %>
-</div>
  
-  <div class="field">
-    <%= f.label :website %>
-    <%= f.text_field :url, :title => "The image and URL used may relate to a specific version that not all credits will relate to (a range of images and other version information will be included in due course)." %>
-  </div>
+    
+<%= f.hidden_field :moderation_status, :value => "Pending" %>	
 
   
+  
+  <div class="submit">
+   <%= f.submit 'Create Work >', :class => "submit" %>
   </div>
  
-<div class="submit">
- <%= f.submit 'Update Work'%>
+    </div>
+    
+  <% end %>
+  
 </div>
  
-  </div>
-  </div>
-<% end %>
-  
-  
-  
-  
-  
-  
- 
-
-</div>

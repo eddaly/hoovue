@@ -1,5 +1,5 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :product_id, :user_id, :role, :credit_validations_count, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
+  attr_accessible :product_id, :user_id, :role, :promoted, :credit_validations_count, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
     attr_accessor :current_credit_id, :current_credit_role 
   belongs_to :user, :counter_cache => true
     belongs_to :product, :counter_cache => true
