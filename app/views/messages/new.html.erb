@@ -1,3 +1,8 @@
+<div class="container_12 pages">
+	<div class="grid_6 push_3">
+		
+	
+	<h2>Which Friend would you like to credit?</h2>
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
@@ -12,27 +17,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :subject %><br />
-    <%= f.text_field :subject %>
-  </div>
-
-  <div class="field">
-    <%= f.label :recipient_name %><br />
+    <%= f.label :friend_name %><br />
     <%= f.text_field :recipient_name %>
   </div>
 
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body, rows: 6 %>
-  </div>
+    <%= f.hidden_field :body, value: "#{params[:name]} #{params[:link]}" %>
+  
 
   <%= f.hidden_field :recipient_uid %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Send", :class => "submit" %>
   </div>
 <% end %>
 
 <%= javascript_tag do %>
   window.friends = <%=raw current_user.all_friends.to_json %>;
 <% end %>
+
+</div>
+</div>
+
+<%= session.inspect %>

@@ -1452,4 +1452,15 @@ form#new_credit {
 	}
 }
 
+input.submit-one-side {
+	
+	background-color: $light;
+	color:white;
+	border:none;
+	text-align:center;
+	width:200px;
+	margin-top:5px;
+	float:left;
+}
+
 }

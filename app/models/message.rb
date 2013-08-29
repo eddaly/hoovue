@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
 
   belongs_to :sender, foreign_key: :sender_id, class_name: "User"
 
-	validates :body, :subject, :sender, :recipient_uid, presence: true
+	validates :body, :sender, :recipient_uid, presence: true
 
 	after_create :send_message
 

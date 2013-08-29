@@ -338,10 +338,23 @@ $(document).ready(function(){
 					</span>
 					</a>
 					<% end %>
+					
 					<% if current_user %>
 						<% if current_user.id == c.user_id  %>
+							
+							<% else %>
+							<%= form_for(@credit_validation) do |f| %>
+								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+								<%= f.hidden_field :status, :value => "confirmed" %>
+					
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 		
-							<% end %> <% end %>
+								<% end %>
+							<% end %> 
+							
+							<% end %>
 					<% else %>
 
 				<% end %>
@@ -407,6 +420,23 @@ $(document).ready(function(){
 					</a>
 					<% end %>
 					
+					<% if current_user %>
+						<% if current_user.id == c.user_id  %>
+							
+							<% else %>
+							<%= form_for(@credit_validation) do |f| %>
+								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+								<%= f.hidden_field :status, :value => "confirmed" %>
+					
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+		
+								<% end %>
+							<% end %> 
+							
+							<% end %>
+					
 					<% end %>
 					<% else %>
 	
@@ -470,8 +500,21 @@ $(document).ready(function(){
 				</a>
 				<% if current_user %>
 					<% if current_user.id == c.user_id  %>
+						
+						<% else %>
+						<%= form_for(@credit_validation) do |f| %>
+							<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+							<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+							<%= f.hidden_field :status, :value => "confirmed" %>
+				
+							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 	
-						<% end %> <% end %>
+							<% end %>
+						<% end %> 
+						
+						<% end %>
+				
 				<% end %>
 	
 				<% end %>
@@ -524,6 +567,13 @@ $(document).ready(function(){
 	
 	
 		</div>	
+		<% if c.credit_validations.count.eql?(0) && current_user && current_user.id == @user_page.id  %>
+		<div style="color:white; margin-bottom:-50px; text-align:center;">
+		Only you can request validation from your co-creators
+		</div>
+		<% end %>
+		
+		
 		<% if current_user %>
 			 <% if current_user.id == @user_page.id %>
 		<%= form_for @credit, :url => {:controller => "credits", :action => "update", :id => c.id }, :html => { :method => 'put' } do |f| %>

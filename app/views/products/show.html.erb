@@ -350,8 +350,21 @@
 					<% end %>
 					<% if current_user %>
 						<% if current_user.id == c.user_id  %>
+							
+							<% else %>
+							<%= form_for(@credit_validation) do |f| %>
+								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+								<%= f.hidden_field :status, :value => "confirmed" %>
+					
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 		
-							<% end %> <% end %>
+								<% end %>
+							<% end %> 
+							
+							<% end %>
+					
 					<% else %>
 
 				<% end %>
@@ -417,6 +430,23 @@
 					</a>
 					<% end %>
 					
+					<% if current_user %>
+						<% if current_user.id == c.user_id  %>
+							
+							<% else %>
+							<%= form_for(@credit_validation) do |f| %>
+								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+								<%= f.hidden_field :status, :value => "confirmed" %>
+					
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+		
+								<% end %>
+							<% end %> 
+							
+							<% end %>
+					
 					<% end %>
 					<% else %>
 	
@@ -480,8 +510,21 @@
 				</a>
 				<% if current_user %>
 					<% if current_user.id == c.user_id  %>
+						
+						<% else %>
+						<%= form_for(@credit_validation) do |f| %>
+							<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
+							<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
+							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+							<%= f.hidden_field :status, :value => "confirmed" %>
+				
+							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 	
-						<% end %> <% end %>
+							<% end %>
+						<% end %> 
+						
+						<% end %>
+				
 				<% end %>
 	
 				<% end %>
@@ -534,6 +577,11 @@
 	
 	
 		</div>	
+		<% if c.credit_validations.count.eql?(0) && current_user && current_user.id == c.user_id  %>
+		<div style="color:white; margin-bottom:-50px; text-align:center;">
+		Only you can request validation from your co-creators
+		</div>
+		<% end %>
 	
 
 	
@@ -694,7 +742,7 @@
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
-						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :class => 'submit' %>
 
 						<% end %> 
 			 
