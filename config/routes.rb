@@ -3,6 +3,9 @@ Hoo::Application.routes.draw do
 
 
 
+  resources :platforms
+
+
   get "beta/index"
 
   get "beta/work"

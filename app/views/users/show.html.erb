@@ -230,7 +230,9 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %><% if current_user %>
+		<p class="role"><%= c.role %>- <% c.platforms.each do |platform| %>
+		     <%= platform.name %>
+		     <% end %><% if current_user %>
 							<% if c.user.id == current_user.id  %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %> <% end %></p>
@@ -805,6 +807,10 @@ $(document).ready(function(){
 			  <% end %>
 			  <div class="field">
 			    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
+				
+				Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a><br />
+				
 			Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 			<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
 				<%= f.hidden_field :credit_id, :value => c.id %>
@@ -824,6 +830,10 @@ $(document).ready(function(){
 		<li>
 		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
 		<p class="content"><%= post.body %></p>
+		<% if post.name_check_user_id %>
+		<% @user_nc = User.find_by_id(post.name_check_user_id) %>
+		<%= link_to @user_nc.name, user_path(@user_nc) %> was namedchecked.
+		<% end %>
 		<% if post.image.blank? %>
 		<% else %>
 			<%= image_tag post.image.post  %>
@@ -840,7 +850,7 @@ $(document).ready(function(){
 		</div>	
 	
 	<% end %>
-	
+<h3>Is this your complete creative legacy? <a href="/credits/search">Add another credit.</a></h3>	
 </div>
 
 	

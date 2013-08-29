@@ -141,7 +141,7 @@
 				 <!--[if IE]>
 				 <strong>Your Role</strong><br/>
 				 <![endif]-->
-			  <%= f.text_field :role, :placeholder => "Your Role" %> 
+			  <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role", :class => "role" %>  
 			  </div>
   
 			  <% if @product.product_genre.name == "Game" %>
@@ -179,8 +179,30 @@
 			 <![endif]-->
 			   <div class="fact">
 		<%= f.text_area :fact, :rows => '2', :placeholder => "Tell fans of this work one interesting thing about it"	 %>
-				<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span>
+				<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span><br />
 			  </div>
+		
+		 <%= f.date_select :startdate, :discard_month => true, :start_year => 1950, :prompt => "Year you started work" %>
+		 
+		  <%= f.date_select :enddate, :discard_month => true, :start_year => 1950, :prompt => "Year you finished work" %>	 
+			 
+		<div class="namecheck">
+			Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a>
+			
+			</div>
+			
+			<div class="platforms">
+				<%= hidden_field_tag "credit[platform_ids][]", nil %>
+				<% Platform.all.each do |platform| %>
+				  <%= check_box_tag "credit[platform_ids][]", platform.id, @credit.platform_ids.include?(platform.id), id: dom_id(platform) %>
+				  <%= label_tag dom_id(platform), platform.name %>
+				<% end %>
+				
+			</div>
+				
+			
+			  
 			   <%= f.hidden_field :product_id, :value => @product.id %>
 			     <%= f.hidden_field :user_id, :value => current_user.id %>
 				     <%= f.hidden_field :user_name, :value => current_user.name %>
@@ -240,7 +262,15 @@
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %><% if current_user %>
+		<p class="role">
+			
+		
+			
+			<%= c.role %> -  <% c.platforms.each do |platform| %>
+		     <%= platform.name %>
+		     <% end %>
+			 
+			 <% if current_user %>
 							<% if c.user.id == current_user.id  %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %> <% end %></p>
@@ -804,6 +834,8 @@
 	  <% end %>
 	  <div class="field">
 	    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
+		Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a><br />
 	Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 	<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
 		<%= f.hidden_field :credit_id, :value => c.id %>
@@ -822,6 +854,10 @@
 			<li>
 			<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
 			<p class="content"><%= post.body %></p>
+			<% if post.name_check_user_id %>
+			<% @user_nc = User.find_by_id(post.name_check_user_id) %>
+			<%= link_to @user_nc.name, user_path(@user_nc) %> was namedchecked.
+			<% end %>
 			<% if post.image.blank? %>
 			<% else %>
 				<%= image_tag post.image.post  %>

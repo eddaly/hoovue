@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "validator_id"
   end
 
+  create_table "creditplatforms", :force => true do |t|
+    t.integer  "credit_id"
+    t.integer  "platform_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "credits", :force => true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -62,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer  "confirmed_validations_count"
     t.integer  "credit_validation_count",     :default => 0, :null => false
     t.string   "promoted"
+    t.integer  "name_check_user_id"
   end
 
   create_table "emails", :force => true do |t|
@@ -94,24 +102,31 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "sender_id",     :limit => 255
+    t.integer  "sender_id"
     t.string   "subject"
     t.string   "body"
     t.string   "recipient_uid"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "platforms", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
     t.string    "title"
     t.text      "body"
     t.integer   "user_id"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.timestamp "created_at",         :null => false
+    t.timestamp "updated_at",         :null => false
     t.integer   "credit_id"
     t.timestamp "date"
     t.string    "image"
     t.string    "video"
+    t.integer   "name_check_user_id"
   end
 
   create_table "product_fields", :force => true do |t|

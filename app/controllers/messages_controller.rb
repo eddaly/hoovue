@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
 	def create
 		@message = current_user.messages.create(params[:message].except(:recipient_name))
 		if @message.save
-			redirect_to ("/products/#{session[:return_to]}"), notice: "Credit sent."
+			redirect_to ("/products/#{session[:return_to]}"), notice: "Message sent."
 		else
 			render :new
 		end

@@ -1,10 +1,12 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :product_id, :user_id, :role, :promoted, :credit_validations_count, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
+  attr_accessible :product_id, :user_id, :role, :promoted, :platform_ids, :credit_validations_count, :name_check_user_id, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
     attr_accessor :current_credit_id, :current_credit_role 
   belongs_to :user, :counter_cache => true
     belongs_to :product, :counter_cache => true
       has_many :credit_validations, :dependent => :destroy
       has_many :posts, :dependent => :destroy
+     has_and_belongs_to_many :platforms
+      
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
         validates_presence_of :role
      #   validates_uniqueness_of :pending_user_email, :scope => [:credit_validation_id, :product_id ], :message => "A credit with this email and role has already been taken."

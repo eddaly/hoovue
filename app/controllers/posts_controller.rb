@@ -44,8 +44,14 @@ class PostsController < ApplicationController
       @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
+        if @post.name_check_user_id
+            @user = User.find_by_id(@post.name_check_user_id)
+            @url = @post.credit.product_id
+            UserMailer.namecheck(@user, @url).deliver
+        end    
         format.html { redirect_to :back, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
+      
       else
         format.html { redirect_to :back, notice: 'Please fill in an update.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
