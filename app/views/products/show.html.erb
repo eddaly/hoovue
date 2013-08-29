@@ -1,5 +1,4 @@
 
-
 <div class="container_12 work-page">
 	<div class="grid_9 work-container">
 
@@ -875,10 +874,13 @@
 	
 		
 		<% end %>
+		
+		
+		
 		</div>	
 		<% end %>
 	<% end %>
-	
+	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</h3>
 </div>
 
 
@@ -886,6 +888,31 @@
 	</div>
 	<div class="grid_3 activity-feed">
 		<% if current_user %>
+		
+		<h3>Did you work on?</h3>
+		
+	
+		<% @recommended.each do |o| %>
+		<div class="following-item" style=:height:50px;>
+
+			<div class="profile-picture">
+				<%= image_tag o.image %>
+			</div>
+	
+			<div class="name">
+			<%= link_to product_path(o.id) do %><%= o.title %><% end %>
+			</div>
+			<div class="stats">
+			<p>Credits</p> <div class="data">
+			 <%= o.credits.count %>
+			</div>
+			</div>	<br />
+			<div class="product-title">
+		<%= link_to product_path(o.id), :class => "btn-blue" do %><div class="btn-blue">Add a credit +</div><% end %>
+		</div>
+		</div>
+		<% end %>
+		
 			<h3>Recent Following Activity</h3>
 	
 		<% for friendship in current_user.friendships%>
