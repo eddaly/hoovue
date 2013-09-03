@@ -51,7 +51,12 @@ gem 'best_in_place'
 gem 'koala'
 gem 'newrelic_rpm'
 gem 'xmpp4r_facebook'
+<<<<<<< HEAD
 gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
+=======
+gem 'mechanize'
+
+>>>>>>> fd592e47b9991b1b42ca24fdfa25d58e714cd4a6
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'

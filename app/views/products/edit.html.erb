@@ -2,7 +2,7 @@
 	
 
   <div class="container_10 new_work">
-  <h1>New Work</h1>
+  <h1>Edit Work</h1>
   <div class="white-box">
  <%= form_for @product, :validate => true do |f| %>
     <% if @product.errors.any? %>
@@ -98,7 +98,7 @@
   
   
   <div class="submit">
-   <%= f.submit 'Create Work >', :class => "submit" %>
+   <%= f.submit 'Update Work >', :class => "submit" %>
   </div>
  
     </div>

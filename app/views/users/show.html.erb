@@ -850,7 +850,9 @@ $(document).ready(function(){
 		</div>	
 	
 	<% end %>
-<h3>Is this your complete creative legacy? <a href="/credits/search">Add another credit.</a></h3>	
+	<% if current_user && current_user.id == @user.id %>
+<h3>Is this your complete creative legacy? <a href="/credits/search">Add another credit.</a></h3>
+	<% end %>
 </div>
 
 	
