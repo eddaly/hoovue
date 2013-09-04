@@ -179,6 +179,23 @@ class ScraperBase
     end
     date
   end
+
+  def get_remote_file(url)
+    extname = File.extname(url)
+    basename = File.basename(url, extname)
+
+    file = Tempfile.new([basename, extname])
+    file.binmode
+
+    open(URI.parse(url)) do |data|
+      file.write data.read
+    end
+    file.rewind
+
+    file
+  rescue
+    nil
+  end
 end
 
 task game_products: :environment do
@@ -202,8 +219,8 @@ task game_products: :environment do
       game_page = agent.send_request agent.properties[:url]
 
       agent.properties[:title] = agent.get_text_with_pattern(game_page, 'div#gameTitle a')
-      agent.properties[:image] = agent.get_attr_with_pattern(game_page, 'div#coreGameCover img', 'src')
       agent.properties[:description] = game_page.search('div.rightPanelMain').first.inner_html()
+      img_url = agent.get_attr_with_pattern(game_page, 'div#coreGameCover img', 'src')
 
       element = game_page.search("div#coreGameRelease").first.search('div').first
       agent.add_properites(element)
@@ -215,17 +232,26 @@ task game_products: :environment do
       product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
       agent.properties[:product_genre_id] = product_genre.id
       agent.properties[:genre] = 'Game'
-      agent.properties[:user_id] = 1
       agent.properties[:date] = agent.properties[:released]
       agent.properties[:year] = agent.parseDate(agent.properties[:released])
 
       product = Product.where(title: agent.properties[:title], genre: 'Game').first
+      img_file = agent.get_remote_file(img_url)
+
       unless product.nil?
+        if product.image.blank?
+          agent.properties[:image] = img_file
+        elsif product.image_2.blank?
+          agent.properties[:image_2] = img_file
+        elsif product.image_3.blank?
+          agent.properties[:image_3] = img_file
+        end
         product.update_attributes(agent.properties)
       else
+        agent.properties[:image] = img_file
         product = Product.create(agent.properties)
       end
-      product.save!
+      img_file.close if img_file
 
       total_count += 1
 		end
