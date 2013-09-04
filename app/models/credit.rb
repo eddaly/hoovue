@@ -8,7 +8,7 @@ class Credit < ActiveRecord::Base
      has_and_belongs_to_many :platforms
       
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
-        validates_presence_of :role
+     #   validates_presence_of :role
      #   validates_uniqueness_of :pending_user_email, :scope => [:credit_validation_id, :product_id ], :message => "A credit with this email and role has already been taken."
  #  validates_uniqueness_of :user_id, :scope => [:role, :product_id], :message => "A credit with this email and role has already been taken."
 

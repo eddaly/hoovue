@@ -58,8 +58,8 @@ end
   end
   
   def search
-    @products = Product.search(params[:search])
-        @users = User.search(params[:search])
+    @products = Product.search(params[:search]).limit(15)
+        @users = User.search(params[:search]).limit(15)
     if current_user
       @credit = Credit.new
       @product = Product.new
@@ -91,6 +91,7 @@ end
   # POST /credits.json
   def create 
     @credit = Credit.new(params[:credit])
+    @credit.role = params[:role]
      if params[:batch]
      @credit.role = params[:role]
      @credit.product_id = params[:product_id]

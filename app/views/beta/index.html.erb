@@ -36,7 +36,7 @@
 		
 		<h2>Featured</h2>
 		<a href="/products/1195">
-		<img src="http://i.imgur.com/9TKZfwj.jpg" width=300px>
+		<img src="http://i.imgur.com/8heZhND.png" width=300px>
 		</a>
 	</div>
 	
@@ -120,15 +120,13 @@
 			<div class="selected">
 				Popular Works
 			</div>
-			<div class="tab">
-				Popular Users
-			</div>
+			
 			<ul>
 			<% @popular_works.each do |pw| %>
 				<li>
 			<%= image_tag pw.image %>		
 				<div class="title">
-					<%= link_to pw.title, product_path(pw) %>
+					<%= link_to truncate(pw.title, length: 35), product_path(pw) %>
 				</div>
 				
 				<div class="sats">
@@ -144,9 +142,7 @@
 					<div class="selected">
 						Recent Credits
 					</div>
-					<div class="tab">
-						Popular Users
-					</div>
+					
 					<ul>
 					<% @recent_credits.each do |c| %>
 						<% if c.user_id %>
@@ -154,11 +150,11 @@
 						<li>
 					<%= image_tag @user.profile_picture %>		
 						<div class="title">
-							<%= link_to @user.name, user_path(c.user_id) %>
+							<%= link_to truncate(@user.name, length: 30), user_path(c.user_id) %>
 						</div>
 				
 						<div class="sats">
-						<strong>Work:</strong> <%= link_to c.product.title, product_path(c.product.id) %>
+						<strong>Work:</strong> <%= link_to truncate(c.product.title, length: 30), product_path(c.product.id) %>
 						</div>	
 					
 						</li>

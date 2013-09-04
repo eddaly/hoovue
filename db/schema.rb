@@ -40,13 +40,6 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer   "validator_id"
   end
 
-  create_table "creditplatforms", :force => true do |t|
-    t.integer  "credit_id"
-    t.integer  "platform_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "credits", :force => true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -70,6 +63,13 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer  "credit_validation_count",     :default => 0, :null => false
     t.string   "promoted"
     t.integer  "name_check_user_id"
+  end
+
+  create_table "credits_platforms", :force => true do |t|
+    t.integer  "credit_id"
+    t.integer  "platform_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "emails", :force => true do |t|
@@ -170,16 +170,13 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "image_2"
     t.string   "image_3"
     t.integer  "like_count"
-<<<<<<< HEAD
     t.boolean  "flag"
-=======
     t.string   "published_by"
     t.string   "developed_by"
     t.string   "released"
     t.string   "perspective"
     t.string   "non_sport"
     t.string   "misc"
->>>>>>> 3711b7408a0d519db08e945092d2404b124a2040
   end
 
   create_table "rails_admin_histories", :force => true do |t|
@@ -217,6 +214,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "created_at",     :null => false
     t.timestamp "updated_at",     :null => false
   end
+
+# Could not dump table "test" because of following StandardError
+#   Unknown type '' for column 'id'
 
   create_table "users", :force => true do |t|
     t.string    "email"

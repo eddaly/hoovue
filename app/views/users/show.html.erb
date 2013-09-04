@@ -190,6 +190,7 @@ $(document).ready(function(){
 	
 	<% if @user.credits.count == 0 %>
 	<% if current_user %>
+	
 		 <% if current_user.id == @user.id %>
 	<h3>You seem to actually have no credits, add your first credit <a href="/credits/search">here.</a>
 		<% else %>
@@ -202,7 +203,9 @@ $(document).ready(function(){
 	
 	<% @credits.each do |c| %>
 	
-	
+	<% if current_user %>
+	<% @user_credit = current_user.credits.where(:product_id => c.product.id) %>
+	<% end %>
 	<div class="credit-item"
 	<% if c.product.status == "Ongoing" %>
 	style="border:1px solid green;"
@@ -351,7 +354,7 @@ $(document).ready(function(){
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 		
 								<% end %>
 							<% end %> 
@@ -432,7 +435,7 @@ $(document).ready(function(){
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 		
 								<% end %>
 							<% end %> 
@@ -510,7 +513,7 @@ $(document).ready(function(){
 							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 							<%= f.hidden_field :status, :value => "confirmed" %>
 				
-							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+							<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 	
 							<% end %>
 						<% end %> 

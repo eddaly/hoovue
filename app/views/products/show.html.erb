@@ -1,11 +1,14 @@
 
 <div class="container_12 work-page">
 	<div class="grid_9 work-container">
-
-
+		
+	
 <div class="work-info-panel">
 	<div class="title">
 		<%= @product.title %>
+		<% if @product.flag %>
+		(content updated)
+		<% end %>
 	<% if current_user %>
 		<%= link_to '(edit work)', edit_product_path(@product, :name => @product.product_genre.id) %>
 	<% end %>	
@@ -79,10 +82,15 @@
 						
 						
 						<div class="views">
-							<div class="data">
-							<%= @flagging_votes.size %>								</div>
+							<div class="data" style="margin-top:-15px;">
+								<% if @flagging_votes.size == @credits.size %>
+								Team voted 100% complete
+								<% else %>
+								Counting team complete votes
+								<% end %>
+										</div>
 							<div class="title">
-								Complete Votes
+								
 							</div>	
 						</div>		
 		</div>
@@ -100,10 +108,16 @@
 			
 		</div>
 		<div class="actions">
-		<%= toggle_complete_button(@product, current_user) %>
+		
 		<%= toggle_like_button(@product, current_user) %>
 		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
+		
+		
+		
+		
 		</div>
+		
+		
 		<% if current_user %>
 		<script type="text/javascript">
 
@@ -143,25 +157,15 @@
 			  <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role", :class => "role" %>  
 			  </div>
   
-			  <% if @product.product_genre.name == "Game" %>
-			 <!--[if IE]>
-			 <strong>Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank</strong><br/>
-			 <![endif]-->
-			   <div class="fact">
-			 <%= f.text_area :issue, :rows => '2', :placeholder => "Please include details of platform formats, a period of time for an online game, or other such details that relate to this credit.  If the credit doesn't relate to specific versions you could leave it blank"	 %>
-
-			  </div>
-  
-			 <% end %>
+			
+			
  
  
 				  <% if @product.product_genre.name == "Comic" %>
 				   <div class="desc">
 			<p>Please include details of the range of issues or other information for which your credit relates.</p>
 				   <%= f.text_field :issue %>
-			<p>Please also include a date range where you worked on this Comic.</p>	   
-			    <%= f.date_select :startdate, :discard_month => true, :start_year => 1980 %> - 
-				 <%= f.date_select :enddate, :discard_month => true, :start_year => 1980 %>  
+			
 				 </div>
 				 <% end %>
  
@@ -180,25 +184,32 @@
 		<%= f.text_area :fact, :rows => '2', :placeholder => "Tell fans of this work one interesting thing about it"	 %>
 				<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span><br />
 			  </div>
-		
+			  
+	  		<div class="namecheck">
+	  			<h3>Name check someone on whoactually in your interesting thing</h3><%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+	  			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a>
+			
+	  			</div>
+			  
+			  <h3>When did you work on <%= @product.title %>?<br />
 		 <%= f.date_select :startdate, :discard_month => true, :start_year => 1950, :prompt => "Year you started work" %>
 		 
 		  <%= f.date_select :enddate, :discard_month => true, :start_year => 1950, :prompt => "Year you finished work" %>	 
 			 
-		<div class="namecheck">
-			Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
-			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a>
+		
 			
-			</div>
-			
+			  <% if @product.product_genre.name == "Game" %>
 			<div class="platforms">
+				<h3>Game platforms</h3>
+				<%=  %>
 				<%= hidden_field_tag "credit[platform_ids][]", nil %>
 				<% Platform.all.each do |platform| %>
 				  <%= check_box_tag "credit[platform_ids][]", platform.id, @credit.platform_ids.include?(platform.id), id: dom_id(platform) %>
 				  <%= label_tag dom_id(platform), platform.name %>
 				<% end %>
-				
 			</div>
+				<% end %>
+			
 				
 			
 			  
@@ -387,7 +398,7 @@
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 		
 								<% end %>
 							<% end %> 
@@ -469,7 +480,7 @@
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 		
 								<% end %>
 							<% end %> 
@@ -547,7 +558,7 @@
 							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 							<%= f.hidden_field :status, :value => "confirmed" %>
 				
-							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
+							<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
 	
 							<% end %>
 						<% end %> 
@@ -880,7 +891,8 @@
 		</div>	
 		<% end %>
 	<% end %>
-	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</h3>
+	<% if current_user %>
+	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</h3><% end %>
 </div>
 
 
@@ -889,10 +901,46 @@
 	<div class="grid_3 activity-feed">
 		<% if current_user %>
 		
-		<h3>Did you work on?</h3>
+		<h3>Teamshot</h3>
 		
+		<% @credits.each do |c| %>
+		<%= image_tag c.user.profile_picture %>
+		<% end %>
+		<% if @user_credit.count > 0 %>
+		<%= toggle_complete_button(@product, current_user) %>
+		<% end %>
+		
+		
+		
+		<% if @credits %>
+		<h3>Team members also worked on</h3>
+		<% @credits.each do |c| %>
+		<% @user_recco = User.find_by_id(c.user_id) %>
+		<% @recco_prod = Product.find_by_id(@user_recco.credits.first) %>
+		<div class="following-item" style=:height:50px;>
+
+			<div class="profile-picture">
+				<%= image_tag @recco_prod.image %>
+			</div>
 	
-		<% @recommended.each do |o| %>
+			<div class="name">
+			<%= link_to product_path(@recco_prod.id) do %><%= @recco_prod.title %><% end %>
+			</div>
+			<div class="stats">
+			<p>Credits</p> <div class="data">
+			 <%= @recco_prod.credits.count %>
+			</div>
+			</div>	<br />
+			<div class="product-title">
+		<%= link_to product_path(@recco_prod.id), :class => "btn-blue" do %><div class="btn-blue">Add a credit +</div><% end %>
+		</div>
+		</div>
+		<% end %>
+		<% end %>
+		
+		
+			<h3>Did you work on?</h3>
+			<% @recommended.each do |o| %>
 		<div class="following-item" style=:height:50px;>
 
 			<div class="profile-picture">

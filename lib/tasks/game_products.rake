@@ -230,7 +230,7 @@ task game_products: :environment do
       total_count += 1
 		end
     
-    count += 25
+    count += 2500
 	end
 
   agent.log_output "\nJob was finished successfully. Total game counts = #{total_count}"

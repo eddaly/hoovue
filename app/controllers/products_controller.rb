@@ -61,6 +61,7 @@ end
         if current_user
         @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)
         @recommended = Product.where(:studio => @product.studio).limit(10)
+        @user_credit = current_user.credits.where(:product_id => @product.id)
           @credit = Credit.new
              @credit_validation = CreditValidation.new
              @post = Post.new

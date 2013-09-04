@@ -19,10 +19,10 @@ module ProductsHelper
     if current_user
     if current_user.flagged?(product, :complete)
       
-      link_to "Vote team uncomplete", complete_product_path(product)
+      link_to "Vote team uncomplete", complete_product_path(product), class: "actions"
     else
       
-      link_to "Vote this team complete", complete_product_path(product)
+      link_to "Vote team this complete", complete_product_path(product), class: "actions"
       
     end
     
