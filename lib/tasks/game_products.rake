@@ -168,12 +168,23 @@ class ScraperBase
       end
     end
   end
+
+  def parseDate(string)
+    date = Date.parse(string) rescue nil
+    if date.nil?
+      date = Date.parse("#{string[3..4]}/#{string[0..1]}/#{string[6..-1]}") rescue nil
+    end
+    if date.nil?
+      date = Date.parse(string + '-01-01') rescue nil
+    end
+    date
+  end
 end
 
 task game_products: :environment do
 	base_url = "http://www.mobygames.com"
 	agent = ScraperBase.new()
-  total_games = 101#41164
+  total_games = 1#41164
   count = 0
   page_num = 0
   total_count = 0
@@ -201,6 +212,21 @@ task game_products: :environment do
       agent.add_properites(element)
 
       #agent.log_output agent.properties.inspect
+      product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
+      agent.properties[:product_genre_id] = product_genre.id
+      agent.properties[:genre] = 'Game'
+      agent.properties[:user_id] = 1
+      agent.properties[:date] = agent.properties[:released]
+      agent.properties[:year] = agent.parseDate(agent.properties[:released])
+
+      product = Product.where(title: agent.properties[:title], genre: 'Game').first
+      unless product.nil?
+        product.update_attributes(agent.properties)
+      else
+        product = Product.create(agent.properties)
+      end
+      product.save!
+
       total_count += 1
 		end
     

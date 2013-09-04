@@ -32,7 +32,9 @@ class User < ActiveRecord::Base
     user.oauth_expires_at = Time.at(auth.credentials.expires_at) unless auth.credentials.expires_at.nil?
     user.role = "user"
     user.credits_count = "0"
-    user.facebook_friends = user.facebook.get_connections("me", "friends").map { |x| {name: x['name'], uid: x['id'] } }
+    if user.provider == 'facebook'
+      user.facebook_friends = user.facebook.get_connections("me", "friends").map { |x| {name: x['name'], uid: x['id'] } }
+    end
 
     user.save!
   end
