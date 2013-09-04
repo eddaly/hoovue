@@ -170,7 +170,16 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "image_2"
     t.string   "image_3"
     t.integer  "like_count"
+<<<<<<< HEAD
     t.boolean  "flag"
+=======
+    t.string   "published_by"
+    t.string   "developed_by"
+    t.string   "released"
+    t.string   "perspective"
+    t.string   "non_sport"
+    t.string   "misc"
+>>>>>>> 3711b7408a0d519db08e945092d2404b124a2040
   end
 
   create_table "rails_admin_histories", :force => true do |t|

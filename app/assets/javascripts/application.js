@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery.ui.core
+//= require jquery.ui.autocomplete
+//= require jquery.ui.tooltip
 //= require jquery.slides
 //= require rails.validations
 //= require select2

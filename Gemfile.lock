@@ -281,11 +281,8 @@ DEPENDENCIES
   honeybadger
   jquery-rails
   koala
-<<<<<<< HEAD
   make_flaggable!
-=======
   mechanize
->>>>>>> fd592e47b9991b1b42ca24fdfa25d58e714cd4a6
   mini_magick
   newrelic_rpm
   omniauth-facebook
