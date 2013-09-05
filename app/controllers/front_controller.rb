@@ -42,6 +42,8 @@ end
 
 def stats
   if current_user.googleplus == "lecrabe"
+    @users = User.order(:updated_at)
+    @cv = CreditValidation.all
   @users_total = User.all.size
   @users_with_credits = User.where("credits_count > ?", 0).size
   @users_with_credits_percentage = @users_with_credits * 100 / @users_total

@@ -1,6 +1,73 @@
 <div class="container_12 pages">
 	<h1>Stats Users</h1>
 
+	<h1>Listing users</h1>
+
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Credits Count</th>
+		  <th>Credit validations in</th>
+	 <th>Credit validations sent</th>
+	    <th>Date opend</th>
+	    <th>Date of last visit</th>
+		<th>Revisted</th>
+	  </tr>
+
+	<% @users.each do |u| %>
+	<% @cvrec = CreditValidation.where(:user_id => u.id) %>
+	<% @cvsent = CreditValidation.where(:validator_id => u.id) %>
+	  <tr>
+	    <td><%= link_to u.name, users_path(u.id) %></td>
+	    <td><%= u.credits.count %></td>
+		<td><%= @cvrec.count %></td>
+		<td><%= @cvsent.count %></td>
+		  <td><%= u.created_at.strftime("%d %m %y") %></td>
+	    <td><%= u.updated_at.strftime("%d %m %y") %></td>
+		<td><% if u.created_at == u.updated_at %><% else %> Y<% end %></td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
+  
+	  </tr>
+	<% end %>
+	</table>
+
+	<br />
+	
+	<h1>Listing validations</h1>
+
+	<table>
+	  <tr>
+	    <th>Name</th>
+		<th>Credit ID</th>
+		<th>Status</th>
+		<th>Created at</th>
+	  </tr>
+
+	<% @cv.each do |c| %>
+
+	  <tr>
+	    <td><%= link_to c.user_id, users_path(c.user_id) %></td>
+		<td><%= c.credit_id %>
+		<td><%= c.status %></td>
+	
+		  <td><%= c.created_at.strftime("%d %m %y") %></td>
+	  
+	  
+		
+	    <td></td>
+	    <td></td>
+	    <td></td>
+  
+	  </tr>
+	<% end %>
+	</table>
+
+	<br />
+	
+
+
 <h3>Total Number of Users:</h3>	
 <h2><%= @users_total %></h2>
 
@@ -46,6 +113,9 @@
 
 <h3>New Credit Verifications in the:</h3>
 <h2>Last day: <%= @credits_v_last_day %>, Last week: <%= @credits_v_last_week %>, Last month: <%= @credits_v_last_month %></h2>
+
+
+
 
 
 </div>
