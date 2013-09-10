@@ -102,7 +102,9 @@ class ApplicationController < ActionController::Base
          end 
          
          def pending_cv
+           if current_user
            @pending_cv = CreditValidation.where(:user_id => current_user.id).where(:status => "pending").where(:oneside => "true")
+         end
           end   
 
 protected
