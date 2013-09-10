@@ -23,6 +23,7 @@
 				<div class="wa">
 			<a href="/">	<%= image_tag '/assets/beta/logo-wa.png' %> </a>
 				</div>	
+				
 		</div>	
 		
 			<div class="divider">
@@ -51,6 +52,10 @@
 			 <% if current_user %>
 			<div class="grid_2 name">
 			<%= link_to user_path(current_user) do %><%= current_user.name %><%end%>
+			
+			<% if @pending_cv %>
+			<%= @pending_cv.size %>
+			<%end%>
 			</div>
 			
 			<div class="divider">
@@ -86,6 +91,9 @@
 		</div>	
 	</div>	
 
+	<% if @pending_cv.size > 0 %>
+	 <p class="notice">You have <%= @pending_cv.size %> pending notification. <a href="/">View ></a></p>
+	<%end%>
 
 
 	<% if flash[:notice] %>

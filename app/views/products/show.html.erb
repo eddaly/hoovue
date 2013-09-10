@@ -6,7 +6,7 @@
 <div class="work-info-panel">
 	<div class="title">
 		<%= @product.title %>
-		<% if @product.flag %>
+		<% if @product.moderation_status = "Pending" %>
 		(content updated)
 		<% end %>
 	<% if current_user %>
@@ -182,7 +182,7 @@
 			 <![endif]-->
 			   <div class="fact">
 		<%= f.text_area :fact, :rows => '2', :placeholder => "Tell fans of this work one interesting thing about it"	 %>
-				<span class="counter"> <strong>You have <em id="count"></em> characters remaining</strong></span><br />
+				<br />
 			  </div>
 			  
 	  		<div class="namecheck">
@@ -208,6 +208,12 @@
 				  <%= label_tag dom_id(platform), platform.name %>
 				<% end %>
 			</div>
+			<div class="role">
+   			 <!--[if IE]>
+   			 <strong>Other platform<br/></strong>
+   			 <![endif]-->
+			<%= f.text_field :issue, :placeholder => "Other platform" %>
+			</div>
 				<% end %>
 			
 				
@@ -218,7 +224,7 @@
 				     <%= f.hidden_field :user_name, :value => current_user.name %>
 	
 			   <div class="submit">
-			    <%= f.submit 'Create Credit >', :class => "submit" %>
+			    <%= f.submit 'CREATE CREDIT', :class => "submit" %>
 				</div>
   
 			<% end %>
@@ -617,11 +623,7 @@
 	
 	
 		</div>	
-		<% if c.credit_validations.count.eql?(0) && current_user && current_user.id == c.user_id  %>
-		<div style="color:white; margin-bottom:-50px; text-align:center;">
-		Only you can request validation from your co-creators
-		</div>
-		<% end %>
+		
 	
 
 	
@@ -892,7 +894,7 @@
 		<% end %>
 	<% end %>
 	<% if current_user %>
-	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</h3><% end %>
+	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</a></h3><% end %>
 </div>
 
 
@@ -901,13 +903,14 @@
 	<div class="grid_3 activity-feed">
 		<% if current_user %>
 		
-		<h3>Teamshot</h3>
-		
+		<h3>Is this team complete?</h3>
+	
 		<% @credits.each do |c| %>
 		<%= image_tag c.user.profile_picture %>
 		<% end %>
 		<% if @user_credit.count > 0 %>
 		<%= toggle_complete_button(@product, current_user) %>
+		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>", class="actions" target="blank"> No, invite team members</a>
 		<% end %>
 		
 		
@@ -920,11 +923,13 @@
 		<div class="following-item" style=:height:50px;>
 
 			<div class="profile-picture">
-				<%= image_tag @recco_prod.image %>
+				
+				<%= image_tag '/assets/default-thumb.png' %>
+			
 			</div>
 	
 			<div class="name">
-			<%= link_to product_path(@recco_prod.id) do %><%= @recco_prod.title %><% end %>
+			<%= link_to product_path(@recco_prod.id) do %><%= truncate(@recco_prod.title, :length => 25) %><% end %>
 			</div>
 			<div class="stats">
 			<p>Credits</p> <div class="data">
@@ -932,7 +937,7 @@
 			</div>
 			</div>	<br />
 			<div class="product-title">
-		<%= link_to product_path(@recco_prod.id), :class => "btn-blue" do %><div class="btn-blue">Add a credit +</div><% end %>
+		<%= link_to product_path(@recco_prod.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:10px;">Add a credit +</div><% end %>
 		</div>
 		</div>
 		<% end %>
@@ -948,7 +953,7 @@
 			</div>
 	
 			<div class="name">
-			<%= link_to product_path(o.id) do %><%= o.title %><% end %>
+			<%= link_to product_path(o.id) do %><%= truncate(o.title, :length => 25) %><% end %>
 			</div>
 			<div class="stats">
 			<p>Credits</p> <div class="data">
@@ -956,7 +961,7 @@
 			</div>
 			</div>	<br />
 			<div class="product-title">
-		<%= link_to product_path(o.id), :class => "btn-blue" do %><div class="btn-blue">Add a credit +</div><% end %>
+		<%= link_to product_path(o.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:10px;">Add a credit +</div><% end %>
 		</div>
 		</div>
 		<% end %>
@@ -981,10 +986,10 @@
 			</div>
 			</div>	
 		<div class="role">
-				<%= fc.role %>
+				<%= truncate(fc.role, :length => 30) %>
 			</div>
 			<div class="product-title">
-		<a href="/products/<%= fc.product.id %>"><%= fc.product.title %></a>
+		<a href="/products/<%= fc.product.id %>"><%= truncate(fc.product.title, :length => 30) %></a>
 			</div>
 		</div>
 		<% end %>

@@ -26,7 +26,7 @@ class CreditValidationsController < ApplicationController
      @credit_validation.status = "confirmed"
           if @credit_validation.update_attributes(params[:credit_validation])
            
-          flash[:notice] = "Thank you for validating"
+          flash[:notice] = "Credit validation added."
           redirect_to :back
         end
   end
@@ -68,8 +68,8 @@ class CreditValidationsController < ApplicationController
   def create
     if params[:one_side]
       @credit_validation = CreditValidation.new(params[:credit_validation])
-      @credit_validation.status == "pending"
-
+      @credit_validation.status = "pending"
+      @credit_validation.oneside = "true"
           respond_to do |format|
             if @credit_validation.save
               format.html { redirect_to :back, notice: 'You have verified this credit.' }
@@ -152,7 +152,7 @@ class CreditValidationsController < ApplicationController
     @credit_validation.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_path(current_user.id), notice: 'Pending validator has been deleted.' }
+      format.html { redirect_to root_url, notice: 'Pending validator has been deleted.' }
       format.json { head :no_content }
     end
   end

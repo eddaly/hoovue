@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
         before_filter :update_facebook_params
             before_filter :save_credit_params
               before_filter :save_facebook_params
+              before_filter :pending_cv
        
         def beta_user
           @beta_user ||= Betauser.find(session[:beta_user_id]) if session[:beta_user_id]
@@ -98,7 +99,11 @@ class ApplicationController < ActionController::Base
          
          def current_user
            @current_user ||= User.find(session[:user_id]) if session[:user_id]
-         end   
+         end 
+         
+         def pending_cv
+           @pending_cv = CreditValidation.where(:user_id => current_user.id).where(:status => "pending").where(:oneside => "true")
+          end   
 
 protected
 

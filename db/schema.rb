@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.timestamp "token_sent_at"
     t.string    "status"
     t.integer   "validator_id"
+    t.string    "oneside"
   end
 
   create_table "credits", :force => true do |t|
@@ -66,10 +67,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "credits_platforms", :force => true do |t|
-    t.integer  "credit_id"
-    t.integer  "platform_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer "credit_id"
+    t.integer "platform_id"
   end
 
   create_table "emails", :force => true do |t|
