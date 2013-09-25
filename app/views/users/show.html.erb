@@ -645,11 +645,11 @@ $(document).ready(function(){
 						<%= f.hidden_field :validator_id, :value => current_user.id %>
 						<%= f.hidden_field :status, :value => "confirmed" %>
 
-						<%= submit_tag " SEND REQUEST", :name => 'existing_credit', :class => 'submit' %>
+						<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
 						<%= f.hidden_field :current_credit_id, :value => c.id %>
 					<% end %>
 			
-					<h2>or invite a team member via:</h2>
+					<h2>or invite from:</h2>
 					<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a>
 						<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
 
@@ -674,16 +674,16 @@ $(document).ready(function(){
 				    </ul>
 				  </div>
 				<% end %> 
-					<%= f.label "Team member email"%>
+					<%= f.label "Co-creator E-mail"%>
 
 					<%= f.text_field :pending_user_email %>
 
-						<%= f.label "What was team member's role?"%>
+						<%= f.label "What was the role of your co-creator?"%>
 
 						<%= f.text_field :role %>
 
 
-					 		<%= f.hidden_field :product_id, :value => c.product.id %>
+					 		<%= f.hidden_field :product_idd, :value => c.product.id %>
 
 							<%= f.hidden_field :current_credit_id, :value => c.id %>
 
@@ -692,7 +692,7 @@ $(document).ready(function(){
 
 							<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 
-					 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :class => 'submit' %>
+					 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'email', :class => 'submit' %>
 
 					<% end %> 
 				</div>
@@ -732,16 +732,16 @@ $(document).ready(function(){
 					  </div>
 					<% end %>
 
-							<%= f.label "What was team member's role?"%>
+							<%= f.label "What was the role of your co-creator?"%>
 							<div>
 							<%= f.text_field :role %>
 							</div>	
 
-						 		<%= f.hidden_field :product_id, :value => c.product.id %>
+						 		<%= f.hidden_field :product_idd, :value => c.product.id %>
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
-						 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
 
 						<% end %> 
 			 
@@ -807,7 +807,7 @@ $(document).ready(function(){
 			  <div class="field">
 			    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
 				
-				Tag a WhoActually user: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+				Tag someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
 				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 				
 			Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
@@ -861,7 +861,7 @@ $(document).ready(function(){
 
 <div class="grid_3 activity-feed">
 <% if current_user %>
-	<h3>Followed Users' Updates</h3>
+	<h3>Recent Following Activity</h3>
 	
 <% for friendship in current_user.friendships%>
 <% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>

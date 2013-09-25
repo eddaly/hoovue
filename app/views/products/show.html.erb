@@ -221,7 +221,7 @@
 				
 			
 			  
-			   <%= f.hidden_field :product_id, :value => @product.id %>
+			   <%= f.hidden_field :product_idd, :value => @product.id %>
 			     <%= f.hidden_field :user_id, :value => current_user.id %>
 				     <%= f.hidden_field :user_name, :value => current_user.name %>
 	
@@ -728,7 +728,7 @@
 						<%= f.text_field :role %>
 
 
-					 		<%= f.hidden_field :product_id, :value => c.product.id %>
+					 		<%= f.hidden_field :product_idd, :value => c.product.id %>
 
 							<%= f.hidden_field :current_credit_id, :value => c.id %>
 
@@ -782,7 +782,7 @@
 							<%= f.text_field :role %>
 							</div>	
 
-						 		<%= f.hidden_field :product_id, :value => c.product.id %>
+						 		<%= f.hidden_field :product_idd, :value => c.product.id %>
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
@@ -912,7 +912,7 @@
 		<% end %>
 		<% if @user_credit.count > 0 %>
 		<%= toggle_complete_button(@product, current_user) %>
-		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>", class="actions" target="blank"> No, invite team members</a>
+		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&name=share", class="actions" target="blank"> No, invite team members</a>
 		<% end %>
 		
 		

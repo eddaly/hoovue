@@ -1,6 +1,6 @@
 class Credit < ActiveRecord::Base
-  attr_accessible :product_id, :user_id, :role, :tag_list, :promoted, :platform_ids, :credit_validations_count, :name_check_user_id, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
-    attr_accessor :current_credit_id, :current_credit_role 
+  attr_accessible :product_id, :user_id, :role, :tag_list, :promoted, :product_idd, :platform_ids, :credit_validations_count, :name_check_user_id, :role_desc, :current_credit_role, :confirmed_validations_count, :credit_validation_id, :issue, :validator_id, :user_name, :current_credit_id, :fact, :credit_validations_attributes, :status, :pending_user_email, :count, :startdate, :enddate
+    attr_accessor :current_credit_id, :current_credit_role, :product_idd 
       belongs_to :user, :counter_cache => true
       belongs_to :product, :counter_cache => true
       has_many :credit_validations, :dependent => :destroy

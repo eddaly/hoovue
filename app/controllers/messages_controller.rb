@@ -16,8 +16,11 @@ class MessagesController < ApplicationController
       @url = @message.url
       UserMailer.share(@user, @url).deliver
       end
-        
+       if @message.url.nil?
+        redirect_to user_path(current_user.id), notice: "Message sent."
+       else 
 			redirect_to @message.url, notice: "Message sent."
+    end
 		else
 			render :new
 		end

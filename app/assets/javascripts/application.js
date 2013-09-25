@@ -18,6 +18,7 @@
 //= require jquery.slides
 //= require rails.validations
 //= require select2
+//= require jquery.show_hide
 //= require jquery.ui.datepicker
 //= require jquery.placeholder
 //= require jquery.nested-fields

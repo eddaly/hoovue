@@ -92,6 +92,7 @@ end
   def create 
     @credit = Credit.new(params[:credit])
     @credit.role = params[:role]
+     @credit.product_id = @credit.product_idd
      if params[:batch]
      @credit.role = params[:role]
      @credit.product_id = params[:product_id]
@@ -105,8 +106,13 @@ end
       if params[:facebook]
          @credit.validator_id = current_user.id
          @credit.pending_user_email = rand(10000...30000).to_i
+        
       else
      
+     end
+     
+     if params[:email]
+       @credit.product_id = @credit.product_idd
      end
         @credit_validation = CreditValidation.new(params[:credit_validation])
         @credit_validation.status = "pending"

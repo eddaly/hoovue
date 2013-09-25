@@ -1,8 +1,11 @@
 <div class="container_12 pages">
 	<div class="grid_6 push_3">
 		
-	
+	<% if params[:name] == "share" %>
+		<h2>Which Friend would you like to share the page with?</h2>
+	<% else %>
 	<h2>Which Facebook Friend would you like to credit?</h2>
+	<% end %>
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
@@ -35,6 +38,7 @@
   window.friends = <%=raw current_user.all_friends.to_json %>;
 <% end %>
 
+<% if params[:name] == "share" %>
 
 <h2>Share by email</h2>
 <%= form_for(@message) do |f| %>
@@ -45,6 +49,8 @@
 <div class="actions">
   <%= f.submit "Send", :class => "submit" %>
 </div>
+<% end %>
+
 <% end %>
 </div>
 
