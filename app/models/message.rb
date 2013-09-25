@@ -1,10 +1,10 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :recipient_uid, :sender_id, :subject
-  attr_accessor :recipient_name
+  attr_accessible :body, :recipient_uid, :sender_id, :subject, :email, :url
+  attr_accessor :recipient_name, :email, :url
 
   belongs_to :sender, foreign_key: :sender_id, class_name: "User"
 
-	validates :body, :sender, :recipient_uid, presence: true
+	# validates :body, :sender, :recipient_uid, presence: true
 
 	after_create :send_message
 

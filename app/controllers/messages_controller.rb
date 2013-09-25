@@ -9,8 +9,15 @@ class MessagesController < ApplicationController
 
 	def create
 		@message = current_user.messages.create(params[:message].except(:recipient_name))
+  
 		if @message.save
-			redirect_to ("/products/#{session[:return_to]}"), notice: "Message sent."
+      if @message.email
+      @user = current_user
+      @url = @message.url
+      UserMailer.share(@user, @url).deliver
+      end
+        
+			redirect_to @message.url, notice: "Message sent."
 		else
 			render :new
 		end

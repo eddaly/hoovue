@@ -1,10 +1,10 @@
-<div class="container_12" style="padding-bottom:100px;">
+<div class="container_12 pages" style="padding-bottom:100px;">
 
-<h1>E-mail Invite Preview:</h1>	
+<h2>E-mail Invite Preview:</h2>	
 
 <% @user = User.find_by_id(current_user.id) %>
 <% @credit = Credit.find_by_id(params[:credits_id])%>
-<p><%= @user.name %> is managing their online creative legacy. As a co-creator, <%= @user.name %> would like you to validate their Credit on <%= @credit.product.title %>. </p>
+<p><%= @user.name %> is managing their online creative legacy. As a team member, <%= @user.name %> would like you to validate their Credit on <%= @credit.product.title %>. </p>
 
 <p>whoactually is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. </p>
 

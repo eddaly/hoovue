@@ -2,7 +2,7 @@
 	<div class="grid_6 push_3">
 		
 	
-	<h2>Which Friend would you like to credit?</h2>
+	<h2>Which Facebook Friend would you like to credit?</h2>
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
@@ -36,6 +36,17 @@
 <% end %>
 
 
+<h2>Share by email</h2>
+<%= form_for(@message) do |f| %>
+<div class="actions">
+<%= f.label :email_address %>	
+<%= f.text_field :email %>
+<%= f.hidden_field :url, :value => params[:link] %>
+<div class="actions">
+  <%= f.submit "Send", :class => "submit" %>
+</div>
+<% end %>
+</div>
 
 </div>
 </div>
