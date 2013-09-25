@@ -245,6 +245,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string    "link_3_desc"
     t.text      "facebook_friends"
     t.integer   "promoted_credit_id"
+    t.boolean   "igda"
   end
 
 end

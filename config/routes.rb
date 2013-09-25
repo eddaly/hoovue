@@ -99,6 +99,7 @@ match "message_preview", to: 'credits#validate-message', :as => 'message_preview
 match "legal", to: 'front#legal', :as => 'legal'
 match "terms", to: 'front#terms', :as => 'terms'
 match "privacy", to: 'front#legal', :as => 'privacy'
+match "suggested", to: 'front#suggested', :as => 'suggested'
 
 root :to => "beta#index"
 

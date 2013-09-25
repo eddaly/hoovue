@@ -1525,4 +1525,36 @@ input.submit-one-side {
 	float:left;
 }
 
+.suggested {
+	
+	ul {
+		list-style-type:none;
+		li {
+			float:left;
+			width:220px;
+			max-width:210px;
+			margin-left:5px;
+			border:1px solid white;
+			text-align:center;
+			padding:3px;
+			
+			h3 {
+			margin-top:5px;
+			line-height:20px;	
+			}
+			
+			h2 a {
+				float:right;
+				text-align:center;
+			}
+			
+			img {
+			max-width:200px;	
+			}
+			
+		}
+		
+	}
+}
+
 }

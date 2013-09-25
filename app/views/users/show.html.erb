@@ -80,7 +80,7 @@
 	 
 	<div class="description">
 		<div class="name">
-			<%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %>
+			<%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %><% if @user.igda == "true" %> IGDA Member<% end %>
 		</div>
 	
 		<% if current_user %>
@@ -807,8 +807,8 @@ $(document).ready(function(){
 			  <div class="field">
 			    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
 				
-				Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
-				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a><br />
+				Tag someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 				
 			Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 			<%= f.text_field :video, :placeholder => "YouTube Video ID" %>

@@ -75,5 +75,13 @@ else
   redirect_to root_url
 end
 end 
+
+def suggested
+  @product = Product.find_by_id(params[:product_id])
+  @suggested = Product.where(:studio => @product.studio).limit(4)
+  if @suggested.empty?
+    redirect_to product_path(@product)
+  end
+end
   
 end

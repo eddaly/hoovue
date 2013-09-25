@@ -59,5 +59,10 @@
     <%= f.label :we_can_display_your_twitter_feed_in_your_profile_page_if_you_enter_your_twitter_username_here %>
     @<%= f.text_field :twitter %>
   </div>
+  <div class="fields">
+	  <%= f.label :Igda_member %>
+	  <%= f.check_box :igda %>
+  </div>
+  
   <div class="actions"><%= f.submit "Update", :class => "submit" %></div>
 <% end %>

@@ -136,9 +136,9 @@ end
 redirect=#{@credit.product.id}")}
         end 
          
-       format.html  { redirect_to product_path(@credit.product_id), :notice => "Credit added. Add another <a href=/credits/search>here.</a>".html_safe }
+       format.html  { redirect_to ("/suggested?product_id=#{@credit.product_id}") }
    
-        format.json { render json: @credit, status: :created, location: @credit }
+    
       else
         flash[:error] =  @credit.errors.full_messages.each do |msg| msg.gsub(/\W+/, '')  end 
         format.html { redirect_to :back }

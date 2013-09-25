@@ -186,8 +186,8 @@
 			  </div>
 			  
 	  		<div class="namecheck">
-	  			<h3>Name check someone on whoactually in your interesting thing</h3><%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
-	  			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a>
+	  			<h3>Tag someone on whoactually in your interesting thing</h3><%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+	  			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a>
 			
 	  			</div>
 			  
@@ -846,8 +846,8 @@
 	  <% end %>
 	  <div class="field">
 	    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
-		Name check someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
-		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has name checked you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Name check a Facebook friend</a><br />
+		Tag someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 	Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 	<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
 		<%= f.hidden_field :credit_id, :value => c.id %>
