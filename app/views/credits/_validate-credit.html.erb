@@ -52,7 +52,7 @@ $(document).ready(function(){
 		<%= f.hidden_field :validator_id, :value => current_user.id %>
 		<%= f.hidden_field :status, :value => "confirmed" %>
 	   
-		<%= submit_tag " Add Verifier", :name => 'existing_credit', :id => 'blue-link' %>
+		<%= submit_tag " SEND REQUEST", :name => 'existing_credit', :id => 'blue-link' %>
 		<%= f.hidden_field :current_credit_id, :value => c.id %>
 	<% end %>
 </div>	
@@ -81,11 +81,11 @@ $(document).ready(function(){
     </ul>
   </div>
 <% end %> 
-	<%= f.label "Co-creator E-mail"%>
+	<%= f.label "Team member email"%>
    
 	<%= f.text_field :pending_user_email %>
   
-		<%= f.label "What was the role of your co-creator?"%>
+		<%= f.label "What was team member's role?"%>
 	   
 		<%= f.text_field :role %>
 	   
@@ -99,7 +99,7 @@ $(document).ready(function(){
 		    
 			<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 			
-	 			<%= f.submit 'Validate Your Credit', :id => 'blue-link' %>
+	 			<%= f.submit 'SEND REQUEST', :id => 'blue-link' %>
 				
 	<% end %> 
 </div>
@@ -139,7 +139,7 @@ $(document).ready(function(){
 	  </div>
 	<% end %>
    
-			<%= f.label "What was the role of your co-creator?"%>
+			<%= f.label "What was team member's role?"%>
 			<%= f.text_field :role %>
 
 			

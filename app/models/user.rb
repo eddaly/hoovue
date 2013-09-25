@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
            
               #Roles
                 ROLES = %w[admin moderator user banned]
+             
+            
               
   #User Validation      
    # validates_uniqueness_of :email

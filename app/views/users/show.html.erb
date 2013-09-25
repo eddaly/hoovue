@@ -68,7 +68,7 @@
 					<div class="data">
 						2					</div>
 					<div class="title">
-						Shared
+						Shares
 					</div>	
 				</div>
 					
@@ -579,7 +579,7 @@ $(document).ready(function(){
 			 <% if current_user.id == @user_page.id %>
 		<%= form_for @credit, :url => {:controller => "credits", :action => "update", :id => c.id }, :html => { :method => 'put' } do |f| %>
 			<%= f.hidden_field :promoted, :value => "#{DateTime.now}" %>
-			<%= f.submit "Promote this credit", :class => "submit" %>
+			<%= f.submit "Send to top", :class => "submit" %>
 		
 			<% end %>
 	 	
@@ -638,18 +638,18 @@ $(document).ready(function(){
 <h2>Invite someone to verify your credit.</h2>
 		    
 					<%= form_for(@credit_validation) do |f| %>
-					<%= f.label "Select existing co-creator:"%>
+					<%= f.label "Select team member with a credit:"%>
 					<div style="z-index:1000;">
 						<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => c.product.id).uniq, :id, :user_name, :prompt => "Please Select" %>
 						</div> 
 						<%= f.hidden_field :validator_id, :value => current_user.id %>
 						<%= f.hidden_field :status, :value => "confirmed" %>
 
-						<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
+						<%= submit_tag " SEND REQUEST", :name => 'existing_credit', :class => 'submit' %>
 						<%= f.hidden_field :current_credit_id, :value => c.id %>
 					<% end %>
 			
-					<h2>or invite from:</h2>
+					<h2>or invite a team member via:</h2>
 					<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a>
 						<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
 
@@ -674,11 +674,11 @@ $(document).ready(function(){
 				    </ul>
 				  </div>
 				<% end %> 
-					<%= f.label "Co-creator E-mail"%>
+					<%= f.label "Team member email"%>
 
 					<%= f.text_field :pending_user_email %>
 
-						<%= f.label "What was the role of your co-creator?"%>
+						<%= f.label "What was team member's role?"%>
 
 						<%= f.text_field :role %>
 
@@ -692,7 +692,7 @@ $(document).ready(function(){
 
 							<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 
-					 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :class => 'submit' %>
+					 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :class => 'submit' %>
 
 					<% end %> 
 				</div>
@@ -732,7 +732,7 @@ $(document).ready(function(){
 					  </div>
 					<% end %>
 
-							<%= f.label "What was the role of your co-creator?"%>
+							<%= f.label "What was team member's role?"%>
 							<div>
 							<%= f.text_field :role %>
 							</div>	
@@ -741,7 +741,7 @@ $(document).ready(function(){
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
-						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+						 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
 
 						<% end %> 
 			 
@@ -807,7 +807,7 @@ $(document).ready(function(){
 			  <div class="field">
 			    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
 				
-				Tag someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+				Tag a WhoActually user: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
 				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 				
 			Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
@@ -861,7 +861,7 @@ $(document).ready(function(){
 
 <div class="grid_3 activity-feed">
 <% if current_user %>
-	<h3>Recent Following Activity</h3>
+	<h3>Followed Users' Updates</h3>
 	
 <% for friendship in current_user.friendships%>
 <% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>

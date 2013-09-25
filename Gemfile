@@ -53,6 +53,7 @@ gem 'newrelic_rpm'
 gem 'xmpp4r_facebook'
 gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
 gem 'mechanize'
+gem 'acts-as-taggable-on'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'

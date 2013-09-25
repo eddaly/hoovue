@@ -73,7 +73,7 @@
 					
 					<div class="shared">
 						<div class="data">
-							0
+							-
 						</div>
 						<div class="title">
 							Shared
@@ -152,9 +152,9 @@
 			  <% end %>
 			 <div class="role">
 				 <!--[if IE]>
-				 <strong>Your Role</strong><br/>
+				 <strong>Your role (e.g. job title)</strong><br/>
 				 <![endif]-->
-			  <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Type in a role", :class => "role" %>  
+			  <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Your role (e.g. job title)", :class => "role" %>  
 			  </div>
   
 			
@@ -178,19 +178,21 @@
 			  <%= f.text_field :role_desc, :placeholder => "What you actually did" %>
 			 </div>
 			 <!--[if IE]>
-			 <strong>Tell fans of this work one interesting thing about it</strong><br/>
+			 <strong>Your insider story (remember to Tag team members or others involved in your story)</strong><br/>
 			 <![endif]-->
 			   <div class="fact">
-		<%= f.text_area :fact, :rows => '2', :placeholder => "Tell fans of this work one interesting thing about it"	 %>
+		<%= f.text_area :fact, :rows => '2', :placeholder => "Your insider story (remember to Tag team members or others involved in your story)"	 %>
 				<br />
 			  </div>
 			  
-	  		<div class="namecheck">
-	  			<h3>Tag someone on whoactually in your interesting thing</h3><%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
-	  			<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a>
-			
-	  			</div>
-			  
+			  <div class="field">
+			      <%= f.text_field :tag_list, :placeholder => "Tag people in your insider story (seperated by ,)" %>
+			    </div>
+				<div class="namecheck" style="margin-top:3px;">
+					
+				
+				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Tag a Facebook Friend</a>
+			  </div>
 			  <h3>When did you work on <%= @product.title %>?<br />
 		 <%= f.date_select :startdate, :discard_month => true, :start_year => 1950, :prompt => "Year you started work" %>
 		 
@@ -681,18 +683,18 @@
 <h2>Invite someone to verify your credit.</h2>
 		    
 					<%= form_for(@credit_validation) do |f| %>
-					<%= f.label "Select existing co-creator:"%>
+					<%= f.label "Select team member with a credit:"%>
 					<div style="z-index:1000;">
 						<%= f.collection_select :credit_id, Credit.where('user_id != ?', current_user.id).where(:product_id => c.product.id).uniq, :id, :user_name, :prompt => "Please Select" %>
 						</div> 
 						<%= f.hidden_field :validator_id, :value => current_user.id %>
 						<%= f.hidden_field :status, :value => "confirmed" %>
 
-						<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
+						<%= submit_tag " SEND REQUEST", :name => 'existing_credit', :class => 'submit' %>
 						<%= f.hidden_field :current_credit_id, :value => c.id %>
 					<% end %>
 			
-					<h2>or invite from:</h2>
+					<h2>or invite a team member via:</h2>
 					<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a>
 						<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
 
@@ -717,11 +719,11 @@
 				    </ul>
 				  </div>
 				<% end %> 
-					<%= f.label "Co-creator E-mail"%>
+					<%= f.label "Team member email"%>
 
 					<%= f.text_field :pending_user_email %>
 
-						<%= f.label "What was the role of your co-creator?"%>
+						<%= f.label "What was team member's role?"%>
 
 						<%= f.text_field :role %>
 
@@ -735,7 +737,7 @@
 
 							<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 
-					 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :class => 'submit' %>
+					 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :class => 'submit' %>
 
 					<% end %> 
 				</div>
@@ -775,7 +777,7 @@
 					  </div>
 					<% end %>
 
-							<%= f.label "What was the role of your co-creator?"%>
+							<%= f.label "What was team member's role?"%>
 							<div>
 							<%= f.text_field :role %>
 							</div>	
@@ -784,7 +786,7 @@
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
-						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+						 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
 
 						<% end %> 
 					
@@ -823,7 +825,7 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </h3><p class="fact"><%= c.fact %></p>
 
-
+<p>Members Tagged: <%= raw c.tag_list.map { |t| link_to t, search_credits_url(:search => t) }.join(', ') %>
 
 <% if c.product.status == "In Development" or c.product.status == "Ongoing"  %>	
 
@@ -846,7 +848,7 @@
 	  <% end %>
 	  <div class="field">
 	    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
-		Tag someone on whoactually: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+		Tag a WhoActually user: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
 		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 	Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 	<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
@@ -966,7 +968,7 @@
 		</div>
 		<% end %>
 		
-			<h3>Recent Following Activity</h3>
+			<h3>Followed Users' Updates</h3>
 	
 		<% for friendship in current_user.friendships%>
 		<% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
