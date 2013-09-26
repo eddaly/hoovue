@@ -32,11 +32,12 @@
 	
 	<% @user = User.find_by_id(cv.user_id) %>
 	<% @credit = Credit.find_by_id(cv.credit_id) %>
+	<% @user_validator = User.find_by_id(cv.validator_id) %>
 	
 	<% if @user %>
 	<% if @credit %>
 	<% @product = Product.find_by_id(@credit.product_id) %>
-		<li class="<%= cycle('even', 'odd') -%>"><h3><%= @credit.user_name %> validated you on <%= @product.title %> <span class="right" style="margin-top:-10px;"><%= link_to "Accept    ",  validate_credit_validation_path(cv), :method=>:put %> or <%= link_to '  Delete', cv, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %></span></h3> </li>
+		<li class="<%= cycle('even', 'odd') -%>"><h3><%= @user_validator.name %> validated you on <%= @product.title %> <span class="right" style="margin-top:-10px;"><%= link_to "Accept    ",  validate_credit_validation_path(cv), :method=>:put %> or <%= link_to '  Delete', cv, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %></span></h3> </li>
 		<% end %>
 		<% end %>
 		<% end %>
