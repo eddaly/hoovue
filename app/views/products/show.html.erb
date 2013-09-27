@@ -951,7 +951,11 @@
 		<div class="following-item" style=:height:50px;>
 
 			<div class="profile-picture">
+				<% if o.image %>
 				<%= image_tag o.image %>
+				<% else %>
+				<%= image_tag '/assets/default-thumb.png' %>
+				<% end %>
 			</div>
 	
 			<div class="name">

@@ -82,12 +82,20 @@ $(document).ready(function(){
   	
     </div>
 	
-    <div class="field">
+    <div class="field" style="width:400px">
    	 <!--[if IE]>
-   	  <%= f.label :Publisher_or_Developer_or_Production_company_etc_if_applicable %>
+   	  <%= f.label :Developer_or_production_company_etc_if_applicable %>
    	 <![endif]-->
      
-   <%= f.text_field :studio, :placeholder => "Publisher/Developer/Production company etc. if applicable" %>
+   <%= f.text_field :developed_by, :placeholder => "Developer/production company etc. if applicable", :style => "width:325px;" %>
+    </div>
+	
+    <div class="field">
+   	 <!--[if IE]>
+   	  <%= f.label :Publisher_or_distributor_etc_if_applicable %>
+   	 <![endif]-->
+     
+   <%= f.text_field :published_by, :placeholder => "Publisher/distributor etc. if applicable" %>
     </div>
 	
 	<div class="field">
