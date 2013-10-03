@@ -4,7 +4,7 @@
 	<% if params[:name] == "share" %>
 		<h2>Which Friend would you like to share the page with?</h2>
 	<% else %>
-	<h2>Which Facebook Friend would you like to credit?</h2>
+	<h2>Which Facebook Friend?</h2>
 	<% end %>
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>

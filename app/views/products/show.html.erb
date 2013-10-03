@@ -186,7 +186,7 @@
 			  </div>
 			  
 			  <div class="field">
-			      <%= f.text_field :tag_list, :placeholder => "Tag people in your insider story (seperated by ,)" %>
+			      <%= f.text_field :tag_list, :placeholder => "Tag people in your insider story (seperated by ,)", :style => "width:350px;" %>
 			    </div>
 				<div class="namecheck" style="margin-top:3px;">
 					
@@ -316,7 +316,7 @@
 
 	
 	<div class="interesting_fact">
-		<a   class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories</a>
+		<a   class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories<% if c.product.status == "Ongoing" %> and Posts<% end %></a>
 	</div>
 	
 	
@@ -896,7 +896,7 @@
 		<% end %>
 	<% end %>
 	<% if current_user %>
-	<h3>Someone missing?<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</a></h3><% end %>
+	<h3>NO, INVITE TEAM MEMBERS<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</a></h3><% end %>
 </div>
 
 

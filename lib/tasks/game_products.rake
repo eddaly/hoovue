@@ -184,7 +184,7 @@ end
 task game_products: :environment do
 	base_url = "http://www.mobygames.com"
 	agent = ScraperBase.new()
-  total_games = 1#41164
+  total_games = 141164
   count = 0
   page_num = 0
   total_count = 0
@@ -230,7 +230,7 @@ task game_products: :environment do
       total_count += 1
 		end
     
-    count += 2500
+    count += 25
 	end
 
   agent.log_output "\nJob was finished successfully. Total game counts = #{total_count}"

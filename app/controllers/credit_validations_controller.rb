@@ -72,6 +72,9 @@ class CreditValidationsController < ApplicationController
       @credit_validation.oneside = "true"
           respond_to do |format|
             if @credit_validation.save
+               if params[:one_side]
+                CreditMailer.one_side(@credit_validation).deliver
+               end 
               format.html { redirect_to :back, notice: 'You have verified this credit.' }
               format.json { render json: @credit_validation, status: :created, location: @credit_validation }
             else

@@ -22,7 +22,7 @@ module ProductsHelper
       
     else
       
-      link_to "Yes, Vote team this complete", complete_product_path(product), class: "actions"
+      link_to "YES, THIS TEAM IS COMPLETE", complete_product_path(product), class: "actions"
       
     end
     

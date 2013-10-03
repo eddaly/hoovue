@@ -65,6 +65,7 @@ float:left;
 	background-color:#09C11F;
 	border: 2px solid #10E72A;
 	font-size:18px;
+	cursor:hand;
 }
 
 .blue-btn-border, .blue-btn-border-large {
@@ -759,11 +760,13 @@ float:left;
 										width:100%;
 										float:left;
 										
+										
 										img { 
 										width:50px;
 										height:50px;
 										border:2px solid white;
 										margin:0 6px;
+										cursor:hand;
 									    }
 									
 										
@@ -1192,6 +1195,7 @@ float:left;
 					height:50px;
 					border:2px solid white;
 					margin:0 6px;
+					cursor:hand;
 				    }
 				
 					

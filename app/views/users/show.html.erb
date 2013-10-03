@@ -265,7 +265,7 @@ $(document).ready(function(){
 
 	
 	<div class="interesting_fact">
-		<a class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories and Posts</a>
+		<a class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories<% if c.product.status == "Ongoing" %> and Posts<% end %></a>
 	</div>
 	
 	<div class="validation-info"   style="
