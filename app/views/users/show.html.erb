@@ -56,19 +56,19 @@
 			
 			<div class="likes">
 				<div class="data">
-					3
+					
 				</div>
 				<div class="title">
-					Likes
+					
 				</div>	
 				</div>
 				
 				
 				<div class="shared">
 					<div class="data">
-						2					</div>
+										</div>
 					<div class="title">
-						Shares
+						
 					</div>	
 				</div>
 					
@@ -645,11 +645,11 @@ $(document).ready(function(){
 						<%= f.hidden_field :validator_id, :value => current_user.id %>
 						<%= f.hidden_field :status, :value => "confirmed" %>
 
-						<%= submit_tag " Add Verifier", :name => 'existing_credit', :class => 'submit' %>
+						<%= submit_tag " SEND REQUEST", :name => 'existing_credit', :class => 'submit' %>
 						<%= f.hidden_field :current_credit_id, :value => c.id %>
 					<% end %>
 			
-					<h2>or invite from:</h2>
+					<h2>or invite a team member via:</h2>
 					<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a>
 						<a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
 
@@ -678,7 +678,7 @@ $(document).ready(function(){
 
 					<%= f.text_field :pending_user_email %>
 
-						<%= f.label "What was the role of your co-creator?"%>
+						<%= f.label "What was team member's role?"%>
 
 						<%= f.text_field :role %>
 
@@ -692,7 +692,7 @@ $(document).ready(function(){
 
 							<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
 
-					 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'email', :class => 'submit' %>
+					 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'email', :class => 'submit' %>
 
 					<% end %> 
 				</div>
@@ -732,7 +732,7 @@ $(document).ready(function(){
 					  </div>
 					<% end %>
 
-							<%= f.label "What was the role of your co-creator?"%>
+							<%= f.label "What was team member's role?"%>
 							<div>
 							<%= f.text_field :role %>
 							</div>	
@@ -741,7 +741,7 @@ $(document).ready(function(){
 
 								<%= f.hidden_field :current_credit_id, :value => c.id %>
 
-						 			<%= f.submit 'Validate Your Credit', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
+						 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
 
 						<% end %> 
 			 
@@ -861,7 +861,7 @@ $(document).ready(function(){
 
 <div class="grid_3 activity-feed">
 <% if current_user %>
-	<h3>Recent Following Activity</h3>
+	<h3>Followed Users' Updates</h3>
 	
 <% for friendship in current_user.friendships%>
 <% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>

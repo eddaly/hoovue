@@ -23,7 +23,7 @@ $(document).ready(function(){
 <%= form_tag search_credits_path, :method => 'get' do %>
 
   <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)}, :placeholder => "Enter a work name to search" %><br />
-     <%= submit_tag "Search", :name => nil, :class => "search-button" %>
+     <%= submit_tag "SEARCH", :name => nil, :class => "search-button" %>
   <%end%>
  
  </div>  

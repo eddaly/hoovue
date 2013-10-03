@@ -6,7 +6,7 @@
    <p>
    	<%= label_tag 'Search:'%>
    <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)} %>
-      <%= submit_tag "Search", :name => nil, :class => "search-button" %>
+      <%= submit_tag "SEARCH", :name => nil, :class => "search-button" %>
 	  <%end%>
    </p>
    

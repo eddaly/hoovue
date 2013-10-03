@@ -54,10 +54,10 @@
 		<div class="analytics">
 			<div class="followers">
 				<div class="data">
-				3
+			
 				</div>
 				<div class="title">
-					Followers
+				
 				</div>	
 				</div>
 				
@@ -73,10 +73,10 @@
 					
 					<div class="shared">
 						<div class="data">
-							-
+							
 						</div>
 						<div class="title">
-							Shared
+						
 						</div>	
 					</div>
 						
@@ -98,13 +98,14 @@
 		<div class="description">
 			<div class="details">
 				<p class="description-title">Date added</p><p class="data"><%= @product.created_at.strftime("%Y") %></p>
-				<p class="description-title">Added By</p><p class="data"><%= @product.user.name %></p><br /><br />
-				<p class="description-title">Developer</p><p class="data"><%= @product.studio %></p>
+				<p class="description-title">Published By</p><p class="data" style="width:150px;"><%= truncate(@product.published_by, length: 30) %></p><br /><br />
 				<p class="description-title">Status</p><p class="data"><%= @product.status %></p>
+				<p class="description-title">Developer</p><p class="data" style="width:150px;"><%= truncate(@product.developed_by, length: 30) %></p>
+				
 		
 			</div>
 			
-			<p class="description-text"><%= @product.description %></p>	
+			<p class="description-text"><%= @product.description.html_safe %></p>	
 			
 		</div>
 		<div class="actions">
@@ -848,7 +849,7 @@
 	  <% end %>
 	  <div class="field">
 	    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
-		Tag a WhoActually user: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
+		TAG A WHOACTUALLY USER: <br /> <%= f.select(:name_check_user_id, User.all.collect {|a| [a.name, a.id]}, {:include_blank => 'Pick a name'}, :name => "post_name_check_user_id") -%>
 		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
 	Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
 	<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
@@ -922,6 +923,7 @@
 		<% @credits.each do |c| %>
 		<% @user_recco = User.find_by_id(c.user_id) %>
 		<% @recco_prod = Product.find_by_id(@user_recco.credits.first) %>
+		<% if @recco_prod %>
 		<div class="following-item" style=:height:50px;>
 
 			<div class="profile-picture">
@@ -944,7 +946,7 @@
 		</div>
 		<% end %>
 		<% end %>
-		
+		<% end %>
 		
 			<h3>Did you work on?</h3>
 			<% @recommended.each do |o| %>

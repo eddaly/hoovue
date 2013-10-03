@@ -53,7 +53,7 @@ def update
   @user = User.find(params[:id])
   respond_to do |format|
     if @user.update_attributes(params[:user])
-      format.html { redirect_to @user, notice: 'Your Profile has been updated.' }
+      format.html { redirect_to @user, notice: 'Your profile has been updated.' }
     else
       format.html { render action: "edit" }
     end

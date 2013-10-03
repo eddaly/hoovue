@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
                   end
                   
                 else
-                  redirect_to root_url, :notice => "Your email does not match the credit. Please add this e-mail address to your account by clicking <a href=/emails/new>here.</a>".html_safe
+                  redirect_to root_url, :notice => "The email that got you here isn't associated with your profile.  But you can add it <a href=/emails/new>here.</a>".html_safe
                     session.delete(:credit_id)     
             end
           end
@@ -114,7 +114,7 @@ protected
  
    #Send to log in page if no auth   
       rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :notice => "Please Sign In."
+      redirect_to root_url, :notice => "Please SIGN IN."
     end
 
 def validation_count 

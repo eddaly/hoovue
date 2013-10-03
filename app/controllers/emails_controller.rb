@@ -44,7 +44,7 @@ class EmailsController < ApplicationController
       @email.user_id = current_user.id
     respond_to do |format|
       if @email.save
-        format.html { redirect_to edit_user_path(current_user.id), notice: 'Email was successfully added.' }
+        format.html { redirect_to edit_user_path(current_user.id), notice: 'Successfully associated a new email address with your profile.' }
         format.json { render json: @email, status: :created, location: @email }
       else
         format.html { render action: "new" }
