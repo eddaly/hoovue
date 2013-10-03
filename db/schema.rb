@@ -147,13 +147,14 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "products", :force => true do |t|
-    t.string   "title"
+    t.integer  "like"
+    t.text     "title"
     t.string   "genre"
     t.integer  "user_id"
     t.string   "image"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "properties"
     t.integer  "product_genre_id"
     t.string   "status"
@@ -164,7 +165,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "studio"
     t.datetime "startdate"
     t.datetime "enddate"
-    t.integer  "credits_count",     :default => 0
+    t.integer  "credits_count"
     t.string   "video"
     t.string   "moderation_status"
     t.string   "image_2"
@@ -177,8 +178,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "perspective"
     t.string   "non_sport"
     t.string   "misc"
-    t.string   "platforms"
-    t.string   "alternate_title"
+    t.text     "platforms"
+    t.text     "alternate_title"
     t.string   "categories"
     t.string   "groups"
   end
