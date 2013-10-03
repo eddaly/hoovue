@@ -196,12 +196,18 @@ class ScraperBase
   rescue
     nil
   end
+
+  def replace_element(page, node_names, replace)
+    node_names.each do |node_name|
+      page.search(node_name).each { |node| node.replace(replace) if node }
+    end
+  end
 end
 
 task game_products: :environment do
 	base_url = "http://www.mobygames.com"
 	agent = ScraperBase.new()
-  total_games = 1#41164
+  total_games = 1#41286
   count = 0
   page_num = 0
   total_count = 0
@@ -210,34 +216,49 @@ task game_products: :environment do
 
 	while count < total_games
 		list_page = agent.send_request "#{base_url}/browse/games/offset,#{count}/so,0a/list-games/"
+    #File.open("test.html", "w") { |file| file.puts list_page.content.force_encoding('UTF-8') }
+    #break
+    #docfile = File.open("test.html", "r")
+    #list_page = Nokogiri::HTML(docfile.read)
+
     page_num += 1
     agent.log_output "current page = #{page_num}"
 
-		list_page.search('table[@id="mof_object_list"] tr[@valign="top"]').each do |item|
-			appendix = item.search('td').first.search('a').first['href']
+		list_page.search('//div[contains(@class, "list-info")]').each do |item|
+			appendix = agent.get_attr_with_pattern(item.search('h3').first, 'a', 'href')
       agent.properties[:url] = base_url + appendix
       game_page = agent.send_request agent.properties[:url]
+      #File.open("test1.html", "w") { |file| file.puts game_page.content.force_encoding('UTF-8') }
+      #break
+      #docfile = File.open("test1.html", "r")
+      #game_page = Nokogiri::HTML(docfile.read)
 
-      agent.properties[:title] = agent.get_text_with_pattern(game_page, 'div#gameTitle a')
-      agent.properties[:description] = game_page.search('div.rightPanelMain').first.inner_html()
-      img_url = agent.get_attr_with_pattern(game_page, 'div#coreGameCover img', 'src')
+      unless (game_info = game_page.search('//div[@class="game-info"]').first).nil?
+        agent.properties[:title] = agent.get_text_with_pattern(game_info, 'h1[@class="hdr1"]')
+        game_detail = game_info.search('//div[@class="detail"]').first
 
-      element = game_page.search("div#coreGameRelease").first.search('div').first
-      agent.add_properites(element)
+        unless game_detail.nil?
+          unless (listing = game_detail.search('//div[@class="listings"]').first).nil?
+            agent.add_properites(listing.search('//div[@class="listing"]').first)
+          end
 
-      element = game_page.search("div#coreGameGenre").first.search('div').first.search('div').first
-      agent.add_properites(element)
+          agent.replace_element(game_detail, ["div", "a"], "")
+          agent.properties[:description] = agent.remove_unuseful(game_detail.inner_html())
+        end
+      end
 
-      #agent.log_output agent.properties.inspect
+      unless (game_nav = game_page.search('//div[@class="game-nav"]').first).nil?
+        img_url = agent.get_attr_with_pattern(game_nav, 'img', 'src')
+        img_file = agent.get_remote_file(img_url)
+      end
+
       product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
       agent.properties[:product_genre_id] = product_genre.id
       agent.properties[:genre] = 'Game'
       agent.properties[:date] = agent.properties[:released]
       agent.properties[:year] = agent.parseDate(agent.properties[:released])
 
-      product = Product.where(title: agent.properties[:title], genre: 'Game').first
-      img_file = agent.get_remote_file(img_url)
-
+      product = Product.where(title: agent.properties[:title], genre: 'Game', released: agent.properties[:released]).first
       unless product.nil?
         if product.image.blank?
           agent.properties[:image] = img_file
@@ -251,13 +272,13 @@ task game_products: :environment do
         agent.properties[:image] = img_file
         product = Product.create(agent.properties)
       end
-      img_file.close if img_file
 
+      img_file.close if img_file
       total_count += 1
-		end
+    end
     
     count += 25
-	end
+  end
 
   agent.log_output "\nJob was finished successfully. Total game counts = #{total_count}"
 end	

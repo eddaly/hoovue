@@ -137,6 +137,10 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "perspective"
     t.string   "non_sport"
     t.string   "misc"
+    t.string   "platforms"
+    t.string   "alternate_title"
+    t.string   "categories"
+    t.string   "groups"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
