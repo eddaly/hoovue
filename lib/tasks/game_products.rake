@@ -226,7 +226,6 @@ task game_products: :environment do
 
 		list_page.search('//div[contains(@class, "list-info")]').each do |item|
       title = agent.get_text_with_pattern(item.search('h3').first, 'a')
-      puts title
       product = Product.find_by_title(title)
 
       if product.nil?
