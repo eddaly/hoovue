@@ -225,56 +225,49 @@ task game_products: :environment do
     agent.log_output "current page = #{page_num}"
 
 		list_page.search('//div[contains(@class, "list-info")]').each do |item|
-			appendix = agent.get_attr_with_pattern(item.search('h3').first, 'a', 'href')
-      agent.properties[:url] = base_url + appendix
-      game_page = agent.send_request agent.properties[:url]
-      #File.open("test1.html", "w") { |file| file.puts game_page.content.force_encoding('UTF-8') }
-      #break
-      #docfile = File.open("test1.html", "r")
-      #game_page = Nokogiri::HTML(docfile.read)
+      title = agent.get_text_with_pattern(item.search('h3').first, 'a')
+      puts title
+      product = Product.find_by_title(title)
 
-      unless (game_info = game_page.search('//div[@class="game-info"]').first).nil?
-        agent.properties[:title] = agent.get_text_with_pattern(game_info, 'h1[@class="hdr1"]')
-        game_detail = game_info.search('//div[@class="detail"]').first
+      if product.nil?
+        appendix = agent.get_attr_with_pattern(item.search('h3').first, 'a', 'href')
+        agent.properties[:url] = base_url + appendix
+        game_page = agent.send_request agent.properties[:url]
+        #File.open("test1.html", "w") { |file| file.puts game_page.content.force_encoding('UTF-8') }
+        #break
+        #docfile = File.open("test1.html", "r")
+        #game_page = Nokogiri::HTML(docfile.read)
 
-        unless game_detail.nil?
-          unless (listing = game_detail.search('//div[@class="listings"]').first).nil?
-            agent.add_properites(listing.search('//div[@class="listing"]').first)
+        unless (game_info = game_page.search('//div[@class="game-info"]').first).nil?
+          agent.properties[:title] = agent.get_text_with_pattern(game_info, 'h1[@class="hdr1"]')
+          game_detail = game_info.search('//div[@class="detail"]').first
+
+          unless game_detail.nil?
+            unless (listing = game_detail.search('//div[@class="listings"]').first).nil?
+              agent.add_properites(listing.search('//div[@class="listing"]').first)
+            end
+
+            agent.replace_element(game_detail, ["div", "a"], "")
+            agent.properties[:description] = agent.remove_unuseful(game_detail.inner_html())
           end
-
-          agent.replace_element(game_detail, ["div", "a"], "")
-          agent.properties[:description] = agent.remove_unuseful(game_detail.inner_html())
         end
-      end
 
-      unless (game_nav = game_page.search('//div[@class="game-nav"]').first).nil?
-        img_url = agent.get_attr_with_pattern(game_nav, 'img', 'src')
-        img_file = agent.get_remote_file(img_url)
-      end
-
-      product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
-      agent.properties[:product_genre_id] = product_genre.id
-      agent.properties[:genre] = 'Game'
-      agent.properties[:date] = agent.properties[:released]
-      agent.properties[:year] = agent.parseDate(agent.properties[:released])
-
-      product = Product.where(title: agent.properties[:title], genre: 'Game', released: agent.properties[:released]).first
-      unless product.nil?
-        if product.image.blank?
-          agent.properties[:image] = img_file
-        elsif product.image_2.blank?
-          agent.properties[:image_2] = img_file
-        elsif product.image_3.blank?
-          agent.properties[:image_3] = img_file
+        unless (game_nav = game_page.search('//div[@class="game-nav"]').first).nil?
+          img_url = agent.get_attr_with_pattern(game_nav, 'img', 'src')
+          img_file = agent.get_remote_file(img_url)
         end
-        product.update_attributes(agent.properties)
-      else
+
+        product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
+        agent.properties[:product_genre_id] = product_genre.id
+        agent.properties[:genre] = 'Game'
+        agent.properties[:date] = agent.properties[:released]
+        agent.properties[:year] = agent.parseDate(agent.properties[:released])
+
         agent.properties[:image] = img_file
         product = Product.create(agent.properties)
+        img_file.close if img_file
+        total_count += 1        
       end
-
-      img_file.close if img_file
-      total_count += 1
     end
     
     count += 25
