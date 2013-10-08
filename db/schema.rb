@@ -147,14 +147,13 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "products", :force => true do |t|
-    t.integer  "like"
     t.text     "title"
     t.string   "genre"
     t.integer  "user_id"
     t.string   "image"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.text     "properties"
     t.integer  "product_genre_id"
     t.string   "status"
@@ -162,10 +161,10 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.text     "url"
     t.string   "date"
     t.datetime "year"
-    t.string   "studio"
+    t.text     "studio"
     t.datetime "startdate"
     t.datetime "enddate"
-    t.integer  "credits_count"
+    t.integer  "credits_count",     :default => 0
     t.string   "video"
     t.string   "moderation_status"
     t.string   "image_2"
@@ -177,11 +176,11 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "released"
     t.string   "perspective"
     t.string   "non_sport"
-    t.string   "misc"
+    t.text     "misc"
     t.text     "platforms"
     t.text     "alternate_title"
-    t.string   "categories"
-    t.string   "groups"
+    t.text     "categories"
+    t.text     "groups"
   end
 
   create_table "rails_admin_histories", :force => true do |t|
