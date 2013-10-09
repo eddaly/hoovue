@@ -162,7 +162,7 @@ end
    
     respond_to do |format|
       if @credit.update_attributes(params[:credit])
-        format.html { redirect_to root_url, notice: 'Your Credit has been updated' }
+        format.html { redirect_to user_path(current_user), notice: 'Your Credit has been updated' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
