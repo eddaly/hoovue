@@ -80,7 +80,7 @@
 	 
 	<div class="description">
 		<div class="name">
-			<%= @user.name %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %><% if @user.igda == "true" %> IGDA Member<% end %>
+			<%= @user.name %><% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %> <% if current_user %> <% if current_user.id == @user.id %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %> <% end %>
 		</div>
 	
 		<% if current_user %>

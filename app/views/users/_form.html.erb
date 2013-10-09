@@ -42,7 +42,7 @@
   <br />
   <div class="field">
     <%= f.label :tell_us_a_little_about_yourself %>
-  <%= f.text_area :bio, :rows => '10' %>
+  <%= f.text_area :bio, :rows => '10', :style => "height:150px;" %>
   </div>
   <div class="field">
     <%= f.label :links_to_personal_websites_or_something_you_are_currently_working_on %>
@@ -61,7 +61,8 @@
   </div>
   <div class="fields">
 	  <%= f.label :Igda_member %>
-	  <%= f.check_box :igda %>
+	  <%= image_tag 'igda-edit.png' %>
+	  <%= f.check_box :igda %><br />
   </div>
   
   <div class="actions"><%= f.submit "SAVE", :class => "submit" %></div>

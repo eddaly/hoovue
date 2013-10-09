@@ -1,19 +1,19 @@
 GIT
   remote: git://github.com/cavneb/make_flaggable.git
-  revision: 9819f5c75df76633bf365bcbbaf9716bd3f65c37
+  revision: 1b09b3bb8a778b5a8f7250c587d59a8e6c205be6
   specs:
-    make_flaggable (0.1.1)
+    make_flaggable (0.1.0)
       activerecord (>= 3.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (3.2.14)
-      actionpack (= 3.2.14)
-      mail (~> 2.5.4)
-    actionpack (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
+    actionmailer (3.2.13)
+      actionpack (= 3.2.13)
+      mail (~> 2.5.3)
+    actionpack (3.2.13)
+      activemodel (= 3.2.13)
+      activesupport (= 3.2.13)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
@@ -21,21 +21,21 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    activemodel (3.2.14)
-      activesupport (= 3.2.14)
+    activemodel (3.2.13)
+      activesupport (= 3.2.13)
       builder (~> 3.0.0)
-    activerecord (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
+    activerecord (3.2.13)
+      activemodel (= 3.2.13)
+      activesupport (= 3.2.13)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
     activerecord-postgresql-adapter (0.0.1)
       pg
-    activeresource (3.2.14)
-      activemodel (= 3.2.14)
-      activesupport (= 3.2.14)
-    activesupport (3.2.14)
-      i18n (~> 0.6, >= 0.6.4)
+    activeresource (3.2.13)
+      activemodel (= 3.2.13)
+      activesupport (= 3.2.13)
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
       multi_json (~> 1.0)
     acts-as-taggable-on (2.4.1)
       rails (>= 3, < 5)
@@ -72,7 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    counter_culture (0.1.16)
+    counter_culture (0.1.17)
       after_commit_action (~> 0.1.3)
     daemons (1.1.9)
     domain_name (0.5.13)
@@ -106,7 +106,7 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpauth (0.2.0)
-    i18n (0.6.5)
+    i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -144,8 +144,8 @@ GEM
     nested_form (0.3.2)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
+    net-scp (1.0.6)
+      net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     newrelic_rpm (3.6.7.159)
     nokogiri (1.5.10)
@@ -187,14 +187,14 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (3.2.14)
-      actionmailer (= 3.2.14)
-      actionpack (= 3.2.14)
-      activerecord (= 3.2.14)
-      activeresource (= 3.2.14)
-      activesupport (= 3.2.14)
+    rails (3.2.13)
+      actionmailer (= 3.2.13)
+      actionpack (= 3.2.13)
+      activerecord (= 3.2.13)
+      activeresource (= 3.2.13)
+      activesupport (= 3.2.13)
       bundler (~> 1.0)
-      railties (= 3.2.14)
+      railties (= 3.2.13)
     rails-asset-jqueryui (0.0.3)
       jquery-rails
     rails_admin (0.4.9)
@@ -212,9 +212,9 @@ GEM
       remotipart (~> 1.0)
       safe_yaml (~> 0.6)
       sass-rails (~> 3.1)
-    railties (3.2.14)
-      actionpack (= 3.2.14)
-      activesupport (= 3.2.14)
+    railties (3.2.13)
+      actionpack (= 3.2.13)
+      activesupport (= 3.2.13)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -293,7 +293,7 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-twitter
   pg
-  rails (~> 3.2.14)
+  rails (= 3.2.13)
   rails-asset-jqueryui
   rails_admin (= 0.4.9)
   sass-rails (~> 3.2.3)
