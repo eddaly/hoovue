@@ -897,7 +897,8 @@
 		<% end %>
 	<% end %>
 	<% if current_user %>
-	<h3>Anyone missing? Invite team members.<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>"> Invite them on Facebook!</a></h3><% end %>
+	<h3>Anyone missing? Invite team members.
+		<a href="https://www.facebook.com/dialog/send?app_id=<%= ENV['FACEBOOK_APP_ID']%>&?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&name=share", class="actions" target="blank"> Invite them on Facebook!</a></h3><% end %>
 </div>
 
 
@@ -913,7 +914,7 @@
 		<% end %>
 		<% if @user_credit.count > 0 %>
 		<%= toggle_complete_button(@product, current_user) %>
-		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&name=share", class="actions" target="blank"> No, invite team members</a>
+		<a href="https://www.facebook.com/dialog/send?app_id=<%= ENV['FACEBOOK_APP_ID']%>&?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %> -&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&name=share", class="actions" target="blank"> No, invite team members</a>
 		<% end %>
 		
 		

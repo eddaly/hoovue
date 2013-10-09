@@ -138,8 +138,9 @@ end
         end 
         
         if params[:facebook]
-          format.html { redirect_to ("/messages/new?name=whoactually.com%20credit%20-%20Get%20the%20recognition%20you%20deserve&description=As%20a%20co-creator%20on%20#{@credit.product.title},%20#{current_user.name}%20would%20like%20you%20to%20validate%20their%20credit.%20#{current_user.name}%20also%20recorded%20that%20you%20were%20#{@credit.role}.%20To%20validate%20this%20credit%20and%20claim%20your%20own%20follow%20this%20link.&link=http://#{ENV['DEFAULT_URL']}/credits/#{@credit.id}?pending_token=#{@credit.pending_token}&
-redirect=#{@credit.product.id}")}
+          format.html { redirect_to ("https://www.facebook.com/dialog/send?app_id=#{ENV['FACEBOOK_APP_ID']}&
+          -name=whoactually.com%20credit%20-%20Get%20the%20recognition%20you%20deserve&description=As%20a%20co-creator%20on%20#{@credit.product.title},%20#{current_user.name}%20would%20like%20you%20to%20validate%20their%20credit.%20#{current_user.name}%20also%20recorded%20that%20you%20were%20#{@credit.role}.%20To%20validate%20this%20credit%20and%20claim%20your%20own%20follow%20this%20link.&link=http://#{ENV['DEFAULT_URL']}/credits/#{@credit.id}?pending_token=#{@credit.pending_token}&
+          -redirect_uri=http://#{ENV['DEFAULT_URL']}/users/#{current_user.id}")}
         end 
          
        format.html  { redirect_to ("/suggested?product_id=#{@credit.product_id}") }
