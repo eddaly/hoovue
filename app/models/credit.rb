@@ -3,11 +3,11 @@ class Credit < ActiveRecord::Base
     attr_accessor :current_credit_id, :current_credit_role, :product_idd 
       belongs_to :user, :counter_cache => true
       belongs_to :product, :counter_cache => true
-      has_many :credit_validations, :dependent => :destroy
-      has_many :posts, :dependent => :destroy
-      has_and_belongs_to_many :platforms
+        has_many :credit_validations, :dependent => :destroy
+        has_many :posts, :dependent => :destroy
+          has_and_belongs_to_many :platforms
         
-        acts_as_taggable
+      acts_as_taggable
         
          accepts_nested_attributes_for :credit_validations, allow_destroy: true
      #   validates_presence_of :role
@@ -16,26 +16,14 @@ class Credit < ActiveRecord::Base
 
     scope :confirmed, where(:status => "confirmed")
     scope :pending, where(:status => "pending")
-    scope :cv_unverified, where(:credit_validations_count => "0")
-    scope :cv_part, where(:confirmed_validations_count => "1 | 2")  
-    scope :cv_confirmed, where(:confirmed_validations_count => "3")  
+    scope :cv_unverified, where(:credit_validation_count => "0")
+    scope :cv_part, where(:confirmed_validation_count => "1 | 2")  
+    scope :cv_confirmed, where(:confirmed_validation_count => "3")  
   
       
-      
-   
-        
-      def self.import(file)
-  CSV.foreach(file.path, headers: true) do |row|
+    def self.import(file)
+        CSV.foreach(file.path, headers: true) do |row|
     Credit.create! row.to_hash
   end
 end
-
-def email_validation
-  
-end
-
-
-
-
-  
 end

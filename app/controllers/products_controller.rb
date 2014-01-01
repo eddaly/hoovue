@@ -5,8 +5,8 @@ load_and_authorize_resource
   # GET /products
   # GET /products.json
   def index
-     
-    redirect_to root_url
+  @products = Product.order(:title).where("title like ?", "#{params[:term]}")  
+   render json: @products.map(&:title)
   end
   
 def import

@@ -46,7 +46,7 @@ $(document).ready(function(){
  	<%= f.text_field :role, :placeholder => "Your role (e.g. job title)", :class => "role" %> 
  
 
-	<%= f.select(:product_id, Product.all.collect {|a| [a.title, a.id]}, :class => "select-advanced") -%>
+	<%= f.select(:product_id, Product.all.collect {|a| [a.title, a.id]}, :class => "select-basic") -%>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>
 	

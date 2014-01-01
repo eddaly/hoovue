@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.16'
 ruby '1.9.3'
 gem 'jquery-rails'
 # Bundle edge Rails instead:
