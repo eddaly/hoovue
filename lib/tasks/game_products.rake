@@ -207,12 +207,53 @@ class ScraperBase
       page.search(node_name).each { |node| node.replace(replace) if node }
     end
   end
+
+  def get_product(base_url, appendix, indentifier)
+    @properties[:indentifier] = indentifier
+    @properties[:url] = base_url + appendix
+    game_page = send_request @properties[:url]
+
+    unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
+      @properties[:title] = get_text_with_pattern(game_info, 'div[@id="gameTitle"]/a')
+
+      unless (release = game_page.search('//div[@id="coreGameRelease"]').first).nil?
+        add_properites(release.search('div').first)
+      end
+
+      unless (listing = game_page.search('//div[@id="coreGameGenre"]').first).nil?
+        add_properites(listing.search('div/div').first)
+      end
+
+      game_description = game_page.search('//div[@class="rightPanelMain"]')
+      replace_element(game_description, ["h2", "h3", "a", "ul", "table"], "")
+      @properties[:description] = remove_unuseful(game_description.inner_html()).gsub(/<div class=\"sideBarLinks\">(.*)/, '')
+    end
+
+    unless (game_nav = game_page.search('//div[@id="coreGameCover"]').first).nil?
+      img_url = get_attr_with_pattern(game_nav, 'img', 'src')
+      img_file = get_remote_file(img_url)
+    end
+
+    product_genre = ProductGenre.find_or_create_by_name(@properties[:genre])
+    @properties[:product_genre_id] = product_genre.id
+    @properties[:genre] = 'Game'
+    @properties[:date] = @properties[:released]
+    @properties[:year] = parseDate(@properties[:released])
+    @properties[:image] = img_file
+    product = Product.create(@properties)
+    img_file.close if img_file
+    product
+  end
+
+  def get_credit(product)
+
+  end
 end
 
 task game_products: :environment do
 	base_url = "http://www.mobygames.com"
 	agent = ScraperBase.new()
-  total_games = 1#41286
+  total_games = 1#42171
   count = 0
   page_num = 0
   total_count = 0
@@ -238,42 +279,11 @@ task game_products: :environment do
       product = Product.find_by_indentifier(indentifier)
 
       if product.nil?
-        agent.properties[:indentifier] = indentifier
-        agent.properties[:url] = base_url + appendix
-        game_page = agent.send_request agent.properties[:url]
-
-        unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
-          agent.properties[:title] = agent.get_text_with_pattern(game_info, 'div[@id="gameTitle"]/a')
-
-          unless (release = game_page.search('//div[@id="coreGameRelease"]').first).nil?
-            agent.add_properites(release.search('div').first)
-          end
-
-          unless (listing = game_page.search('//div[@id="coreGameGenre"]').first).nil?
-            agent.add_properites(listing.search('div/div').first)
-          end
-
-          game_description = game_page.search('//div[@class="rightPanelMain"]')
-          agent.replace_element(game_description, ["h2", "h3", "a", "ul", "table"], "")
-          agent.properties[:description] = agent.remove_unuseful(game_description.inner_html()).gsub(/<div class=\"sideBarLinks\">(.*)/, '')
-        end
-
-        unless (game_nav = game_page.search('//div[@id="coreGameCover"]').first).nil?
-          img_url = agent.get_attr_with_pattern(game_nav, 'img', 'src')
-          img_file = agent.get_remote_file(img_url)
-        end
-
-        product_genre = ProductGenre.find_or_create_by_name(agent.properties[:genre])
-        agent.properties[:product_genre_id] = product_genre.id
-        agent.properties[:genre] = 'Game'
-        agent.properties[:date] = agent.properties[:released]
-        agent.properties[:year] = agent.parseDate(agent.properties[:released])
-
-        agent.properties[:image] = img_file
-        product = Product.create(agent.properties)
-        img_file.close if img_file
+        product = agent.get_product(base_url, appendix, indentifier)
         total_count += 1
       end
+
+      agent.get_credit(product)
     end
     
     count += 25
