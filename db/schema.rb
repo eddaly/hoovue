@@ -141,7 +141,11 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "alternate_title"
     t.string   "categories"
     t.string   "groups"
+    t.string   "indentifier"
+    t.string   "esrb_rating"
   end
+
+  add_index "products", ["indentifier"], :name => "index_products_on_indentifier"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

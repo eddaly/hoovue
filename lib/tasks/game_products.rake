@@ -162,9 +162,14 @@ class ScraperBase
       element = element.next_element
       unless element.nil?
         unless key.to_s.blank?
-          @properties[key] = element.search('a').map { |link| link.text().force_encoding("utf-8") }.join(', ')
+          if key == :platform
+            @properties[:platforms] = element.search('a').map { |link| link.text().force_encoding("utf-8") }.join(', ')
+          else
+            @properties[key] = element.search('a').map { |link| link.text().force_encoding("utf-8") }.join(', ')
+          end
         end
         element = element.next_element
+        element = element.next_element if element.to_s == '<br>'
       end
     end
   end
@@ -224,34 +229,36 @@ task game_products: :environment do
     page_num += 1
     agent.log_output "current page = #{page_num}"
 
-		list_page.search('//div[contains(@class, "list-info")]').each do |item|
-      title = agent.get_text_with_pattern(item.search('h3').first, 'a')
-      product = Product.find_by_title(title)
+    list_table = list_page.search('//table[@id="mof_object_list"]').first
+    next if list_table.blank?
+
+		list_table.search('//tbody/tr[@valign="top"]').each do |item|
+      appendix = agent.get_attr_with_pattern(item.search('td').first, 'a', 'href')
+      indentifier = appendix.gsub(/\/game\//, '')
+      product = Product.find_by_indentifier(indentifier)
 
       if product.nil?
-        appendix = agent.get_attr_with_pattern(item.search('h3').first, 'a', 'href')
+        agent.properties[:indentifier] = indentifier
         agent.properties[:url] = base_url + appendix
         game_page = agent.send_request agent.properties[:url]
-        #File.open("test1.html", "w") { |file| file.puts game_page.content.force_encoding('UTF-8') }
-        #break
-        #docfile = File.open("test1.html", "r")
-        #game_page = Nokogiri::HTML(docfile.read)
 
-        unless (game_info = game_page.search('//div[@class="game-info"]').first).nil?
-          agent.properties[:title] = agent.get_text_with_pattern(game_info, 'h1[@class="hdr1"]')
-          game_detail = game_info.search('//div[@class="detail"]').first
+        unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
+          agent.properties[:title] = agent.get_text_with_pattern(game_info, 'div[@id="gameTitle"]/a')
 
-          unless game_detail.nil?
-            unless (listing = game_detail.search('//div[@class="listings"]').first).nil?
-              agent.add_properites(listing.search('//div[@class="listing"]').first)
-            end
-
-            agent.replace_element(game_detail, ["div", "a"], "")
-            agent.properties[:description] = agent.remove_unuseful(game_detail.inner_html())
+          unless (release = game_page.search('//div[@id="coreGameRelease"]').first).nil?
+            agent.add_properites(release.search('div').first)
           end
+
+          unless (listing = game_page.search('//div[@id="coreGameGenre"]').first).nil?
+            agent.add_properites(listing.search('div/div').first)
+          end
+
+          game_description = game_page.search('//div[@class="rightPanelMain"]')
+          agent.replace_element(game_description, ["h2", "h3", "a", "ul", "table"], "")
+          agent.properties[:description] = agent.remove_unuseful(game_description.inner_html()).gsub(/<div class=\"sideBarLinks\">(.*)/, '')
         end
 
-        unless (game_nav = game_page.search('//div[@class="game-nav"]').first).nil?
+        unless (game_nav = game_page.search('//div[@id="coreGameCover"]').first).nil?
           img_url = agent.get_attr_with_pattern(game_nav, 'img', 'src')
           img_file = agent.get_remote_file(img_url)
         end
@@ -265,7 +272,7 @@ task game_products: :environment do
         agent.properties[:image] = img_file
         product = Product.create(agent.properties)
         img_file.close if img_file
-        total_count += 1        
+        total_count += 1
       end
     end
     
