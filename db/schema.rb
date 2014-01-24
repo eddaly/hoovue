@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "pending_token"
     t.integer  "credit_validations_count", :default => 0, :null => false
     t.integer  "credit_validation_count",  :default => 0, :null => false
+    t.string   "release"
+    t.string   "category"
   end
 
   create_table "emails", :force => true do |t|
@@ -212,6 +214,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "link_3"
     t.string   "link_3_desc"
     t.text     "facebook_friends"
+    t.integer  "developer_id"
   end
+
+  add_index "users", ["developer_id"], :name => "index_users_on_developer_id"
 
 end

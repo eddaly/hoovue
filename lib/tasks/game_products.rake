@@ -5,12 +5,13 @@ require 'yaml'
 require 'csv'
 
 class ScraperBase
-  attr_accessor :properties
+  attr_accessor :properties, :base_url
 
   # initialize method
   def initialize
     reset_mechanize_object
     # total number of requests
+    @base_url = "http://www.mobygames.com"
     @request_count = 0
     @properties = {}
   end
@@ -208,9 +209,9 @@ class ScraperBase
     end
   end
 
-  def get_product(base_url, appendix, indentifier)
+  def get_product(appendix, indentifier)
     @properties[:indentifier] = indentifier
-    @properties[:url] = base_url + appendix
+    @properties[:url] = @base_url + appendix
     game_page = send_request @properties[:url]
 
     unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
@@ -245,13 +246,50 @@ class ScraperBase
     product
   end
 
-  def get_credit(product)
+  def get_credit(product, appendix)
+    url = @base_url + appendix + '/credits'
+    credit_page = send_request url
+    return unless credit_page
 
+    if (credit_list = credit_page.search('//table[@summary="List of Credits"]').first).nil?
+      credit_page.search('//div[@class="rightPanelMain"]/ul/li').each do |r|
+        release = get_text_with_pattern(r, 'a')
+        new_credit_page = send_request (@base_url + get_attr_with_pattern(r, 'a', 'href'))
+        unless (new_credit_list = new_credit_page.search('//table[@summary="List of Credits"]').first).nil?
+          parse_credit(product, new_credit_list, release)
+        end
+      end
+    else
+      parse_credit(product, credit_list)
+    end
+  end
+
+  def parse_credit(product, credit_list, release=nil)
+    category = nil
+
+    credit_list.search('tr').each do |row|
+      if row.attr('class') == 'crln'
+        role = get_text_with_pattern(row, 'td').singularize
+        row.search('td/span').each do |dp|
+          name = get_text_with_pattern(dp, 'a')
+          unless name.nil?
+            developer_id = /developerId,(\d+)/.match(get_attr_with_pattern(dp, 'a', 'href'))[1] rescue nil
+            next if developer_id.nil?
+
+            user = User.find_or_create_by_developer_id(name: name, developer_id: developer_id)
+            credit = product.credits.where(role: role, release: release, category: category, user_id: user.id).first
+            product.credits.create(role: role, release: release, category: category, user_id: user.id) if credit.nil?
+          end
+        end
+      else
+        category = get_text_with_pattern(row, 'h2')
+        next
+      end
+    end
   end
 end
 
 task game_products: :environment do
-	base_url = "http://www.mobygames.com"
 	agent = ScraperBase.new()
   total_games = 1#42171
   count = 0
@@ -261,7 +299,7 @@ task game_products: :environment do
   agent.log_output "Starting..."
 
 	while count < total_games
-		list_page = agent.send_request "#{base_url}/browse/games/offset,#{count}/so,0a/list-games/"
+		list_page = agent.send_request "#{agent.base_url}/browse/games/offset,#{count}/so,0a/list-games/"
     #File.open("test.html", "w") { |file| file.puts list_page.content.force_encoding('UTF-8') }
     #break
     #docfile = File.open("test.html", "r")
@@ -279,11 +317,11 @@ task game_products: :environment do
       product = Product.find_by_indentifier(indentifier)
 
       if product.nil?
-        product = agent.get_product(base_url, appendix, indentifier)
+        product = agent.get_product(appendix, indentifier)
         total_count += 1
       end
 
-      agent.get_credit(product)
+      agent.get_credit(product, appendix)
     end
     
     count += 25
