@@ -2,9 +2,8 @@ OmniAuth.config.logger = Rails.logger
 
 Rails.application.config.middleware.use OmniAuth::Builder do 
   provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'],
-   	:scope => 'xmpp_login'
+:scope => 'xmpp_login'
 end
-
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :linkedin, "7xlvt2s361wr", "91EYzutUxFmDGvaQ"
 end

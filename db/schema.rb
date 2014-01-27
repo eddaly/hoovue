@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "promoted"
     t.integer  "name_check_user_id"
     t.string   "tag_list"
+    t.string   "release"
+    t.string   "category"
   end
 
   create_table "credits_platforms", :force => true do |t|
@@ -148,12 +150,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
 
   create_table "products", :force => true do |t|
     t.text     "title"
-    t.string   "genre"
+    t.text     "genre"
     t.integer  "user_id"
-    t.string   "image"
+    t.text     "image"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "properties"
     t.integer  "product_genre_id"
     t.string   "status"
@@ -161,27 +163,31 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.text     "url"
     t.string   "date"
     t.datetime "year"
-    t.string   "studio"
+    t.text     "studio"
     t.datetime "startdate"
     t.datetime "enddate"
-    t.integer  "credits_count",     :default => 0
+    t.integer  "credits_count"
     t.string   "video"
     t.string   "moderation_status"
     t.string   "image_2"
     t.string   "image_3"
     t.integer  "like_count"
     t.boolean  "flag"
-    t.string   "published_by"
-    t.string   "developed_by"
-    t.string   "released"
-    t.string   "perspective"
-    t.string   "non_sport"
-    t.string   "misc"
+    t.text     "published_by"
+    t.text     "developed_by"
+    t.text     "released"
+    t.text     "perspective"
+    t.text     "non_sport"
+    t.text     "misc"
     t.text     "platforms"
     t.text     "alternate_title"
-    t.string   "categories"
-    t.string   "groups"
+    t.text     "categories"
+    t.text     "groups"
+    t.string   "indentifier"
+    t.string   "esrb_rating"
   end
+
+  add_index "products", ["indentifier"], :name => "index_products_on_indentifier"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -236,6 +242,33 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string "name"
   end
 
+  create_table "test", :id => false, :force => true do |t|
+    t.text "id"
+    t.text "title"
+    t.text "genre"
+    t.text "user_id"
+    t.text "image"
+    t.text "description"
+    t.text "created_at"
+    t.text "updated_at"
+    t.text "properties"
+    t.text "product_genre_id"
+    t.text "status"
+    t.text "issue"
+    t.text "url"
+    t.text "date"
+    t.text "year"
+    t.text "studio"
+    t.text "startdate"
+    t.text "enddate"
+    t.text "credits_count"
+    t.text "video"
+    t.text "moderation_status"
+    t.text "image_2"
+    t.text "image_3"
+    t.text "like_count"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "password_digest"
@@ -265,6 +298,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.text     "facebook_friends"
     t.integer  "promoted_credit_id"
     t.boolean  "igda"
+    t.integer  "developer_id"
   end
+
+  add_index "users", ["developer_id"], :name => "index_users_on_developer_id"
 
 end

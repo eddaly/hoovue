@@ -15,3 +15,5 @@
 
 #Ignore uploads
 /tmp
+
+.DS_Store
