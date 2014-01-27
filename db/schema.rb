@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "groups"
     t.string   "indentifier"
     t.string   "esrb_rating"
+    t.string   "sport"
   end
 
   add_index "products", ["indentifier"], :name => "index_products_on_indentifier"

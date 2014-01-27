@@ -278,7 +278,9 @@ class ScraperBase
 
             user = User.find_or_create_by_developer_id(name: name, developer_id: developer_id)
             credit = product.credits.where(role: role, release: release, category: category, user_id: user.id).first
-            product.credits.create(role: role, release: release, category: category, user_id: user.id) if credit.nil?
+            if credit.nil? 
+              cr = product.credits.create(role: role, release: release, category: category, user_id: user.id)
+            end
           end
         end
       else
@@ -290,42 +292,92 @@ class ScraperBase
 end
 
 task game_products: :environment do
-	agent = ScraperBase.new()
   total_games = 1#42171
   count = 0
   page_num = 0
-  total_count = 0
-  
-  agent.log_output "Starting..."
+  completed = false
 
-	while count < total_games
-		list_page = agent.send_request "#{agent.base_url}/browse/games/offset,#{count}/so,0a/list-games/"
+  puts "Starting..."
+
+  links = []
+  mutex = Mutex.new
+  cv = ConditionVariable.new
+
+  Credit.skip_callback(:create, :after, :belongs_to_counter_cache_after_create_for_product)
+  Credit.skip_callback(:create, :after, :belongs_to_counter_cache_after_create_for_user)
+
+  threads = []
+  5.times do |i|
+    threads << Thread.new do
+      agent = ScraperBase.new()
+
+      while (true)
+        target_link = nil
+
+        mutex.synchronize {
+          target_link = links.shift
+          cv.signal
+        }
+
+        break if completed && target_link.blank?
+        if target_link.blank?
+          sleep 1
+          next
+        end
+
+        indentifier = target_link.gsub(/\/game\//, '')
+        product = Product.find_by_indentifier(indentifier)
+
+        if product.nil?
+          product = agent.get_product(target_link, indentifier) rescue nil
+        end
+
+        agent.get_credit(product, target_link) if product
+      end
+    end
+  end
+
+  agent = ScraperBase.new()
+
+  while count < total_games
     #File.open("test.html", "w") { |file| file.puts list_page.content.force_encoding('UTF-8') }
     #break
     #docfile = File.open("test.html", "r")
     #list_page = Nokogiri::HTML(docfile.read)
 
+    list_page = agent.send_request "#{agent.base_url}/browse/games/offset,#{count}/so,0a/list-games/"
     page_num += 1
     agent.log_output "current page = #{page_num}"
 
     list_table = list_page.search('//table[@id="mof_object_list"]').first
     next if list_table.blank?
 
-		list_table.search('//tbody/tr[@valign="top"]').each do |item|
+    list_table.search('//tbody/tr[@valign="top"]').each do |item|
       appendix = agent.get_attr_with_pattern(item.search('td').first, 'a', 'href')
-      indentifier = appendix.gsub(/\/game\//, '')
-      product = Product.find_by_indentifier(indentifier)
+      mutex.synchronize { 
+        while links.count > 10
+          cv.wait(mutex)
+        end
 
-      if product.nil?
-        product = agent.get_product(appendix, indentifier)
-        total_count += 1
-      end
-
-      agent.get_credit(product, appendix)
+        links << appendix 
+      }
     end
     
     count += 25
   end
 
-  agent.log_output "\nJob was finished successfully. Total game counts = #{total_count}"
+  completed = true
+  threads.each {|thread| thread.join}
+
+  User.find_each do |user|
+    user.credits_count = user.credits.count
+    user.save!(validate: false)
+  end
+
+  Product.find_each do |product|
+    product.credits_count = product.credits.count
+    product.save!(validate: false)
+  end
+
+  agent.log_output "\nJob was finished successfully."
 end	
