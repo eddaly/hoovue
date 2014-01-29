@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'json'
 require 'yaml'
 require 'csv'
+require 'thread'
 
 class ScraperBase
   attr_accessor :properties, :base_url
@@ -213,6 +214,7 @@ class ScraperBase
     @properties[:indentifier] = indentifier
     @properties[:url] = @base_url + appendix
     game_page = send_request @properties[:url]
+    product_genre = nil
 
     unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
       @properties[:title] = get_text_with_pattern(game_info, 'div[@id="gameTitle"]/a')
@@ -236,6 +238,7 @@ class ScraperBase
     end
 
     product_genre = ProductGenre.find_or_create_by_name(@properties[:genre])
+
     @properties[:product_genre_id] = product_genre.id
     @properties[:genre] = 'Game'
     @properties[:date] = @properties[:released]
@@ -249,50 +252,56 @@ class ScraperBase
   def get_credit(product, appendix)
     url = @base_url + appendix + '/credits'
     credit_page = send_request url
-    return unless credit_page
 
-    if (credit_list = credit_page.search('//table[@summary="List of Credits"]').first).nil?
-      credit_page.search('//div[@class="rightPanelMain"]/ul/li').each do |r|
+    unless (release_items = credit_page.search('//div[@class="rightPanelMain"]/ul/li')).empty?
+      release_items.each do |r|
         release = get_text_with_pattern(r, 'a')
         new_credit_page = send_request (@base_url + get_attr_with_pattern(r, 'a', 'href'))
-        unless (new_credit_list = new_credit_page.search('//table[@summary="List of Credits"]').first).nil?
-          parse_credit(product, new_credit_list, release)
-        end
+        parse_credit(product, new_credit_page, release)
       end
     else
-      parse_credit(product, credit_list)
+      parse_credit(product, credit_page)
     end
   end
 
-  def parse_credit(product, credit_list, release=nil)
-    category = nil
+  def parse_credit(product, credit_page, release=nil)
+    unless (credit_list = credit_page.search('//table[@summary="List of Credits"]').first rescue nil).nil?
+      category = nil
+      user = nil
 
-    credit_list.search('tr').each do |row|
-      if row.attr('class') == 'crln'
-        role = get_text_with_pattern(row, 'td').singularize
-        row.search('td/span').each do |dp|
-          name = get_text_with_pattern(dp, 'a')
-          unless name.nil?
+      credit_list.search('tr').each do |row|
+        if row.attr('class') == 'crln'
+          role = get_text_with_pattern(row, 'td').singularize
+          next if role.blank?
+
+          row.search('td/span').each do |dp|
+            name = get_text_with_pattern(dp, 'a')
+            next if name.nil?
+
             developer_id = /developerId,(\d+)/.match(get_attr_with_pattern(dp, 'a', 'href'))[1] rescue nil
             next if developer_id.nil?
 
-            user = User.find_or_create_by_developer_id(name: name, developer_id: developer_id)
+            user = User.find_or_create_by_developer_id(developer_id: developer_id, name: name)
+            next if user.nil?
+
             credit = product.credits.where(role: role, release: release, category: category, user_id: user.id).first
             if credit.nil? 
-              cr = product.credits.create(role: role, release: release, category: category, user_id: user.id)
+              credit = product.credits.create(role: role, release: release, category: category, user_id: user.id)
             end
-          end
+          end            
+        else
+          category = get_text_with_pattern(row, 'h2')
+          next
         end
-      else
-        category = get_text_with_pattern(row, 'h2')
-        next
       end
     end
+
+    true
   end
 end
 
-task game_products: :environment do
-  total_games = 1#42171
+task :game_products => :environment do
+  total_games = 60#42171
   count = 0
   page_num = 0
   completed = false
@@ -303,20 +312,17 @@ task game_products: :environment do
   mutex = Mutex.new
   cv = ConditionVariable.new
 
-  Credit.skip_callback(:create, :after, :belongs_to_counter_cache_after_create_for_product)
-  Credit.skip_callback(:create, :after, :belongs_to_counter_cache_after_create_for_user)
-
   threads = []
   5.times do |i|
     threads << Thread.new do
       agent = ScraperBase.new()
+      Product
 
       while (true)
         target_link = nil
 
         mutex.synchronize {
           target_link = links.shift
-          cv.signal
         }
 
         break if completed && target_link.blank?
@@ -325,26 +331,25 @@ task game_products: :environment do
           next
         end
 
+        cv.signal
+
         indentifier = target_link.gsub(/\/game\//, '')
         product = Product.find_by_indentifier(indentifier)
 
         if product.nil?
-          product = agent.get_product(target_link, indentifier) rescue nil
+          product = agent.get_product(target_link, indentifier)
         end
 
         agent.get_credit(product, target_link) if product
       end
+
+      true
     end
   end
 
   agent = ScraperBase.new()
 
   while count < total_games
-    #File.open("test.html", "w") { |file| file.puts list_page.content.force_encoding('UTF-8') }
-    #break
-    #docfile = File.open("test.html", "r")
-    #list_page = Nokogiri::HTML(docfile.read)
-
     list_page = agent.send_request "#{agent.base_url}/browse/games/offset,#{count}/so,0a/list-games/"
     page_num += 1
     agent.log_output "current page = #{page_num}"
@@ -355,7 +360,7 @@ task game_products: :environment do
     list_table.search('//tbody/tr[@valign="top"]').each do |item|
       appendix = agent.get_attr_with_pattern(item.search('td').first, 'a', 'href')
       mutex.synchronize { 
-        while links.count > 10
+        while links.count > 25
           cv.wait(mutex)
         end
 
@@ -368,16 +373,6 @@ task game_products: :environment do
 
   completed = true
   threads.each {|thread| thread.join}
-
-  User.find_each do |user|
-    user.credits_count = user.credits.count
-    user.save!(validate: false)
-  end
-
-  Product.find_each do |product|
-    product.credits_count = product.credits.count
-    product.save!(validate: false)
-  end
 
   agent.log_output "\nJob was finished successfully."
 end	

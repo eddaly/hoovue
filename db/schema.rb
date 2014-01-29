@@ -72,12 +72,12 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "sender_id",     :limit => 255
+    t.integer  "sender_id"
     t.string   "subject"
     t.string   "body"
     t.string   "recipient_uid"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "posts", :force => true do |t|
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "indentifier"
     t.string   "esrb_rating"
     t.string   "sport"
+    t.string   "educational"
   end
 
   add_index "products", ["indentifier"], :name => "index_products_on_indentifier"
@@ -156,7 +157,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer  "item"
     t.string   "table"
     t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 5
+    t.integer  "year",       :limit => 8
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
   end
