@@ -110,12 +110,15 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "recipient_uid"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+<<<<<<< HEAD
   end
 
   create_table "platforms", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+=======
+>>>>>>> 6dacfffdada488220ade3d450fd4bb657c8384d0
   end
 
   create_table "posts", :force => true do |t|
@@ -186,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "indentifier"
     t.string   "esrb_rating"
     t.string   "sport"
+    t.string   "educational"
   end
 
   add_index "products", ["indentifier"], :name => "index_products_on_indentifier"
@@ -195,10 +199,17 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "username"
     t.integer  "item"
     t.string   "table"
+<<<<<<< HEAD
     t.integer  "month"
     t.integer  "year"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+=======
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+>>>>>>> 6dacfffdada488220ade3d450fd4bb657c8384d0
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"

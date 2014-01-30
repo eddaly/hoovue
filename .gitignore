@@ -15,5 +15,5 @@
 
 #Ignore uploads
 /tmp
-
+/public/uploads
 .DS_Store

@@ -1,6 +1,5 @@
 class Product < ActiveRecord::Base
-
-  attr_accessible :description, :genre, :video, :moderation_status, :startdate, :enddate, :credits_count, :image, :image_2, :image_3, :studio, :title, :year, :status, :user_id, :credits_attributes, :properties, :product_genre_id, :role, :role_description, :fact, :issue, :url, :remove_image, :image_cache, :date, :published_by, :developed_by, :released, :perspective, :non_sport, :misc, :platforms, :alternate_title, :categories, :groups, :indentifier, :esrb_rating
+  attr_accessible :description, :genre, :video, :moderation_status, :startdate, :enddate, :credits_count, :image, :image_2, :image_3, :studio, :title, :year, :status, :user_id, :credits_attributes, :properties, :product_genre_id, :role, :role_description, :fact, :issue, :url, :remove_image, :image_cache, :date, :published_by, :developed_by, :released, :perspective, :non_sport, :misc, :platforms, :alternate_title, :categories, :groups, :indentifier, :esrb_rating, :sport, :educational
     attr_accessor :role, :role_description, :fact, :issue
   belongs_to :user
     has_many :credits, :dependent => :destroy
@@ -10,8 +9,6 @@ class Product < ActiveRecord::Base
            mount_uploader :image, ImageUploader
              mount_uploader :image_2, ImageUploader
                mount_uploader :image_3, ImageUploader
-               make_flaggable :like, :complete
-               
          
              validates :title, :presence => true
   
