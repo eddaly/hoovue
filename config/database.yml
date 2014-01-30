@@ -1,35 +1,16 @@
 development:
-<<<<<<< HEAD
   adapter: postgresql
   encoding: unicode
   database: wa_development
-  pool: 5
+  pool: 20
   username: Nick
   password: 
-=======
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 200
-  timeout: 5000
->>>>>>> cf02ce38a21fb53bb0fdcb0523b1e1f1eafd92b5
 
 test:
-<<<<<<< HEAD
+
   adapter: postgresql
   encoding: unicode
   database: wa_test
   pool: 5
   username: Nick
   password: å
-=======
-  adapter: sqlite3
-  database: db/test.sqlite3
-  pool: 200
-  timeout: 5000
-
-production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 200
-  timeout: 5000
->>>>>>> cf02ce38a21fb53bb0fdcb0523b1e1f1eafd92b5
