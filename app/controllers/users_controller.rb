@@ -24,6 +24,7 @@ end
 
 def show
   @user = User.find(params[:id])
+  @credits = Credit.where(:developer_id == @current_user.developer_id)
   @user_page = User.find(params[:id])
     @credits = @user.credits.order("promoted DESC, updated_at DESC")
       @posts = @user.posts.all

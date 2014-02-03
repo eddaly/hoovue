@@ -110,7 +110,6 @@
 		</div>
 		<div class="actions">
 		
-		<%= toggle_like_button(@product, current_user) %>
 		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
 		
 		
@@ -270,7 +269,9 @@
 		<% else %>
 	<div class="credit-item">
 		<% if c.user %>
+		<% if c.user.profile_picture %>
 	<%= image_tag c.user.profile_picture, :width => "50" %>	 
+		<% end %>	
 	<div class="user-name">
 	<%= link_to c.user.name, user_path(c.user) %>
 	</div>
@@ -285,9 +286,7 @@
 			
 		
 			
-			<%= c.role %> -  <% c.platforms.each do |platform| %>
-		     <%= platform.name %>
-		     <% end %>
+			<%= c.role %> -  
 			 
 			 <% if current_user %>
 							<% if c.user.id == current_user.id  %>
@@ -826,7 +825,6 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </h3><p class="fact"><%= c.fact %></p>
 
-<p>Members Tagged: <%= raw c.tag_list.map { |t| link_to t, search_credits_url(:search => t) }.join(', ') %>
 
 <% if c.product.status == "In Development" or c.product.status == "Ongoing"  %>	
 
@@ -896,122 +894,8 @@
 		</div>	
 		<% end %>
 	<% end %>
-	<% if current_user %>
-	<h3>Anyone missing? Invite team members.
-		<a href="https://www.facebook.com/dialog/send?app_id=<%= ENV['FACEBOOK_APP_ID']%>&?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %>&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&redirect_uri=http://<%= ENV['DEFAULT_URL']%>/users/<%= current_user.id %>", class="actions" target="blank"> Invite them on Facebook!</a></h3><% end %>
-</div>
-
-
-
-	</div>
-	<div class="grid_3 activity-feed">
-		<% if current_user %>
-		
-		<h3>Is this team complete?</h3>
 	
-		<% @credits.each do |c| %>
-		<%= image_tag c.user.profile_picture %>
-		<% end %>
-		<% if @user_credit.count > 0 %>
-		<%= toggle_complete_button(@product, current_user) %>
-		<a href="https://www.facebook.com/dialog/send?app_id=<%= ENV['FACEBOOK_APP_ID']%>&?name= Whoactually.com - <%= current_user.name%> has invited you to add your credit on <%= @product.title %>&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>&redirect_uri=http://<%= ENV['DEFAULT_URL']%>/users/<%= current_user.id %>", class="actions" target="blank"> No, invite team members</a>
-		<% end %>
-		
-		
-		
-		<% if @credits %>
-		<h3>Team members also worked on</h3>
-		<% @credits.each do |c| %>
-		<% @user_recco = User.find_by_id(c.user_id) %>
-		<% @recco_prod = Product.find_by_id(@user_recco.credits.first) %>
-		<% if @recco_prod %>
-		<div class="following-item" style=:height:50px;>
-
-			<div class="profile-picture">
-				
-				<%= image_tag '/assets/default-thumb.png' %>
-			
-			</div>
 	
-			<div class="name">
-			<%= link_to product_path(@recco_prod.id) do %><%= truncate(@recco_prod.title, :length => 25) %><% end %>
-			</div>
-			<div class="stats">
-			<p>Credits</p> <div class="data">
-			 <%= @recco_prod.credits.count %>
-			</div>
-			</div>	<br />
-			<div class="product-title">
-		<%= link_to product_path(@recco_prod.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:10px;">Add a credit +</div><% end %>
-		</div>
-		</div>
-		<% end %>
-		<% end %>
-		<% end %>
-		
-			<h3>Did you work on?</h3>
-			<% @recommended.each do |o| %>
-		<div class="following-item" style=:height:50px;>
-
-			<div class="profile-picture">
-				<% if o.image %>
-				<%= image_tag o.image %>
-				<% else %>
-				<%= image_tag '/assets/default-thumb.png' %>
-				<% end %>
-			</div>
-	
-			<div class="name">
-			<%= link_to product_path(o.id) do %><%= truncate(o.title, :length => 25) %><% end %>
-			</div>
-			<div class="stats">
-			<p>Credits</p> <div class="data">
-			 <%= o.credits.count %>
-			</div>
-			</div>	<br />
-			<div class="product-title">
-		<%= link_to product_path(o.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:10px;">Add a credit +</div><% end %>
-		</div>
-		</div>
-		<% end %>
-		
-			<h3>Followed Users' Updates</h3>
-	
-		<% for friendship in current_user.friendships%>
-		<% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
-		<% @friend_credits.each do |fc| %>
-		<div class="following-item">
-
-			<div class="profile-picture">
-				<%= image_tag friendship.friend.profile_picture %>
-			</div>
-	
-			<div class="name">
-			<%= link_to user_path(friendship.friend.id) do %><%= friendship.friend.name %><% end %>
-			</div>
-			<div class="stats">
-			<p>Credits</p> <div class="data">
-			 <%= friendship.friend.credits.count %>
-			</div>
-			</div>	
-		<div class="role">
-				<%= truncate(fc.role, :length => 30) %>
-			</div>
-			<div class="product-title">
-		<a href="/products/<%= fc.product.id %>"><%= truncate(fc.product.title, :length => 30) %></a>
-			</div>
-		</div>
-		<% end %>
-		<% end %>
-
-
-
-
-		  <% for user in current_user.inverse_friends %>
-		<%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
-		  <% end %>
-
-		<% end %>
 
 		
 		</div>

@@ -1,0 +1,7 @@
+<%= form_tag claim_credits_path, method: :put do %>
+<% @user.credits.each do |credit| %>
+<%= credit.role %> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
+ 
+<% end %>
+<%= submit_tag "Claim" %>
+<% end %>

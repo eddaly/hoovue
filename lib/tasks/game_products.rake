@@ -301,8 +301,8 @@ class ScraperBase
 end
 
 task :game_products => :environment do
-  total_games = 60#42171
-  count = 0
+  total_games = 10000#42171
+  count = 2500
   page_num = 0
   completed = false
 

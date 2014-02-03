@@ -160,6 +160,7 @@ end
    
     respond_to do |format|
       if @credit.update_attributes(params[:credit])
+        
         format.html { redirect_to user_path(current_user), notice: 'Your Credit has been updated' }
         format.json { head :no_content }
       else
@@ -179,5 +180,11 @@ end
       format.html { redirect_to :back, notice: 'Credit deleted' }
       format.json { head :no_content }
     end
+  end
+  
+  
+  def claim
+     Credit.update_all({user_id: @current_user.id}, {id: params[:credit_ids]})
+    redirect_to root_url
   end
 end

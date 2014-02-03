@@ -3,6 +3,9 @@ Hoo::Application.routes.draw do
 
 
 
+  get "connection/index"
+  
+
   resources :platforms
 
 
@@ -51,10 +54,12 @@ Hoo::Application.routes.draw do
      match 'search'
      match 'search_new'
      match 'batch'
+     put :claim
    end
    member do
      put :increase
      put :flag
+     put :claim
    end
 end
 

@@ -233,9 +233,8 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %>- <% c.platforms.each do |platform| %>
-		     <%= platform.name %>
-		     <% end %><% if current_user %>
+		<p class="role"><%= c.role %> 
+			<% if current_user %>
 							<% if c.user.id == current_user.id  %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %> <% end %></p>
