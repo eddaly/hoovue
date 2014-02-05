@@ -14,5 +14,12 @@ test:
   database: wa_test
   pool: 5
   username: Nick
-  password: å
+  password: 
 
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: wa_test
+  pool: 5
+  username: Nick
+  password: 

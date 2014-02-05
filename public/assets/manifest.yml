@@ -90,10 +90,10 @@ validate-by-email-button.png: validate-by-email-button-1c01934363de089b45334112a
 validate-by-email-button/index.png: validate-by-email-button-1c01934363de089b45334112a73a38c0.png
 validate-by-facebook-button.png: validate-by-facebook-button-8d6b3232b419631457d5ad478ef927a8.png
 validate-by-facebook-button/index.png: validate-by-facebook-button-8d6b3232b419631457d5ad478ef927a8.png
-application.js: application-10d8a7e587d1476915a53ef35b4f2720.js
-application/index.js: application-10d8a7e587d1476915a53ef35b4f2720.js
-application.css: application-36e8ed71f4594cf495f74e033118ed0b.css
-application/index.css: application-36e8ed71f4594cf495f74e033118ed0b.css
+application.js: application-76fc7ad29b121192cecf1afdbacc9405.js
+application/index.js: application-76fc7ad29b121192cecf1afdbacc9405.js
+application.css: application-3dcf8972be2a11a24482552b200f53a5.css
+application/index.css: application-3dcf8972be2a11a24482552b200f53a5.css
 select2.png: select2-27d8d5d3daa0266fdae951cfa4cb5a8e.png
 select2/index.png: select2-27d8d5d3daa0266fdae951cfa4cb5a8e.png
 select2x2.png: select2x2-e0f581b2df6f18fcf870f8b6f516fcec.png
