@@ -185,6 +185,6 @@ end
   
   def claim
      Credit.update_all({user_id: @current_user.id}, {id: params[:credit_ids]})
-    redirect_to root_url
+    redirect_to :back
   end
 end

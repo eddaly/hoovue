@@ -1,7 +1,22 @@
-<%= form_tag claim_credits_path, method: :put do %>
-<% @user.credits.each do |credit| %>
-<%= credit.role %> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
- 
+<div class="container_12 pages">
+	<h1>Claim existing credits</h1>
+	<p>We have found these credits in your name. Do any belong to you?</p>
+
+<% @users.each do |u| %>
+	<%= form_tag claim_credits_path, method: :put do %>
+	<div class="activity-feed">
+		<ul>
+		<% u.credits.each do |credit| %>
+		<li class="<%= cycle('even', 'odd') -%>">
+		<%= image_tag credit.product.image.thumb.to_s || "assets/default-small.png" %><strong><%= credit.role %></strong> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
+		</li>
+		<% end %>
+		</ul>
+	</div>
+		<% if u.credits.count > 0 %>
+<span style="margin-left:25px">	<%= submit_tag "Claim Credits", :class => 'submit' %> </span>
+		<% end %>
+	<% end %>
 <% end %>
-<%= submit_tag "Claim" %>
-<% end %>
+
+</div>
