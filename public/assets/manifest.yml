@@ -44,8 +44,8 @@ default-credit-small.jpg: default-credit-small-1db9b0e2f409ce31a85fbc8a1f734ab6.
 default-credit-small/index.jpg: default-credit-small-1db9b0e2f409ce31a85fbc8a1f734ab6.jpg
 default-small.png: default-small-d360f67351257772d18020b93021e35b.png
 default-small/index.png: default-small-d360f67351257772d18020b93021e35b.png
-default-thumb.png: default-thumb-98efc805c641f92ac16559ee6975efb5.png
-default-thumb/index.png: default-thumb-98efc805c641f92ac16559ee6975efb5.png
+default-thumb.png: default-thumb-59faa4506c5a97d1c18158ba4b432a48.png
+default-thumb/index.png: default-thumb-59faa4506c5a97d1c18158ba4b432a48.png
 deleted.png: deleted-1129fc736bda815a0d2904cf199879a8.png
 deleted/index.png: deleted-1129fc736bda815a0d2904cf199879a8.png
 empty.png: empty-430b55ab9aaf856fce55cf9f58ecb030.png
