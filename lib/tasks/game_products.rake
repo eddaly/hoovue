@@ -217,7 +217,7 @@ class ScraperBase
     product_genre = nil
 
     unless (game_info = game_page.search('//div[@class="rightPanelHeader"]').first).nil?
-      @properties[:title] = get_text_with_pattern(game_info, 'div[@id="gameTitle"]/a')
+      @properties[:title] = get_text_with_pattern(game_info, 'h1[@class="gameTitle"]/a')
 
       unless (release = game_page.search('//div[@id="coreGameRelease"]').first).nil?
         add_properites(release.search('div').first)
@@ -228,7 +228,7 @@ class ScraperBase
       end
 
       game_description = game_page.search('//div[@class="rightPanelMain"]')
-      replace_element(game_description, ["h2", "h3", "a", "ul", "table"], "")
+      replace_element(game_description, ["div", "h2", "h3", "a", "ul", "table"], "")
       @properties[:description] = remove_unuseful(game_description.inner_html()).gsub(/<div class=\"sideBarLinks\">(.*)/, '')
     end
 
@@ -245,6 +245,7 @@ class ScraperBase
     @properties[:year] = parseDate(@properties[:released])
     @properties[:image] = img_file
     product = Product.create(@properties)
+
     img_file.close if img_file
     product
   end
@@ -300,10 +301,14 @@ class ScraperBase
   end
 end
 
-task :game_products => :environment do
-  total_games = 60#42171
-  count = 0
-  page_num = 0
+task :game_products, [:from] => :environment do |t, args|
+  args.with_defaults(:from => 0)
+
+  total_games = 42528
+  count = args.from.to_i - 5
+  count = 0 if count < 0
+  count = count - count % 25
+  page_num = count / 25
   completed = false
 
   puts "Starting..."
@@ -367,7 +372,7 @@ task :game_products => :environment do
         links << appendix 
       }
     end
-    
+
     count += 25
   end
 
