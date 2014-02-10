@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: wa_development
+  database: wa_test2
   pool: 20
   username: Nick
   password: 
@@ -11,7 +11,7 @@ test:
 
   adapter: postgresql
   encoding: unicode
-  database: wa_test
+  database: wa_test2
   pool: 5
   username: Nick
   password: 
@@ -19,7 +19,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: wa_test
+  database: wa_test2
   pool: 5
   username: Nick
   password: 
