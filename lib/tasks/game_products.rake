@@ -302,7 +302,7 @@ end
 
 task :game_products => :environment do
   total_games = 42171
-  count = 2040
+  count = 2050
   page_num = 75
   completed = false
 
