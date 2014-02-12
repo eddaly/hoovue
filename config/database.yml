@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: wa_test2
+  database: wa_development
   pool: 200
   username: Nick
   password: 
