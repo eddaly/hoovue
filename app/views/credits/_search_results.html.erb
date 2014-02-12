@@ -31,8 +31,12 @@
 	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	
 		
 		<% else %>
-		
+		<% if u.profile_picture %>
 		<%= image_tag u.profile_picture, :width => "50", :height => "50" %>
+		<% else %>
+		<%= image_tag 'default-thumb.png' %>
+		<% end %>
+		
 		
 		<% end %>
 <%= link_to u.name, user_path(u) %>
