@@ -388,7 +388,7 @@
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 		
 								<% end %>
 							<% end %> 

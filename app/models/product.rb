@@ -11,6 +11,10 @@ class Product < ActiveRecord::Base
                mount_uploader :image_3, ImageUploader
          
              validates :title, :presence => true
+             
+def to_param
+  "#{id} #{title}".parameterize
+end
   
 def self.import(file)
   CSV.foreach(file.path, headers: true) do |row|
