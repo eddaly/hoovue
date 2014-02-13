@@ -28,18 +28,17 @@ def show
   @credits = Credit.where(:developer_id == @current_user.developer_id)
 end
   @user_page = User.find(params[:id])
-    @credits = @user.credits.order("promoted DESC, updated_at DESC")
+    @credits = @user.credits.order("promoted DESC, updated_at DESC").includes(:credit_validations)
       @posts = @user.posts.all
-        @credit_validations = CreditValidation.where(:user_id => @user.id)
           @credit_validation = CreditValidation.new
             @credit = Credit.new
             @post = Post.new
             @followers = Friendship.where(:friend_id => @user.id)
-             @verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
-             @one_verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
-             @two_verified_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
+             @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
+             @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
+             @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
              @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
-             @pending_credits = @user.credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
+             @pending_credits = @credits.where("credit_validations.status = 'pending'")
             
 end
 

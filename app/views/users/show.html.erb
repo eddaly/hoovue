@@ -23,7 +23,7 @@
 	
 	<div class="grid_3 stats">
 		<div class="stats">
-			<p class="credit-count"><%= @user.credits.count %></p>
+			<p class="credit-count"><%= @credits.size %></p>
 			<p class="credits">Credits</p>
 				<div class="verified-count">
 					<p class="verified-credits">
@@ -33,12 +33,12 @@
 				</div>
 					<div class="images">
 						<p class="verified-credits">
-							<%= @part_verified_credits %>
+							<%= @part_verified_credits.size %>
 						</p>
 						<p class="part">Part</p>
 					</div>
 						<div class="videos">
-							<p class="verified-credits"><%= @pending_credits.count %></p>
+							<p class="verified-credits"><%= @pending_credits.size %></p>
 							<p class="pending">Pending</p>
 						</div>
 		</div>
@@ -46,12 +46,7 @@
 	
 	<div class="grid_2 analytics">
 		<div class="followers">
-			<div class="data">
-				<%= @followers.count %>
-			</div>
-			<div class="title">
-				Followers
-			</div>	
+			
 			</div>
 			
 			<div class="likes">
@@ -87,7 +82,7 @@
 			 <% if current_user.id == @user.id %>
 			 		<% else %>
 	
-		<%= link_to 'Follow +', friendships_path(:friend_id => @user.id), :method => :post, :class => "blue-btn" %><br /><br />
+		
 
 		<% if @user.twitter.blank? %>
 		
@@ -152,35 +147,7 @@ $(document).ready(function(){
 
 </script>
 
-<ul class="following-navi">
-	<li><a href"#" class="show_hide_followers">Followers</a></li>
-	<li><a href"#" class="show_hide_following">Following</a></li>
-</ul>	
 
-<div class="slidingDiv_followers">
-	<ul>
-	    <% for user in @user.inverse_friends %>
-	<li><%= link_to user_path(user.id) do %>
-		<%= image_tag user.profile_picture %>
-		<%=h user.name %><% end %></li>
-	    <% end %>
-
-	</ul>
-</div>
-
-<div class="slidingDiv_following">
-	<ul>
-<% for friendship in @user.friendships%>
-<% user = User.find_by_id(friendship.friend_id) %>
-<li>
-	<%= link_to user_path(user.id) do %>
-	
-<%= image_tag user.profile_picture %>
-	
-	<%= user.name %><% end %></li>
-<% end %>
-	</ul>
-</div>
 
 
 
@@ -224,10 +191,9 @@ $(document).ready(function(){
 	<%= link_to c.product.title, product_path(c.product) %>
 	</div>
 	
-	<% @product_credit_count = c.product.credits.where("user_id > ?", 0) %>
 	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= @product_credit_count.size %></p>
+		<p class="title">Credits</p><p class="data"><%= c.product.credits.size %></p>
 		<p class="title">Followers</p><p class="data">0</p>
 		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
 	</div>
@@ -353,7 +319,7 @@ $(document).ready(function(){
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
+							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 		
 								<% end %>
 							<% end %> 
@@ -434,7 +400,7 @@ $(document).ready(function(){
 								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 								<%= f.hidden_field :status, :value => "confirmed" %>
 					
-								<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
+								<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 		
 								<% end %>
 							<% end %> 
@@ -512,7 +478,7 @@ $(document).ready(function(){
 							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
 							<%= f.hidden_field :status, :value => "confirmed" %>
 				
-							<% if @user_credit.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
+							<%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %>
 	
 							<% end %>
 						<% end %> 
@@ -858,48 +824,7 @@ $(document).ready(function(){
 
 
 
-<div class="grid_3 activity-feed">
-<% if current_user %>
-	<h3>Followed Users' Updates</h3>
-	
-<% for friendship in current_user.friendships%>
-<% @friend_credits = Credit.where(:user_id => friendship.friend.id).limit(4) %>
-<% @friend_credits.each do |fc| %>
-<div class="following-item">
 
-	<div class="profile-picture">
-		<%= image_tag friendship.friend.profile_picture %>
-	</div>
-	
-	<div class="name">
-	<%= link_to user_path(friendship.friend.id) do %><%= friendship.friend.name %><% end %>
-	</div>
-	<div class="stats">
-	<p>Credits</p> <div class="data">
-	 <%= friendship.friend.credits.count %>
-	</div>
-	</div>	
-<div class="role">
-		<%= fc.role %>
-	</div>
-	<div class="product-title">
-<a href="/products/<%= fc.product.id %>"><%= fc.product.title %></a>
-	</div>
-</div>
-<% end %>
-<% end %>
-
-
-
-
-  <% for user in current_user.inverse_friends %>
-<%= link_to user_path(user.id) do %><%=h user.name %><% end %><br />
-  <% end %>
-
-<% end %>
-
-		
-</div>
 
 </div>
 
