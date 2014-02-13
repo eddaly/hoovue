@@ -191,16 +191,17 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   add_index "products", ["indentifier"], :name => "index_products_on_indentifier"
+  add_index "products", ["title"], :name => "index_products_on_title"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
     t.string   "username"
     t.integer  "item"
     t.string   "table"
-    t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 8
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.integer  "month"
+    t.integer  "year"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
@@ -227,6 +228,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -305,5 +308,6 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
   end
 
   add_index "users", ["developer_id"], :name => "index_users_on_developer_id"
+  add_index "users", ["name"], :name => "index_users_on_name"
 
 end

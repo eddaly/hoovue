@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 <%= form_tag search_credits_path, :method => 'get' do %>
 
-  <%= text_field_tag :search, params[:search], data: {autocomplete_source: Product.order(:title).map(&:title)}, :placeholder => "Enter a work name to search" %><br />
+  <%= text_field_tag :search, params[:search], :placeholder => "Enter a work name to search" %><br />
      <%= submit_tag "SEARCH", :name => nil, :class => "search-button" %>
   <%end%>
  
@@ -46,7 +46,6 @@ $(document).ready(function(){
  	<%= f.text_field :role, :placeholder => "Your role (e.g. job title)", :class => "role" %> 
  
 
-	<%= f.select(:product_id, Product.all.collect {|a| [a.title, a.id]}, :class => "select-basic") -%>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>
 	
