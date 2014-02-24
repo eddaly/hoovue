@@ -54,6 +54,8 @@ gem 'mechanize'
 gem 'acts-as-taggable-on'
 gem  'activerecord-postgresql-adapter'
 gem 'pg'
+gem 'sql-logging', :git => 'git://github.com/lightyear/sql-logging'
+
 
 
 # To use ActiveModel has_secure_password

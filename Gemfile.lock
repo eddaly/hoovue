@@ -5,6 +5,13 @@ GIT
     make_flaggable (0.1.1)
       activerecord (>= 3.0.0)
 
+GIT
+  remote: git://github.com/lightyear/sql-logging
+  revision: 8d398e85561b1cb2be64c04e1c0aed20d1354593
+  specs:
+    sql-logging (3.0.8)
+      rails (> 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -300,6 +307,7 @@ DEPENDENCIES
   rails_admin (= 0.4.9)
   sass-rails (~> 3.2.3)
   select2-rails (~> 3.2.1)
+  sql-logging!
   sqlite3
   thin
   uglifier (>= 1.0.3)
