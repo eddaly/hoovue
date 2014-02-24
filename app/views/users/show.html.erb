@@ -155,7 +155,7 @@ $(document).ready(function(){
 	
 	<h2>Credits</h2>
 	
-	<% if @user.credits.size == 0 %>
+	<% if @user.credits.count == 0 %>
 	<% if current_user %>
 	
 		 <% if current_user.id == @user.id %>
@@ -170,6 +170,9 @@ $(document).ready(function(){
 	
 	<% @credits.each do |c| %>
 	
+	<% if current_user %>
+	<% @user_credit = current_user.credits.where(:product_id => c.product.id) %>
+	<% end %>
 	<div class="credit-item"
 	<% if c.product.status == "Ongoing" %>
 	style="border:1px solid green;"
@@ -328,7 +331,7 @@ $(document).ready(function(){
 	
 		
 	
-							<% if c.credit_validations_count.eql?(1) %>
+							<% if c.credit_validations.count.eql?(1) %>
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
@@ -409,7 +412,7 @@ $(document).ready(function(){
 	
 			<% end %>
 
-			<% if c.credit_validations_count.eql?(2)  %>
+			<% if c.credit_validations.count.eql?(2)  %>
 			<% c.credit_validations.each do |cv| %>
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
@@ -486,7 +489,7 @@ $(document).ready(function(){
 	
 				<% end %>
 	
-				<% if c.credit_validations_count.eql?(3)  %>
+				<% if c.credit_validations.count.eql?(3)  %>
 				<% c.credit_validations.each do |cv| %>
 	
 				<% if cv.status == "confirmed" %>
@@ -824,5 +827,4 @@ $(document).ready(function(){
 
 
 </div>
-
 
