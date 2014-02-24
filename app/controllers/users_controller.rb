@@ -25,15 +25,15 @@ end
 def show
   @user = User.find(params[:id])
   if current_user
-  @credits = Credit.where(:developer_id == @current_user.developer_id)
+ # @credits = Credit.where(:developer_id == @current_user.developer_id)
 end
   @user_page = User.find(params[:id])
     @credits = @user.credits.order("promoted DESC, updated_at DESC").includes(:credit_validations)
-      @posts = @user.posts.all
+    #  @posts = @user.posts.all
           @credit_validation = CreditValidation.new
             @credit = Credit.new
             @post = Post.new
-            @followers = Friendship.where(:friend_id => @user.id)
+           # @followers = Friendship.where(:friend_id => @user.id)
              @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
              @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
              @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
