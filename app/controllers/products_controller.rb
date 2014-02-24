@@ -44,17 +44,16 @@ end
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @credits = @product.credits
-    @verified_credits = @credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
-    @one_verified_credits = @credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
-    @two_verified_credits = @credits.includes(:credit_validations).where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
-    @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
-    @pending_credits = @credits.includes(:credit_validations).where("credit_validations.status = 'pending'")
+    @credits = @product.credits.includes(:credit_validations).includes(:user).limit(100)
+    @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
+    @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
+    @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
+   # @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
+    @pending_credits = @credits.where("credit_validations.status = 'pending'")
     @flagging_likes = Flagging.where(:flaggable_type == "Product").where(:flag => "like")
     @flagging_votes = Flagging.where(:flag => "complete")
  
         if current_user
-        @user_credits = Credit.where(:user_id => current_user.id, :product_id => @product.id)
           @credit = Credit.new
              @credit_validation = CreditValidation.new
                @post = Post.new

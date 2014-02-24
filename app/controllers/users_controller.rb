@@ -37,7 +37,7 @@ end
              @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
              @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
              @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
-             @part_verified_credits = @one_verified_credits.count + @two_verified_credits.count 
+             @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
              @pending_credits = @credits.where("credit_validations.status = 'pending'")
             
 end

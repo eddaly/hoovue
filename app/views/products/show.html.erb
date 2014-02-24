@@ -154,7 +154,7 @@
 				 <!--[if IE]>
 				 <strong>Your role (e.g. job title)</strong><br/>
 				 <![endif]-->
-			  <%= text_field_tag :role, params[:role], data: {autocomplete_source: Credit.where(:user_id => current_user.id).order(:role).map(&:role).uniq}, :placeholder => "Your role (e.g. job title)", :class => "role" %>  
+			  <%= text_field_tag :role, :placeholder => "Your role (e.g. job title)", :class => "role" %>  
 			  </div>
   
 			
