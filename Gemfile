@@ -10,7 +10,7 @@ group :development do
 gem 'sqlite3'
 gem 'better_errors'
 gem 'bullet'
-
+gem 'sql-logging', :git => 'git://github.com/lightyear/sql-logging'
 end
 
 
@@ -54,7 +54,6 @@ gem 'mechanize'
 gem 'acts-as-taggable-on'
 gem  'activerecord-postgresql-adapter'
 gem 'pg'
-gem 'sql-logging', :git => 'git://github.com/lightyear/sql-logging'
 
 
 
