@@ -1,8 +1,16 @@
 <div class="container_12 pages">
 	<h1>Claim existing credits</h1>
-	<p>We have found these credits in your name. Do any belong to you? If the role are incorrect you may edit them by clicking on the role.</p>
+
+	<p>We have found <%= @users.count %> name/s that match yours.</p>
+
 
 <% @users.each do |u| %>
+
+<% if u.nil? %>
+
+<p>We could not match your name to any existing credits.</p>
+
+<% else %>
 	<%= form_tag claim_credits_path, method: :put do %>
 	<div class="activity-feed">
 		<ul>
@@ -17,6 +25,8 @@
 <span style="margin-left:25px">	<%= submit_tag "Claim Credits", :class => 'submit' %> </span>
 		<% end %>
 	<% end %>
+<% end %>
+
 <% end %>
 
 <h2>Go under a different first name? Please enter the full correct name.</h2>
