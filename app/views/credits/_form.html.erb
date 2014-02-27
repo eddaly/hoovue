@@ -47,21 +47,7 @@
    <% end  %>
    
   
-<div class="platforms">
-	<h3>Game platforms</h3>
-	<%=  %>
-	<%= hidden_field_tag "credit[platform_ids][]", nil %>
-	<% Platform.all.each do |platform| %>
-	  <%= check_box_tag "credit[platform_ids][]", platform.id, @credit.platform_ids.include?(platform.id), id: dom_id(platform) %>
-	  <%= label_tag dom_id(platform), platform.name %>
-	<% end %>
-</div>
-<div class="role">
 
-Other platform<br/>
-
-<%= f.text_field :issue, :placeholder => "Other platform" %>
-</div>
 	
  
 
