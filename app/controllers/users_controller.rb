@@ -28,8 +28,8 @@ def show
   @credits = Credit.where(:developer_id == @current_user.developer_id)
 end
   @user_page = User.find(params[:id])
-    @credits = Credit.where(:user_id => @user.id).order("promoted DESC, updated_at DESC").includes(:credit_validations)
-      @posts = @user.posts.all
+    @credits = Credit.where(:user_id => @user.id).order("promoted DESC, updated_at DESC").includes(:credit_validations).includes(:posts)
+      @posts = @user.posts.find_all
           @credit_validation = CreditValidation.new
             @credit = Credit.new
             @post = Post.new

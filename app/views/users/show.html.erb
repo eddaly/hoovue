@@ -190,6 +190,8 @@ $(document).ready(function(){
 	
 	
 	<div class="user-details">
+		<p class="title">Followers</p><p class="data">0</p>
+		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
 	</div>
 	
 	<div class="more-detail">
@@ -783,15 +785,10 @@ $(document).ready(function(){
 		<% end %>
 		
 		<ul class="posts">	
-				  <% @posts = Post.where(:credit_id => c.id).order("created_at desc").limit(10) %>
 		<% @posts.each do |post| %>
 		<li>
 		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
 		<p class="content"><%= post.body %></p>
-		<% if post.name_check_user_id %>
-		<% @user_nc = User.find_by_id(post.name_check_user_id) %>
-		<%= link_to @user_nc.name, user_path(@user_nc) %> was namedchecked.
-		<% end %>
 		<% if post.image.blank? %>
 		<% else %>
 			<%= image_tag post.image.post  %>
