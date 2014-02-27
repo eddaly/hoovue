@@ -155,7 +155,7 @@ $(document).ready(function(){
 	
 	<h2>Credits</h2>
 	
-	<% if @user.credits.count == 0 %>
+	<% if @credits.nil? %>
 	<% if current_user %>
 	
 		 <% if current_user.id == @user.id %>
@@ -168,11 +168,8 @@ $(document).ready(function(){
 
 	<% end %>
 	
-	<% @credits.each do |c| %>
+	<% @credits.limit(25).each do |c| %>
 	
-	<% if current_user %>
-	<% @user_credit = current_user.credits.where(:product_id => c.product.id) %>
-	<% end %>
 	<div class="credit-item"
 	<% if c.product.status == "Ongoing" %>
 	style="border:1px solid green;"
@@ -193,7 +190,6 @@ $(document).ready(function(){
 	
 	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= c.product.credits.size %></p>
 		<p class="title">Followers</p><p class="data">0</p>
 		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
 	</div>

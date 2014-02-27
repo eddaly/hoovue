@@ -16,8 +16,7 @@ class Credit < ActiveRecord::Base
     scope :cv_part, where(:confirmed_validations_count => "1 | 2")  
     scope :cv_confirmed, where(:confirmed_validations_count => "3")  
   
-      
-      
+     
    
         
       def self.import(file)
