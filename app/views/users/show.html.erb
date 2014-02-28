@@ -327,12 +327,11 @@ $(document).ready(function(){
 				<% end %>
 	
 		
-	
-							<% if c.credit_validations.count.eql?(1) %>
+					<% @cvc = c.credit_validations.count  %>
+							<% if @cvc.eql?(1) %>
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
-					<% @user = User.find_by_id(cv.validator_id) %>
 				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
 					<% if @user %>
 					<% if @user.provider == "facebook" %>
@@ -409,7 +408,7 @@ $(document).ready(function(){
 	
 			<% end %>
 
-			<% if c.credit_validations.count.eql?(2)  %>
+			<% if @cvc.eql?(2)  %>
 			<% c.credit_validations.each do |cv| %>
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
@@ -486,7 +485,7 @@ $(document).ready(function(){
 	
 				<% end %>
 	
-				<% if c.credit_validations.count.eql?(3)  %>
+				<% if @cvc.eql?(3)  %>
 				<% c.credit_validations.each do |cv| %>
 	
 				<% if cv.status == "confirmed" %>
@@ -595,7 +594,7 @@ $(document).ready(function(){
 				</script>
 
 		
-				<% if c.credit_validations.count < 3  %>
+				<% if @cvc < 3  %>
 
 <h2>Invite someone to verify your credit.</h2>
 		    
