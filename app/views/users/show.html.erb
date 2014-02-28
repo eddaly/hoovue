@@ -229,58 +229,15 @@ $(document).ready(function(){
 		<a class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories<% if c.product.status == "Ongoing" %> and Posts<% end %></a>
 	</div>
 	
-	<div class="validation-info"   style="
-			<% if c.credit_validations.confirmed.empty? %>
-			background-color:red;
-			<% end %>
-			
-			<% if c.credit_validations.confirmed.count == 1  %>
-			background-color:orange;
-			<% end %>	
-			
-			<% if c.credit_validations.confirmed.count == 2  %>
-				background-color:orange;
-			<% end %>
-			
-			<% if c.credit_validations.confirmed.count == 3  %>
-			background-color:green;
-			<% end %>
-			
-			">
+	<div class="validation-info">
 	
 	
 	<p class="cv-count">
-	<% if c.credit_validations.confirmed.count > 2 %>
-	<%= image_tag '/assets/beta/tick.png' %>
-	<% else %>	
-	<% if c.credit_validations.confirmed.count > 2 %>
-	3
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 2 %>
-	2
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 1 %>
-	1
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 0 %>
-	0
-	<% end %>
+	
 		/3</p><br />
 		
-	<% end %>	
 	<p class="validation-status">
-		<% if c.credit_validations.confirmed.count > 2 %>
-		Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 2 %>
-		Part Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 1 %>
-		Part Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 0 %>
-		Unverified</p>
-		<% end %>
+	
 		
 	
 		<div class="head-shots">
@@ -327,7 +284,7 @@ $(document).ready(function(){
 	
 		
 	
-							<% if c.credit_validations.count.eql?(1) %>
+							<% if c.credit_validations_count.eql?(1) %>
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
@@ -408,7 +365,7 @@ $(document).ready(function(){
 	
 			<% end %>
 
-			<% if c.credit_validations.count.eql?(2)  %>
+			<% if c.credit_validations_count.eql?(2)  %>
 			<% c.credit_validations.each do |cv| %>
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
@@ -485,7 +442,7 @@ $(document).ready(function(){
 	
 				<% end %>
 	
-				<% if c.credit_validations.count.eql?(3)  %>
+				<% if c.credit_validations_count.eql?(3)  %>
 				<% c.credit_validations.each do |cv| %>
 	
 				<% if cv.status == "confirmed" %>
