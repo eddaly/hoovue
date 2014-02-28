@@ -284,7 +284,7 @@ $(document).ready(function(){
 	
 		
 	
-							<% if c.credit_validations_count.eql?(1) %>
+							<% if c.credit_validations.count.eql?(1) %>
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
@@ -365,7 +365,7 @@ $(document).ready(function(){
 	
 			<% end %>
 
-			<% if c.credit_validations_count.eql?(2)  %>
+			<% if c.credit_validations.count.eql?(2)  %>
 			<% c.credit_validations.each do |cv| %>
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
@@ -442,7 +442,7 @@ $(document).ready(function(){
 	
 				<% end %>
 	
-				<% if c.credit_validations_count.eql?(3)  %>
+				<% if c.credit_validations.count.eql?(3)  %>
 				<% c.credit_validations.each do |cv| %>
 	
 				<% if cv.status == "confirmed" %>
