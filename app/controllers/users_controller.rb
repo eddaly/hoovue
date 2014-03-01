@@ -27,6 +27,11 @@ def show
   if current_user
   @credits = Credit.where(:developer_id == @current_user.developer_id)
 end
+
+if current_user && current_user.id == @user.id 
+  @match = "t"
+end
+
   @user_page = User.find(params[:id])
     @credits = Credit.where(:user_id => @user.id).order("promoted DESC, updated_at DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
       @posts = @user.posts.find_all
