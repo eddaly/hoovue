@@ -15,10 +15,17 @@ class Ability
         end
         
         if user.role == "user"
-          can :manage, :all  
-          can :destroy, :all
-          can :access, :rails_admin   
-          can :dashboard  
+          can :read, :all  
+                      can :manage, User, :id => user.id
+                        cannot :destroy, User
+                          can [:create, :flag, :increase], Credit
+                            can :manage, Credit, :user_id => user.id
+                              can :update, Credit, :user_id => nil
+                              can [:create, :update, :like, :complete], Product
+                                can :manage, CreditValidation
+                                    can :access, :rails_admin   
+                                      can :dashboard 
+                                        cannot [:create, :destroy], Email, :user_id => user.id
         end
         if user.role.nil?
           cannot :manage, :all
