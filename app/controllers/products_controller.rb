@@ -44,7 +44,8 @@ end
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @credits = @product.credits.includes(:credit_validations).includes(:user).limit(100)
+    @credits = @product.credits.includes(:credit_validations).includes(:user).includes(:posts).limit(50)
+    
     @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
     @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
     @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
