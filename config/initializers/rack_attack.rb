@@ -6,5 +6,6 @@ Rack::Attack.blacklist('block 5.10.83.61') do |req|
   '5.10.83.26' == req.ip
   '5.10.83.72' == req.ip
   '5.10.83.85' == req.ip
+  '5.10.83.91' == req.ip
   
 end
