@@ -24,9 +24,6 @@ end
 
 def show
   @user = User.find(params[:id])
-  if current_user
-  @credits = Credit.where(:developer_id == @current_user.developer_id)
-end
 
 if current_user && current_user.id == @user.id 
   @match = "t"

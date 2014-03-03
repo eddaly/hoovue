@@ -519,9 +519,8 @@ $(document).ready(function(){
 		</div>	
 		
 		
+		<% if @match == "t" %>
 		
-		<% if current_user %>
-			 <% if current_user.id == @user_page.id %>
 		<%= form_for @credit, :url => {:controller => "credits", :action => "update", :id => c.id }, :html => { :method => 'put' } do |f| %>
 			<%= f.hidden_field :promoted, :value => "#{DateTime.now}" %>
 			<%= f.submit "Send to top", :class => "submit" %>
@@ -529,7 +528,7 @@ $(document).ready(function(){
 			<% end %>
 	 	
 		<% end %>
-	<% end %>
+	
 	
 	
 	
