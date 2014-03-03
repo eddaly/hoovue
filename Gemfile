@@ -54,7 +54,6 @@ gem 'mechanize'
 gem 'acts-as-taggable-on'
 gem  'activerecord-postgresql-adapter'
 gem 'pg'
-gem 'rack-attack'
 gem 'rack-block'
 
 # To use ActiveModel has_secure_password
