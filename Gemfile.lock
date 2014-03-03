@@ -187,6 +187,8 @@ GEM
     pg (0.17.0-x86-mingw32)
     polyglot (0.3.4)
     rack (1.4.5)
+    rack-attack (2.3.0)
+      rack
     rack-cache (1.2)
       rack (>= 0.4)
     rack-pjax (0.7.0)
@@ -302,6 +304,7 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-twitter
   pg
+  rack-attack
   rails (= 3.2.17)
   rails-asset-jqueryui
   rails_admin (= 0.4.9)
