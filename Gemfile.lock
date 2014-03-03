@@ -189,6 +189,8 @@ GEM
     rack (1.4.5)
     rack-attack (2.3.0)
       rack
+    rack-block (0.1.1)
+      rack (>= 1.3)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-pjax (0.7.0)
@@ -305,6 +307,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rack-attack
+  rack-block
   rails (= 3.2.17)
   rails-asset-jqueryui
   rails_admin (= 0.4.9)
