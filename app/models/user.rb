@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
               #Roles
                 ROLES = %w[admin moderator user banned]
              
+                def to_param
+                  "#{id} #{name}".parameterize
+                end
             
               
   #User Validation      

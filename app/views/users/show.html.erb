@@ -21,10 +21,12 @@
 	</div>
 	
 	
-	<div class="grid_3 stats">
+	<div class="grid_3 push_1 stats">
 		<div class="stats">
 			<p class="credit-count"><%= @credits.size %></p>
 			<p class="credits">Credits</p>
+			
+			<div class="white-line"> </div>
 				<div class="verified-count">
 					<p class="verified-credits">
 						<%= @verified_credits.size %>
@@ -32,53 +34,25 @@
 					<p class="verifed">Verified</p>
 				</div>
 					<div class="images">
-						<p class="verified-credits">
+						<p class="part-count">
 							<%= @part_verified_credits.size %>
 						</p>
 						<p class="part">Part</p>
 					</div>
 						<div class="videos">
-							<p class="verified-credits"><%= @pending_credits.size %></p>
+							<p class="pending-count"><%= @pending_credits.size %></p>
 							<p class="pending">Pending</p>
 						</div>
 		</div>
 	</div>
 	
-	<div class="grid_2 analytics">
-		<div class="followers">
-			
-			</div>
-			
-			<div class="likes">
-				<div class="data">
-					
-				</div>
-				<div class="title">
-					
-				</div>	
-				</div>
-				
-				
-				<div class="shared">
-					<div class="data">
-										</div>
-					<div class="title">
-						
-					</div>	
-				</div>
-					
-					
-					
-					
-	
-	 </div>
+
 	 
 	<div class="description">
 		<div class="name">
 			<%= @user.name %><% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %><% if @match == "t" %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %>
 		</div>
 	
-		<% if @match == "t" %>
 		
 
 		<% if @user.twitter.blank? %>
@@ -89,9 +63,6 @@
 	
 		<% end %>
 
-		
-					<% end %>
-		
 		
 	
 		<div class="info">
@@ -187,8 +158,7 @@ $(document).ready(function(){
 	
 	
 	<div class="user-details">
-		<p class="title">Followers</p><p class="data">0</p>
-		<p class="title">Status</p><p class="data"><%= c.product.status %></p>
+		<p class="title">Status</p><p class="data" style="width:300px;"><%= c.product.status %></p>
 	</div>
 	
 	<div class="more-detail">
@@ -246,24 +216,7 @@ $(document).ready(function(){
 	
 	<p class="cv-count">
 		<% @cvcc = c.credit_validations.confirmed.count  %>
-	<% if @cvcc > 2 %>
-	<%= image_tag '/assets/beta/tick.png' %>
-	<% else %>	
-	<% if @cvcc > 2 %>
-	3
-	<% end %>
-	<% if @cvcc == 2 %>
-	2
-	<% end %>
-	<% if @cvcc == 1 %>
-	1
-	<% end %>
-	<% if @cvcc == 0 %>
-	0
-	<% end %>
-		/3</p><br />
-		
-	<% end %>	
+
 	<p class="validation-status">
 		<% if @cvcc > 2 %>
 		Verified</p>
@@ -752,7 +705,7 @@ $(document).ready(function(){
 		
 		
 		<ul class="posts">	
-		<% @posts.each do |post| %>
+		<% c.posts.each do |post| %>
 		<li>
 		<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
 		<p class="content"><%= post.body %></p>

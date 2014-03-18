@@ -33,6 +33,7 @@
 	<div class="stats">
 		<p class="credit-count"><%= @credits.size %></p>
 		<p class="credits">Credits</p>
+		<div class="white-line"></div>
 			<div class="verified-count">
 				<p class="verified-credits">
 					<%= @verified_credits.size %>
@@ -40,72 +41,30 @@
 				<p class="verifed">Verified</p>
 			</div>
 				<div class="images">
-					<p class="verified-credits">0</p>
-					<p class="verifed">Videos</p>
+					<p class="verified-credits" style="margin-left:15px !important;">1</p>
+					<p class="verifed">Image</p>
 				</div>
 					<div class="videos">
-						<p class="verified-credits">1</p>
-						<p class="verifed">Image</p>
+						<p class="verified-credits" style="margin-left:4px;">0</p>
+						<p class="verifed">Videos</p>
 					</div>
 	</div>
 
 
 	<div class="description-containter">
-		<div class="analytics">
-			<div class="followers">
-				<div class="data">
-			
-				</div>
-				<div class="title">
-				
-				</div>	
-				</div>
-				
-				<div class="likes">
-					<div class="data">
-						<%= @flagging_likes.size %>
-					</div>
-					<div class="title">
-						Likes
-					</div>	
-					</div>
-					
-					
-					<div class="shared">
-						<div class="data">
-							
-						</div>
-						<div class="title">
-						
-						</div>	
-					</div>
-						
-						
-						<div class="views">
-							<div class="data" style="margin-top:-15px;">
-								<% if @flagging_votes.size == @credits.size %>
-								Team voted 100% complete
-								<% else %>
-								Counting team complete votes
-								<% end %>
-										</div>
-							<div class="title">
-								
-							</div>	
-						</div>		
-		</div>
+		
 		
 		<div class="description">
 			<div class="details">
-				<p class="description-title">Date added</p><p class="data"><%= @product.created_at.strftime("%Y") %></p>
-				<p class="description-title">Published By</p><p class="data" style="width:150px;"><%= truncate(@product.published_by, length: 30) %></p><br /><br />
-				<p class="description-title">Status</p><p class="data"><%= @product.status %></p>
-				<p class="description-title">Developer</p><p class="data" style="width:150px;"><%= truncate(@product.developed_by, length: 30) %></p>
+				<p class="description-title">Date added</p><p class="data"><%= @product.created_at.strftime("%Y")  || "None Found" %></p>
+				<p class="description-title">Published By</p><p class="data" style="width:150px;"><%= truncate(@product.published_by, length: 30) || " N/A" %></p><br /><br />
+				<p class="description-title">Status</p><p class="data"><%= @product.status || " N/A"  %></p>
+				<p class="description-title">Developer</p><p class="data" style="width:150px;"><%= truncate(@product.developed_by, length: 30) || " N/A"  %></p>
 				
 		
 			</div>
 			
-			<p class="description-text"><%= @product.description %></p>	
+			<p class="description-text"><%= @product.description || " Not supplied."  %></p>	
 			
 		</div>
 		<div class="actions">
@@ -259,8 +218,7 @@
 	</div>
 	
 	<div class="user-details">
-		<p class="title">Credits</p><p class="data"><%= c.user.credits.count %></p>
-		<p class="title">Followers</p><p class="data"><%= c.user.friendships.count %></p>
+		<p class="title">Credits</p><p class="data" style="width:300px;"><%= c.user.credits.count %></p>
 	</div>
 	
 	<div class="more-detail">
@@ -324,24 +282,7 @@
 	
 	
 	<p class="cv-count">
-	<% if c.credit_validations.confirmed.count > 2 %>
-	<%= image_tag '/assets/beta/tick.png' %>
-	<% else %>	
-	<% if c.credit_validations.confirmed.count > 2 %>
-	3
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 2 %>
-	2
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 1 %>
-	1
-	<% end %>
-	<% if c.credit_validations.confirmed.count == 0 %>
-	0
-	<% end %>
-		/3</p><br />
-		
-	<% end %>	
+	
 	<p class="validation-status">
 		<% if c.credit_validations.confirmed.count > 2 %>
 		Verified</p>
