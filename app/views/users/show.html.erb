@@ -734,6 +734,35 @@ $(document).ready(function(){
 	
 </div>
 
+<div class="grid_3 activity-feed">
+		
+
+		<h3>Did you work on?</h3>
+		<% @credits_red.each do |c| %>
+		<div class="following-item" style=:height:50px;>
+
+			<div class="profile-picture">
+
+				<%= image_tag c.product.image, :width => "50" || '/assets/default-thumb.png' %>
+
+			</div>
+
+			<div class="name">
+			<%= link_to product_path(c.id) do %><%= truncate(c.product.title, :length => 25) || "unknown" %><% end %>
+			</div>
+			<div class="stats">
+			<p>Credits</p> <div class="data">
+			 <%= c.product.credits.size %>
+			</div>
+			</div>	<br />
+			<div class="product-title">
+		<%= link_to product_path(c.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:16px;">Add a credit +</div><% end %>
+		</div>
+		</div>
+		<% end %>
+
+
+		</div>
 
 
 

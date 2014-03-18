@@ -897,9 +897,17 @@ float:left;
 	.user-container {
 		
 		.user-info-panel {
-		height:490px;
+		height:425px;
 		background-color:#E5EAED;	
 		padding:10px;
+		
+		.profile-picture {
+		
+			img {
+			margin-right:1000px;	
+			}
+			
+		}
 		
 		
 		.stats {
@@ -909,6 +917,7 @@ float:left;
 			color:white;
 			height:194px;
 			width:280px;
+			
 			
 			p.credit-count {
 			margin-top:25px;
@@ -1360,6 +1369,7 @@ float:left;
 	float:left;	
 	width:50px;
 	height:50px;
+	
 	}
 	
 	
