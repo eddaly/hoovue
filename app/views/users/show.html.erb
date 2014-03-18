@@ -748,15 +748,15 @@ $(document).ready(function(){
 			</div>
 
 			<div class="name">
-			<%= link_to product_path(c.id) do %><%= truncate(c.product.title, :length => 25) || "unknown" %><% end %>
+			<%= link_to product_path(c.product.id) do %><%= truncate(c.product.title, :length => 25) || "unknown" %><% end %>
 			</div>
 			<div class="stats">
 			<p>Credits</p> <div class="data">
-			 <%= c.product.credits.size %>
+			 <%= c.product.credits_count %>
 			</div>
 			</div>	<br />
 			<div class="product-title">
-		<%= link_to product_path(c.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:16px;">Add a credit +</div><% end %>
+		<%= link_to product_path(c.product.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:16px;">Add a credit +</div><% end %>
 		</div>
 		</div>
 		<% end %>
