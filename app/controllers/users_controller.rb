@@ -31,7 +31,7 @@ end
 
   @user_page = User.find(params[:id])
     @credits = Credit.where(:user_id => @user.id).order("promoted DESC, updated_at DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
-		 @credits_red = Credit.order("RANDOM()").limit(13)
+		 @credits_red = Credit.first(13)
 		
           @credit_validation = CreditValidation.new
             @credit = Credit.new
