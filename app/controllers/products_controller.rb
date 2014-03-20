@@ -45,7 +45,7 @@ end
   def show
     @product = Product.find(params[:id])
     @credits = @product.credits.includes(:credit_validations).includes(:user).includes(:posts).limit(25)
-	 @credits_red = Credit.first(13)
+	 @credits_red = Credit.uniq.where(:id => 200..220)
     
     @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
     @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
