@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-#load_and_authorize_resource
- # skip_authorize_resource :only => :new
+load_and_authorize_resource
+  skip_authorize_resource :only => :new
 
 def index 
   redirect_to root_url
@@ -37,21 +37,20 @@ end
             @credit = Credit.new
             @post = Post.new
             @followers = Friendship.where(:friend_id => @user.id)
-             @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
-             @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
-             @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
-             @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
-             @pending_credits = @credits.where("credit_validations.status = 'pending'")
+            @verified_credits = @credits.cv_confirmed.count
+            @part_verified_credits = @credits.cv_part.count
+            @pending_credits = @credits.size - @verified_credits.to_i + @part_verified_credit.to_i
+           
             
 end
 
 def edit
-#  if current_user.id == @user.id
+  if current_user.id == @user.id
   @user = User.find(params[:id])
     @emails = Email.where(:user_id => current_user.id)
- # else
-  #  redirect_to root_url
-#  end
+  else
+    redirect_to root_url
+  end
 end
 
 def update
