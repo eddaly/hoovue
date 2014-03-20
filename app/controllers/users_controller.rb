@@ -36,7 +36,6 @@ end
           @credit_validation = CreditValidation.new
             @credit = Credit.new
             @post = Post.new
-            @followers = Friendship.where(:friend_id => @user.id)
             @verified_credits = @credits.cv_confirmed.count
             @part_verified_credits = @credits.cv_part.count
             @pending_credits = @credits.size - @verified_credits.to_i + @part_verified_credit.to_i
