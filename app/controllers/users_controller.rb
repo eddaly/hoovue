@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-load_and_authorize_resource
-  skip_authorize_resource :only => :new
+#load_and_authorize_resource
+ # skip_authorize_resource :only => :new
 
 def index 
   redirect_to root_url
@@ -46,12 +46,12 @@ end
 end
 
 def edit
-  if current_user.id == @user.id
+#  if current_user.id == @user.id
   @user = User.find(params[:id])
     @emails = Email.where(:user_id => current_user.id)
-  else
-    redirect_to root_url
-  end
+ # else
+  #  redirect_to root_url
+#  end
 end
 
 def update

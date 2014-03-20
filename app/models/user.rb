@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-      attr_accessible :email, :provider, :picture, :picture_cache, :credits_count, :uid, :bio, :link, :link_desc, :link_2, :link_2_desc, :link_3, :link_3_desc, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count, :facebook_friends, :developer_id
+      attr_accessible :email, :provider, :picture, :picture_cache, :igda, :credits_count, :uid, :bio, :link, :link_desc, :link_2, :link_2_desc, :link_3, :link_3_desc, :twitter, :facebook, :linkedin, :googleplus, :oauth_token, :oauth_expires_at, :profile_picture, :product_ids, :role, :name, :credits_count, :facebook_friends, :developer_id
 
         has_many :products
           has_many :credits
