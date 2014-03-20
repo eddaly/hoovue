@@ -47,14 +47,8 @@ end
     @credits = @product.credits.includes(:credit_validations).includes(:user).includes(:posts).limit(25)
 	 @credits_red = Credit.uniq.where(:id => 200..220)
     
-    @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
-    @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
-    @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
-    @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
-    @pending_credits = @credits.where("credit_validations.status = 'pending'")
-    @flagging_likes = Flagging.where(:flaggable_type == "Product").where(:flag => "like")
-    @flagging_votes = Flagging.where(:flag => "complete")
- 
+   @verified_credits = @credits.cv_confirmed.count
+   
         if current_user
           @credit = Credit.new
              @credit_validation = CreditValidation.new
