@@ -50,7 +50,7 @@ end
     @verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "3")
     @one_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "1")
     @two_verified_credits = @credits.where("credit_validations.status = 'confirmed'").where(:credit_validation_count => "2")
-   # @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
+    @part_verified_credits = @one_verified_credits.size + @two_verified_credits.size 
     @pending_credits = @credits.where("credit_validations.status = 'pending'")
     @flagging_likes = Flagging.where(:flaggable_type == "Product").where(:flag => "like")
     @flagging_votes = Flagging.where(:flag => "complete")
