@@ -9,7 +9,7 @@ Hoo::Application.configure do
              halt 401
               end
               
-              ip_pattern '198.143.175.' do
+              ip_pattern '198.143.175.122' do
                   halt 401
                    end
   end
