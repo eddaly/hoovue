@@ -30,7 +30,7 @@ if current_user && current_user.id == @user.id
 end
 
   @user_page = User.find(params[:id])
-    @credits = Credit.where(:user_id => @user.id).order("promoted DESC, updated_at DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
+    @credits = Credit.where(:user_id => @user.id).order("confirmed_validations_count DESC, credit_validation_count DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
  	 @credits_red = Credit.uniq.where(:id => 300..320)
  
           @credit_validation = CreditValidation.new
@@ -49,7 +49,7 @@ def edit
   @user = User.find(params[:id])
     @emails = Email.where(:user_id => current_user.id)
     #else
-    redirect_to root_url
+#    redirect_to root_url
 #  end
 end
 
