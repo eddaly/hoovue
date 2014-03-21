@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "oneside"
   end
 
+  add_index "credit_validations", ["credit_id"], :name => "index_credit_validations_on_credit_id"
+
   create_table "credits", :force => true do |t|
     t.integer  "user_id"
     t.integer  "product_id"
@@ -68,6 +70,9 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "release"
     t.string   "category"
   end
+
+  add_index "credits", ["product_id"], :name => "index_credits_on_product_id"
+  add_index "credits", ["user_id"], :name => "index_credits_on_user_id"
 
   create_table "credits_platforms", :force => true do |t|
     t.integer "credit_id"
