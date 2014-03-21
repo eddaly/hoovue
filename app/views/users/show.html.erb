@@ -7,13 +7,13 @@
 	
 	<div class="grid_3 profile-picture">
 		<% if @user.picture.blank? %>
-		
+	
 		<% if @user.provider == "facebook" %>		
 	<img  style="margin-top:3px;" src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
+		<% else %>
+			<%= image_tag 'user-default.gif'%>
 		<% end %>
-		<% if @user.provider == "linkedin" %>		
-	<%= image_tag @user.profile_picture %><br />
-		<% end %>
+		
 		<% else %>
 		<%= image_tag @user.picture %>
 		<% end %>

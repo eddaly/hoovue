@@ -152,7 +152,7 @@
 						<li>
 											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= c.user.uid %>/picture?type=square" />		
 												<div class="title">
-													<a href="/users/46"><%= c.user.name %></a>
+													<%= link_to c.user.name, user_path(c.user) %>
 												</div>
 				
 												<div class="sats">
