@@ -30,7 +30,7 @@ if current_user && current_user.id == @user.id
 end
 
   @user_page = User.find(params[:id])
-    @credits = Credit.where(:user_id => @user.id).order("confirmed_validations_count DESC, credit_validation_count DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
+    @credits = @user.credits.order("confirmed_validations_count DESC, credit_validation_count DESC").includes(:credit_validations).includes(:posts).includes(:product).includes(:user)
  	 @credits_red = Credit.uniq.where(:id => 300..320)
  
           @credit_validation = CreditValidation.new
@@ -38,7 +38,7 @@ end
             @post = Post.new
             @verified_credits = @credits.cv_confirmed.count
             @part_verified_credits = @credits.cv_part.count
-            @pending_credits = @credits.size - @verified_credits.to_i + @part_verified_credit.to_i
+            @pending_credits = @user.credits_count - @verified_credits.to_i + @part_verified_credit.to_i
             @user_credits_count = @pending_credits + @verified_credits + @part_verified_credits
             
 end
