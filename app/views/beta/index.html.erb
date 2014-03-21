@@ -162,12 +162,12 @@
 												<% else %>
 												<%= image_tag c.user.picture %>
 												<% end %>
-												<div class="title">
+												<div class="title" style="float:left; width:280px; margin-top:20px;">
 													<%= link_to c.user.name, user_path(c.user) %>
 												</div>
 				
 												<div class="sats">
-												<strong>Work:</strong> <%= link_to c.product.title, product_path(c.product.id) %>
+												<strong style="float:left; margin-top:20px;"><%= c.role %> on</strong>  <%= link_to c.product.title, product_path(c.product.id), style: "margin-top:20px;float:left;" %>
 												</div>	
 					
 												</li>
