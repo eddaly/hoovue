@@ -150,7 +150,18 @@
 					<ul>
 						<% @recent_credits.each do |c| %>
 						<li>
+											
+												<% if c.user.picture.blank? %>
+	
+												<% if c.user.provider == "facebook" %>		
 											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= c.user.uid %>/picture?type=square" />		
+												<% else %>
+													<%= image_tag 'user-default-small.png'%>
+												<% end %>
+		
+												<% else %>
+												<%= image_tag c.user.picture %>
+												<% end %>
 												<div class="title">
 													<%= link_to c.user.name, user_path(c.user) %>
 												</div>
