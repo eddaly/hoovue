@@ -47,7 +47,6 @@ end
     @credits = @product.credits.includes(:credit_validations).includes(:user).includes(:posts).limit(25)
 	 @credits_red = Credit.uniq.where(:id => 200..220)
     
-   @verified_credits = @credits.cv_confirmed.count
    
         if current_user
           @credit = Credit.new

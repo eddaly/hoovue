@@ -38,7 +38,7 @@ end
             @post = Post.new
             @verified_credits = @credits.cv_confirmed.count
             @part_verified_credits = @credits.cv_part.count
-            @pending_credits = @user.credits_count - @verified_credits.to_i + @part_verified_credit.to_i
+            @pending_credits = @credits.length - @verified_credits.to_i + @part_verified_credit.to_i
             @user_credits_count = @pending_credits + @verified_credits + @part_verified_credits
             
 end
