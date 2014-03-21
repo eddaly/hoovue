@@ -44,10 +44,8 @@ end
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @credits = @product.credits.includes(:credit_validations).includes(:user).includes(:posts).limit(25)
+    @credits = @product.credits.order("credit_validation_count").includes(:credit_validations).includes(:user).includes(:posts).limit(25)
 	 @credits_red = Credit.uniq.where(:id => 200..220)
-    
-   
         if current_user
           @credit = Credit.new
              @credit_validation = CreditValidation.new

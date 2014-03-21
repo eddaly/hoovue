@@ -17,7 +17,8 @@ $(document).ready(function(){
 <div class="container_12 pages">
 	<h1>Add a credit</h1> 
 	<div class="container_12">
-<div class="grid_3 alpha add_credit_box">
+		
+<div class="grid_3 push_2 alpha add_credit_box">
 	<h2>Search works</h2>
 
 <%= form_tag search_credits_path, :method => 'get' do %>
@@ -29,7 +30,7 @@ $(document).ready(function(){
  </div>  
 
 
-<div class="grid_3 add_credit_box">
+<div class="grid_3 push_2 add_credit_box">
 <h2>Add a new work to our site</h2>	
 <p>Can't find the work your after?</p>
 <a id="show_hide_new_work" style="cursor:hand;">ADD NEW WORK
@@ -38,21 +39,7 @@ $(document).ready(function(){
 </div>
 
 
-<div class="grid_3 omega add_credit_box">
-<h2>Quick-Add credit</h2>	
-	 <p>Use the form below to quickly add multiple credits. Previous role suggestions appear.</p>
-<%= form_for(@credit) do |f| %>
- 
- 	<%= f.text_field :role, :placeholder => "Your role (e.g. job title)", :class => "role" %> 
- 
 
-
-    <%= f.hidden_field :user_id, :value => current_user.id %>
-	
-	<%= f.submit 'CREATE CREDIT', :class => 'submit'%>
-
-<% end %>
-</div>	
   </div>
   
   <div class="container_10 new_work" id="slidingDiv_new_work">
