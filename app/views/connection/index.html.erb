@@ -1,20 +1,20 @@
 <div class="container_12 pages">
 	<h1>Claim existing credits</h1>
-
+<% if current_user %>
 	<p>We have found <%= @users.count %> name/s that match yours.</p>
-
+<% end %>
 
 <% @users.each do |u| %>
 
 <% if u.nil? %>
-
+<% if current_user %>
 <p>We could not match your name to any existing credits.</p>
-
+<% end %>
 <% else %>
 	<%= form_tag claim_credits_path, method: :put do %>
 	<div class="activity-feed">
 		<ul>
-		<% u.credits.where(:user_id.nil?).each do |credit| %>
+		<% u.credits.each do |credit| %>
 		<li class="<%= cycle('even', 'odd') -%>">
 		<%= image_tag credit.product.image.thumb.to_s || "assets/default-small.png" %><strong><%= best_in_place credit, :role %></strong> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
 		</li>
@@ -22,18 +22,32 @@
 		</ul>
 	</div>
 		<% if u.credits.count > 0 %>
+		<% if current_user %>
 <span style="margin-left:25px">	<%= submit_tag "Claim Credits", :class => 'submit' %> </span>
+		<% else %>
+		<h2>You will need to register with  <%= link_to "Facebook", "/auth/facebook", id: "facebook" %> or 	 <%= link_to "LinkedIn", "/auth/linkedin", id: "linkedin" %> to claim your credits.</h2>
+		<% end %>
+			
 		<% end %>
 	<% end %>
 <% end %>
 
 <% end %>
 
+<% if current_user %>
 <h2>Go under a different first name? Please enter the full correct name.</h2>
-
+<% else %>
+<h2>Please enter your full name so we can search for your credits.</h2>
+<% end %>
 <%= form_tag connection_index_path, :method => 'get' do %>
-  <%= text_field_tag :name, params[:name] %>
+  <%= text_field_tag :name, params[:name], :style => "float:left;" %>
 		 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+		 <% end %>
+<% if current_user %>
+<% if @users.nil?  %>
+<% else %>
+<h2><%= link_to 'Or visit your profile >', user_path(current_user) %></h2>
+<% end %>
 <% end %>
 
 </div>

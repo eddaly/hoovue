@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
  
-# load_and_authorize_resource
-#  skip_authorize_resource :only => :new
+ load_and_authorize_resource
+  skip_authorize_resource :only => :new
 
 def index 
   redirect_to root_url
@@ -39,7 +39,7 @@ end
             @verified_credits = @credits.cv_confirmed.count
             @part_verified_credits = @credits.cv_part.count
             @pending_credits = @credits.size - @verified_credits.to_i + @part_verified_credit.to_i
-           
+            @user_credits_count = @pending_credits + @verified_credits + @part_verified_credits
             
 end
 
