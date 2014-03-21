@@ -60,7 +60,7 @@
 		
 <% if current_user %>
 	<div class="grid_12">
-		<h2 style="margin:-20px 0 30px 0;">You have <%= current_user.credits_count %> credits. Add to your creative legacy:</h2>
+		<h2 style="margin:-20px 0 30px 0;">You have <%= current_user.credits.count %> credits. Add to your creative legacy:</h2>
 		<%= form_tag search_credits_path, :method => 'get' do %>
 		  <%= text_field_tag :search, params[:search], style: "float:left; width:730px; height:58px; font-size:28px; border:none; padding-top:15px 0; text-align:right; padding-right:80px; padding-left:80px;", placeholder: "Search for a work or person" %>
 				 <%= submit_tag "Search >", style: "background-color:#003e46; border:none; height:58px; color:white; margin-left:-20px;" %>  
