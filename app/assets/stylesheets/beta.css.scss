@@ -403,13 +403,13 @@ float:left;
 					ul {
 						float:left;
 						list-style-type:none;
-						width:320px;
+						width:900px;
 						background-color:white;
 						
 					
 						li {
 							margin-left:10px;
-							width:290px;
+							width:900px;
 							height:55px;
 							padding:5px 0 5px 10px;
 							border-bottom: 1px solid #E7EBED;
@@ -424,14 +424,14 @@ float:left;
 							
 							.title {
 								float:left;
-								width:232px;
+								width:700px;
+								margin-top:15px;
+								font-size:20px;
 								
 							}
 							
 							.stats {
-								float:left;
-								width:232px;
-								font-size:8px;
+								margin-top:10px;
 								
 								strong {
 								float:left;
