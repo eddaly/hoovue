@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.integer  "name_check_user_id"
   end
 
+  add_index "posts", ["credit_id"], :name => "index_posts_on_credit_id"
+
   create_table "product_fields", :force => true do |t|
     t.string   "name"
     t.string   "field_type"
