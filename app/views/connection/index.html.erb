@@ -1,5 +1,5 @@
 <div class="container_12 pages">
-	<h1>Claim existing credits</h1>
+	<h1>Suggested credits</h1>
 <% if current_user %>
 	<p>We have found <%= @users.count %> name/s that match yours.</p>
 <% end %>
@@ -23,7 +23,7 @@
 	</div>
 		<% if u.credits.count > 0 %>
 		<% if current_user %>
-<span style="margin-left:25px">	<%= submit_tag "Claim Credits", :class => 'submit' %> </span>
+<span style="margin-left:25px">	<%= submit_tag "CLAIM", :class => 'submit' %> </span>
 		<% else %>
 		<h2>You will need to register with  <%= link_to "Facebook", "/auth/facebook", id: "facebook" %> or 	 <%= link_to "LinkedIn", "/auth/linkedin", id: "linkedin" %> to claim your credits.</h2>
 		<% end %>
@@ -41,7 +41,7 @@
 <% end %>
 <%= form_tag connection_index_path, :method => 'get' do %>
   <%= text_field_tag :name, params[:name], :style => "float:left;" %>
-		 <%= submit_tag "Search", :name => nil, :class => "search-button" %>   
+		 <%= submit_tag "SEARCH", :name => nil, :class => "search-button" %>   
 		 <% end %>
 <% if current_user %>
 <% if @users.nil?  %>

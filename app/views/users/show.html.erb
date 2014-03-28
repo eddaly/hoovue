@@ -277,7 +277,7 @@ $(document).ready(function(){
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
-				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
+			<a href="/users/<%= cv.validator_id %>-<% if @user %><%= @user.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed1">
 					<% if @user %>
 					<% if @user.provider == "facebook" %>
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
@@ -354,7 +354,7 @@ $(document).ready(function(){
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
 				<% @user = User.find_by_id(cv.validator_id) %>
-			<a href="/users/<%= cv.validator_id %>" name="confirmed2">
+		<a href="/users/<%= cv.validator_id %>-<% if @user %><%= @user.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed2">
 				<% if @user %>
 				<% if @user.provider == "facebook" %>
 				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
@@ -428,7 +428,7 @@ $(document).ready(function(){
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
 					<% @user = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
+				<a href="/users/<%= cv.validator_id %>-<% if @user %><%= @user.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed3">
 					<% if @user %>
 					<% if @user.provider == "facebook" %>
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
