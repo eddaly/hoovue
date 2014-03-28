@@ -7,8 +7,12 @@
 		<ul>
 			<% @suggested.each do |p| %>
 				<%= link_to product_path(p) do %>
-				<li>				
+				<li style="min-width:210px; min-height:293px;">
+					<% if p.image %>				
 					<%= image_tag p.image %><br />
+					<% else %>
+					<%= image_tag 'assets/beta/logo-with-bg.png' %><br />
+					<% end %>
 					<h3><%= p.title %></h3><br />
 					<p>Add Credit +</p>
 		
