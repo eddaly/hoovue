@@ -92,6 +92,8 @@ end
   def create 
     @credit = Credit.new(params[:credit])
     @credit.role = params[:role]
+    @credit.confirmed_validations_count = 0
+    @credit.validations_count = 0
      @credit.product_id = @credit.product_idd
      if params[:batch]
      @credit.role = params[:role]
@@ -184,7 +186,7 @@ end
   
   
   def claim
-     Credit.update_all({user_id: @current_user.id}, {id: params[:credit_ids]})
+     Credit.update_all({user_id: @current_user.id, :confirmed_validations_count => "0"}, {id: params[:credit_ids]})
     redirect_to :back
   end
 end
