@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
           @credit_validation.status = "confirmed"
           @credit_validation.save
           @credit_validator = Credit.find_by_id(@credit_validation.credit_id)
-          @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
+          @credit_validator.confirmed_validations_count = @credit_validator.credit_validations.confirmed.count
           @credit_validator.save
         if @credit.save
           
