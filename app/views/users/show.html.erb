@@ -136,7 +136,7 @@ $(document).ready(function(){
 
 	<% end %>
 	
-	<% @credits.limit(30).each do |c| %>
+	<% @credits.each do |c| %>
 	
 	<div class="credit-item"
 	<% if c.product.status == "Ongoing" %>
@@ -193,9 +193,10 @@ $(document).ready(function(){
 	<div class="interesting_fact">
 		<a class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories<% if c.product.status == "Ongoing" %> and Posts<% end %></a>
 	</div>
+	<% @cvcc = c.credit_validations.confirmed.count  %>
 	
 	<div class="validation-info"   style="
-			<% if c.credit_validations.confirmed.empty? %>
+			<% if @cvcc == 0 %>
 			background-color:red;
 			<% end %>
 			
@@ -212,10 +213,9 @@ $(document).ready(function(){
 			<% end %>
 			
 			">
-	
+Conf -	<%= c.credit_validations.confirmed.count %> Count - <%= c.credit_validations.count %> ID <%= c.id %>
 	
 	<p class="cv-count">
-		<% @cvcc = c.credit_validations.confirmed.count  %>
 
 	<p class="validation-status">
 		<% if @cvcc > 2 %>
