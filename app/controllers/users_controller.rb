@@ -30,7 +30,7 @@ if current_user && current_user.id == @user.id
 end
 
   @user_page = User.find(params[:id])
-    @credits = @user.credits.includes(:credit_validations).includes(:posts).includes(:product).includes(:user).order("confirmed_validations_count DESC, credit_validation_count DESC, updated_at DESC")
+    @credits = @user.credits.includes(:credit_validations).includes(:posts).includes(:product).includes(:user).order("promoted DESC, confirmed_validations_count DESC, credit_validation_count DESC, updated_at DESC")
  	 @credits_red = Credit.uniq.where(:id => 300..320)
  
           @credit_validation = CreditValidation.new
