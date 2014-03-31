@@ -163,6 +163,7 @@
 			   <%= f.hidden_field :product_idd, :value => @product.id %>
 			     <%= f.hidden_field :user_id, :value => current_user.id %>
 				     <%= f.hidden_field :user_name, :value => current_user.name %>
+					     <%= f.hidden_field :confirmed_validations_count, :value => "0" %>
 	
 			   <div class="submit">
 			    <%= f.submit 'CREATE CREDIT', :class => "submit" %>

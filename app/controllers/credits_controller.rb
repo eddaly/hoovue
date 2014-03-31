@@ -92,7 +92,6 @@ end
   def create 
     @credit = Credit.new(params[:credit])
     @credit.role = params[:role]
-    @credit.confirmed_validations_count = 0
     @credit.validations_count = 0
      @credit.product_id = @credit.product_idd
      if params[:batch]
