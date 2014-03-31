@@ -9,6 +9,7 @@ class Credit < ActiveRecord::Base
       has_many :credit_validations, :dependent => :destroy
       has_many :posts, :dependent => :destroy
         accepts_nested_attributes_for :credit_validations, allow_destroy: true
+      
   
       #  validates_presence_of :role
      #   validates_uniqueness_of :pending_user_email, :scope => [:credit_validation_id, :product_id ], :message => "A credit with this email and role has already been taken."
@@ -32,6 +33,7 @@ end
 def email_validation
   
 end
+
 
 
 

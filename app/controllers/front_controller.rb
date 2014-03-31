@@ -32,6 +32,7 @@ class FrontController < ApplicationController
 def validate_new_email_credit
   @credit = Credit.find_by_id(params[:credit_id])
   @credit.pending_user_email = current_user.email
+  @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
   @credit.user_id = current_user.id
   if @credit.save
     redirect_to root_url

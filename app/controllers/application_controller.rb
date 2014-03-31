@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
         @credit_validation.validator_id = current_user.id
         @credit_validation.status = "confirmed"
         @credit_validation.save
+        @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
         if @credit.save
          @credit_validation = CreditValidation.new(params[:credit_validation])
           @credit_validation.validator_id = @credit.validator_id
@@ -77,6 +78,9 @@ class ApplicationController < ActionController::Base
              @credit_validation.status = "confirmed"
              @credit_validation.validator_id = current_user.id
              @credit_validation.update_attributes(params[:credit_validationn])
+             @credit_validator = Credit.find_by_id(@credit_validation.credit_id)
+              @credit_validator.confirmed_validations_count = @credit_validator.credit_validations.confirmed.count
+              @credit_validator.save
            else
            end
              @credit_validation = CreditValidation.new(params[:credit_validation])
@@ -85,8 +89,11 @@ class ApplicationController < ActionController::Base
                @credit_validation.status = "confirmed"
                if  @credit.save
                  @credit_validation.credit_id = @credit.id
-                   @credit_validation.save
+                 if  @credit_validation.save
+                   @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
+                   @credit.save
                     session.delete(:credit_id)
+                  end
                   end
                   
                 else

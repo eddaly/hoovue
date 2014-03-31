@@ -4,14 +4,14 @@ class BetaController < ApplicationController
     @users = User.where(:profile_picture.blank?).where("credits_count > ?", 0).where(:provider => "facebook").order("RANDOM()").limit(45)
     @works = Product.limit(80).where("credits_count > ?", 0).where(:image.blank?).order("RANDOM()")
        @popular_works = Product.limit(8).order("credits_count DESC")
-       @recent_credits = Credit.limit(8).order("RANDOM()").order("created_at DESC")
+       @recent_credits = Credit.limit(0).order("RANDOM()").order("created_at DESC")
        if current_user
          
           @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
           @emails = Email.where(:user_id => current_user.id)
-          @emails.each do |email|
-            @unclamied_email_credits = Credit.where(:pending_user_email => email.email)
-              end
+        
+            @unclamied_email_credits = Credit.where(:pending_user_email => current_user.email).where(:user_id.nil?)
+            
                end
   end
 

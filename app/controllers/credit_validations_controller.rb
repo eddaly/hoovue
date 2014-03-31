@@ -101,6 +101,8 @@ class CreditValidationsController < ApplicationController
      @credit_validation_current.status = "pending"
      @credit_validation_current.validator_id = @current_credit_validator
      if @credit_validation_current.save
+        @credit.confirmed_validations_count = @credit.credit_validations.count
+        @credit.save
       redirect_to :back, notice: "Credit Validation Updated"
        else
        redirect_to :back, notice: "Cannot be added. Has this person already validated you?" 
@@ -132,9 +134,12 @@ class CreditValidationsController < ApplicationController
   # PUT /credit_validations/1.json
   def update
     @credit_validation = CreditValidation.find(params[:id])
-
+    @credit = @credit_validation.credit_id
+    @credit.confirmed_validations_count = @credit.credit_validations.count
+   
     respond_to do |format|
       if @credit_validation.update_attributes(params[:credit_validation])
+         @credit.save
         format.html { redirect_to @credit_validation, notice: 'Credit validation was successfully updated.' }
         format.json { head :no_content }
       else

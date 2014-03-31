@@ -3,26 +3,13 @@ class CreditValidation < ActiveRecord::Base
         attr_accessor :current_credit_id  
           belongs_to :credit, :counter_cache => :credit_validation_count
            scope :confirmed, where(:status => "confirmed")
- 
+     
      validates_uniqueness_of :credit_id, :scope => :validator_id, :message => "This user has already validated you."
      
   def generate_token(column)
   begin
     self[column] = SecureRandom.urlsafe_base64
   end while CreditValidation.exists?(column => self[column])
-end
-
-def after_save
-  self.update_counter_cache
-end
-
-def after_destroy
-  self.update_counter_cache
-end
-
-def update_counter_cache
-  self.credit.credit_validation_count = Credit_validation.count
-  self.credit.save
 end
 
   
