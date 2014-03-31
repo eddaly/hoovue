@@ -52,7 +52,9 @@ class ApplicationController < ActionController::Base
           @credit_validation.validator_id = current_user.id
           @credit_validation.status = "confirmed"
           @credit_validation.save
+          @credit_validator = Credit.find_by_id(@credit_validation.credit_id)
           @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
+          @credit_validator.save
         if @credit.save
           
           #Create new CV for use and set as conf with id from validator
