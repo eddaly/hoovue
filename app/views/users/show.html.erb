@@ -12,7 +12,7 @@
 	 
 	<div class="description">
 		<div class="name">
-			<%= @user.name %><% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %><% if @match == "t" %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %>
+			<%= @user.name %> <% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %><% if @match == "t" %><span style="font-size:15px"><%= link_to " (edit profile)", edit_user_path(@user) %> <% end %>
 		</div>
 	
 	<div class="grid_3 profile-picture">

@@ -132,7 +132,7 @@ def update_credit_params
                 end
                   
                 else
-                  redirect_to root_url, :notice => "The email that got you here isn't associated with your profile.  But you can add it <a href=/emails/new>here.</a>".html_safe
+                  redirect_to root_url, :notice => "The email on this credit isn't associated with your profile.  But you can add it <a href=/emails/new>here.</a>".html_safe
                     session.delete(:credit_id)     
                   end
               end

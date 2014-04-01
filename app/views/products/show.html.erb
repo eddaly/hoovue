@@ -226,8 +226,8 @@
 		<p class="role">
 			
 		
-			
-			<%= c.role %> -  
+			<% if c.role %>
+			<%= c.role %><% else %> No role found<% end %> -  
 			 
 			 <% if current_user %>
 							<% if c.user.id == current_user.id  %>
