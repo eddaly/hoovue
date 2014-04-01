@@ -148,7 +148,7 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="more-detail">
-		<p class="role"><%= c.role %> 
+		<p class="role"> <% if c.role %> <%= c.role %> <% else %>No role found<% end %>
 			<% if @match == "t" %>
 							<%= link_to "(edit)", role_credits_path(:id => c) %>
 							<% end %></p>
