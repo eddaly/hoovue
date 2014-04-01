@@ -5,6 +5,16 @@
 
 <div class="user-info-panel">
 	
+	
+	
+	
+
+	 
+	<div class="description">
+		<div class="name">
+			<%= @user.name %><% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %><% if @match == "t" %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %>
+		</div>
+	
 	<div class="grid_3 profile-picture">
 		<% if @user.picture.blank? %>
 	
@@ -19,40 +29,6 @@
 		<% end %>
 		
 	</div>
-	
-	
-	<div class="grid_3 push_1 stats">
-		<div class="stats">
-			<p class="credit-count"><%= @credits.length %></p>
-			<p class="credits">Credits</p>
-			
-			<div class="white-line"> </div>
-				<div class="verified-count">
-					<p class="verified-credits">
-						<%= @verified_credits %>
-					</p>
-					<p class="verifed">Verified</p>
-				</div>
-					<div class="images">
-						<p class="part-count">
-							<%= @part_verified_credits %>
-						</p>
-						<p class="part">Part</p>
-					</div>
-						<div class="videos">
-							<p class="pending-count"><%= @pending_credits %></p>
-							<p class="pending">Pending</p>
-						</div>
-		</div>
-	</div>
-	
-
-	 
-	<div class="description">
-		<div class="name">
-			<%= @user.name %><% if @user.igda == true %> <%= image_tag 'igda-show.png'%><% end %><% if @match == "t" %><span style="font-size:15px"><%= link_to "(edit profile)", edit_user_path(@user) %> <% end %>
-		</div>
-	
 		
 
 		<% if @user.twitter.blank? %>
@@ -117,11 +93,21 @@ $(document).ready(function(){
 
 
 
-
+	<div class="credit-stats">
+		<div class="total-credits"><span class="verified-credits"><%= @verified_credits %> Verified </span>
+				<span class="part-credits"><%= @part_verified_credits %> Part Verified </span>
+					<span class="pending-credits"><%= @pending_credits %> Pending </span></span>
+			
+					
+	</div>
+	
 
 <div class="credits">
 	
-	<h2>Credits</h2>
+	
+	
+	
+	
 	
 	<% if @credits.nil? %>
 	<% if current_user %>
@@ -733,7 +719,7 @@ Conf -	<%= c.credit_validations.confirmed.count %>/<%= c.confirmed_validations_c
 
 	
 </div>
-
+</div>
 <div class="grid_3 activity-feed">
 		
 

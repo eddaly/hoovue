@@ -894,10 +894,12 @@ float:left;
 
 .user-page {
 	
+	h2.total-credits { width:657px; padding:5px; background-color:$light; color:white;}
+	
 	.user-container {
 		
 		.user-info-panel {
-		height:425px;
+		height:260px;
 		background-color:#E5EAED;	
 		padding:10px;
 		
@@ -910,89 +912,7 @@ float:left;
 		}
 		
 		
-		.stats {
-			
-			float:left;
-			background-color: $light;
-			color:white;
-			height:194px;
-			width:280px;
-			
-			
-			p.credit-count {
-			margin-top:25px;
-			text-align:center;
-			font-size:40px;	
-			}
-			
-			p.credits {
-				text-align:center;
-				margin-top:10px;
-				margin-left:95px;
-				font-size:20px;
-				width:50px;
-				padding-bottom:5px;
-				background-color:$light;
-			}
-			
-			.white-line {
-				width:100%;
-				border-bottom:1px solid white;
 		
-			}
-			
-			.verified-count, .images, .videos {
-				float:left;
-				width:45px;
-				padding-right:49px;
-				border-right: 1px solid white;
-				margin-top:10px;
-				text-align:center;
-			
-			p.verified-credits {
-				font-size:25px;
-				margin:20px 0px 5px 35px;
-				
-			}
-			
-			p.verifed, p.pending, p.part {
-				font-size:15px;
-				margin:5px 0 0 17px;
-				
-			}
-			
-			p.pending {
-				margin:5px 0px 0 10px;
-			}
-			
-			p.part {
-				margin:5px 0 0 31px;
-			}
-				}
-			
-			.images {
-			
-				
-			}
-			
-			.pending-count {
-				font-size:25px;
-				margin:20px 0px 5px 28px;
-			}
-			
-			.part-count {
-				font-size:25px;
-				margin:20px 0px 5px 40px;
-			
-			}
-				
-			.videos {
-				border-right:none;
-				padding-left:10px;
-				text-align:center;
-				width:5px;
-			}	
-		}
 		
 		.analytics {
 			
@@ -1030,16 +950,18 @@ float:left;
 		
 		
 		.description {
-			width:500px;
+			width:650px;
 			padding:5px;
-			height:200px;
-			overflow:auto;
+			height:240px;
+			overflow:hidden;
 			
 			
 			.name {
-			font-size:25px;
+				float:left;
+			font-size:35px;
 			width:490px;
-			margin-bottom:10px;	
+			margin-bottom:10px;
+			margin-left:10px;	
 			}
 			
 			.info {
@@ -1115,9 +1037,64 @@ float:left;
 		
 	}
 	
+	
+	.credit-stats {
+	
+		
+		background-color:none;
+	
+		.total-credits, .verified-credits, .part-credits, .pending-credits {
+			margin-right:10px;
+			margin-left:-5px;
+			padding:5px 10px;
+			
+		}
+	
+		.total-credits {
+		
+			color: $light !important;
+			font-size:28px;
+			width:680px;
+			height:28px;
+			padding:14px 5px 5px 5px;
+			margin:15px 0;
+			font-size:20px;
+			color:white;
+			
+	
+		
+	
+		}
+	
+	
+		.verified-credits {
+			background-color:green;
+			font-size:20px;
+			width:150px;
+			color:white;
+		}
+	
+		.part-credits {
+			background-color:#ffa500;
+			font-size:20px;
+			color:white
+		
+		}
+	
+		.pending-credits {
+			background-color:red;
+			font-size:20px;
+			color:white
+		
+		}
+	
+	
+	}
+	
 		.credits {
 			background-color:#F1F5F5;
 			padding:5px 0 5px 15px;	
+		
 			
 			.actions {
 			margin:10px 0px;
