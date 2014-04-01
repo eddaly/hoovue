@@ -3,8 +3,8 @@ class BetaController < ApplicationController
     @featured_users = User.find_all_by_id([13, 3, 19,121,15])
     @users = User.where(:profile_picture.blank?).where("credits_count > ?", 0).where(:provider => "facebook").order("RANDOM()").limit(45)
     @works = Product.limit(80).where("credits_count > ?", 0).where(:image.blank?).order("RANDOM()")
-       @popular_works = Product.limit(8).order("RANDOM()")
-       @recent_credits = Credit.limit(8).order("RANDOM()")
+       @popular_works = Product.order_by_rand.limit(8).all
+       @recent_credits = Credit.order_by_rand.limit(8).all
        if current_user
          
           @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")

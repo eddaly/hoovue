@@ -55,6 +55,7 @@ gem 'acts-as-taggable-on'
 gem  'activerecord-postgresql-adapter'
 gem 'pg'
 gem 'rack-block'
+gem 'randumb'
 
 # To use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.0.0'

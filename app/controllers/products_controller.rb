@@ -45,7 +45,7 @@ end
   def show
     @product = Product.find(params[:id])
     @credits = @product.credits.order("confirmed_validations_count DESC, credit_validation_count DESC, updated_at DESC").includes(:credit_validations).includes(:user).includes(:posts).limit(25)
-	 @credits_red = Credit.limit(20).order("RANDOM()")
+	 @credits_red = Credit.order_by_rand.limit(20).all
         if current_user
           @credit = Credit.new
              @credit_validation = CreditValidation.new
