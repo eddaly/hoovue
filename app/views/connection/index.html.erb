@@ -16,7 +16,7 @@
 		<ul>
 		<% u.credits.each do |credit| %>
 		<li class="<%= cycle('even', 'odd') -%>">
-		<%= image_tag credit.product.image.thumb.to_s || "assets/default-small.png" %><strong><%= best_in_place credit, :role %></strong> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
+		<%= image_tag credit.product.image.thumb.to_s || "assets/default-thumb.png" %><strong><%= best_in_place credit, :role %></strong> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
 		</li>
 		<% end %>
 		</ul>
