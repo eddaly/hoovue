@@ -40,6 +40,11 @@
 		<% end %>
 
 		
+	<div class="info">
+		<p class="url"><a href="http://<%= @user.link %>" target=blank><%= @user.link %></a></p>
+	
+	</div>
+		
 	
 		
 		
@@ -47,11 +52,6 @@
 			<%= @user.bio %>
 		</div>	
 		
-		<div class="info">
-			<p class="url"><a href="http://<%= @user.link %>" target=blank><%= @user.link %></a></p>
-		
-		</div>
-			
 		
 			
 		
@@ -146,7 +146,7 @@ $(document).ready(function(){
 	
 	
 	<div class="user-details">
-		<p class="title">Status</p><p class="data" style="width:300px;">None available</p>
+		<p class="title">Status</p><p class="data" style="width:300px;"> <% if c.product.status.blank? %> Not supplied <% else %> <%= c.product.status %>  <% end %></p>
 	</div>
 	
 	<div class="more-detail">
@@ -201,7 +201,6 @@ $(document).ready(function(){
 			<% end %>
 			
 			">
-Conf -	<%= c.credit_validations.confirmed.count %>/<%= c.confirmed_validations_count %> Count - <%= c.credit_validations.count %>/<%= c.credit_validation_count %> ID - <%= c.id %>
 	
 	<p class="cv-count">
 
@@ -461,17 +460,6 @@ Conf -	<%= c.credit_validations.confirmed.count %>/<%= c.confirmed_validations_c
 		</div>	
 		
 		
-		<% if @match == "t" %>
-		
-		<%= form_for @credit, :url => {:controller => "credits", :action => "update", :id => c.id }, :html => { :method => 'put' } do |f| %>
-			<%= f.hidden_field :promoted, :value => "#{DateTime.now}" %>
-			<%= f.submit "Send to top", :class => "submit" %>
-		
-			<% end %>
-	 	
-		<% end %>
-	
-	
 	
 	
 	

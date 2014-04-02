@@ -1,8 +1,6 @@
 
 <%= form_for(@credit) do |f| %>
 
-<%= f.text_field :confirmed_validations_count %>
-
   <% if @credit.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
@@ -41,7 +39,12 @@
 </div>
 	<% end %>
 	
-
+<% if controller.action_name == 'role' %>
+   <%= f.fields_for :credit_validations do |builder| %>
+     <%= render 'cv_fields', f: builder %>
+   <% end %>
+   
+   <% end  %>
    
   
 
