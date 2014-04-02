@@ -45,7 +45,7 @@ end
   def show
     @product = Product.find(params[:id])
       @credits = @product.credits.order("confirmed_validations_count, credit_validation_count, updated_at DESC").includes(:credit_validations).includes(:user).includes(:posts)
-      @related_products = Product.where(:developed_by => @product.developed_by)
+      @related_products = Product.where(:id != @product.id).where(:developed_by => @product.developed_by)
         @rec_products = Product.uniq.where(:id => 10..20)
     
         if current_user
