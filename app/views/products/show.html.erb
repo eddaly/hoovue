@@ -210,7 +210,6 @@
 		<% if c.user_id.blank? %>
 		<% else %>
 		
-		<% if c.user.provider.blank? %><% else %>
 		
 	<div class="credit-item">
 		<% if c.user %>
@@ -283,7 +282,7 @@
 			<% end %>
 			
 			">
-	
+<% c.user.provider %>	
 	<p class="cv-count">
 	
 	<p class="validation-status">
@@ -722,7 +721,6 @@
 
 
 					<% end %>
-				<% end %>
 				<% end %>
 	
 			</div>
