@@ -513,7 +513,6 @@
 					<% if @user.provider == "facebook" %>
 					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
 					<% else %>
-					<%= image_tag @user.profile_picture || '/assets/deleted.png' %>
 					
 					<% end %>
 					</a>
