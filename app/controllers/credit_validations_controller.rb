@@ -68,7 +68,7 @@ class CreditValidationsController < ApplicationController
   def create
     if params[:one_side]
       @credit_validation = CreditValidation.new(params[:credit_validation])
-      @credit_validation.status = "pending"
+      @credit_validation.status = "confirmed"
       @credit_validation.oneside = "true"
           respond_to do |format|
             if @credit_validation.save

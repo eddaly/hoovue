@@ -9,7 +9,7 @@ class BetaController < ApplicationController
          
           @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")
           @emails = Email.where(:user_id => current_user.id)
-        
+        #  @pending_cv = CreditValidation.where(:user_id => current_user.id).where(:oneside => "true")
             @unclamied_email_credits = Credit.where(:pending_user_email => current_user.email).where(:user_id.nil?)
             
                end
