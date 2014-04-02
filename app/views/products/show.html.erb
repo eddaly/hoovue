@@ -209,6 +209,9 @@
 	<% @credits.each do |c| %>
 		<% if c.user_id.blank? %>
 		<% else %>
+		
+		<% if c.user && c.user.provider.blank? %><% else %>
+		
 	<div class="credit-item">
 		<% if c.user %>
 		<% if c.user.profile_picture %>
@@ -801,6 +804,7 @@
 		
 		
 		</div>	
+			<% end %>
 		<% end %>
 	<% end %>
 	
