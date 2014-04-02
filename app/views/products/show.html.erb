@@ -31,7 +31,7 @@
 	</div>	
 
 	<div class="stats">
-		<p class="credit-count"><%= @credits_c.length %></p>
+		<p class="credit-count"><%= @credits.length %></p>
 		<p class="credits">Credits</p>
 		<div class="white-line"></div>
 			<div class="verified-count">
@@ -819,25 +819,55 @@
 		
 
 			<h3>Did you work on?</h3>
-			<% @credits_red.each do |c| %>
+			
+			
+			<% @related_products.each do |p| %>
+			
 			<div class="following-item" style=:height:50px;>
 
 				<div class="profile-picture">
 
-					<%= image_tag c.product.image, :width => "50" || '/assets/default-thumb.png' %>
+					<%= image_tag p.image, :width => "50" || '/assets/default-thumb.png' %>
 
 				</div>
 
 				<div class="name">
-				<%= link_to product_path(c.product.id) do %><%= truncate(c.product.title, :length => 25) || "unknown" %><% end %>
+				<%= link_to product_path(p) do %><%= truncate(p.title, :length => 25) || "unknown" %><% end %>
 				</div>
 				<div class="stats">
 				<p>Credits</p> <div class="data">
-				 <%= c.product.credits_count %>
+				 <%= p.credits_count %>
 				</div>
 				</div>	<br />
 				<div class="product-title">
-			<%= link_to product_path(c.product.id), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:20px;">Add a credit +</div><% end %>
+			<%= link_to product_path(p), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:20px;">Add a credit +</div><% end %>
+			</div>
+			</div>
+			<% end %>
+
+
+			
+			
+			<% @rec_products.each do |p| %>
+			
+			<div class="following-item" style=:height:50px;>
+
+				<div class="profile-picture">
+
+					<%= image_tag p.image, :width => "50" || '/assets/default-thumb.png' %>
+
+				</div>
+
+				<div class="name">
+				<%= link_to product_path(p) do %><%= truncate(p.title, :length => 25) || "unknown" %><% end %>
+				</div>
+				<div class="stats">
+				<p>Credits</p> <div class="data">
+				 <%= p.credits_count %>
+				</div>
+				</div>	<br />
+				<div class="product-title">
+			<%= link_to product_path(p), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:20px;">Add a credit +</div><% end %>
 			</div>
 			</div>
 			<% end %>
