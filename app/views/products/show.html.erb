@@ -41,7 +41,7 @@
 				<p class="verifed">Verified</p>
 			</div>
 				<div class="images">
-					<p class="verified-credits" style="margin-left:15px !important;">1</p>
+					<p class="verified-credits" style="margin-left:15px !important;"><% if @product.image.blank? %>0<% else %>1<% end %></p>
 					<p class="verifed">Image</p>
 				</div>
 					<div class="videos">
