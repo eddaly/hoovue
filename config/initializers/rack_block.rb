@@ -32,8 +32,12 @@ Hoo::Application.configure do
                                        ip_pattern '91.194.84.' do
                                            halt 401
                                             end
+                                            
+                                            ip_pattern ' 180.76.5.' do
+                                                halt 401
+                                                 end
                                        
-                                    
+                                   
   end
 
 end
