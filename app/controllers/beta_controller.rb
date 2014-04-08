@@ -3,8 +3,40 @@ class BetaController < ApplicationController
     @featured_users = User.find_all_by_id([13, 3, 19,121,15])
     @users = User.where(:profile_picture.blank?).where("credits_count > ?", 0).where(:provider => "facebook").order("RANDOM()").limit(45)
     @works = Product.limit(80).where("credits_count > ?", 0).where(:image.blank?).order("RANDOM()")
-       @popular_works = Product.limit(8).order("RANDOM()")
-       @recent_credits = Credit.limit(8).order("RANDOM()")
+  #  @recent_credits = Credit.limit(8).order("RANDOM()")
+   
+       #Random Popular works
+       
+       offset_1 = rand(Product.count)
+       @pw_1 = Product.first(:offset => offset_1)
+       
+       offset_2 = rand(Product.count)
+       @pw_2 = Product.first(:offset => offset_2)
+       
+       
+       offset_3 = rand(Product.count)
+       @pw_3 = Product.first(:offset => offset_3)
+       
+       
+       offset_4 = rand(Product.count)
+       @pw_4 = Product.first(:offset => offset_4)
+       
+       
+       offset_5 = rand(Product.count)
+       @pw_5 = Product.first(:offset => offset_5)
+       
+         
+          #Random Credits
+          
+       
+          offset_c_1 = rand(Credit.count)
+          @c_1 = Credit.first(:offset => offset_1)
+       
+          offset_c_2 = rand(Credit.count)
+          @c_2 = Credit.first(:offset => offset_2)
+       
+       
+       
        if current_user
          
           @credit_validations = CreditValidation.where(:validator_id => current_user.id).where(:status => "pending")

@@ -12,7 +12,6 @@
 
 
 
-
 <div class="container_12 credits-form">
 	<% if @credit_validations.empty? %>
 	<% else %>
@@ -159,17 +158,48 @@
 			<h2>Popular Works</h2>
 
 			<ul>
-			<% @popular_works.each do |p| %>
-				<li>
-							<%= image_tag p.image %>
-								<div class="title">
-									<%= link_to p.title, product_path(p) %>
-								</div>
-
-								
-
-								</li>
-			<% end %>
+			
+			
+			<li>
+			<%= image_tag @pw_1.image %>
+			<div class="title">
+			<%= link_to @pw_1.title, product_path(@pw_1) %>
+			</div>
+			</li>
+			
+			<li>
+			<%= image_tag @pw_2.image %>
+			<div class="title">
+			<%= link_to @pw_2.title, product_path(@pw_2) %>
+			</div>
+			</li>
+			
+			<li>
+			<%= image_tag @pw_3.image %>
+			<div class="title">
+			<%= link_to @pw_3.title, product_path(@pw_3) %>
+			</div>
+			</li>
+			
+			<li>
+			<%= image_tag @pw_4.image %>
+			<div class="title">
+			<%= link_to @pw_4.title, product_path(@pw_4) %>
+			</div>
+			</li>
+			
+			<li>
+			<%= image_tag @pw_5.image %>
+			<div class="title">
+			<%= link_to @pw_5.title, product_path(@pw_5) %>
+			</div>
+			</li>
+			
+			
+			
+			
+			
+			
 				</ul>
 		</div>
 
@@ -177,36 +207,68 @@
 					<h2>Recent Credits</h2>
 
 					<ul>
-						<% @recent_credits.each do |c| %>
-						<% if c.user %>
+						
+						<% if @c_1.user %>
 						
 						<li>
 
-												<% if c.user.picture.blank? %>
+												<% if @c_1.user.picture.blank? %>
 
-												<% if c.user.provider == "facebook" %>
-											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= c.user.uid %>/picture?type=square" />
+												<% if @c_1.user.provider == "facebook" %>
+											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_1.user.uid %>/picture?type=square" />
 												<% else %>
 													<%= image_tag 'user-default-small.png'%>
 												<% end %>
 
 												<% else %>
-												<%= image_tag c.user.picture %>
+												<%= image_tag @c_1.user.picture %>
 												<% end %>
 												
 												
 												<div class="title" style="float:left; width:280px; margin-top:20px;">
-													<%= link_to c.user.name, user_path(c.user) %>
+													<%= link_to @c_1.user.name, user_path(@c_1.user) %>
 												</div>
 
 												<div class="sats">
-												<strong style="float:left; margin-top:20px;"><%= c.role %>  on &nbsp;  </strong>  <%= link_to c.product.title, product_path(c.product.id), style: "margin-top:20px;float:left;" %>
+												<strong style="float:left; margin-top:20px;"><%= @c_1.role %>  on &nbsp;  </strong>  <%= link_to @c_1.product.title, product_path(@c_1.product.id), style: "margin-top:20px;float:left;" %>
 												</div>
 												
 												</li>
 												<% else %>
 												<% end %>
-						<% end %>
+												
+												
+												
+												
+												<% if @c_2.user %>
+						
+												<li>
+
+																		<% if @c_2.user.picture.blank? %>
+
+																		<% if @c_2.user.provider == "facebook" %>
+																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_2.user.uid %>/picture?type=square" />
+																		<% else %>
+																			<%= image_tag 'user-default-small.png'%>
+																		<% end %>
+
+																		<% else %>
+																		<%= image_tag @c_2.user.picture %>
+																		<% end %>
+												
+												
+																		<div class="title" style="float:left; width:280px; margin-top:20px;">
+																			<%= link_to @c_2.user.name, user_path(@c_2.user) %>
+																		</div>
+
+																		<div class="sats">
+																		<strong style="float:left; margin-top:20px;"><%= @c_2.role %>  on &nbsp;  </strong>  <%= link_to @c_2.product.title, product_path(@c_2.product.id), style: "margin-top:20px;float:left;" %>
+																		</div>
+												
+																		</li>
+																		<% else %>
+																		<% end %>
+						
 						</ul>
 				</div>
 
