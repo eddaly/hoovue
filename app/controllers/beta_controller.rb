@@ -36,6 +36,18 @@ class BetaController < ApplicationController
           @c_2 = Credit.first(:offset => offset_2)
        
        
+          offset_c_3 = rand(Credit.count)
+          @c_3 = Credit.first(:offset => offset_3)
+       
+          offset_c_4 = rand(Credit.count)
+          @c_4 = Credit.first(:offset => offset_4)
+       
+       
+          offset_c_5 = rand(Credit.count)
+          @c_5 = Credit.first(:offset => offset_5)
+       
+       
+       
        
        if current_user
          

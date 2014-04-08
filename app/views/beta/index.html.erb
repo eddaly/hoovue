@@ -269,6 +269,112 @@
 																		<% else %>
 																		<% end %>
 						
+						
+						
+						
+						
+						
+						
+						<% if @c_3.user %>
+
+						<li>
+
+												<% if @c_3.user.picture.blank? %>
+
+												<% if @c_3.user.provider == "facebook" %>
+											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_3.user.uid %>/picture?type=square" />
+												<% else %>
+													<%= image_tag 'user-default-small.png'%>
+												<% end %>
+
+												<% else %>
+												<%= image_tag @c_3.user.picture %>
+												<% end %>
+						
+						
+												<div class="title" style="float:left; width:280px; margin-top:20px;">
+													<%= link_to @c_3.user.name, user_path(@c_3.user) %>
+												</div>
+
+												<div class="sats">
+												<strong style="float:left; margin-top:20px;"><%= @c_3.role %>  on &nbsp;  </strong>  <%= link_to @c_3.product.title, product_path(@c_3.product.id), style: "margin-top:20px;float:left;" %>
+												</div>
+						
+												</li>
+												<% else %>
+												<% end %>
+												
+												
+												<% if @c_4.user %>
+						
+												<li>
+
+																		<% if @c_4.user.picture.blank? %>
+
+																		<% if @c_4.user.provider == "facebook" %>
+																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_4.user.uid %>/picture?type=square" />
+																		<% else %>
+																			<%= image_tag 'user-default-small.png'%>
+																		<% end %>
+
+																		<% else %>
+																		<%= image_tag @c_4.user.picture %>
+																		<% end %>
+												
+												
+																		<div class="title" style="float:left; width:280px; margin-top:20px;">
+																			<%= link_to @c_4.user.name, user_path(@c_2.user) %>
+																		</div>
+
+																		<div class="sats">
+																		<strong style="float:left; margin-top:20px;"><%= @c_4.role %>  on &nbsp;  </strong>  <%= link_to @c_4.product.title, product_path(@c_4.product.id), style: "margin-top:20px;float:left;" %>
+																		</div>
+												
+																		</li>
+																		<% else %>
+																		<% end %>
+																		
+																		
+																		
+																		
+												
+  												<% if @c_5.user %>
+						
+  												<li>
+
+  																		<% if @c_5.user.picture.blank? %>
+
+  																		<% if @c_5.user.provider == "facebook" %>
+  																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_5.user.uid %>/picture?type=square" />
+  																		<% else %>
+  																			<%= image_tag 'user-default-small.png'%>
+  																		<% end %>
+
+  																		<% else %>
+  																		<%= image_tag @c_5.user.picture %>
+  																		<% end %>
+												
+												
+  																		<div class="title" style="float:left; width:280px; margin-top:20px;">
+  																			<%= link_to @c_5.user.name, user_path(@c_5.user) %>
+  																		</div>
+
+  																		<div class="sats">
+  																		<strong style="float:left; margin-top:20px;"><%= @c_5.role %>  on &nbsp;  </strong>  <%= link_to @c_5.product.title, product_path(@c_5.product.id), style: "margin-top:20px;float:left;" %>
+  																		</div>
+												
+  																		</li>
+  																		<% else %>
+  																		<% end %>
+												  
+												
+						
+						
+						
+						
+						
+						
+						
 						</ul>
 				</div>
 
