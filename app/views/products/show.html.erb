@@ -348,18 +348,9 @@
 					<% c.credit_validations.each do |cv| %>
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
-					<% @user = User.find_by_id(cv.validator_id) %>
+					<% @user_validator = User.find_by_id(cv.validator_id) %>
 				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
-					<% if @user %>
-					<% if @user.provider == "facebook" %>
-					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag @user.profile_picture %>
-					<% end %>
-					</a>
-					<% else %>
-					<%= image_tag '/assets/deleted.png' %>
-					<% end %>
+					<%= render '/users/user_validator_images'  %>
 				</span>
 	
 				<% end %>
@@ -430,19 +421,11 @@
 			<% c.credit_validations.each do |cv| %>
 			<% if cv.status == "confirmed" %>
 			<span class="picture">
-				<% @user = User.find_by_id(cv.validator_id) %>
+				<% @user_validator = User.find_by_id(cv.validator_id) %>
 			<a href="/users/<%= cv.validator_id %>" name="confirmed2">
-				<% if @user %>
-				<% if @user.provider == "facebook" %>
-				<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
-				<% else %>
-				<%= image_tag @user.profile_picture %>
-				
-				<% end %>
-				</a>
-				<% else %>
-				<%= image_tag '/assets/deleted.png' %>
-				<% end %>
+
+				<%= render '/users/user_validator_images'  %>
+
 			</span>
 			<% end %>
 				<% if cv.status == "pending" %>
@@ -508,19 +491,11 @@
 	
 				<% if cv.status == "confirmed" %>
 				<span class="picture">
-					<% @user = User.find_by_id(cv.validator_id) %>
+					<% @user_validator = User.find_by_id(cv.validator_id) %>
 				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
-					<% if @user %>
-					<% if @user.provider == "facebook" %>
-					<img  src="http://graph.facebook.com/<%= @user.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag @user.profile_picture %>
-					
-					<% end %>
-					</a>
-					<% else %>
-					<%= image_tag '/assets/deleted.png' %>
-					<% end %>
+
+					<%= render '/users/user_validator_images'  %>
+
 				</span>
 				<% end %>
 					<% if cv.status == "pending" %>
