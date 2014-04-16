@@ -20,8 +20,8 @@
 	
 		<% if @user.provider == "facebook" %>		
 	<img  style="margin-top:3px;" src="http://graph.facebook.com/<%= @user.uid%>/picture?type=large"><br />
-		<% else %>
-			<%= image_tag 'user-default.gif'%>
+		<% elsif @user.provider == "linkedin"%>
+			<%= image_tag @user.profile_picture %>
 		<% end %>
 		
 		<% else %>
@@ -344,11 +344,11 @@ $(document).ready(function(){
 				<% @user_validator = User.find_by_id(cv.validator_id) %>
 		<a href="/users/<%= cv.validator_id %>-<% if @user_validator %><%= @user_validator.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed2">
 				<% if @user_validator %>
-				<%= @user_validator.provider %>
+				
 				<% if @user_validator.provider == "facebook" %>
 				<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
 				<% elsif @user_validator.provider == "linkedin" %>
-				linkedin
+				
 					<%= image_tag @user.profile_picture %>
 				<% else %>
 
