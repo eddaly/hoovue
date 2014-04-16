@@ -42,7 +42,7 @@
 
 		<ul>
 	<% @unclamied_email_credits.each do |u| %>
-		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> <%= u.user_id %>on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit >", front_validate_new_email_credit_url(:credit_id => u.id), :class => "blue-btn" %> </span> </li>
+		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit >", front_validate_new_email_credit_url(:credit_id => u.id), :class => "blue-btn" %> </span> </li>
 	<% end %>
 
 </ul>
