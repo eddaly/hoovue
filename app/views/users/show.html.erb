@@ -266,16 +266,9 @@ $(document).ready(function(){
 				<span class="picture">
 					<% @user_validator = User.find_by_id(cv.validator_id) %>
 			<a href="/users/<%= cv.validator_id %>-<% if @user_validator %><%= @user_validator.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed1">
-					<% if @user_validator %>
-					<% if @user_validator.provider == "facebook" %>
-					<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag @user.profile_picture %>
-					<% end %>
-					</a>
-					<% else %>
-					<%= image_tag '/assets/deleted.png' %>
-					<% end %>
+					
+					<%= render '/users/user_validator_images'  %>
+
 				</span>
 	
 				<% end %>
@@ -343,22 +336,7 @@ $(document).ready(function(){
 			<span class="picture">
 				<% @user_validator = User.find_by_id(cv.validator_id) %>
 		<a href="/users/<%= cv.validator_id %>-<% if @user_validator %><%= @user_validator.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed2">
-				<% if @user_validator %>
-				
-				<% if @user_validator.provider == "facebook" %>
-				<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
-				<% elsif @user_validator.provider == "linkedin" %>
-				
-					<%= image_tag @user.profile_picture %>
-				<% else %>
-
-				<%= image_tag @user.profile_picture %>
-				
-				<% end %>
-				</a>
-				<% else %>
-				<%= image_tag '/assets/deleted.png' %>
-				<% end %>
+				<%= render '/users/user_validator_images'  %>
 			</span>
 			<% end %>
 				<% if cv.status == "pending" %>
@@ -422,18 +400,9 @@ $(document).ready(function(){
 				<span class="picture">
 					<% @user_validator = User.find_by_id(cv.validator_id) %>
 				<a href="/users/<%= cv.validator_id %>-<% if @user_validator %><%= @user_validator.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed3">
-					<% if @user_validator %>
+				
+					<%= render '/users/user_validator_images'  %>
 
-					<% if @user_validator.provider == "facebook" %>
-					<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag @user.profile_picture %>
-					
-					<% end %>
-					</a>
-					<% else %>
-					<%= image_tag '/assets/deleted.png' %>
-					<% end %>
 				</span>
 				<% end %>
 					<% if cv.status == "pending" %>

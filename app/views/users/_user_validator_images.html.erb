@@ -1,0 +1,16 @@
+				<% if @user_validator %>
+				
+				<% if @user_validator.provider == "facebook" %>
+				<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
+				<% elsif @user_validator.provider == "linkedin" %>
+				
+					<%= image_tag @user_validator.profile_picture %>
+				<% else %>
+
+				<%= image_tag @user_validator.picture %>
+				
+				<% end %>
+				</a>
+				<% else %>
+				<%= image_tag '/assets/deleted.png' %>
+				<% end %>
