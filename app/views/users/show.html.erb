@@ -419,12 +419,7 @@ $(document).ready(function(){
 				<a href="/users/<%= cv.validator_id %>-<% if @user_validator %><%= @user_validator.name.gsub( /\W/, '-' ) %><%end%>" name="confirmed3">
 					<% if @user_validator %>
 					<% if @user_validator.provider == "facebook" %>
-					<% if @user_validator.uid.blank? %>
 					<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
-					<% else %>
-					<%= image_tag '/assets/pending.png' %>	
-					<% end %>
-
 					<% else %>
 					<%= image_tag @user.profile_picture %>
 					
