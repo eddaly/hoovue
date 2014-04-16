@@ -348,6 +348,7 @@ $(document).ready(function(){
 				<% if @user_validator.provider == "facebook" %>
 				<img  src="http://graph.facebook.com/<%= @user_validator.uid %>/picture?type=square">
 				<% elsif @user_validator.provider == "linkedin" %>
+				linkedin
 					<%= image_tag @user.profile_picture %>
 				<% else %>
 
