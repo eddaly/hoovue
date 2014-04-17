@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
         
           @credit.user_id = current_user.id
           @credit.user_name = current_user.name
+          @credit.status = "confirmed"
           
           #Find validators CV and update
           
@@ -99,7 +100,7 @@ def update_credit_params
           redirect_to @credit
           @credit.user_id = current_user.id
           @credit.user_name = current_user.name
-          
+          @credit.status = "confirmed"
         #Find validators CV and update status  
           
           @credit_validation = CreditValidation.find_by_id(@credit.credit_validation_id)

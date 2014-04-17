@@ -21,7 +21,7 @@ class FrontController < ApplicationController
             end  
                   
                 
-          @unclaimed = Credit.where(:pending_user_email => current_user.email).where(:user_id => nil)
+          @unclaimed = Credit.where(:status => "pending").where(:pending_user_email => current_user.email).where(:user_id => nil)
             @flagged_credits = CreditValidation.where(:user_id => current_user.id).where(:status => "pending").where(:credit_id => true)  
               @empty_credits = Credit.where(:user_id => current_user.id).limit(3)
         @credit_validation = CreditValidation.new
@@ -34,6 +34,7 @@ def validate_new_email_credit
   @credit.pending_user_email = current_user.email
   @credit.confirmed_validations_count = @credit.credit_validations.confirmed.count
   @credit.user_id = current_user.id
+  @credit.status = "confirmed"
   if @credit.save
     redirect_to root_url
   end

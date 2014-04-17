@@ -4,16 +4,16 @@
 
 <% @user = User.find_by_id(current_user.id) %>
 <% @credit = Credit.find_by_id(params[:credits_id])%>
-<p><%= @user.name %> is managing their online creative legacy. As a team member, <%= @user.name %> would like you to validate their Credit on <%= @credit.product.title %>. </p>
 
-<p>whoactually is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. </p>
+<p><%= @user.name %> is managing their online creative legacy. As a team member, <%= @user.name %> would like you to validate their Credit on <strong> <%= @credit.product.title %></strong>. </p>
 
-<p><%= @user.name %> claims the following Credit on <%= @credit.product.title %>:<%= @credit.role %>. <%= @user.name %> also recorded that you were (their role) on <%= @credit.product.title %>.</p>
+<p style="font-style:italic;">whoactually is the platform for all Creators to own and manage their Credits and get the public recognition they deserve. </p>
+
+<p><%= @user.name %> claims the following Credit on <%= @credit.product.title %>: <%= @credit.role %>. <%= @user.name %> also recorded that you were (their role) on <%= @credit.product.title %>.</p>
 
 <p style=margin-bottom:20px;>To validate this Credit and to claim your own Credit <a href"#">click here</a></p>
 
 
-
-<a href="JavaScript:window.close()" class="blue-link" style="float:none; m">Close and return to invite</a>
+<a href="JavaScript:window.close()" class="blue-link" style="float:none; background-color:#00adef; padding:3px; color:white;">Close and return to invite</a>
 
 </div>
