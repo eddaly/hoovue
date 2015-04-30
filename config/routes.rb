@@ -3,7 +3,7 @@ Hoo::Application.routes.draw do
 
 
 
-  get "connection/index"
+  get "connection/index", as: :connections
   
 
   resources :platforms
@@ -48,28 +48,37 @@ Hoo::Application.routes.draw do
 
 
   resources :credits do
-     collection do
-     post :import 
-     match 'role'
-     match 'search'
-     match 'search_new'
-     match 'batch'
-     put :claim
-   end
-   member do
-     put :increase
-     put :flag
-     put :claim
-   end
-end
-
-
-  resources :products do
-    member do
-      get 'like'
-      get 'complete'
+    collection do
+      get :recent
+      post :import 
+      match 'role'
+      match 'search'
+      match 'batch'
+      put :claim
     end
-end
+    member do
+      put :increase
+      put :flag
+      put :claim
+    end
+  end
+
+
+  resources :products, execpt: [:index, :destroy] do
+
+    member do
+      post :invite
+    end
+
+    collection do
+      get :recent
+      get :popular
+    end
+    #member do
+    #get 'like'
+    #get 'complete'
+    #end
+  end
 
 
 #Rails Admin
@@ -102,8 +111,8 @@ match "message_preview", to: 'credits#validate-message', :as => 'message_preview
 #Front
 
 match "legal", to: 'front#legal', :as => 'legal'
-match "terms", to: 'front#terms', :as => 'terms'
-match "privacy", to: 'front#legal', :as => 'privacy'
+get :terms, to: "front#terms"
+get :privacy, to: "front#privacy"
 match "suggested", to: 'front#suggested', :as => 'suggested'
 
 root :to => "beta#index"

@@ -1,75 +1,59 @@
+<% if @products.present? %>	
+<h2><i class="fa fa-archive"></i> Games</h2>
 
-<div class="activity-feed">
-	<% if @products %>
-	<% @products.each do |p| %>
-	<script type="text/javascript">
- 
-	$(document).ready(function(){
- 
-	        $(".slidingDiv<%= p.id %>").hide();
-	        $(".show_hide<%= p.id %>").show();
- 
-	    $('.show_hide<%= p.id %>').click(function(){
-	    $(".slidingDiv<%= p.id %>").slideToggle();
-	    });
- 
-	});
- 
-	</script>
+  <ul>
+    <% @products.each do |p| %>
+      <li>
+        <%= link_to p do %>
+          <% if p.image? %>
+            <%= image_tag p.image.thumb.to_s, :class => 'cover_art' %>
+          <% else %>
+            <%= image_tag '/assets/beta/placeholder-cover.png', :class => 'cover_art'%>
+          <% end %>
+          <h3><%= p.title %></h3>
+          <span>
+            <% if p.product_genre_id.present? %>
+              <%= p.product_genre.name %>
+            <% end %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>	
+  </ul>
+  <%= paginate @products %>
+<% end %>
 
-	<% end %>
-	<div class="activity-feed">
-		<% if @users %>
-		<h2>Users:</h2>
-	<ul>
-	<% @users.each do |u| %>
-	<%= link_to u do %>
-	
-	<li class="<%= cycle('even', 'odd') -%>">
-		<% if u.provider == "facebook" %>
-		
-	<img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square">	
-		
-		<% else %>
-		<% if u.profile_picture %>
-		<%= image_tag u.profile_picture, :width => "50", :height => "50" %>
-		<% else %>
-		<%= image_tag 'default-thumb.png' %>
-		<% end %>
-		
-		
-		<% end %>
-<%= link_to u.name, user_path(u) %>
-	</li>
-	<%end%>
-		<%end%>
-	</ul>
-			<%else%>
-		
-			<%end%>
-	</div>	
-	
-	<h2>Works we know about:</h2>
-<ul>
-<% @products.each do |p| %>
-<%= link_to p do %>
-<li class="<%= cycle('even', 'odd') -%>">
-<span style="float:left; margin:10px 10px;">	<% if p.image? %><%= image_tag p.image.thumb.to_s %> <%else%> <%= image_tag '/assets/default-thumb.png'%> <%end%></span> <h2> <%= link_to p.title, product_path(p)%>  <span style="margin-left:20px;"> <% if p.product_genre_id.present? %><%= p.product_genre.name %> <%end%></h2> 
-	
+<% if @users.present? %>
+  <h2><i class="fa fa-users"></i> People</h2>
 
- </span>
- </li>
-<%end%>
-	<%end%>	
-	<%else%>
+  <ul class="people">
+    <% @users.each do |u| %>
+      <li>
+        <%= link_to u do %>
+          <% if u.provider == "facebook" %>
+            <img src="http://graph.facebook.com/<%= u.uid%>/picture?type=square" class="user">	
+          <% else %>
+            <% if u.profile_picture %>
+              <%= image_tag u.profile_picture, :class => 'user' %>
+            <% else %>
+              <%= image_tag '/assets/beta/placeholder-user.png', :class => 'user' %>
+            <% end %>
+          <% end %>
 
-	<%end%>
-</ul>
-</div>
+          <h3><%= u.name %></h3>
 
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
-	
-	
+  <%= paginate @users %>
+<% end %>
 
-</div>
+<% if @projects.blank? &&  @users.blank? %>
+  <div class="noresults">
+  <p>Sorry, your search returned no results. <br>We may not yet have it in our database.</p>
+  <p><%= link_to "Add a new game", new_product_path, class: "btn" %></p>
+  </div>
+<% end %>
 

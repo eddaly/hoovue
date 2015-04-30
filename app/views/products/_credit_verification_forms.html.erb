@@ -1,0 +1,57 @@
+<% 3.times do |i| %>
+
+  <% if cv = credit.credit_validations.to_a[i] %>
+    <span class="picture <%= cv.status %>">
+      <% if cv.confirmed? %>
+        <% @user_validator = User.find_by_id(cv.validator_id) %>
+        <%= link_to user_path(cv.validator), name: "confirmed#{i}" do %>
+          <%= render '/users/user_validator_images'  %>
+        <% end %>
+      <% end %>
+
+      <% if cv.pending? %>
+        <% if current_user && current_user.id == credit.user_id %>
+          <%= link_to credit_validation_path(cv) do %>
+            <%= image_tag '/assets/beta/placeholder-user.png' %>
+          <% end %>
+        <% else %>
+          <a>
+          <%= image_tag '/assets/beta/placeholder-user.png' %>
+        </a>
+        <% end %>
+      <% end %>
+    </span>
+  <% else %>
+    <span class="picture empty">
+      <% if current_user && current_user.id == credit.user_id  %>
+      <% else %>
+
+      <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+<% if current_user && current_user.id != credit.user_id %>
+  <%= render "credit_validation_form", credit: credit, credit_validation: credit_validation %>
+<% end %>
+
+<% if credit.credit_validations.confirmed.count > 0 && credit.credit_validations.confirmed.count < 3  %>
+  <span class="fa-stack part_verified">
+    <i class="fa fa-circle fa-stack-2x"></i>
+    <i class="fa fa-check fa-stack-1x white"></i>
+  </span>
+<% else %>
+  <% if credit.credit_validations.confirmed.count > 2  %>
+    <span class="fa-stack verified">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-check fa-stack-1x white"></i>
+    </span>
+<% else %>
+  <% if credit.credit_validations.confirmed.count == 0  %>
+    <span class="fa-stack part_verified">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-question fa-stack-1x white"></i>
+    </span>
+  <% end %>
+<% end %>
+<% end %>

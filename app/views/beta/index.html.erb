@@ -1,386 +1,103 @@
 <div class="index">
 
 
-<div class="row-1">
-
-<% if current_user %>
-
-
-
-
-
-
-
-
-<div class="container_12 credits-form">
-	<% if @credit_validations.empty? %>
-	<% else %>
-	<h2 style="color:white;">Validation Requests</h2>
-	<% end %>
-	<ul>
-	<% @credit_validations.each do |cv| %>
-		<% c = Credit.find_by_id(cv.credit_id)%>
-		<li class="<%= cycle('even', 'odd') -%>">
-		<p><% if c.product.image? %>
-				<%= image_tag c.product.image.thumb.to_s %>
-					 <%else%> 
-				<%= image_tag '/assets/default-credit-small.jpg'%>
-		 <%end%>  
-	
-  <%= c.user.name %> was a <%= c.role%>  on   <%= link_to c.product.title, product_path(c.product)%> <%= link_to "VALIDATE", validate_credit_validation_path(cv), :method=>:put, :class => "blue-btn", :style => "margin-left:300px;"  %><p>
-   		
-				
-   		</li>
-	<% end %>
-	</ul>
-
-</div>
-<div class="container_12 user-messages">
-	<% if @unclamied_email_credits  %>
-
-<div class= "activity-feed">
-
-		<ul>
-	<% @unclamied_email_credits.each do |u| %>
-		<li class="<%= cycle('even', 'odd') -%>"><h3><%= u.role %> on <%= u.product.title %></h3> <span class="right" style="margin-top:-80px;"><%= link_to "Claim Credit >", front_validate_new_email_credit_url(:credit_id => u.id), :class => "blue-btn" %> </span> </li>
-	<% end %>
-
-</ul>
-<% else %>
-
-<% end %>
-
-
-
-<% if current_user %>
-<div class="container_12 user-messages">
-	<% if @pending_cv  %>
-
-<div class= "activity-feed">
-
-		<ul>
-	<% @pending_cv.each do |cv| %>
-
-	<% @user = User.find_by_id(cv.user_id) %>
-	<% @credit = Credit.find_by_id(cv.credit_id) %>
-	<% @user_validator = User.find_by_id(cv.validator_id) %>
-
-	<% if @user %>
-	<% if @credit %>
-	<% @product = Product.find_by_id(@credit.product_id) %>
-		<li class="<%= cycle('even', 'odd') -%>"><h3><%= @user_validator.name %> verified you on <%= @product.title %> <span class="right" style="margin-top:-10px;"><%= link_to "Accept    ",  validate_credit_validation_path(cv), :method=>:put %> or <%= link_to '  Delete', cv, method: :delete, data: { confirm: 'Are you sure?' }, :class => "blue-link" %></span></h3> </li>
-		<% end %>
-		<% end %>
-		<% end %>
-
-	<% end %>
-
-</ul>
-<% else %>
-
-<% end %>
-
-
-	</div>
-	</div>
-	
-	</div>
-	<% end %>
-	<div class="container_12 row-1-content">
-
-<% if current_user %>
-	<div class="grid_12">
-		<h2 style="margin:-20px 0 30px 0;">You have <%= current_user.credits.count %> credits. Add more:</h2>
-		<%= form_tag search_credits_path, :method => 'get' do %>
-		  <%= text_field_tag :search, params[:search], style: "float:left; margin-left:30px; width:700px; height:58px; font-size:25px; border:none; padding-top:0px 0;" %>
-				 <%= submit_tag "SEARCH", style: "background-color:#003e46; border:none; height:58px; color:white; margin-left:-20px;" %>
-
-				 <p>or try our automatic <%= link_to 'credit finder.', connection_index_path, style: "color:white; text-decoration:underline;" %></p>
-		<% end %>
-	</div>
-
-	<% else %>
-
-		<h1>Who actually makes all the films, games, TV shows, videos, music, design, artwork, websites, comics and other cool stuff you love?</h1>
-		<p>Whether you're in the business or a fan, or both, get the insider stories behind the work, from the people who actually make it all happen.</p>
-
-
-
-		<iframe src="http://player.vimeo.com/video/70016170?byline=0&amp;portrait=0&amp;color=ff0179" width="624" height="351" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-			<% end %>
-	</div>
-
-</div>
-
-<% if current_user %>
-<% else %>
-<div class="row-2">
-	<div class="container_12 row-2-content">
-		<h1>Sign-up or sign-in to WhoActually</h1>
-
-		<h2 style="text-align:center;">Not a member? <a href="/connection/index" style="text-decoration:underline;">Tell us who you are</a> to view your existing credits.</h2>
-
-	<p>We will NEVER post anything or contact any of your friends without permission. We'll only use your profile picture (which you can change) and the email address registered to that account to communicate with you.</p>
-		<div class="signin">
-			<div class="grid_3 push_1">
-			 <%= link_to "Sign in With Facebook", "/auth/facebook", id: "facebook" %>
-
-
-			 </div>
-		</div>
-
-		<div class="grid_2 push_2 or">
-			<%= image_tag '/assets/beta/or-circle.png' %>
-		</div>
-		<div class="signin">
-			<div class="grid_3 push_2">
-
-			 <%= link_to "Sign in with LinkedIn", "/auth/linkedin", id: "linkedin" %>
-
-			 </div>
-		</div>
-	</div>
-	<div class="container_12">
-		<p>By creating your WhoActually account you agree to our <a>Terms of Use</a> and  <a>Privacy Policy</a></p>
-</div>
-</div>
-<% end %>
-
-
-<div class="row-3">
-	<div class="container_12 slider">
-
-	</div>
-
-	<div class="container_12 charts">
-		<div class="grid_10 popular">
-			<h2>Popular Works</h2>
-
-			<ul>
-			
-			
-			<li>
-			<%= image_tag @pw_1.image %>
-			<div class="title">
-			<%= link_to @pw_1.title, product_path(@pw_1) %>
-			</div>
-			</li>
-			
-			<li>
-			<%= image_tag @pw_2.image %>
-			<div class="title">
-			<%= link_to @pw_2.title, product_path(@pw_2) %>
-			</div>
-			</li>
-			
-			<li>
-			<%= image_tag @pw_3.image %>
-			<div class="title">
-			<%= link_to @pw_3.title, product_path(@pw_3) %>
-			</div>
-			</li>
-			
-			<li>
-			<%= image_tag @pw_4.image %>
-			<div class="title">
-			<%= link_to @pw_4.title, product_path(@pw_4) %>
-			</div>
-			</li>
-			
-			<li>
-			<%= image_tag @pw_5.image %>
-			<div class="title">
-			<%= link_to @pw_5.title, product_path(@pw_5) %>
-			</div>
-			</li>
-			
-			
-			
-			
-			
-			
-				</ul>
-		</div>
-
-		<div class="grid_10 popular">
-					<h2>Recent Credits</h2>
-
-					<ul>
-						
-						<% if @c_1.user %>
-						
-						<li>
-
-												<% if @c_1.user.picture.blank? %>
-
-												<% if @c_1.user.provider == "facebook" %>
-											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_1.user.uid %>/picture?type=square" />
-												<% else %>
-													<%= image_tag 'user-default-small.png'%>
-												<% end %>
-
-												<% else %>
-												<%= image_tag @c_1.user.picture %>
-												<% end %>
-												
-												
-												<div class="title" style="float:left; width:280px; margin-top:20px;">
-													<%= link_to @c_1.user.name, user_path(@c_1.user) %>
-												</div>
-
-												<div class="sats">
-												<strong style="float:left; margin-top:20px;"><%= @c_1.role %>  on &nbsp;  </strong>  <%= link_to @c_1.product.title, product_path(@c_1.product.id), style: "margin-top:20px;float:left;" %>
-												</div>
-												
-												</li>
-												<% else %>
-												<% end %>
-												
-												
-												
-												
-												<% if @c_2.user %>
-						
-												<li>
-
-																		<% if @c_2.user.picture.blank? %>
-
-																		<% if @c_2.user.provider == "facebook" %>
-																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_2.user.uid %>/picture?type=square" />
-																		<% else %>
-																			<%= image_tag 'user-default-small.png'%>
-																		<% end %>
-
-																		<% else %>
-																		<%= image_tag @c_2.user.picture %>
-																		<% end %>
-												
-												
-																		<div class="title" style="float:left; width:280px; margin-top:20px;">
-																			<%= link_to @c_2.user.name, user_path(@c_2.user) %>
-																		</div>
-
-																		<div class="sats">
-																		<strong style="float:left; margin-top:20px;"><%= @c_2.role %>  on &nbsp;  </strong>  <%= link_to @c_2.product.title, product_path(@c_2.product.id), style: "margin-top:20px;float:left;" %>
-																		</div>
-												
-																		</li>
-																		<% else %>
-																		<% end %>
-						
-						
-						
-						
-						
-						
-						
-						<% if @c_3.user %>
-
-						<li>
-
-												<% if @c_3.user.picture.blank? %>
-
-												<% if @c_3.user.provider == "facebook" %>
-											<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_3.user.uid %>/picture?type=square" />
-												<% else %>
-													<%= image_tag 'user-default-small.png'%>
-												<% end %>
-
-												<% else %>
-												<%= image_tag @c_3.user.picture %>
-												<% end %>
-						
-						
-												<div class="title" style="float:left; width:280px; margin-top:20px;">
-													<%= link_to @c_3.user.name, user_path(@c_3.user) %>
-												</div>
-
-												<div class="sats">
-												<strong style="float:left; margin-top:20px;"><%= @c_3.role %>  on &nbsp;  </strong>  <%= link_to @c_3.product.title, product_path(@c_3.product.id), style: "margin-top:20px;float:left;" %>
-												</div>
-						
-												</li>
-												<% else %>
-												<% end %>
-												
-												
-												<% if @c_4.user %>
-						
-												<li>
-
-																		<% if @c_4.user.picture.blank? %>
-
-																		<% if @c_4.user.provider == "facebook" %>
-																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_4.user.uid %>/picture?type=square" />
-																		<% else %>
-																			<%= image_tag 'user-default-small.png'%>
-																		<% end %>
-
-																		<% else %>
-																		<%= image_tag @c_4.user.picture %>
-																		<% end %>
-												
-												
-																		<div class="title" style="float:left; width:280px; margin-top:20px;">
-																			<%= link_to @c_4.user.name, user_path(@c_2.user) %>
-																		</div>
-
-																		<div class="sats">
-																		<strong style="float:left; margin-top:20px;"><%= @c_4.role %>  on &nbsp;  </strong>  <%= link_to @c_4.product.title, product_path(@c_4.product.id), style: "margin-top:20px;float:left;" %>
-																		</div>
-												
-																		</li>
-																		<% else %>
-																		<% end %>
-																		
-																		
-																		
-																		
-												
-  												<% if @c_5.user %>
-						
-  												<li>
-
-  																		<% if @c_5.user.picture.blank? %>
-
-  																		<% if @c_5.user.provider == "facebook" %>
-  																	<img alt="Picture?type=square" src="http://graph.facebook.com/<%= @c_5.user.uid %>/picture?type=square" />
-  																		<% else %>
-  																			<%= image_tag 'user-default-small.png'%>
-  																		<% end %>
-
-  																		<% else %>
-  																		<%= image_tag @c_5.user.picture %>
-  																		<% end %>
-												
-												
-  																		<div class="title" style="float:left; width:280px; margin-top:20px;">
-  																			<%= link_to @c_5.user.name, user_path(@c_5.user) %>
-  																		</div>
-
-  																		<div class="sats">
-  																		<strong style="float:left; margin-top:20px;"><%= @c_5.role %>  on &nbsp;  </strong>  <%= link_to @c_5.product.title, product_path(@c_5.product.id), style: "margin-top:20px;float:left;" %>
-  																		</div>
-												
-  																		</li>
-  																		<% else %>
-  																		<% end %>
-												  
-												
-						
-						
-						
-						
-						
-						
-						
-						</ul>
-				</div>
-
-	</div>
-</div>
-
-
+  <!-- New Hero Area -->
+  <div class="hero">
+
+    <ul class="backgrounds">
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <div class="project_slider">
+
+      <% @featured_products.each do |product| %>
+        <div>
+          <div class="container_12">
+            <h5><%= product.title %></h5>
+            <div class="project_details" data-product-url="<%= product_url(product, anchor: 'add_credit') %>">
+              <%= product_image_tag product, {size: :post}, {class: "cover_art"} %>
+              <ul class="team">
+                <% product.credits.limit(3).each do |credit| %>
+                  <li>
+                    <%= render "/shared/profile_image", user: credit.user, credit: credit %>
+                    <div class="profile_info">
+                      <span class="profile_name"><%= credit.name %></span>
+                      <span class="profile_role"><%= credit.role %></span>
+                      <%= content_tag(:p, credit.role_desc, class: "profile_description") %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div> <!-- Close project_slider -->
+
+    <div class="container_12">
+
+      <a href="#" id="add-credit" class="add_credit hidden">
+          <i class="fa fa-plus"></i>
+      </a>
+
+      <div class="grid_8 intro">
+        <h1 class="hero-h1"><span class="logotype">WhoActually</span> <span class="phrase"></span></h1>
+
+        <p>Beyond a job title — Find out who did what on a particular game, film and more...
+          Scout talent, read insider stories or claim credit for your own role.</p>
+
+        <a href="#" class="btn"><i class="fa fa-play-circle"></i> See how it works</a>
+
+      </div> <!-- Close grid_6 -->
+    </div> <!-- Close container_12 -->
+
+    <div class="bottom_bar">
+    </div>
+
+  </div> <!-- Close hero -->
+
+  <!-- Video Overlay -->
+  <div class="video">
+    <iframe src="http://player.vimeo.com/video/70016170?byline=0&amp;portrait=0&amp;color=00cc99" width="800" height="450" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+  </div>
+
+  <div class="lists">
+    <div class="container_12">
+      <div class="grid_4">
+        <h3>Recent Projects</h3>
+        <ul>
+          <% @recent_products.each do |product| %>
+            <li><%= render "product_mini", product: product %></li>
+          <% end %>
+        </ul>
+        <%= link_to "view more", recent_products_path, class: "more" %>
+      </div>
+
+      <div class="grid_4">
+        <h3>Most Popular</h3>
+        <ul>
+          <% @popular_products.each do |product| %>
+            <li><%= render "product_mini", product: product %></li>
+          <% end %>
+        </ul>
+        <%= link_to "view more", popular_products_path, class: "more" %>
+      </div>
+
+
+      <div class="grid_4">
+        <h3>Recent Credits</h3>
+        <ul class="credits">
+          <% @recent_credits.each do |credit| %>
+            <li><%= render "credit_mini", credit: credit %></li>
+          <% end %>
+        </ul>
+        <%= link_to "view more", recent_credits_path, class: "more" %>
+      </div>
+    </div> <!-- Close container_12 -->
+
+  </div> <!-- Close lists -->
 
 </div>

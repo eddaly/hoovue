@@ -1,73 +1,42 @@
 <%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+  <%= render "/shared/error_messages", target: @user %>
+
+  <h2>Edit Your Profile Picture</h2>
+
+  <% if @user.picture %>
+    <%= image_tag @user.picture.small, :class => "picture" %>
+  <% else %>
+  <% if @user.profile_picture %>
+	  <%= image_tag @user.profile_picture, :class => "picture" %>
+  <% end %>
   <% end %>
 
   <div class="field">
-    <%= f.label :email_address %>
-    <%= @user.email %>
+  <%= f.file_field :picture, :class => "browse" %>
   </div>
-  <div class="additional" style="margin-bottom:10px;">
-  	
-  <%= f.label :addtional_email_addresses %>
- <ul> 
-  <% @emails.each do |email| %>
-  
-     <li><%= email.email %> <%= link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-  	
-  <% end %>
-  </ul>
- <%= link_to 'Add Additional Email +', new_email_path %>
- <br />
- </div>
- 
- <% if @user.picture %>
- <%= image_tag @user.picture.small %>
-	<% else %>
-	<% if @user.profile_picture %>
-	  	<%= image_tag @user.profile_picture %>	 
-	 <% end %>
-	<% end %> 
-  <div class="field">
-    <%= f.label :upload_your_own_picture %>
-  <%= f.file_field :picture %>
-  </div>
-  <br />
+
+
+  <h2>Edit Your Bio</h2>
+
   <div class="field">
     <%= f.label :tell_us_a_little_about_yourself %>
   <%= f.text_area :bio, :rows => '10', :style => "height:150px;" %>
   </div>
+
+  <h2>Edit Your Personal Website URL</h2>
+
   <div class="field">
-    <%= f.label :links_to_personal_websites_or_something_you_are_currently_working_on %>
-   http:// <%= f.text_field :link %>
-   Why this link? <%= f.text_field :link_desc %><br />
-   
-   http:// <%= f.text_field :link_2 %>
-   Why this link? <%= f.text_field :link_2_desc %><br />
-   
-   http:// <%= f.text_field :link_3 %>
-   Why this link? <%= f.text_field :link_3_desc %>
+    <%= f.label :link_to_your_personal_website %>
+    <span>http://</span><%= f.text_field :link %>
   </div>
+
+  <h2>Twitter</h2>
+
   <div class="field">
-    <%= f.label :we_can_display_your_twitter_feed_in_your_profile_page_if_you_enter_your_twitter_username_here %>
-    @<%= f.text_field :twitter %>
-	
-	
-	<%= f.text_field :credits_count %>
-	
+    <%= f.label :provide_your_twitter_username_below_to_add_it_to_your_profile %>
+    <span>@</span><%= f.text_field :twitter %>
   </div>
-  <div class="fields">
-	  <%= f.label :Igda_member %>
-	  <%= image_tag 'igda-edit.png' %>
-	  <%= f.check_box :igda %><br />
-  </div>
-  
+
   <div class="actions"><%= f.submit "SAVE", :class => "submit" %></div>
+
 <% end %>

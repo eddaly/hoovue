@@ -10,6 +10,14 @@
  *
  *= require_self
  *= require jquery.ui.datepicker
- *= require select2
- *= require_tree .
+ *= require font-awesome/font-awesome
+ *= require 960
+ *= require credits
+ *= require front
+ *= require jquery.tooltip
+ *= require products
+ *= require users
+ *= require slick
+ *= require beta
+ 
  */

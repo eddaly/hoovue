@@ -1,101 +1,69 @@
 @import "mixins.css.scss";
 
+$mint: #00cc99;
+
 .new-credit {
-	@include white-box;
-	margin:20px 0 0px 0;
-	padding:5px;
-	
-    h2 {
-   	 border-bottom: 1px solid #f1f1f1;
+  /*@include white-box;*/
+  margin:20px 0 0px 0;
+  padding: 10px 40px 40px 40px;
+
+  background: none repeat scroll 0% 0% rgba(172, 190, 190, 0.2);
+  border-radius: 0px 0px 4px 4px;
+}
+
+form.new_product {
+  .buttons {
+    margin-top: 2em;
+
+    .btn {
+      display: block;
+      height: 40px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      text-align: center;
+      background: $mint;
+      padding: 0 10px;
+      font-family: 'Gotham SSm A', 'Gotham SSm B';
+      font-weight: 800;
+      -webkit-font-smoothing: antialiased;
+      &:hover {
+        background: darken($mint, 5%);
+      }
     }
-	
-	.role, .desc, .issue, .fact {
-		input, textarea {
-			border:none;
-			margin:15px;
-			border-bottom:1px solid grey;	
-			-webkit-border-radius: 0px;
-			-moz-border-radius: 0px;
-			border-radius: 0px;
-			box-shadow: none;
-			 -webkit-box-shadow: none; 
-			 -moz-box-shadow: none; 
-			
-	}
-	
-	input:focus{
-		box-shadow: none;
-		    -webkit-box-shadow: none; 
-		    -moz-box-shadow: none;
-			border-bottom:1px solid grey; 
-		
-	}
-	
-}
-	
-.role {
-	input {
-		font-size:20px;	
-}
-}
-		
-	
-	
-	.desc {
-		input {
-			width:460px;	
-	}
-	}
-		
-		
-	
-	
-	.fact {
-		textarea {
-		border:1px solid grey;
-		margin-left:400px;	
-		margin-top: -25px;
-		}
-		
-		.counter {
-		margin-left:600px;		
-		}
-	}
-	
-	.submit {
-		input[type=submit] {
-		@include white-box;
-		padding:10px 0 30px;	
-		}
-	}
-	
-	
+  }
 }
 
 .credit-validate-container {
-	float:left;
-	width:800px;
-	
+  float:left;
+  width:800px;
+
 }
 
 .update {
-	ul {
-		
-		li {
-			float:left;
-	 	width:90%;   
-		margin: 10px 0px;
-		border:1px solid grey;	
-		padding:10px;
-		
-		.date {
-			
-		}
-		
-		.p {
-			
-		}
-			
-		}
-	}
+  ul {
+
+    li {
+      float:left;
+      width:90%;   
+      margin: 10px 0px;
+      border:1px solid grey;	
+      padding:10px;
+
+      .date {
+
+      }
+
+      .p {
+
+      }
+
+    }
+  }
 }

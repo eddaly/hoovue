@@ -1,0 +1,21 @@
+<div class="search_header">
+    <div class="container_12">
+        <h1 class="grid_12">
+          <%= @page_title || "Product listing" %>
+        </h1>
+    </div>
+</div>
+
+<div class="container_12">
+
+  <div class="search_results grid_12">
+    <%= render "products_list", products: @products %>
+  </div>
+
+  <% if @products.respond_to? :current_page %>
+    <div class="grid_12">
+      <%= paginate @products %>
+    </div>
+  <% end %>
+</div>
+

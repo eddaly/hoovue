@@ -1,0 +1,11 @@
+<%= form_for(credit_validation) do |f| %>
+  <%= f.hidden_field :credit_id, :value => "#{credit.id}" %>
+  <%= f.hidden_field :user_id, :value => "#{credit.user_id}" %>
+  <%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
+  <%= f.hidden_field :status, :value => "confirmed" %>
+
+  <% if @user_credits.count > 0 %>
+    <%= f.submit "+", :name => "one_side", :class => "submit-one-side" %>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,6 @@
+<div class="project project-image" style="background-image: url('<%= (credit.product.image || '/assets/beta/placeholder-cover.png') %>'); "></div>
+<h5><%= link_to credit.user.name, user_path(credit.user) %></h5>
+<p><%= credit.role %></p>
+<h6><%= link_to credit.product.title, product_path(credit.product) %></h6>
+
+<%= render "shared/profile_image", user: credit.user, credit: credit %>

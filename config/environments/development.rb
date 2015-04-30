@@ -12,29 +12,14 @@ Hoo::Application.configure do
   
   ENV['rel'] = "12345"
   
-  ENV['DEFAULT_URL'] = "localhost:3000"
+  ENV['DEFAULT_URL'] = "localdocker:3000"
   
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   
-      config.action_mailer.default_url_options = { :host => "localhost:3000" }
-  
-          #SMTP settings
-            
-              config.action_mailer.delivery_method = :smtp
-          
-                #Gmail Settings
-                    
-                    config.action_mailer.smtp_settings = { 
-                  :address => "smtp.gmail.com",
-                  :port => 587, 
-                  :domain => "gmail.com",
-                  :authentication => 'plain',
-                  :user_name => 'hoovue@beo.so',
-                  :password => 'waterloo12',
-                  :enable_starttls_auto => true
-                }
-
-  
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = {
+    host: "localhost:5000"
+  }
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

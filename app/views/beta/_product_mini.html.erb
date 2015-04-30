@@ -1,0 +1,22 @@
+<div class="project project-image" style="background-image: url('<%= (product.image || '/assets/beta/placeholder-cover.png') %>'); "></div>
+<h5><%= link_to product.title, product_path(product) %></h5>
+<h6><%= product.platforms %></h6>
+
+<% if product.credits.any? %>
+  <ul class="team">
+    <% product.credits.uniq_user.limit(3).each do |credit| %>
+      <li class="profile_img">
+        <%= image_tag((credit.user.profile_picture  || '/assets/beta/placeholder-user.png'), :class => 'user') %>
+        <span class="fa-stack verified">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-check fa-stack-1x white"></i>
+        </span>
+      </li>
+    <% end %>
+    <% if product.credits.uniq_user.count > 3 && product.credits.uniq_user.count < 100 %>
+      <li class="profile_more">+<%= product.credits.uniq_user.count %></li>
+    <% elsif product.credits.uniq_user.count > 100 %>
+      <li class="profile_more">•••</li>
+    <% end  %>
+  </ul>
+<% end %>

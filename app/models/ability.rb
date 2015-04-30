@@ -5,32 +5,35 @@ class Ability
     if @current_user
       user = @current_user
     else
-       user ||= User.new # guest user (not logged in)
-     end
-        if user.googleplus == "lecrabe"
-          can :manage, :all  
-          can :destroy, :all
-          can :access, :rails_admin   
-          can :dashboard              
-        end
-        
-        if user.role == "user"
-          can :read, :all  
-                      can :manage, User, :id => user.id
-                        cannot :destroy, User
-                          can [:create, :flag, :increase], Credit
-                            can :manage, Credit, :user_id => user.id
-                              can :update, Credit, :user_id => nil
-                              can [:create, :update, :like, :complete], Product
-                                can :manage, CreditValidation
-                                    can :access, :rails_admin   
-                                      can :dashboard 
-                                        cannot [:create, :destroy], Email, :user_id => user.id
-        end
-        if user.role.nil?
-          cannot :manage, :all
-            can :read, :all  
-       end
+      user ||= User.new # guest user (not logged in)
+    end
+    if user.googleplus == "lecrabe"
+      can :manage, :all  
+      can :destroy, :all
+      can :access, :rails_admin   
+      can :dashboard              
+    end
+
+    if user.role == "user"
+      can :read, :all  
+      can :manage, User, :id => user.id
+      cannot :destroy, User
+      can [:create, :flag, :increase], Credit
+      can :manage, Credit, :user_id => user.id
+      can :update, Credit, :user_id => nil
+
+      can [:recent, :popular, :create, :update, :like, :complete, :invite], Product
+
+      can :manage, CreditValidation
+      can :access, :rails_admin   
+      can :dashboard 
+      cannot [:create, :destroy], Email, :user_id => user.id
+    end
+    if user.role.nil?
+      cannot :manage, :all
+      can :read, :all  
+      can [:popular, :recent], Product
+    end
     #
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are

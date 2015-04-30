@@ -1,53 +1,57 @@
-<div class="container_12 pages">
-	<h1>Suggested credits</h1>
-<% if current_user %>
-	<p>We have found <%= @users.count %> name/s that match yours.</p>
-<% end %>
+<div class="search_header">
+<div class="container_12">
+  <h1 class="grid_12">Suggested credits</h1>
+</div>
+</div>
 
-<% @users.each do |u| %>
+<div class="container_12">
 
-<% if u.nil? %>
-<% if current_user %>
-<p>We could not match your name to any existing credits.</p>
-<% end %>
-<% else %>
-	<%= form_tag claim_credits_path, method: :put do %>
-	<div class="activity-feed">
-		<ul>
-		<% u.credits.each do |credit| %>
-		<li class="<%= cycle('even', 'odd') -%>">
-		<%= image_tag credit.product.image.thumb.to_s || "assets/default-thumb.png" %><strong><%= best_in_place credit, :role %></strong> on <%= credit.product.title %>  <%= check_box_tag "credit_ids[]", credit.id %> <br />
-		</li>
-		<% end %>
-		</ul>
-	</div>
-		<% if u.credits.count > 0 %>
-		<% if current_user %>
-<span style="margin-left:25px">	<%= submit_tag "CLAIM", :class => 'submit' %> </span>
-		<% else %>
-		<h2>You will need to register with  <%= link_to "Facebook", "/auth/facebook", id: "facebook" %> or 	 <%= link_to "LinkedIn", "/auth/linkedin", id: "linkedin" %> to claim your credits.</h2>
-		<% end %>
-			
-		<% end %>
-	<% end %>
-<% end %>
+  <% if @claimable_credits.empty? %>
+      <div class="search_results grid_12">
+    <p>We could not automatically detect any unclaimed credits for <em><%= params[:name] || current_user.try(:name) %></em></p>
+      </div>
+  <% else %>
+    <%= form_tag claim_credits_path, method: :put do %>
 
-<% end %>
+      <div class="search_results grid_12">
+        <ul>
+          <% @claimable_credits.each do |credit| %>
+            <li class="<%= cycle('even', 'odd') -%>">
+              <%= link_to credit.product do %>
+                <%= image_tag credit.product.image.thumb.to_s || '/assets/beta/placeholder-cover.png', :class => 'cover_art' %>
+                <h3><%= credit.product.title %></h3>
+                <span> <%= best_in_place credit, :role %> </span>
+              <% end %>
+              <%= check_box_tag "credit_ids[]", credit.id if current_user %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
 
-<% if current_user %>
-<h2>Go under a different first name? Please enter the full correct name.</h2>
-<% else %>
-<h2>Please enter your full name so we can search for your credits.</h2>
-<% end %>
-<%= form_tag connection_index_path, :method => 'get' do %>
-  <%= text_field_tag :name, params[:name], :style => "float:left;" %>
-		 <%= submit_tag "SEARCH", :name => nil, :class => "search-button" %>   
-		 <% end %>
-<% if current_user %>
-<% if @users.nil?  %>
-<% else %>
-<h2><%= link_to 'Or visit your profile >', user_path(current_user) %></h2>
-<% end %>
-<% end %>
+      <div class="grid_12 accept_credits">
+        <% if current_user %>
+          <%= submit_tag "CLAIM THESE CREDITS", :class => 'submit' %>
+        <% else %>
+          <p>You will need to <%= link_to "register with Facebook", "/auth/facebook", id: "facebook" %> to claim your credits.</p>
+        <% end %>
+      </div>
+
+    <% end %>
+  <% end %>
+
+  <div class="grid_12 search_withname">
+
+    <%= form_tag connections_path, :method => 'get' do %>
+      <% if current_user %>
+        <p>Go under a different first name? Please enter the full correct name.</p>
+      <% else %>
+        <p>Please enter your full name so we can search for your credits.</p>
+      <% end %>
+
+      <%= text_field_tag :name, (params[:name] || current_user.name), :class => "search_field" %>
+      <%= submit_tag "SEARCH", :name => nil, :class => "search_button" %>
+    <% end %>
+
+  </div>
 
 </div>

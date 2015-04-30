@@ -1,18 +1,14 @@
 class ConnectionController < ApplicationController
-  
+
+  before_filter do |controller|
+    controller.params[:name] = nil if params[:name].blank?
+    controller.params[:name] ||= current_user.try(:name)
+  end
+
   def index
-    if @current_user
-      if params[:name]
-        @users = User.where(:name => params[:name]).where("developer_id > ?", 1) 
- 
-      else
-        @users = User.where(:name => @current_user.name).where("developer_id > ?", 1) 
- 
+    @users = User.search(params[:name] || current_user.name)
+    @claimable_credits = @users.map{ |user| user.credits.claimable.all }.flatten.uniq
+    @claimable_credits.delete_if{ |credit| credit.user == current_user } if current_user
   end
-    else
-      @users = User.where(:name => params[:name]).where("developer_id > ?", 1) 
- 
-  end
-  end
-  
+
 end

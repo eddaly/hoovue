@@ -1,0 +1,10 @@
+<div class="profile_img">
+  <%= profile_image_tag credit.user, nil, {:class => 'user'} %>
+  <% if credit && credit.confirmed? %>
+    <span class="fa-stack verified">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-check fa-stack-1x white"></i>
+    </span>
+  <% end %>
+</div>
+

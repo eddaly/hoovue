@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.string   "tag_list"
     t.string   "release"
     t.string   "category"
+    t.string   "source"
   end
 
   add_index "credits", ["product_id"], :name => "index_credits_on_product_id"
@@ -235,8 +236,6 @@ ActiveRecord::Schema.define(:version => 20130118001758655) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
-
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

@@ -1,854 +1,191 @@
+<div class="project_header">
+
+    <div class="cover_background" style="background-image: url(<% if @product.image.blank? %><%= '/assets/beta/placeholder-cover.png' %><% else %><%= @product.image.small %><% end %>)"></div>
+
+    <div class="container_12">
+
+        <div class="cover_art grid_3">
+        	<% if @product.image.post.blank? %>
+            	<%= image_tag '/assets/beta/placeholder-cover.png' %>
+            <% else %>
+            	<%= image_tag @product.image.post %>
+            <% end %>
+        </div>
+
+        <div class="description grid_6">
+            <h1><%= @product.title %></h1>
+        	<ul class="details">
+        	    <li class="clearfix"><h4>Category</h4><p><%= @product.product_genre.name %></p></li>
+              <li class="clearfix"><h4>Released</h4><p>2013</p></li>
+        		<li class="clearfix"><h4>Developer</h4><p><%= @product.developed_by %></p></li>
+        		<li class="clearfix"><h4>Publisher</h4><p><%= @product.published_by %></p></li>
+        	</ul>
+
+
+          <% if @product.can_buy_on_amazon? %>
+            <span class="amazon_btn">
+              <%= link_to amazon_affilliate_url(@product), target: "_blank" do %>
+                Buy from <%= image_tag '/assets/beta/amazon.png' %>
+            <% end %>
+          </span>
+        <% end %>
+        </div>
+
+    </div> <!-- Close container_12 -->
+
+</div> <!-- Close header_area -->
+
+<div class="container_12 content">
+
+  <% unless @credits.empty? %>
+    <h2><i class="fa fa-users"></i> The Team</h2>
+
+    <div class="credit_list clearfix">
+
+        <ul class="grid_12">
+            <% @credits.each do |c| %>
+                <% if c.user_id.blank? %>
+                <% else %>
+            <li class="clearfix">
+                <a href="<%= user_path(c.user) %>" class="user grid_3">
+                    <% if c.user.profile_picture %>
+                        <%= image_tag c.user.profile_picture, :class => 'profile_img' %>
+                    <% else %>
+                        <%= image_tag '/assets/beta/placeholder-user.png', :class => 'profile_img' %>
+                    <% end %>
+                    <p class="details">
+                        <span class="name"><%= c.user.name %></span>
+                        <span class="role"><%= c.role %></span>
+                    </p>
+                </a>
+                <p class="role_description grid_5"><%= c.role_desc %></p>
+
+                <% if c.credit_validations.confirmed.count == 2  %>
+    				<!-- Add Check -->
+    			<% end %>
+
+    			<div class="insider grid_1">
+    			    <% if c.fact %>
+        			    <a href="#<%= c.user_id %>_story"><i class="fa fa-book"></i></a>
+        			<% else %>
+        			    &nbsp;
+        			<% end %>
+    			</div>
+
+          <div class="verification grid_3">
+            <%= render "credit_verification_forms", credit: c, credit_validation: @credit_validation %>
+          </div>
+
+            </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+    </div>
+  <% end %>
+
+  <%= link_to "#", {class: "add_credit"} do %>
+    <span class="fa-stack verified fa-lg">
+      <i class="fa fa-circle-thin fa-stack-2x"></i>
+      <i class="fa fa-plus fa-stack-1x"></i>
+    </span>
+    Were you part of this team? <span>Add a credit</span>
+  <% end %>
+
+  <div class="addcredit_form grid_12">
+    <% if current_user %>
+      <%= form_for @credit do |f| %>
+        <%= f.hidden_field :product_id %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :user_name %>
+
+        <fieldset>
+          <div>
+            <%= f.label :role, 'What was your role?' %>
+            <%= f.text_field :role %>
+          </div>
+
+          <div>
+            <%= f.label :role_desc, 'What did you actually do?' %>
+            <%= f.text_field :role_desc %>
+          </div>
+
+          <div>
+            <%= f.label :fact, 'Do you have any insider stories?' %>
+            <%= f.text_area :fact %>
+          </div>
+
+          <div>
+            <label>When were you involved?</label>
+            <br><br>
+            <%= f.label :startdate, 'From' %>
+            <%= f.date_select :startdate, {discard_month: true, discard_day: true} %>
+            <%= f.label :enddate, 'Until' %>
+            <%= f.date_select :enddate, {discard_month: true, discard_day: true} %>
+          </div>
+
+        </fieldset>
+
+        <div class="buttons">
+          <%= f.submit :class => 'btn' %>
+        </div>
+
+      <% end %>
+    <% else %>
+      <p>You need to <%= link_to "Login", "/auth/facebook", id: "login_with_facebook" %> before you can add credits</p>
+    <% end %>
+  </div>
+
+  <%= link_to "#", {class: "invite_team_member"} do %>
+    <span class="fa-stack verified fa-lg">
+      <i class="fa fa-circle-thin fa-stack-2x"></i>
+      <i class="fa fa-paper-plane fa-stack-1x"></i>
+    </span>
+    Do you know someone who was part of this team? <span>Invite them to add their credit</span>
+  <% end %>
+  <div class="invite_team_member_form grid_12">
+    <% if current_user %>
+      <%= form_tag invite_product_url(@product) do |f| %>
+        <fieldset>
+          <div>
+            <label for="email">Email</label>
+            <%= text_field_tag :email %>
+          </div>
+
+        </fieldset>
+
+        <div class="buttons">
+          <%= submit_tag "Invite", :class => 'btn' %>
+        </div>
+
+      <% end %>
+    <% else %>
+    <% end %>
+  </div>
+
+
+  <% if (credits_with_facts = @credits.select{|credit| credit.fact.present? }).any? %>
+    <h2><i class="fa fa-book"></i> Insider Stories</h2>
+
+    <div class="stories clearfix">
+
+      <ul class="grid_12">
+        <% credits_with_facts.each do |credit| %>
+          <li id="<%= credit.user_id %>_story" class="clearfix">
+            <%= link_to user_path(credit.user), class: "user grid_4" do %>
+              <%= profile_image_tag credit.user, nil, {class: "profile_img"} %>
+              <p>
+                <span class="name"><%= credit.user.name %></span>
+                <span class="role"><%= credit.role %></span>
+              </p>
+            <% end %>
+            <p class="fact grid_7"><%= credit.fact %></p>
+          </li>
+        <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+
+</div> <!-- Close container_12 -->
 
-<div class="container_12 work-page">
-	<div class="grid_9 work-container">
-		
-	
-<div class="work-info-panel">
-	<div class="title">
-		<%= @product.title %>
-		<% if @product.moderation_status = "Pending" %>
-		(content updated)
-		<% end %>
-	<% if current_user %>
-		<%= link_to '(edit work)', edit_product_path(@product, :name => @product.product_genre.id) %>
-	<% end %>	
-	</div>
-	<div class="genre">
-	<% if @product.product_genre %><p><%= @product.product_genre.name %><%end%>
-	</div>	
-	
-	<div id="slides">	
-			<% if @product.image.blank? %>
-		<div class="slides">
-			<%= image_tag '/assets/beta/logo-with-bg.png'%>
-		</div>	
-		<%else%>
-		<div class="slides">
-			<%= image_tag @product.image.small %>
-		</div>	
-		<%end%>
-		
-	</div>	
-
-	<div class="stats">
-		<p class="credit-count"><%= @credits.length %></p>
-		<p class="credits">Credits</p>
-		<div class="white-line"></div>
-			<div class="verified-count">
-				<p class="verified-credits">
-					0
-				</p>
-				<p class="verifed">Verified</p>
-			</div>
-				<div class="images">
-					<p class="verified-credits" style="margin-left:15px !important;"><% if @product.image.blank? %>0<% else %>1<% end %></p>
-					<p class="verifed">Image</p>
-				</div>
-					<div class="videos">
-						<p class="verified-credits" style="margin-left:4px;">0</p>
-						<p class="verifed">Videos</p>
-					</div>
-	</div>
-
-
-	<div class="description-containter">
-		
-		
-		<div class="description">
-			<div class="details">
-				<p class="description-title">Date added</p><p class="data"><%= @product.created_at.strftime("%Y")  || "None Found" %></p>
-				<p class="description-title">Published By   </p><p class="data" style="width:150px;"> <%= truncate(@product.published_by, length: 25) || " N/A" %></p><br /><br />
-				<p class="description-title">Status</p><p class="data"><%= @product.status || " N/A"  %></p>
-				<p class="description-title">Developer</p><p class="data" style="width:150px;"><%= truncate(@product.developed_by, length: 30) || " N/A"  %></p>
-				
-		
-			</div>
-			
-			<p class="description-text"><%= @product.description || " Not supplied."  %></p>	
-			
-		</div>
-		<div class="actions">
-		
-		<a type=amzn class="blue-btn" search="<%= @product.title %>">Buy on Amazon ></a>
-		
-		
-		
-		
-		</div>
-		
-		
-		<% if current_user %>
-		<script type="text/javascript">
-
-		$(document).ready(function(){
-
-		        $("#slidingDiv_add_new").hide();
-		        $("#show_hide_add_new").show();
-
-		    $('#show_hide_add_new').click(function(){
-		    $("#slidingDiv_add_new").slideToggle();
-		    });
-
-		});
-
-		</script>
-		
-		<div id="slidingDiv_add_new">
-			
-				
-				<h2>Add your credit</h2>
-				<%= form_for(@credit) do |f| %>
-			  <% if @credit.errors.any? %>
-			    <div id="error_explanation">
-			      <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
-
-			      <ul>
-			      <% @credit.errors.full_messages.each do |msg| %>
-			        <li><%= msg %></li>
-			      <% end %>
-			      </ul>
-			    </div>
-			  <% end %>
-			 <div class="role">
-				 <!--[if IE]>
-				 <strong>Your role (e.g. job title)</strong><br/>
-				 <![endif]-->
-			  <%= f.text_field :role, :placeholder => "Your role (e.g. job title)", :class => "role" %>  
-			  </div>
-  
-			
-			
- 
- 
-				  <% if @product.product_genre.name == "Comic" %>
-				   <div class="desc">
-			<p>Please include details of the range of issues or other information for which your credit relates.</p>
-				   <%= f.text_field :issue %>
-			
-				 </div>
-				 <% end %>
- 
- 
- 
-				 <!--[if IE]>
-				 <strong>What you actually did</strong><br/>
-				 <![endif]--> 
-			 <div class="desc">
-			  <%= f.text_field :role_desc, :placeholder => "What you actually did" %>
-			 </div>
-			 <!--[if IE]>
-			 <strong>Your insider story (remember to Tag team members or others involved in your story)</strong><br/>
-			 <![endif]-->
-			   <div class="fact">
-		<%= f.text_area :fact, :rows => '2', :placeholder => "Your insider story (remember to Tag team members or others involved in your story)"	 %>
-				<br />
-			  </div>
-			  
-			
-				<div class="namecheck" style="margin-top:3px;">
-					
-				
-				<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= @product.id %>" class="blue-btn" target="blank">Tag a Facebook Friend</a>
-			  </div>
-			  <h3>When did you work on <%= @product.title %>?<br />
-		 <%= f.date_select :startdate, :discard_month => true, :start_year => 1950, :prompt => "Year you started work" %>
-		 
-		  <%= f.date_select :enddate, :discard_month => true, :start_year => 1950, :prompt => "Year you finished work" %>	 
-			 
-		
-			
-		
-			
-			  
-			   <%= f.hidden_field :product_idd, :value => @product.id %>
-			     <%= f.hidden_field :user_id, :value => current_user.id %>
-				     <%= f.hidden_field :user_name, :value => current_user.name %>
-					 
-					 
-					 
-	
-			   <div class="submit">
-			    <%= f.submit 'CREATE CREDIT', :class => "submit" %>
-				</div>
-  
-			<% end %>
-			
-				
-		
-		</div>
-		<% end %>
-	</div>	
-	
-	</div>	
-	
-	
-	
-	
-<div class="credits">
-<% if current_user %>
-
-
-<div style="margin:30px;">
-	
-
-		<a id="show_hide_add_new" class="grn-btn" style="">Add credit
-		<%= image_tag '/assets/beta/btn-icon.png' %>
-		</a>
-		
-			
-		
-		<div style="float:right;">
-		<select onchange="if (this.value) window.location.href=this.value">
-			    <option value="1">Sort by..</option>
-			    <option value="/products/<%= @product.id %>?sort=created_at desc">Most Recent</option>
-			    <option value="/products/<%= @product.id %>?sort=verified">Verified</option>
-			</select>
-		</div>	
-		</div>
-<% end %>
-	<% @credits.each do |c| %>
-		<% if c.user_id.blank? %>
-		<% else %>
-		
-		<% if c.user && c.user.provider.blank? %><% else %>
-		
-	<div class="credit-item">
-		<% if c.user %>
-		<% if c.user.profile_picture %>
-	<%= image_tag c.user.profile_picture, :width => "50" %>	 
-		<% end %>	
-	<div class="user-name">
-	<%= link_to c.user.name, user_path(c.user) %>
-	</div>
-	
-	<div class="user-details">
-		<p class="title">Credits</p><p class="data" style="width:300px;"><%= c.user.credits.count %></p>
-	</div>
-	
-	<div class="more-detail">
-		<p class="role">
-			
-		
-			<% if c.role %>
-			<%= c.role %><% else %> No role found<% end %> -  
-			 
-			 <% if current_user %>
-							<% if c.user.id == current_user.id  %>
-							<%= link_to "(edit)", role_credits_path(:id => c) %>
-							<% end %> <% end %></p>
-		<p class="role-description"><%= c.role_desc %><% if current_user %>
-							<% if c.user.id == current_user.id  %>
-							<%= link_to "(edit)", role_credits_path(:id => c) %>
-							<% end %> <% end %></p>
-	</div>
-	
-	
-	<script type="text/javascript">
- 
-	$(document).ready(function(){
- 
-	        $(".slidingDiv_interesting_fact_<%= c.id %>").hide();
-	        $(".show_hide_interesting_fact_<%= c.id %>").show();
- 
-	    $('.show_hide_interesting_fact_<%= c.id %>').click(function(){
-	    $(".slidingDiv_interesting_fact_<%= c.id %>").slideToggle();
-	    });
- 
-	});
- 
-	</script>
-
-	
-	<div class="interesting_fact">
-		<a   class="show_hide_interesting_fact_<%= c.id %>">View Insider Stories<% if c.product.status == "Ongoing" %> and Posts<% end %></a>
-	</div>
-	
-	
-	
-	<div class="validation-info"  style="
-			<% if c.credit_validations.confirmed.empty? %>
-			background-color:red;
-			<% end %>
-			
-			<% if c.credit_validations.confirmed.count == 1  %>
-			background-color:orange;
-			<% end %>	
-			
-			<% if c.credit_validations.confirmed.count == 2  %>
-				background-color:orange;
-			<% end %>
-			
-			<% if c.credit_validations.confirmed.count == 3  %>
-			background-color:green;
-			<% end %>
-			
-			">
-	
-	<p class="cv-count">
-	
-	<p class="validation-status">
-		<% if c.credit_validations.confirmed.count > 2 %>
-		Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 2 %>
-		Part Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 1 %>
-		Part Verified</p>
-		<% end %>
-		<% if c.credit_validations.confirmed.count == 0 %>
-		Unverified</p>
-		<% end %>
-	
-	
-		<div class="head-shots">
-	
-				<% if c.credit_validations.empty? %>
-					<% 3.times do %>
-					<a class="show_hide_add_<%= c.id %>">
-					<span class="picture">
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-						<a class="show_hide_add_<%= c.id %>">
-							<%= image_tag '/assets/empty.png' %>
-						</a>	
-						
-						<% else %>	
-						<%= image_tag '/assets/question.png' %>	
-						<% end %>
-						<% else %>
-						<%= image_tag '/assets/question.png' %>
-						<% end %>
-					</span>
-					</a>
-					<% end %>
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-							
-							<% else %>
-							<%= form_for(@credit_validation) do |f| %>
-								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
-								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
-								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
-								<%= f.hidden_field :status, :value => "confirmed" %>
-						<% if @user_credits.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
-		
-								<% end %>
-							<% end %> 
-							
-							<% end %>
-					
-					<% else %>
-
-				<% end %>
-	
-		
-	
-							<% if c.credit_validations.count.eql?(1) %>
-					<% c.credit_validations.each do |cv| %>
-				<% if cv.status == "confirmed" %>
-				<span class="picture">
-					<% @user_validator = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed1">
-					<%= render '/users/user_validator_images'  %>
-				</span>
-	
-				<% end %>
-					<% if cv.status == "pending" %>
-					<span class="picture">
-						<% if current_user %>
-							<% if current_user.id == c.user_id  %>
-						<%= link_to credit_validation_path(cv) do %>
-					<%= image_tag '/assets/pending.png' %>
-	
-						<% end %>
-						<% else %>
-							<%= image_tag '/assets/pending.png' %>
-								<% end %>
-								<% else %>
-									<%= image_tag '/assets/pending.png' %>
-									<% end %>
-			
-						</span>
-		
-		
-		
-	
-					<% end %>
-					<% 2.times do %>
-					<a class="show_hide_add_<%= c.id %>">
-					<span class="picture">
-					<% if current_user %>	
-						<% if current_user.id == c.user_id  %>
-							<a class="show_hide_add_<%= c.id %>">
-							<%= image_tag '/assets/empty.png' %>
-							</a>
-								
-						<% else %>	
-						<%= image_tag '/assets/question.png' %>	
-						<% end %>
-						<% end %>
-			
-				
-					</span>
-					</a>
-					<% end %>
-					
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-							
-							<% else %>
-							<%= form_for(@credit_validation) do |f| %>
-								<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
-								<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
-								<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
-								<%= f.hidden_field :status, :value => "confirmed" %>
-					
-								<% if @user_credits.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
-								
-		
-								<% end %>
-							<% end %> 
-							
-							<% end %>
-					
-					<% end %>
-					<% else %>
-	
-			<% end %>
-
-			<% if c.credit_validations.count.eql?(2)  %>
-			<% c.credit_validations.each do |cv| %>
-			<% if cv.status == "confirmed" %>
-			<span class="picture">
-				<% @user_validator = User.find_by_id(cv.validator_id) %>
-			<a href="/users/<%= cv.validator_id %>" name="confirmed2">
-
-				<%= render '/users/user_validator_images'  %>
-
-			</span>
-			<% end %>
-				<% if cv.status == "pending" %>
-	
-				<span class="picture">
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-					<%= link_to credit_validation_path(cv) do %>
-				<%= image_tag '/assets/pending.png' %>
-	
-					<% end %>
-					<% else %>
-						<%= image_tag '/assets/pending.png' %>
-							<% end %>
-							<% else %>
-								<%= image_tag '/assets/pending.png' %>
-								<% end %>
-	
-					</span>
-			<% end %>
-
-		
-				<% end %>
-				<% 1.times do %>
-				<a class="show_hide_add_<%= c.id %>">
-					<span class="picture">
-					<% if current_user %>	
-						<% if current_user.id == c.user_id  %>
-						<a class="show_hide_add_<%= c.id %>">
-							<%= image_tag '/assets/empty.png' %>
-						</a>
-									
-						<% else %>	
-						<%= image_tag '/assets/question.png' %>	
-						<% end %>
-						<% end %>
-					</span>
-	
-				</a>
-				<% if current_user %>
-					<% if current_user.id == c.user_id  %>
-						
-						<% else %>
-						<%= form_for(@credit_validation) do |f| %>
-							<%= f.hidden_field :credit_id, :value => "#{c.id}" %>
-							<%= f.hidden_field :user_id, :value => "#{c.user_id}" %>
-							<%= f.hidden_field :validator_id, :value => "#{current_user.id}" %>
-							<%= f.hidden_field :status, :value => "confirmed" %>
-				
-								<% if @user_credits.count > 0 %><%= f.submit "Click to verify this credit", :name => "one_side", :class => "submit-one-side" %><%end%>
-	
-							<% end %>
-						<% end %> 
-						
-						<% end %>
-				
-				<% end %>
-	
-				<% end %>
-	
-				<% if c.credit_validations.count.eql?(3)  %>
-				<% c.credit_validations.each do |cv| %>
-	
-				<% if cv.status == "confirmed" %>
-				<span class="picture">
-					<% @user_validator = User.find_by_id(cv.validator_id) %>
-				<a href="/users/<%= cv.validator_id %>" name="confirmed3">
-
-					<%= render '/users/user_validator_images'  %>
-
-				</span>
-				<% end %>
-					<% if cv.status == "pending" %>
-				<span class="picture">
-					<% if current_user %>
-						<% if current_user.id == c.user_id  %>
-					<%= link_to credit_validation_path(cv) do %>
-				<%= image_tag '/assets/pending.png' %>
-	
-					<% end %>
-					<% else %>
-						<%= image_tag '/assets/pending.png' %>
-							<% end %>
-							<% else %>
-								<%= image_tag '/assets/pending.png' %>
-								<% end %>
-		
-					</span>
-		
-					<% end %>
-
-		
-					<% end %>
-	
-	
-					<% end %>
-	
-	
-	
-		</div>	
-		
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
-	
-	
-		<% end %>
-	</div>
-	
-		<script type="text/javascript">
-
-		$(document).ready(function(){
-
-		        $(".slidingDiv_add_<%= c.id %>").hide();
-		        $(".show_hide_add_<%= c.id %>").show();
-
-		    $('.show_hide_add_<%= c.id %>').click(function(){
-		    $(".slidingDiv_add_<%= c.id %>").slideToggle();
-		    });
-
-		});
-
-		</script>		
-		<div class="slidingDiv_add_<%= c.id %>" >
-			<div class="add_credit">
-			
-			 	<a title="Close" id="close" class="show_hide_add_<%= c.id %>" style="width:20px;">X</a>
-				<% if current_user %>			
-				<% if current_user.id == c.user_id %>
-				<script type="text/javascript">
-
-				$(document).ready(function(){
-
-				        $(".slidingDiv_email_<%= c.id %>").hide();
-				        $(".show_hide_email_<%= c.id %>").show();
-
-				    $('.show_hide_email_<%= c.id %>').click(function(){
-				    $(".slidingDiv_email_<%= c.id %>").slideToggle();
-				    });
-
-				});
-
-				</script>
-
-		
-				<% if c.credit_validations.count < 3  %>
-
-<h2>Invite someone to verify via:</h2>
-		    
-			<a class="show_hide_email_<%= c.id %>" style="cursor: pointer;">Email</a> or <a class="show_hide_facebook_<%= c.id %>" style="cursor: pointer;" >Facebook</a>
-
-			
-
-
-				<div class="slidingDiv_email_<%= c.id %>">
-		
-
-				<div style="float:right;"> <a class="show_hide_email_<%= c.id %>">(close X)</a></div>
-				<br />
-
-				<%= form_for @credit, :validate => true do |f|%>
-				<% if @credit.errors.any? %>
-				  <div id="error_explanation">
-				    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
-
-				    <ul>
-				    <% @credit.errors.full_messages.each do |msg| %>
-				      <li><%= msg %></li>
-				    <% end %>
-				    </ul>
-				  </div>
-				<% end %> 
-					<%= f.label "Team member email"%>
-
-					<%= f.text_field :pending_user_email %>
-
-						<%= f.label "What was team member's role?"%>
-
-						<%= f.text_field :role %>
-
-
-					 		<%= f.hidden_field :product_idd, :value => c.product.id %>
-
-							<%= f.hidden_field :current_credit_id, :value => c.id %>
-
-							<%= f.hidden_field :current_credit_role, :value => c.role %>
-
-
-							<a href="/message_preview?credits_id=<%= c.id %>" target="blank">(preview the message)</a>
-
-					 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :class => 'submit' %>
-
-					<% end %> 
-				</div>
-		
-
-				<script type="text/javascript">
-
-				$(document).ready(function(){
-
-				        $(".slidingDiv_facebook_<%= c.id %>").hide();
-				        $(".show_hide_facebook_<%= c.id %>").show();
-
-				    $('.show_hide_facebook_<%= c.id %>').click(function(){
-				    $(".slidingDiv_facebook_<%= c.id %>").slideToggle();
-				    });
-
-				});
-
-				</script>	
-
-
-				<div class="slidingDiv_facebook_<%= c.id %>">	
-			
-					<div style="float:right;"> <a class="show_hide_facebook_<%= c.id %>">(close X)</a></div>	
-					<br />
-
-					<%= form_for @credit, :validate => true do |f|%>
-					<% if @credit.errors.any? %>
-					  <div id="error_explanation">
-					    <h2><%= pluralize(@credit.errors.count, "error") %> prohibited this credit from being saved:</h2>
-
-					    <ul>
-					    <% @credit.errors.full_messages.each do |msg| %>
-					      <li><%= msg %></li>
-					    <% end %>
-					    </ul>
-					  </div>
-					<% end %>
-
-							<%= f.label "What was team member's role?"%>
-							<div>
-							<%= f.text_field :role %>
-							</div>	
-
-						 		<%= f.hidden_field :product_idd, :value => c.product.id %>
-
-								<%= f.hidden_field :current_credit_id, :value => c.id %>
-
-						 			<%= f.submit 'SEND REQUEST', :id => 'blue-link', :name => 'facebook', :class => 'submit' %>
-
-						<% end %> 
-					
-							</div>
-
-
-							<script type="text/javascript">
-
-							$(document).ready(function(){
-
-							        $(".slidingDiv_co_<%= c.id %>").hide();
-							        $(".show_hide_co_<%= c.id %>").show();
-
-							    $('.show_hide_co_<%= c.id %>').click(function(){
-							    $(".slidingDiv_co_<%= c.id %>").slideToggle();
-							    });
-
-							});
-
-							</script>	
-
-
-					<% end %>
-				<% end %>
-				<% end %>
-	
-			</div>
-		</div>
-		
-		
-		<div class="slidingDiv_interesting_fact_<%= c.id %>" id="interesting_fact">
-			<h3>Insider Stories:</h3>
-				 <% if current_user %>			
-<% if current_user.id == c.user_id %><%= link_to "(edit)", edit_credit_path(:id => c) %> <% end %> <% end %>
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 100) %>">Tweet this fact</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</h3><p class="fact"><%= c.fact %></p>
-
-
-<% if c.product.status == "In Development" or c.product.status == "Ongoing"  %>	
-
-
-<h3>Updates:</h3>
-	  <% @posts = c.posts.order("created_at desc").limit(4) %>
-<% if current_user %>			
-	<% if current_user.id == c.user_id %>	
-	<%= form_for(@post) do |f| %>
-	  <% if @post.errors.any? %>
-	    <div id="error_explanation">
-	      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-	      <ul>
-	      <% @post.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <% end %>
-	  <div class="field">
-	    <%= f.text_area :body, :rows => "5", :placeholder => "Write a new post..." %>
-		<a href="/messages/new?name= Whoactually.com - <%= current_user.name%> has tagged you in a post&link=http://<%= ENV['DEFAULT_URL'] %>/products/<%= c.product.id %>" class="blue-btn" target="blank">Tag a Facebook friend</a><br />
-	Upload an Image <div class="file-upload"><%= f.file_field :image %></div> or <br />
-	<%= f.text_field :video, :placeholder => "YouTube Video ID" %>
-		<%= f.hidden_field :credit_id, :value => c.id %>
-	  </div>
-	  <div class="actions">
-	    <%= f.submit "Add update", :class => "submit" %>
-	 </div>
-		
-			<% end %>
-			<% end %>	
-	
-				<% end %>	
-			
-			<ul class="posts">	
-			<% @posts.each do |post| %>
-			<li>
-			<p class="time">Added on <%= post.created_at.strftime "%d-%m-%Y" %> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.whoactually.com/products/<%=  c.product.id %>" data-text="<%= truncate(c.fact, :length => 50) %>" style="margin-top:10px;">Tweet this fact</a></p><br />
-			<p class="content"><%= post.body %></p>
-			<% if post.name_check_user_id %>
-			<% @user_nc = User.find_by_id(post.name_check_user_id) %>
-			<%= link_to @user_nc.name, user_path(@user_nc) %> was namedchecked.
-			<% end %>
-			<% if post.image.blank? %>
-			<% else %>
-				<%= image_tag post.image.post  %>
-			<% end  %>
-			<% if post.video.blank? %>
-			<% else %>
-			<iframe width="600" height="480" src="//www.youtube.com/embed/<%= post.video %>?rel=0" frameborder="0" allowfullscreen></iframe>
-			<% end %>
-			</li>
-
-			<% end %>
-			</ul>		
-			
-		
-	
-		
-		<% end %>
-		
-		
-		
-		</div>	
-			<% end %>
-		<% end %>
-	<% end %>
-	
-	
-
-		
-		</div>
-		
-		
-	</div>
-	
-	<div class="grid_3 activity-feed">
-		
-
-			<h3>Did you work on?</h3>
-			
-			
-			<% @related_products.each do |p| %>
-			
-			<div class="following-item" style=:height:50px;>
-
-				<div class="profile-picture">
-
-					<%= image_tag p.image, :width => "50" || '/assets/default-thumb.png' %>
-
-				</div>
-
-				<div class="name">
-				<%= link_to product_path(p) do %><%= truncate(p.title, :length => 25) || "unknown" %><% end %>
-				</div>
-				<div class="stats">
-				<p>Credits</p> <div class="data">
-				 <%= p.credits_count %>
-				</div>
-				</div>	<br />
-				<div class="product-title">
-			<%= link_to product_path(p), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:20px;">Add a credit +</div><% end %>
-			</div>
-			</div>
-			<% end %>
-
-
-			
-			
-			<% @rec_products.each do |p| %>
-			
-			<div class="following-item" style=:height:50px;>
-
-				<div class="profile-picture">
-
-					<%= image_tag p.image, :width => "50" || '/assets/default-thumb.png' %>
-
-				</div>
-
-				<div class="name">
-				<%= link_to product_path(p) do %><%= truncate(p.title, :length => 25) || "unknown" %><% end %>
-				</div>
-				<div class="stats">
-				<p>Credits</p> <div class="data">
-				 <%= p.credits_count %>
-				</div>
-				</div>	<br />
-				<div class="product-title">
-			<%= link_to product_path(p), :class => "btn-blue" do %><div class="btn-blue" style="margin-top:20px;">Add a credit +</div><% end %>
-			</div>
-			</div>
-			<% end %>
-
-
-			</div>
-	
-	
-</div>

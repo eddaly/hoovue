@@ -1,0 +1,16 @@
+<ul class="products">
+  <% credits.each do |credit| %>
+    <li class="product credit">
+
+      <%= link_to credit.user.name do %>
+        <%= product_image_tag credit.product, {size: :small}, {class: "cover_art"} %>
+        <%= render "shared/profile_image", user: credit.user, credit: credit %>
+        <h3><%= credit.user.name %></h3>
+        <span><%= credit.role %></span>
+        <span><%= credit.product.title %></span>
+
+      <% end %>
+
+    </li>
+  <% end %>
+</ul>

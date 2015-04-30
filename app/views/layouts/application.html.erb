@@ -1,161 +1,62 @@
 <html>
-<head>
-  <title>whoactually | Credit Where It's Due</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <meta property="og:image" content="http://www.whoactually.com/assets/beta/logo-with-bg.png"/>
-  <link rel="shortcut icon" href="/assets/favicon.ico" />
-  <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
-  <script type="text/javascript">  $(document).ready(function() { $(".select-advanced").select2({ width: 'element' }); }); </script>
-   <script type="text/javascript">  $(document).ready(function() { $("#credit_product_id").select2({ width: 'element' }); }); </script>
-    <script type="text/javascript">  $(document).ready(function() { $("#post_name_check_user_id").select2({ width: 'element' }); }); </script>
-  <SCRIPT charset="utf-8" type="text/javascript" src="http://ws.amazon.co.uk/widgets/q?ServiceVersion=20070822&MarketPlace=GB&ID=V20070822/GB/whoactually-21/8005/5a799ec4-96f9-454c-91c9-334719815924"> </SCRIPT>
-</head>
-<%= render '/layouts/google_analytics'%>
-<body class="new">
-	<div class="header-container">
-		<div class="container_12 header-content">
-			<div class="grid_3 logo">
-				<div class="icon">
-				<a href="/">	<%= image_tag '/assets/beta/logo-icon.png' %> </a>
-				</div>	
-				<div class="wa">
-			<a href="/">	<%= image_tag '/assets/beta/logo-wa.png' %> </a>
-				</div>	
-				
-		</div>	
-		
-			<div class="divider">
-			<%= image_tag '/assets/beta/divider.png' %>
-			</div>
-			<div class="grid_2 drop-down">
-				
-				<a href="/credits/search" class="grn-btn">Add credit <%= image_tag '/assets/beta/btn-icon.png' %></a>
-			</div>
-			
-			<div class="divider">
-			<%= image_tag '/assets/beta/divider.png' %>
-			</div>
-			
-			<div class="grid_4 search">
-			<%= form_tag search_credits_path, :method => 'get' do %>
-			  <%= text_field_tag :search, params[:search] %>
-					 <%= submit_tag "", :name => nil, :class => "search-button" %>   
-			<% end %>
-			</div>
-			
-			<div class="divider">
-			<%= image_tag '/assets/beta/divider.png' %>
-			</div>
-			
-			 <% if current_user %>
-			<div class="grid_2 name">
-			<%= link_to user_path(current_user) do %><%= current_user.name %><%end%>
-		</div>
-			
-			<div class="divider">
-			<%= image_tag '/assets/beta/divider.png' %>
-			</div>
-			
-			<%end%>
-			
-			<div class="grid_1 signin">
-				<% if current_user %>
-				
-				<%= link_to "Sign out", signout_path %> 
-				
-				<% else %>
-				
-				<%= link_to "SIGN IN", "/auth/facebook", id: "login_with_facebook" %>
-				
-				<% end %>
-			</div>	
-			
-			<div class="divider">
-			<%= image_tag '/assets/beta/divider.png' %>
-			</div>
-				
-			
-			
-			
-		
-			
-			
-			
-			
-		</div>	
-	</div>	
-	<% if current_user %>
-	<% if @pending_cv.size > 0 %>
-	 <p class="notice">You have <%= @pending_cv.size %> pending notification. <a href="/">View ></a></p>
-	<%end%>
- 	<%end%>
+  <head>
+    <title>whoactually | Credit Where It's Due</title>
 
-	<% if flash[:notice] %>
-	      <p class="notice"><%= flash[:notice] %></p>
-	    <% end %>
-	    <% if flash[:error] %>
-	      <p class="error"><%= flash[:error] %></p>
-	    <% end %>
-	<div class="body-wrapper">
-		<%= yield %>
-	</div>
-	
-	<div class="footer">
-			&copy; 2014 Itsoo Ltd | <a href="/terms">Terms of Use</a> | <a href="mailto:contact@whoactually.com">Contact Us</a> | Release: <%= ENV['rel'] %> <% if current_user%> <% if current_user.googleplus == "lecrabe" %><a href="/lecrabe">Admin</a><%else%><%end%> <%end%>
- 		</div>
-		</div>
-		<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 
-		<script type="text/javascript">
-		  var _sf_async_config = { uid: 47632, domain: 'alpha.whoactually.com', useCanonical: true };
-		  (function() {
-		    function loadChartbeat() {
-		      window._sf_endpt = (new Date()).getTime();
-		      var e = document.createElement('script');
-		      e.setAttribute('language', 'javascript');
-		      e.setAttribute('type', 'text/javascript');
-		      e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
-		      document.body.appendChild(e);
-		    };
-		    var oldonload = window.onload;
-		    window.onload = (typeof window.onload != 'function') ?
-		      loadChartbeat : function() { oldonload(); loadChartbeat(); };
-		  })();
-		</script>
-		<!-- UserVoice JavaScript SDK (only needed once on a page) -->
-		<script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/VUuMusu6f4sJpeHJHaikBA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+    <meta property="og:image" content="http://www.whoactually.com/assets/beta/logo-with-bg.png"/>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
 
-		<!-- A tab to launch the Classic Widget -->
-		<script>
-		UserVoice = window.UserVoice || [];
-		UserVoice.push(['showTab', 'classic_widget', {
-		  mode: 'feedback',
-		  primary_color: '#cc6d00',
-		  link_color: '#007dbf',
-		  forum_id: 209979,
-		  tab_label: 'Give Feedback ',
-		  tab_color: '#cc6d00',
-		  tab_position: 'middle-right',
-		  tab_inverted: false
-		}]);
-		</script>
-		<script type="text/javascript">
+    <SCRIPT charset="utf-8" type="text/javascript" src="http://ws.amazon.co.uk/widgets/q?ServiceVersion=20070822&MarketPlace=GB&ID=V20070822/GB/whoactually-21/8005/5a799ec4-96f9-454c-91c9-334719815924"> </SCRIPT>
 
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-38356982-1']);
-		  _gaq.push(['_trackPageview']);
+    <!-- fonts -->
+    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6205712/663186/css/fonts.css" />
 
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
+  </head>
 
-		</script>
-		
-	
-</body>	
+  <%= render '/layouts/google_analytics'%>
+
+  <body class="new">
+
+    <%= render "/shared/header" %>
+
+    <% if current_user %>
+      <% if @pending_cv.size > 0 %>
+        <p class="notice">You have <%= @pending_cv.size %> pending notification. <a href="/">View ></a></p>
+      <% end %>
+    <% end %>
+
+    <%= render "shared/flash", flash: flash %>
+
+    <div class="body-wrapper">
+      <%= yield %>
+    </div>
+
+    <div class="register <%= "min" unless controller.is_a? BetaController %>">
+      <div class="container_12">
+        <% if current_user %>
+          <h2>What did you do?</h2>
+          <p>Join the thousands of professionals already claiming credit for their work. Register today and let others know what you <em>actually</em> did.</p>
+          <div class="btn-container">
+          <%= link_to 'Get Started', products_path, class: 'btn' %>
+          </div>
+        <% else %>
+          <h2>What did you do?</h2>
+          <p>Join the thousands of professionals already claiming credit for their work. Register today and let others know what you <em>actually</em> did.</p>
+          <div class="btn-container">
+          <%= link_to 'Sign in with Facebook',  "/auth/facebook", class: 'btn' %>
+          <%= link_to 'Sign in with LinkedIn',  "/auth/linkedin", class: 'btn' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render "/shared/footer" %>
+
+    <%= render "/shared/analytics" %>
+
+  </body>
 
 </html>

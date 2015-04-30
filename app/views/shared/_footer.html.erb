@@ -1,0 +1,52 @@
+<div class="footer">
+
+  <div class="container_12">
+
+    <div class="grid_4 left">
+      <a href="#" class="social"><i class="fa fa-twitter fa-fw"></i> Follow us on Twitter</a>
+      <a href="#" class="social"><i class="fa fa-facebook-square fa-fw"></i> Like us on Facebook</a>
+
+      <%= image_tag '/assets/beta/logo-dark.png' %>
+      <p>&copy; Copyright 2014</p>
+      <%= link_to "Terms & Conditions", terms_path %>
+      <%= link_to "Privacy Policy", privacy_path %>
+    </div>
+
+    <div class="grid_4">
+      <h3>Top 5 Most Viewed</h3>
+      <ol>
+        <% Product.top_five.each do |product| %>
+        <li>
+            <%= link_to product_path(product) do %>
+            <%= image_tag(product.image || '/assets/beta/placeholder-cover.png', :class => 'project') %>
+            <h5><%= product.title %></h5>
+            <p><%= product.platforms %></p>
+        <% end %>
+        </li>
+      <% end %>
+      </ol>
+    </div>
+
+    <div class="grid_4">
+      <h3>Top 5 Most Credited</h3>
+      <ol>
+        <% User.top_five.each do |user| %>
+          <li>
+            <%= link_to user_path(user) do %>
+              <%= image_tag '/assets/beta/placeholder-user.png', :class => 'user' %>
+              <h5 class="name"><%= user.name %></h5>
+              <!-- <p><%= (user.bio || "")[0..35] %></p> -->
+              <span class="credits"><%= user.credits_count %>
+                <span class="fa-stack">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-check fa-stack-1x white"></i>
+                </span>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
+  </div>
+</div>

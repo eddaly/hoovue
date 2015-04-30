@@ -141,7 +141,11 @@ def update_credit_params
 end
          
          def current_user
-           @current_user ||= User.find(session[:user_id]) if session[:user_id]
+           #if Rails.env.production?
+             @current_user ||= User.find(session[:user_id]) if session[:user_id]
+           #else
+             #@current_user ||= User.find_by_name "Piers Palmer"
+           #end
          end 
          
          def pending_cv

@@ -1,0 +1,17 @@
+<div class="search_header">
+  <div class="container_12">
+    <h1 class="grid_12">
+      <%= @page_title || "Credits listing" %>
+    </h1>
+  </div>
+</div>
+
+<div class="container_12">
+  <div class="search_results grid_12">
+    <%= render "credits_list", credits: @credits %>
+  </div>
+
+  <% if @credits.respond_to? :current_page %>
+    <%= paginate @credits %>
+  <% end %>
+</div>

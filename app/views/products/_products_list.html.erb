@@ -1,31 +1,12 @@
-<ul class="product-list">
-<% @products.each do |p| %>
-<%= link_to p do %>
-<li class="product-list">
-	<% if p.image.blank? %>
-		<%= image_tag 'default-small.png'%>
-	<%else%>
-		<%= image_tag p.image.small %>
-	<%end%>
-<h3> <%= p.title %></h3>
-
-</li>
-<%end%>
-<%end%>
-</ul>
-
-<ul class="product-list">
-<% @users.each do |u| %>
-<%= link_to p do %>
-<li class="product-list">
-	<% if u.image.blank? %>
-		<%= image_tag 'default-small.png'%>
-	<%else%>
-		<%= image_tag u.image.small %>
-	<%end%>
-<h3> <%= u.name %></h3>
-
-</li>
-<%end%>
-<%end%>
+<ul class="products">
+  <% products.each do |product| %>
+    <li class="product">
+      <%= link_to product do %>
+        <%= product_image_tag product, {size: :small}, {class: "cover_art"} %>
+        <h3><%= product.title %></h3>
+        <span><%= product.product_genre.try(:name) %></span>
+        <span><%= product.platforms %></span>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
